@@ -5,6 +5,12 @@ Class {
 }
 
 { #category : #accessing }
+GT_BA_Examples >> TestGit [
+	<gtExample>
+	^'abc'
+]
+
+{ #category : #accessing }
 GT_BA_Examples >> edgesToHalf [
 	<gtExample>
 	| view |
