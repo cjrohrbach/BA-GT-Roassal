@@ -1,3 +1,6 @@
+"
+I am a collection of usefull examples.
+"
 Class {
 	#name : #'GT_BA_Examples',
 	#superclass : #Object,
@@ -5,9 +8,21 @@ Class {
 }
 
 { #category : #accessing }
-GT_BA_Examples >> TestGit [
+GT_BA_Examples >> Testing [ 
 	<gtExample>
-	^'abc'
+	| view c p |
+	c := OrderedCollection new.
+	p := (RPackageOrganizer default packageNamed: 'GToolkit-Mondrian') definedClasses.
+	
+	
+	
+	view := GtMondrian new.
+	view nodes with: (p).
+	
+	
+	view layout grid.
+	^ view
+	
 ]
 
 { #category : #accessing }
@@ -19,6 +34,12 @@ GT_BA_Examples >> edgesToHalf [
 	view edges connectFrom: [ :x | x / 2 ].
 	view layout grid.
 	^ view
+]
+
+{ #category : #accessing }
+GT_BA_Examples >> getAllPackages [
+	<gtExample>
+	^ RPackageOrganizer default
 ]
 
 { #category : #accessing }
@@ -46,6 +67,25 @@ GT_BA_Examples >> graphWithGtMondrianMethods [
 		ifTrue: [x methods]
 		ifFalse: [x classBinding])].
 	view layout grid.
+	^ view
+]
+
+{ #category : #accessing }
+GT_BA_Examples >> graphWithPackages [
+	<gtExample>
+	| view packages |
+	
+	packages := RPackageOrganizer default packages.
+	
+	view := GtMondrian new.
+	view nodes 
+		shape: [ :x | BlElement new
+			geometry: (BlRectangle cornerRadius: 0);
+			size: (x classes size) @ (x methods size);
+			background:Color green];
+		with: (packages).
+	view layout tree.
+	
 	^ view
 ]
 
@@ -108,6 +148,29 @@ GT_BA_Examples >> nodesWithGtMondrianClasses [
 ]
 
 { #category : #accessing }
+GT_BA_Examples >> nodesWithGtMondrianClassesAndMethods [
+	<gtExample>
+	| view c |
+	c := OrderedCollection new.
+	
+	(((RPackageOrganizer default packageNamed: 'GToolkit-Mondrian') definedClasses ) do: [ :each | 
+		(c add: each). 
+		(each methods) do: [:x | c add:x]]).
+
+	view := GtMondrian new.
+	view nodes 
+		shape: [ :x | BlElement new
+			geometry: (BlRectangle cornerRadius: 10);
+			size: 10 @ 10;
+			background:(x isClass
+				ifTrue: [Color green]
+				ifFalse: [Color red])];
+		with: (c).
+	view layout grid.
+	^ view
+]
+
+{ #category : #accessing }
 GT_BA_Examples >> nodesWithGtMondrianMethods [
 	<gtExample>
 	| view c |
@@ -149,4 +212,59 @@ GT_BA_Examples >> nodesWithTooltip [
 		with: (1 to: 9).
 	m layout grid.
 	^ m
+]
+
+{ #category : #accessing }
+GT_BA_Examples >> packageTreeView [
+	<gtExample>
+	| packagesToDisplay view s packages |
+	packagesToDisplay := Set new.
+	packagesToDisplay add: 'BA-Testing'.
+	packagesToDisplay add: 'GToolkit-Mondrian'.
+		
+	packages := Set new.
+	
+	packagesToDisplay do: [ :p | packages add: (RPackageOrganizer default packageNamed: p)].
+	
+	s := Set new.
+	packages do: [ :each | 
+		(s add: each). 
+		(each classes) do: [:x | s add:x]].
+
+	
+	view := GtMondrian new.
+	view nodes 
+			shape: [ :x | BlElement new
+				geometry: (BlRectangle cornerRadius: 0);
+				size: ( x isClass
+					ifTrue: [(x methods size) @ (x linesOfCode) ]
+					ifFalse: [10@10]);
+				background:(x isClass
+					ifTrue: [Color green]
+					ifFalse: [Color red])];
+			with: (s).
+	view edges connectFrom: [:x | x package].
+	
+	view layout tree.
+			
+	^ view
+]
+
+{ #category : #accessing }
+GT_BA_Examples >> systemComplexityWithPackages [
+	<gtExample>
+	| view packages |
+	
+	packages := RPackageOrganizer default packages.
+	
+	view := GtMondrian new.
+	view nodes 
+		shape: [ :x | BlElement new
+			geometry: (BlRectangle cornerRadius: 0);
+			size: (x methods size) @ (x linesOfCode);
+			background:(Color r: 0.5 g:0.5 b:0.5 alpha:0.5)];
+		with: (packages).
+	view layout grid.
+	
+	^ view
 ]
