@@ -26,6 +26,106 @@ GT_BA_Examples >> Testing [
 ]
 
 { #category : #accessing }
+GT_BA_Examples >> boxWithColorChangeOnHover [
+	| box |
+	box := BlElement new
+		geometry: (BlRectangle cornerRadius: 5);
+		background: Color gray;
+		size: 50@50;
+		clipChildren: false;
+		yourself.
+		
+	box addEventHandlerOn: BlMouseEnterEvent do: [box background: Color green].
+	box addEventHandlerOn: BlMouseLeaveEvent do: [box background: Color gray].
+		
+	^ box
+]
+
+{ #category : #accessing }
+GT_BA_Examples >> boxWithLabelOnHover: labelContent [
+ "create a BlElement with a label poping up when the mouse is over it"
+	| box label |
+	box := BlElement new
+		geometry: (BlRectangle cornerRadius: 5);
+		background: Color gray;
+		size: 50@50;
+		clipChildren: false;
+		zIndex: 1;
+		yourself.
+		
+	label := BrLabel new
+		look: BrGlamorousLabelLook new;
+		background: Color red;
+		text: labelContent asRopedText;
+		size: 40@40;
+		zIndex:100.
+		
+	box addEventHandlerOn: BlMouseEnterEvent do: [
+		"label relocate: (pos x)@(pos y)."
+		box addChild: label.
+		box zIndex: 100].
+	box addEventHandlerOn: BlMouseLeaveEvent do: [
+		box removeChild: label. 
+		box zIndex: 1].
+		
+	^ box
+]
+
+{ #category : #accessing }
+GT_BA_Examples >> boxWithLabelOnHover: labelContent l: label [
+ "create a BlElement with a label poping up when the mouse is over it"
+	| box |
+	box := BlElement new
+		geometry: (BlRectangle cornerRadius: 5);
+		background: Color gray;
+		size: 50@50;
+		clipChildren: false;
+		zIndex: 1;
+		yourself.
+		
+	label text: labelContent asRopedText.
+		
+	box addEventHandlerOn: BlMouseEnterEvent do: [
+		"label relocate: (pos x)@(pos y)."
+		box addChild: label.
+		box zIndex: 100].
+	box addEventHandlerOn: BlMouseLeaveEvent do: [
+		box removeChild: label. 
+		box zIndex: 1].
+		
+	^ box
+]
+
+{ #category : #accessing }
+GT_BA_Examples >> boxWithLabelOnHover: labelContent position: pos [
+ "create a BlElement with a label poping up when the mouse is over it"
+	| box label |
+	box := BlElement new
+		geometry: (BlRectangle cornerRadius: 5);
+		background: Color gray;
+		size: 50@50;
+		clipChildren: false;
+		zIndex: 1;
+		yourself.
+		
+	label := BrLabel new
+		look: BrGlamorousLabelLook new glamorousRegularFontAndSize;
+		background: Color red;
+		text: labelContent;
+		zIndex:100.
+		
+	box addEventHandlerOn: BlMouseEnterEvent do: [
+		label relocate: (pos x)@(pos y).
+		box addChild: label.
+		box zIndex: 100].
+	box addEventHandlerOn: BlMouseLeaveEvent do: [
+		box removeChild: label. 
+		box zIndex: 1].
+		
+	^ box
+]
+
+{ #category : #accessing }
 GT_BA_Examples >> colorChangeOnHover [
 	<gtExample>
 		| box |
@@ -118,17 +218,35 @@ GT_BA_Examples >> labelOnHover [
 	
 
 	box2 := BrLabel new
-		look: BrGlamorousLabelLook new glamorousRegularFontAndSize;
+		look: BrGlamorousLabelLook new;
 		background: Color red;
 		size: 20@20.
 	
-	box addEventFilterOn: BlMouseEnterEvent do: [
+	box addEventHandlerOn: BlMouseEnterEvent do: [
 	box2 relocate: ((box position x) + (box size x) + 10)@((box position y )+ (box size y) + 10).
 	box addChild: box2].
-	box addEventFilterOn: BlMouseLeaveEvent do: [box removeChild: box2].	
+	box addEventHandlerOn: BlMouseLeaveEvent do: [box removeChild: box2].	
 
 
 	^box
+]
+
+{ #category : #accessing }
+GT_BA_Examples >> mondrianWithTextOnHover [
+	<gtExample>
+	|view |
+
+
+	view := GtMondrian new.
+
+	view nodes 
+		shape: [:x | (GT_BA_Examples new boxWithLabelOnHover: x)];
+		with: (1 to: 50).
+	
+	
+	view layout grid.
+
+	^view
 ]
 
 { #category : #accessing }
@@ -251,7 +369,7 @@ GT_BA_Examples >> nodesWithTooltip [
 				alignCenter;
 				text: 'abc' asRopedText));
 				yourself];
-		with: (1 to: 9).
+		with: (1 to: 10000).
 	m layout grid.
 	^ m
 ]
@@ -310,4 +428,20 @@ GT_BA_Examples >> systemComplexityWithPackages [
 	view layout grid.
 	
 	^ view
+]
+
+{ #category : #accessing }
+GT_BA_Examples >> test [
+	| box |
+	box := BlElement new
+		geometry: (BlRectangle cornerRadius: 5);
+		background: Color gray;
+		size: 50@50;
+		clipChildren: false;
+		yourself.
+		
+	box addEventHandlerOn: BlMouseEnterEvent do: [box background: Color green].
+	box addEventHandlerOn: BlMouseLeaveEvent do: [box background: Color gray].
+		
+	^ box
 ]
