@@ -26,6 +26,22 @@ GT_BA_Examples >> Testing [
 ]
 
 { #category : #accessing }
+GT_BA_Examples >> colorChangeOnHover [
+	<gtExample>
+		| box |
+		box := BlElement new
+			geometry: (BlRectangle cornerRadius: 5);
+			size: 100@100;
+			background: Color gray;
+			yourself.
+	
+	box addEventHandlerOn: BlMouseEnterEvent do: [box background: Color green].
+	box addEventHandlerOn: BlMouseLeaveEvent do: [box background: Color gray].	
+	
+	^ box
+]
+
+{ #category : #accessing }
 GT_BA_Examples >> edgesToHalf [
 	<gtExample>
 	| view |
@@ -87,6 +103,32 @@ GT_BA_Examples >> graphWithPackages [
 	view layout tree.
 	
 	^ view
+]
+
+{ #category : #accessing }
+GT_BA_Examples >> labelOnHover [
+	<gtExample>
+|	 box box2 |
+	box := BlElement new
+		geometry: (BlRectangle cornerRadius: 5);
+		background: Color green;
+		size: 50@50;
+		clipChildren: false;
+		yourself.
+	
+
+	box2 := BrLabel new
+		look: BrGlamorousLabelLook new glamorousRegularFontAndSize;
+		background: Color red;
+		size: 20@20.
+	
+	box addEventFilterOn: BlMouseEnterEvent do: [
+	box2 relocate: ((box position x) + (box size x) + 10)@((box position y )+ (box size y) + 10).
+	box addChild: box2].
+	box addEventFilterOn: BlMouseLeaveEvent do: [box removeChild: box2].	
+
+
+	^box
 ]
 
 { #category : #accessing }
@@ -207,7 +249,7 @@ GT_BA_Examples >> nodesWithTooltip [
 			look: (BrGlamorousWithLabelTooltipLook content: (BrLabel new
 				look: BrGlamorousLabelLook new glamorousRegularFontAndSize;
 				alignCenter;
-				text: x asRopedText));
+				text: 'abc' asRopedText));
 				yourself];
 		with: (1 to: 9).
 	m layout grid.
@@ -221,7 +263,8 @@ GT_BA_Examples >> packageTreeView [
 	packagesToDisplay := Set new.
 	packagesToDisplay add: 'BA-Testing'.
 	packagesToDisplay add: 'GToolkit-Mondrian'.
-		
+	packagesToDisplay add: 'IMAD-Cards'.
+			
 	packages := Set new.
 	
 	packagesToDisplay do: [ :p | packages add: (RPackageOrganizer default packageNamed: p)].
@@ -229,7 +272,7 @@ GT_BA_Examples >> packageTreeView [
 	s := Set new.
 	packages do: [ :each | 
 		(s add: each). 
-		(each classes) do: [:x | s add:x]].
+		(each definedClasses) do: [:x | s add:x]].
 
 	
 	view := GtMondrian new.
