@@ -320,12 +320,12 @@ GT_BA_Examples >> nodesWithTooltip [
 			geometry: (BlRectangle cornerRadius: 1);
 			size: 10 @ 10;
 			background: Color gray;
-			look: (BrGlamorousWithLabelTooltipLook content: (BrLabel new
+			look: (BrGlamorousWithLabelTooltipLook content: [BrLabel new
 				look: BrGlamorousLabelLook new glamorousRegularFontAndSize;
 				alignCenter;
-				text: 'abc' asRopedText));
+				text: 'abc' asRopedText]);
 				yourself];
-		with: (1 to: 10000).
+		with: (1 to: 10).
 	m layout grid.
 	^ m
 ]
