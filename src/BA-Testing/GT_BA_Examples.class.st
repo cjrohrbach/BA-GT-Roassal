@@ -72,60 +72,6 @@ GT_BA_Examples >> boxWithLabelOnHover: labelContent [
 ]
 
 { #category : #accessing }
-GT_BA_Examples >> boxWithLabelOnHover: labelContent l: label [
- "create a BlElement with a label poping up when the mouse is over it"
-	| box |
-	box := BlElement new
-		geometry: (BlRectangle cornerRadius: 5);
-		background: Color gray;
-		size: 50@50;
-		clipChildren: false;
-		zIndex: 1;
-		yourself.
-		
-	label text: labelContent asRopedText.
-		
-	box addEventHandlerOn: BlMouseEnterEvent do: [
-		"label relocate: (pos x)@(pos y)."
-		box addChild: label.
-		box zIndex: 100].
-	box addEventHandlerOn: BlMouseLeaveEvent do: [
-		box removeChild: label. 
-		box zIndex: 1].
-		
-	^ box
-]
-
-{ #category : #accessing }
-GT_BA_Examples >> boxWithLabelOnHover: labelContent position: pos [
- "create a BlElement with a label poping up when the mouse is over it"
-	| box label |
-	box := BlElement new
-		geometry: (BlRectangle cornerRadius: 5);
-		background: Color gray;
-		size: 50@50;
-		clipChildren: false;
-		zIndex: 1;
-		yourself.
-		
-	label := BrLabel new
-		look: BrGlamorousLabelLook new glamorousRegularFontAndSize;
-		background: Color red;
-		text: labelContent;
-		zIndex:100.
-		
-	box addEventHandlerOn: BlMouseEnterEvent do: [
-		label relocate: (pos x)@(pos y).
-		box addChild: label.
-		box zIndex: 100].
-	box addEventHandlerOn: BlMouseLeaveEvent do: [
-		box removeChild: label. 
-		box zIndex: 1].
-		
-	^ box
-]
-
-{ #category : #accessing }
 GT_BA_Examples >> colorChangeOnHover [
 	<gtExample>
 		| box |
@@ -150,12 +96,6 @@ GT_BA_Examples >> edgesToHalf [
 	view edges connectFrom: [ :x | x / 2 ].
 	view layout grid.
 	^ view
-]
-
-{ #category : #accessing }
-GT_BA_Examples >> getAllPackages [
-	<gtExample>
-	^ RPackageOrganizer default
 ]
 
 { #category : #accessing }
@@ -229,6 +169,22 @@ GT_BA_Examples >> labelOnHover [
 
 
 	^box
+]
+
+{ #category : #accessing }
+GT_BA_Examples >> mondrianWithColorChangeOnHover [
+	| box |
+	box := BlElement new
+		geometry: (BlRectangle cornerRadius: 5);
+		background: Color gray;
+		size: 50@50;
+		clipChildren: false;
+		yourself.
+		
+	box addEventHandlerOn: BlMouseEnterEvent do: [box background: Color green].
+	box addEventHandlerOn: BlMouseLeaveEvent do: [box background: Color gray].
+		
+	^ box
 ]
 
 { #category : #accessing }
