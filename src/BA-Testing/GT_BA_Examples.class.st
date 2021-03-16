@@ -312,7 +312,7 @@ GT_BA_Examples >> nodesWithGtMondrianMethods [
 { #category : #accessing }
 GT_BA_Examples >> nodesWithTooltip [
 	<gtExample>
-	| m  |
+	| m |
 	
 	m := GtMondrian new.
 	m nodes 
@@ -320,7 +320,8 @@ GT_BA_Examples >> nodesWithTooltip [
 			geometry: (BlRectangle cornerRadius: 1);
 			size: 10 @ 10;
 			background: Color gray;
-			look: (BrGlamorousWithLabelTooltipLook content: [BrLabel new
+			look: (BrGlamorousWithLabelTooltipLook 
+				content: [BrLabel new
 				look: BrGlamorousLabelLook new glamorousRegularFontAndSize;
 				alignCenter;
 				text: 'abc' asRopedText]);
