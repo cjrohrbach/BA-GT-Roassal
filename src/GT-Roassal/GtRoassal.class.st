@@ -4,14 +4,18 @@ Class {
 	#instVars : [
 		'nodeShape',
 		'nodeCollection',
-		'mondrianInst'
+		'mondrianInst',
+		'nodeLayout'
 	],
 	#category : #'GT-Roassal'
 }
 
 { #category : #accessing }
 GtRoassal >> build [
-	^ mondrianInst nodes  shape: nodeShape; with: nodeCollection
+	mondrianInst nodes 
+		shape: nodeShape;
+		with: nodeCollection.
+	mondrianInst layout grid.
 ]
 
 { #category : #accessing }
@@ -23,14 +27,20 @@ GtRoassal >> circle [
 ]
 
 { #category : #accessing }
-GtRoassal >> initialize [
-	mondrianInst := super new.
-	^ self.
+GtRoassal >> gtLiveFor: aView [
+	<gtView>
+	^ mondrianInst gtLiveFor: aView
 ]
 
 { #category : #accessing }
-GtRoassal >> n [
-	nodeCollection := (1 to: 10).
+GtRoassal >> initialize [
+	mondrianInst := GtMondrian new.
+	^ self
+]
+
+{ #category : #accessing }
+GtRoassal >> layout [ 
+	nodeLayout := 'grid'.
 ]
 
 { #category : #accessing }
@@ -40,14 +50,14 @@ GtRoassal >> nodes [
 
 { #category : #accessing }
 GtRoassal >> shape [
-	nodeShape := BlElement new 
+	nodeShape := [BlElement new 
 		geometry: BlEllipseGeometry new;
 		border: (BlBorder paint: Color black width: 2);
-		size: 50 asPoint.
+		size: 50 asPoint].
 	
 ]
 
 { #category : #accessing }
 GtRoassal >> stack [
-	^ self stack
+	^ mondrianInst stack
 ]
