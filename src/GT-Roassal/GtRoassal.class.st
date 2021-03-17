@@ -6,7 +6,8 @@ Class {
 		'nodeCollection',
 		'mondrianInst',
 		'nodeLayout',
-		'showTooltip'
+		'showTooltip',
+		'layout'
 	],
 	#category : #'GT-Roassal'
 }
@@ -18,7 +19,7 @@ GtRoassal >> build [
 	mondrianInst nodes 
 		shape: [ :x | self buildNodeShape: x];
 		with: nodeCollection.
-	mondrianInst layout grid.
+	self setLayout.
 ]
 
 { #category : #accessing }
@@ -58,13 +59,20 @@ GtRoassal >> gtLiveFor: aView [
 { #category : #accessing }
 GtRoassal >> initialize [
 	showTooltip := true.
+	nodeLayout := #grid.
+	
 	mondrianInst := GtMondrian new.
 	^ self
 ]
 
 { #category : #accessing }
 GtRoassal >> layout [ 
-	nodeLayout := 'grid'.
+	^ mondrianInst layout
+]
+
+{ #category : #accessing }
+GtRoassal >> layout: aLayout [
+	nodeLayout := aLayout.
 ]
 
 { #category : #accessing }
@@ -103,6 +111,16 @@ GtRoassal >> nodes [
 { #category : #accessing }
 GtRoassal >> nodes: aCollection [
 	nodeCollection := aCollection.
+]
+
+{ #category : #accessing }
+GtRoassal >> setLayout [
+	(nodeLayout = #grid) ifTrue: [mondrianInst layout grid] 
+		ifFalse: [
+	(nodeLayout = #circle) ifTrue: [mondrianInst layout circle]
+		ifFalse: [
+	(nodeLayout = #tree) ifTrue: [mondrianInst layout tree]]].
+	
 ]
 
 { #category : #accessing }
