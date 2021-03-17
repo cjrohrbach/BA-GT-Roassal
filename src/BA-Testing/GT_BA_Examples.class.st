@@ -322,13 +322,36 @@ GT_BA_Examples >> nodesWithTooltip [
 			background: Color gray;
 			look: (BrGlamorousWithLabelTooltipLook 
 				content: [BrLabel new
-				look: BrGlamorousLabelLook new glamorousRegularFontAndSize;
-				alignCenter;
-				text: 'abc' asRopedText]);
-				yourself];
+					look: BrGlamorousLabelLook new glamorousRegularFontAndSize;
+					alignCenter;
+					text: 'abc' asRopedText]);
+			yourself];
 		with: (1 to: 10).
 	m layout grid.
 	^ m
+]
+
+{ #category : #accessing }
+GT_BA_Examples >> nodesWithTooltipWithoutDelay [
+	<gtExample>
+	| view |
+	
+	view := GtMondrian new.
+	view nodes 
+	shape: [:x |BlElement new 
+		look: (BrGlamorousWithTooltipLook new
+			contentStencil: [BrLabel new
+				look: BrGlamorousLabelLook new glamorousRegularFontAndSize;
+				alignCenter;
+				text: x];
+			showDelay: 0;
+			hideDelay: 0);
+		background: Color gray;
+		size: 10@10];
+	with: (1 to: 100).
+			
+	view layout grid.
+	^view
 ]
 
 { #category : #accessing }
