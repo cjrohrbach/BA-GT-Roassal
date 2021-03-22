@@ -1,16 +1,47 @@
 Class {
 	#name : #GtRoassal,
-	#superclass : #GtMondrian,
+	#superclass : #Object,
 	#instVars : [
 		'nodeShape',
 		'nodeCollection',
 		'mondrianInst',
 		'nodeLayout',
 		'showTooltip',
-		'layout'
+		'layout',
+		'nodeShapeBuilder'
 	],
 	#category : #'GT-Roassal'
 }
+
+{ #category : #accessing }
+GtRoassal >> _build [
+	mondrianInst nodes
+		shape: [ :x | (nodeShapeBuilder getElement) 
+		addHoverEffekt: (nodeShapeBuilder color) effectColor: (Color pink);
+		addToolTip: x];
+		with: nodeCollection.
+	self setLayout.
+]
+
+{ #category : #accessing }
+GtRoassal >> _color: aColor [
+	nodeShapeBuilder color: aColor
+]
+
+{ #category : #accessing }
+GtRoassal >> _customShape: aBlElement [
+	nodeShapeBuilder customShape: aBlElement
+]
+
+{ #category : #accessing }
+GtRoassal >> _shape: aShape [
+	nodeShapeBuilder shape: aShape
+]
+
+{ #category : #accessing }
+GtRoassal >> _size: aSize [
+	nodeShapeBuilder size: aSize
+]
 
 { #category : #accessing }
 GtRoassal >> build [
@@ -43,11 +74,8 @@ GtRoassal >> buildNodeShape: labelText [
 ]
 
 { #category : #accessing }
-GtRoassal >> circle [
-	^ (BlElement new 
-		geometry: BlEllipseGeometry new;
-				border: (BlBorder paint: Color black width: 2);
-				size: 50 asPoint)
+GtRoassal >> edges [
+	^ mondrianInst edges
 ]
 
 { #category : #ui }
@@ -60,7 +88,7 @@ GtRoassal >> gtLiveFor: aView [
 GtRoassal >> initialize [
 	showTooltip := true.
 	nodeLayout := #grid.
-	
+	nodeShapeBuilder := GR_NodeShapeBuilder new.
 	mondrianInst := GtMondrian new.
 	^ self
 ]
@@ -87,7 +115,7 @@ GtRoassal >> nodeShape: aShape [
 	dict := {
 		#square ->[BlElement new
 			geometry: (BlRectangle cornerRadius: 1);
-			background: Color gray;
+			background: Color black;
 			size: 10@10].
 		#circle ->[BlElement new 
 			geometry: BlEllipseGeometry new;
@@ -95,7 +123,7 @@ GtRoassal >> nodeShape: aShape [
 			size: 10 asPoint].
 		#point ->[BlElement new 
 			geometry: BlEllipseGeometry new;
-			background: Color gray;
+			background: Color black;
 			size: 10 asPoint].
 	} asDictionary.
 	
@@ -105,7 +133,7 @@ GtRoassal >> nodeShape: aShape [
 
 { #category : #accessing }
 GtRoassal >> nodes [
-	nodeCollection := (1 to: 10).
+	^ nodeCollection.
 ]
 
 { #category : #accessing }
@@ -125,10 +153,7 @@ GtRoassal >> setLayout [
 
 { #category : #accessing }
 GtRoassal >> shape [
-	nodeShape := [BlElement new 
-		geometry: BlEllipseGeometry new;
-		border: (BlBorder paint: Color black width: 2);
-		size: 50 asPoint].
+	^ nodeShape
 	
 ]
 
@@ -138,7 +163,7 @@ GtRoassal >> shape: aShape [
 	dict := {
 		#square ->[BlElement new
 			geometry: (BlRectangle cornerRadius: 1);
-			background: Color gray;
+			background: Color black;
 			size: 10@10].
 		#circle ->[BlElement new 
 			geometry: BlEllipseGeometry new;
@@ -146,7 +171,7 @@ GtRoassal >> shape: aShape [
 			size: 10 asPoint].
 		#point ->[BlElement new 
 			geometry: BlEllipseGeometry new;
-			background: Color gray;
+			background: Color black;
 			size: 10 asPoint].
 	} asDictionary.
 	
