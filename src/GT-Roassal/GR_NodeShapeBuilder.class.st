@@ -40,7 +40,7 @@ GR_NodeShapeBuilder >> color [
 { #category : #accessing }
 GR_NodeShapeBuilder >> color: aColor [
 	color := aColor.
-	shape background: aColor.
+	"shape background: aColor."
 ]
 
 { #category : #accessing }
@@ -72,7 +72,7 @@ GR_NodeShapeBuilder >> getElement: labelText toolTip: showToolTip hoverEffect: u
 	| el |
 	el := GR_NodeElement new
 		geometry: (shape geometry);
-		background: (shape background);
+		background: color;
 		border: (shape border);
 		size: size.
 	
