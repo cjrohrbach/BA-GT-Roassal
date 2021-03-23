@@ -1,3 +1,5 @@
+Load me as follows:
+
 ```
 Metacello new
 	baseline: 'BAGTRoassal';
