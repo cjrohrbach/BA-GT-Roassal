@@ -5,12 +5,6 @@ Class {
 }
 
 { #category : #accessing }
-GR_NodeElement >> addHoverEffekt: originalColor [
-	self addEventHandlerOn: BlMouseEnterEvent do: [self background: Color green].
-	self addEventHandlerOn: BlMouseLeaveEvent do: [self background: originalColor].
-]
-
-{ #category : #accessing }
 GR_NodeElement >> addHoverEffekt: originalColor effectColor: aColor [
 	self addEventHandlerOn: BlMouseEnterEvent do: [self background: aColor].
 	self addEventHandlerOn: BlMouseLeaveEvent do: [self background: originalColor].

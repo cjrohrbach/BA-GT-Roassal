@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'shape',
 		'color',
-		'size'
+		'size',
+		'colorOnHover'
 	],
 	#category : #'GT-Roassal-GT-Roassal'
 }
@@ -51,6 +52,16 @@ GR_NodeShapeBuilder >> color: aColor [
 ]
 
 { #category : #accessing }
+GR_NodeShapeBuilder >> colorOnHover [
+	^colorOnHover
+]
+
+{ #category : #accessing }
+GR_NodeShapeBuilder >> colorOnHover: aColor [
+	colorOnHover := aColor
+]
+
+{ #category : #accessing }
 GR_NodeShapeBuilder >> customShape: aBlElement [
 	shape := aBlElement
 ]
@@ -62,6 +73,36 @@ GR_NodeShapeBuilder >> getElement [
 		background: (shape background);
 		border: (shape border);
 		size: size.
+]
+
+{ #category : #accessing }
+GR_NodeShapeBuilder >> getElement: labelText showToolTip: showToolTip hoverEffect: useHover [
+	| el |
+	el := GR_NodeElement new
+		geometry: (shape geometry);
+		background: (shape background);
+		border: (shape border);
+		size: size.
+	
+	showToolTip ifTrue: [el addTooltip: labelText].
+	useHover ifTrue: [el addHoverEffekt: color effectColor: colorOnHover].
+	
+	^el 
+]
+
+{ #category : #accessing }
+GR_NodeShapeBuilder >> getElement: labelText toolTip: showToolTip hoverEffect: useHover [
+	| el |
+	el := GR_NodeElement new
+		geometry: (shape geometry);
+		background: (shape background);
+		border: (shape border);
+		size: size.
+	
+	showToolTip ifTrue: [el addToolTip: labelText].
+	useHover ifTrue: [el addHoverEffekt: color effectColor: colorOnHover].
+	
+	^el 
 ]
 
 { #category : #accessing }
@@ -81,6 +122,7 @@ GR_NodeShapeBuilder >> hoverEffect [
 { #category : #accessing }
 GR_NodeShapeBuilder >> initialize [
 	size := 10@10.
+	colorOnHover := Color green.
 	self shape: #square.
 	^ self
 ]
