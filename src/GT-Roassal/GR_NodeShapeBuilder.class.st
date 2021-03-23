@@ -26,14 +26,6 @@ GR_NodeShapeBuilder >> addToolTip: labelText [
 ]
 
 { #category : #accessing }
-GR_NodeShapeBuilder >> asStencil [
-	^ [BlElement new
-		geometry: (shape geometry);
-		background: (shape background);
-		size: (shape size)] asStencil
-]
-
-{ #category : #accessing }
 GR_NodeShapeBuilder >> clone [
 	| clonedElement |
 	clonedElement := super clone.
@@ -76,21 +68,6 @@ GR_NodeShapeBuilder >> getElement [
 ]
 
 { #category : #accessing }
-GR_NodeShapeBuilder >> getElement: labelText showToolTip: showToolTip hoverEffect: useHover [
-	| el |
-	el := GR_NodeElement new
-		geometry: (shape geometry);
-		background: (shape background);
-		border: (shape border);
-		size: size.
-	
-	showToolTip ifTrue: [el addTooltip: labelText].
-	useHover ifTrue: [el addHoverEffekt: color effectColor: colorOnHover].
-	
-	^el 
-]
-
-{ #category : #accessing }
 GR_NodeShapeBuilder >> getElement: labelText toolTip: showToolTip hoverEffect: useHover [
 	| el |
 	el := GR_NodeElement new
@@ -106,20 +83,6 @@ GR_NodeShapeBuilder >> getElement: labelText toolTip: showToolTip hoverEffect: u
 ]
 
 { #category : #accessing }
-GR_NodeShapeBuilder >> getStencil [
-	^ [BlElement new
-		geometry: BlRectangle cornerRadius: 1;
-		background: Color green;
-		size: 10@10].
-]
-
-{ #category : #accessing }
-GR_NodeShapeBuilder >> hoverEffect [
-	shape addEventHandlerOn: BlMouseEnterEvent do: [shape background: Color green].
-	shape addEventHandlerOn: BlMouseLeaveEvent do: [shape background: color].
-]
-
-{ #category : #accessing }
 GR_NodeShapeBuilder >> initialize [
 	size := 10@10.
 	colorOnHover := Color green.
@@ -129,7 +92,7 @@ GR_NodeShapeBuilder >> initialize [
 
 { #category : #accessing }
 GR_NodeShapeBuilder >> shape [
-	^shape clone
+	^shape
 ]
 
 { #category : #accessing }
@@ -157,19 +120,4 @@ GR_NodeShapeBuilder >> shape: aShape [
 GR_NodeShapeBuilder >> size: aSize [
 	size := aSize.
 	shape size: aSize.
-]
-
-{ #category : #accessing }
-GR_NodeShapeBuilder >> toolTip: labelText [
-	| label |
-	label := [BrLabel new 
-		look: BrGlamorousLabelLook new  
-			glamorousRegularFontAndSize;
-			alignCenter;
-			text: labelText].
-		
-	shape look: (BrGlamorousWithTooltipLook new
-		showDelay: 0;
-		hideDelay: 0;
-		contentStencil: label).
 ]

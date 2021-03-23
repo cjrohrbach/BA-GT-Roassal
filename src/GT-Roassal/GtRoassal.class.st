@@ -15,7 +15,19 @@ Class {
 }
 
 { #category : #accessing }
-GtRoassal >> _build [
+GtRoassal >> _shape: aShape [
+	nodeShapeBuilder shape: aShape.
+	^nodeShapeBuilder 
+]
+
+{ #category : #accessing }
+GtRoassal >> addHoverEffect: aColor [
+	hoverEffect := true.
+	nodeShapeBuilder colorOnHover: aColor.
+]
+
+{ #category : #accessing }
+GtRoassal >> build [
 	| tmp |
 	mondrianInst nodes
 		shape: [ :x | 
@@ -25,29 +37,13 @@ GtRoassal >> _build [
 ]
 
 { #category : #accessing }
-GtRoassal >> _color: aColor [
+GtRoassal >> color: aColor [
 	nodeShapeBuilder color: aColor
 ]
 
 { #category : #accessing }
-GtRoassal >> _customShape: aBlElement [
+GtRoassal >> customShape: aBlElement [
 	nodeShapeBuilder customShape: aBlElement
-]
-
-{ #category : #accessing }
-GtRoassal >> _shape: aShape [
-	nodeShapeBuilder shape: aShape
-]
-
-{ #category : #accessing }
-GtRoassal >> _size: aSize [
-	nodeShapeBuilder size: aSize
-]
-
-{ #category : #accessing }
-GtRoassal >> addHoverEffect: aColor [
-	hoverEffect := true.
-	nodeShapeBuilder colorOnHover: aColor.
 ]
 
 { #category : #accessing }
@@ -112,6 +108,11 @@ GtRoassal >> setLayout [
 ]
 
 { #category : #accessing }
+GtRoassal >> shape: aShape [
+	nodeShapeBuilder shape: aShape
+]
+
+{ #category : #accessing }
 GtRoassal >> showTooltip [
 	^ showTooltip
 ]
@@ -119,6 +120,11 @@ GtRoassal >> showTooltip [
 { #category : #accessing }
 GtRoassal >> showTooltip: aBoolean [
 	showTooltip := aBoolean.
+]
+
+{ #category : #accessing }
+GtRoassal >> size: aSize [
+	nodeShapeBuilder size: aSize
 ]
 
 { #category : #accessing }

@@ -425,3 +425,19 @@ GT_BA_Examples >> test [
 		
 	^ box
 ]
+
+{ #category : #accessing }
+GT_BA_Examples >> treeWithEvenNumbersHighlighted [
+	<gtExample>
+	| view |
+	view := GtMondrian new.
+	view nodes
+		shape: [:x | BlElement new
+			background: ((x%2 = 0) 
+				ifTrue: [Color red] 
+				ifFalse: [Color black])];
+		with: (1 to: 100).
+	view edges connectFrom: [:x | x//2].
+	view layout tree.
+	^ view
+]
