@@ -427,6 +427,11 @@ GT_BA_Examples >> test [
 ]
 
 { #category : #accessing }
+GT_BA_Examples >> testGit [
+	^ 'abc'
+]
+
+{ #category : #accessing }
 GT_BA_Examples >> treeWithEvenNumbersHighlighted [
 	<gtExample>
 	| view |
