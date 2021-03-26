@@ -1,6 +1,9 @@
 Class {
 	#name : #CRShape,
 	#superclass : #BlElement,
+	#instVars : [
+		'model'
+	],
 	#category : #'CR-Graph-CR-Graph'
 }
 
@@ -13,4 +16,14 @@ CRShape >> color: aColor [
 CRShape >> initialize [
 	super initialize.
 	^self
+]
+
+{ #category : #accessing }
+CRShape >> model [
+	^ model
+]
+
+{ #category : #accessing }
+CRShape >> model: anObject [
+	model := anObject
 ]

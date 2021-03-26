@@ -39,7 +39,8 @@ CRShapeBuilder >> shapeClass: aClass [
 CRShapeBuilder >> shapesOn: someObjects [
 	| result |
 	^ someObjects collect: [ :obj | 
-		result := shapeClass new.
+		result := shapeClass new
+			model: obj.
 			width ifNotNil: [result width: (width)].
 			height ifNotNil: [result height: (height)].
 			color ifNotNil: [result color: (color)].
