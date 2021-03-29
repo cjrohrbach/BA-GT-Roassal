@@ -22,30 +22,10 @@ CRMondrian >> build [
 ]
 
 { #category : #accessing }
-CRMondrian >> gtInspectorView: aView [
-	<gtView>
-	^ aView explicit
-		title: 'Canvas';
-		priority: 50;
-		initialize: [self build]
-]
-
-{ #category : #accessing }
-CRMondrian >> gtLiveView: aView [
+CRMondrian >> gtLiveViewOn: aView [
 	<gtView>
 	^ aView explicit 
 		title: 'Live';
-		priority: 5;
-		stencil: [
-			self build.
-			canvas asPannableElement].
-]
-
-{ #category : #accessing }
-CRMondrian >> gtViewContactDetailsOn: aView [
-	<gtView>
-	^ aView explicit 
-		title: 'Details' translated;
 		priority: 5;
 		stencil: [
 			self build.
@@ -81,11 +61,6 @@ CRMondrian >> nodes: aCollection [
 { #category : #accessing }
 CRMondrian >> shape [
 	^ shapeBuilder
-]
-
-{ #category : #accessing }
-CRMondrian >> shape: aCRShape [
-	shapeBuilder shape
 ]
 
 { #category : #accessing }

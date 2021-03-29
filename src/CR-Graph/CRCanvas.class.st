@@ -23,7 +23,7 @@ CRCanvas >> addAll: shapeCollection [
 
 { #category : #accessing }
 CRCanvas >> asPannableElement [
-	^canvas asPannableElement
+	^canvas asPannableElement zoomToActualSize
 ]
 
 { #category : #accessing }

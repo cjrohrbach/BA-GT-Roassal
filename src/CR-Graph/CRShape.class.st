@@ -32,6 +32,7 @@ CRShape >> initialize [
 	super initialize.
 	self addToolTip.
 	self makeDraggable.
+	self openModelOnClick.
 	^self
 ]
 
@@ -52,5 +53,5 @@ CRShape >> model: anObject [
 
 { #category : #accessing }
 CRShape >> openModelOnClick [
-	self addEventHandlerOn: BlClickEvent do:[model inspect].
+	self addEventHandlerOn: BlClickEvent do:[:e | e target phlow spawnObject: model ].
 ]

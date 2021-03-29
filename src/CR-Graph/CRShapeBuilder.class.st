@@ -32,7 +32,6 @@ CRShapeBuilder >> extent: aPoint [
 CRShapeBuilder >> initialize [
 	super initialize.
 	self box.
-	color := Color black.
 ]
 
 { #category : #accessing }
