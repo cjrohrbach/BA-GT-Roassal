@@ -18,6 +18,11 @@ CRShapeBuilder >> box [
 ]
 
 { #category : #accessing }
+CRShapeBuilder >> circle [
+	shapeClass := CRCircle
+]
+
+{ #category : #accessing }
 CRShapeBuilder >> extent: aPoint [
 	width := aPoint x.
 	height := aPoint y. 
@@ -28,6 +33,11 @@ CRShapeBuilder >> initialize [
 	super initialize.
 	self box.
 	color := Color black.
+]
+
+{ #category : #accessing }
+CRShapeBuilder >> point [
+	shapeClass := CRPoint
 ]
 
 { #category : #accessing }

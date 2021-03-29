@@ -2,26 +2,41 @@ Class {
 	#name : #CRCanvas,
 	#superclass : #Object,
 	#instVars : [
-		'shapes'
+		'shapes',
+		'canvas',
+		'layout'
 	],
 	#category : #'CR-Graph-CR-Graph'
 }
 
 { #category : #accessing }
 CRCanvas >> add: aShape [
-	shapes add: aShape
+	shapes add: aShape.
+	canvas addChild: aShape
 ]
 
 { #category : #accessing }
-CRCanvas >> gtLiveFor: aView [
-	<gtView>
-	^ aView list
-		title: 'Shape List' translated;
-		priority: 8;
-		items: [ shapes ].
+CRCanvas >> addAll: shapeCollection [
+	shapes addAll: shapeCollection.
+	canvas addChildren: shapeCollection.
 ]
 
 { #category : #accessing }
 CRCanvas >> initialize [
+	super initialize.
 	shapes := CRGroup new.
+	canvas := BlElement new.
+	canvas properties 
+			addProperty: (BlElementLayoutHorizontalResizerProperty new fitContent);
+			addProperty: (BlElementLayoutVerticalResizerProperty new fitContent).
+]
+
+{ #category : #accessing }
+CRCanvas >> layout: aLayout [
+	canvas layout: aLayout.
+]
+
+{ #category : #accessing }
+CRCanvas >> shapeCount [
+	^shapes size
 ]

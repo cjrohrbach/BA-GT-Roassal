@@ -8,6 +8,21 @@ Class {
 }
 
 { #category : #accessing }
+CRShape >> addToolTip [
+	| label |
+	label := [BrLabel new look: 
+		BrGlamorousLabelLook new  
+			glamorousRegularFontAndSize;
+			alignCenter;
+			text: model].
+		
+	self look: (BrGlamorousWithTooltipLook new
+		showDelay: 0;
+		hideDelay: 0;
+		contentStencil: label)
+]
+
+{ #category : #accessing }
 CRShape >> color: aColor [
 	self background: aColor
 ]
@@ -15,7 +30,14 @@ CRShape >> color: aColor [
 { #category : #accessing }
 CRShape >> initialize [
 	super initialize.
+	self addToolTip.
+	self makeDraggable.
 	^self
+]
+
+{ #category : #accessing }
+CRShape >> makeDraggable [
+	self addEventHandler: BlPullHandler new allowOutOfBounds.
 ]
 
 { #category : #accessing }
@@ -26,4 +48,9 @@ CRShape >> model [
 { #category : #accessing }
 CRShape >> model: anObject [
 	model := anObject
+]
+
+{ #category : #accessing }
+CRShape >> openModelOnClick [
+	self addEventHandlerOn: BlClickEvent do:[model inspect].
 ]

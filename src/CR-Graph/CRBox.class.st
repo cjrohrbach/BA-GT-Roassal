@@ -13,8 +13,8 @@ Class {
 CRBox >> initialize [
 	super initialize.
 	self geometry: (BlRectangle cornerRadius: 0).
-	self width: 10.
-	self height: 10.
+	self width: 25.
+	self height: 25.
 	self background: Color black.
 	^self
 ]

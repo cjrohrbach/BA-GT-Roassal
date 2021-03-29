@@ -12,12 +12,22 @@ Class {
 }
 
 { #category : #accessing }
+CRMondrian >> applyLayout [
+	layoutBuilder on: canvas
+]
+
+{ #category : #accessing }
+CRMondrian >> build [
+	self applyLayout.
+]
+
+{ #category : #accessing }
 CRMondrian >> gtInspectorView: aView [
 	<gtView>
-	^ aView mondrian
+	^ aView explicit
 		title: 'Canvas';
 		priority: 50;
-		initialize: [Canvas new]
+		initialize: [self build]
 ]
 
 { #category : #accessing }
@@ -25,10 +35,15 @@ CRMondrian >> initialize [
 	super initialize.
 	shapeBuilder := CRShapeBuilder new.
 	layoutBuilder := CRLayoutBuilder new. 
-	canvas := Canvas new.
+	canvas := CRCanvas new.
 	nodesForLayout := CRGroup new.
 	depth := 0.
 	
+]
+
+{ #category : #accessing }
+CRMondrian >> layout [
+	^ layoutBuilder
 ]
 
 { #category : #accessing }
@@ -36,9 +51,19 @@ CRMondrian >> nodes: aCollection [
 	| nodes |
 	self assert: [aCollection isCollection] description: 'You need to provide a collection'.
 	nodes := self shapesOn: aCollection .
-	"canvas addAll: nodes."
+	canvas addAll: nodes.
 	nodesForLayout addAll: nodes.
 	^ nodes
+]
+
+{ #category : #accessing }
+CRMondrian >> shape [
+	^ shapeBuilder
+]
+
+{ #category : #accessing }
+CRMondrian >> shape: aCRShape [
+	shapeBuilder shape
 ]
 
 { #category : #accessing }
