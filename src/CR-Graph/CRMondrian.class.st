@@ -31,6 +31,28 @@ CRMondrian >> gtInspectorView: aView [
 ]
 
 { #category : #accessing }
+CRMondrian >> gtLiveView: aView [
+	<gtView>
+	^ aView explicit 
+		title: 'Live';
+		priority: 5;
+		stencil: [
+			self build.
+			canvas asPannableElement].
+]
+
+{ #category : #accessing }
+CRMondrian >> gtViewContactDetailsOn: aView [
+	<gtView>
+	^ aView explicit 
+		title: 'Details' translated;
+		priority: 5;
+		stencil: [
+			self build.
+			canvas asPannableElement].
+]
+
+{ #category : #accessing }
 CRMondrian >> initialize [
 	super initialize.
 	shapeBuilder := CRShapeBuilder new.

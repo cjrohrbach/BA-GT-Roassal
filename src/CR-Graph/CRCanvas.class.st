@@ -22,6 +22,11 @@ CRCanvas >> addAll: shapeCollection [
 ]
 
 { #category : #accessing }
+CRCanvas >> asPannableElement [
+	^canvas asPannableElement
+]
+
+{ #category : #accessing }
 CRCanvas >> initialize [
 	super initialize.
 	shapes := CRGroup new.
