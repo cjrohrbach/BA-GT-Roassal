@@ -22,14 +22,21 @@ CRMondrian >> build [
 ]
 
 { #category : #accessing }
-CRMondrian >> gtLiveViewOn: aView [
+CRMondrian >> gtCanvasViewOn: aView [
 	<gtView>
 	^ aView explicit 
-		title: 'Live';
+		title: 'Canvas';
 		priority: 5;
 		stencil: [
 			self build.
 			canvas asPannableElement].
+]
+
+{ #category : #accessing }
+CRMondrian >> gtLiveViewOn: aView [
+	<gtView>
+	self build.
+	^ (canvas asPannableElement) gtLiveFor: aView
 ]
 
 { #category : #accessing }

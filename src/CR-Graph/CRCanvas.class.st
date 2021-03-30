@@ -23,7 +23,7 @@ CRCanvas >> addAll: shapeCollection [
 
 { #category : #accessing }
 CRCanvas >> asPannableElement [
-	^canvas asPannableElement zoomToActualSize
+	^canvas asPannableElement
 ]
 
 { #category : #accessing }
@@ -34,6 +34,8 @@ CRCanvas >> initialize [
 	canvas properties 
 			addProperty: (BlElementLayoutHorizontalResizerProperty new fitContent);
 			addProperty: (BlElementLayoutVerticalResizerProperty new fitContent).
+			
+	canvas clipChildren: false.
 ]
 
 { #category : #accessing }

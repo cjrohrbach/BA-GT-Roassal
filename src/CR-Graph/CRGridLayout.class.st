@@ -14,5 +14,5 @@ CRGridLayout >> initialize [
 { #category : #accessing }
 CRGridLayout >> on: aCanvas [
 	self columnCount: (((aCanvas shapeCount)/((aCanvas shapeCount sqrt) round: 0)) ceiling).
-	aCanvas layout: self.
+	aCanvas layout: (BlOnceLayout new layout: self).
 ]
