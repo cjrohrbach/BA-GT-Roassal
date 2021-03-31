@@ -13,46 +13,112 @@ Class {
 }
 
 { #category : #accessing }
+CRShapeBuilder >> borderColor [
+	^borderColor
+]
+
+{ #category : #accessing }
+CRShapeBuilder >> borderColor: aColor [
+	borderColor := aColor
+]
+
+{ #category : #accessing }
+CRShapeBuilder >> borderWidth [
+	^ borderWidth
+]
+
+{ #category : #accessing }
+CRShapeBuilder >> borderWidth: anInteger [
+	borderWidth := anInteger
+]
+
+{ #category : #accessing }
 CRShapeBuilder >> box [
 	shapeClass := CRBox.
+	^self
 ]
 
 { #category : #accessing }
 CRShapeBuilder >> circle [
-	shapeClass := CRCircle
+	shapeClass := CRCircle.
+	^self
+]
+
+{ #category : #accessing }
+CRShapeBuilder >> color [
+	^color
+]
+
+{ #category : #accessing }
+CRShapeBuilder >> color: aColor [
+	color := aColor.
+	^self
 ]
 
 { #category : #accessing }
 CRShapeBuilder >> extent: aPoint [
 	width := aPoint x.
 	height := aPoint y. 
+	^self
+]
+
+{ #category : #accessing }
+CRShapeBuilder >> height [
+	^height
+]
+
+{ #category : #accessing }
+CRShapeBuilder >> height: aHeight [
+	height = aHeight.
+	^self
 ]
 
 { #category : #accessing }
 CRShapeBuilder >> initialize [
 	super initialize.
 	self box.
+	^self
 ]
 
 { #category : #accessing }
 CRShapeBuilder >> point [
-	shapeClass := CRPoint
-]
-
-{ #category : #accessing }
-CRShapeBuilder >> shapeClass: aClass [
-	shapeClass := aClass
+	shapeClass := CRPoint.
+	^self
 ]
 
 { #category : #accessing }
 CRShapeBuilder >> shapesOn: someObjects [
 	| result |
 	^ someObjects collect: [ :obj | 
-		result := shapeClass new
+		result := shapeClass new 
 			model: obj.
-			width ifNotNil: [result width: (width)].
-			height ifNotNil: [result height: (height)].
-			color ifNotNil: [result color: (color)].
-			result
+		width ifNotNil: [result width: (width)].
+		height ifNotNil: [result height: (height)].
+		color ifNotNil: [result color: (color)].
+		
+		(borderWidth notNil and: [borderColor notNil])
+			ifTrue: [result border: (BlBorder paint: borderColor width: borderWidth)]
+			ifFalse: [
+				borderWidth ifNotNil: [result border: (BlBorder paint: Color black width: borderWidth)].
+				borderColor ifNotNil: [result border: (BlBorder paint: borderColor width: 4)]].
+		result
 		] as: CRGroup
+]
+
+{ #category : #accessing }
+CRShapeBuilder >> size: anInteger [
+	width := anInteger.
+	height := anInteger.
+	^self
+]
+
+{ #category : #accessing }
+CRShapeBuilder >> width [
+	^ width
+]
+
+{ #category : #accessing }
+CRShapeBuilder >> width: aWidth [
+	width = aWidth.
+	^self
 ]

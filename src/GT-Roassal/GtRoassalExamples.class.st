@@ -10,7 +10,6 @@ GtRoassalExamples >> simpleNodeGraph [
 	| view |
 	view := GtRoassal new.
 	view nodes: (1 to: 9).
-	view shape: #point.
 	view build.
 	^ view
 ]

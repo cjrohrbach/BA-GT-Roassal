@@ -53,5 +53,5 @@ CRShape >> model: anObject [
 
 { #category : #accessing }
 CRShape >> openModelOnClick [
-	self addEventHandlerOn: BlClickEvent do:[:e | e target phlow spawnObject: model ].
+	self addEventHandlerOn: BlClickEvent do:[:e | e target phlow spawnObject: model].
 ]

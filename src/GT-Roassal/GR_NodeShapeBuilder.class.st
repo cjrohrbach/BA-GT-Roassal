@@ -85,6 +85,7 @@ GR_NodeShapeBuilder >> getElement: labelText toolTip: showToolTip hoverEffect: u
 { #category : #accessing }
 GR_NodeShapeBuilder >> initialize [
 	size := 10@10.
+	color := Color black.
 	colorOnHover := Color green.
 	self shape: #square.
 	^ self
