@@ -88,10 +88,14 @@ CRShapeBuilder >> point [
 
 { #category : #accessing }
 CRShapeBuilder >> shapesOn: someObjects [
-	| result |
-	^ someObjects collect: [ :obj | 
+	| result group |
+	
+	group := CRGroup new.
+	group addAll: (someObjects collect: [ :obj | 
 		result := shapeClass new 
-			model: obj.
+			model: obj;
+			group: group.
+		result highlightOnClick.
 		width ifNotNil: [result width: (width)].
 		height ifNotNil: [result height: (height)].
 		color ifNotNil: [result color: (color)].
@@ -102,7 +106,9 @@ CRShapeBuilder >> shapesOn: someObjects [
 				borderWidth ifNotNil: [result border: (BlBorder paint: Color black width: borderWidth)].
 				borderColor ifNotNil: [result border: (BlBorder paint: borderColor width: 4)]].
 		result
-		] as: CRGroup
+		]).
+		
+	^ group
 ]
 
 { #category : #accessing }

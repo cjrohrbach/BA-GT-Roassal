@@ -33,8 +33,7 @@ CRCanvas >> initialize [
 	canvas := BlElement new.
 	canvas properties 
 			addProperty: (BlElementLayoutHorizontalResizerProperty new fitContent);
-			addProperty: (BlElementLayoutVerticalResizerProperty new fitContent).
-			
+			addProperty: (BlElementLayoutVerticalResizerProperty new fitContent).		
 	canvas clipChildren: false.
 ]
 

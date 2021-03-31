@@ -26,12 +26,14 @@ Usefull_Snippets >> blElementsWithEdge [
 	
 	z := BlElement new
 		background: Color blue;
-			size: 75@75;
-			addEventHandler: BlPullHandler new.
+		size: 75@75;
+		addEventHandler: BlPullHandler new.
 	
-	e := BlElement new				background: Color red;			size: 75@75;
-					addEventHandler: BlPullHandler new;
-					relocate: 200@200.
+	e := BlElement new				
+		background: Color red;			
+		size: 75@75;
+		addEventHandler: BlPullHandler new;
+		relocate: 200@200.
 	
 	l := BlLineElement new
 		border: (BlBorder paint: (Color black alpha: 1) width: 2);

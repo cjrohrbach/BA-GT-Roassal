@@ -2,7 +2,9 @@ Class {
 	#name : #CRShape,
 	#superclass : #BlElement,
 	#instVars : [
-		'model'
+		'model',
+		'originalBorder',
+		'group'
 	],
 	#category : #'CR-Graph-CR-Graph'
 }
@@ -25,6 +27,27 @@ CRShape >> addToolTip [
 { #category : #accessing }
 CRShape >> color: aColor [
 	self background: aColor
+]
+
+{ #category : #accessing }
+CRShape >> group [
+	^group
+]
+
+{ #category : #accessing }
+CRShape >> group: aCRGroup [
+	group := aCRGroup
+]
+
+{ #category : #accessing }
+CRShape >> highlight [
+	originalBorder := self border.
+	self border: (BlBorder paint: (Color green alpha: 0.5) width: 5).
+]
+
+{ #category : #accessing }
+CRShape >> highlightOnClick [
+	self addEventFilterOn: BlClickEvent do: [group highlightElement: self].
 ]
 
 { #category : #accessing }
@@ -54,4 +77,9 @@ CRShape >> model: anObject [
 { #category : #accessing }
 CRShape >> openModelOnClick [
 	self addEventHandlerOn: BlClickEvent do:[:e | e target phlow spawnObject: model].
+]
+
+{ #category : #accessing }
+CRShape >> removeHighlight [
+	self border: originalBorder
 ]

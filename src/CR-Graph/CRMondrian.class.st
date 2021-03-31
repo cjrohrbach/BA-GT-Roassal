@@ -1,3 +1,6 @@
+"
+I'm a simple API to generate some visualizations with nodes and edges.
+"
 Class {
 	#name : #CRMondrian,
 	#superclass : #Object,
