@@ -11,5 +11,6 @@ BaselineOfBAGTRoassal >> baseline: spec [
 		for: #common
 		do: [ spec
 				package: #'BA-Testing';
-				package: #'GT-Roassal' ]
+				package: #'GT-Roassal';
+				package: #'CR-Graph' ]
 ]
