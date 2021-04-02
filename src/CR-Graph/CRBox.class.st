@@ -12,7 +12,7 @@ Class {
 { #category : #accessing }
 CRBox >> initialize [
 	super initialize.
-	self geometry: (BlRectangle cornerRadius: 0).
+	self geometry: BlSquare new.
 	self width: 25.
 	self height: 25.
 	self background: Color black.

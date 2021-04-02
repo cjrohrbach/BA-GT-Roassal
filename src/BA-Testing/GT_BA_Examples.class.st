@@ -158,7 +158,7 @@ GT_BA_Examples >> labelOnHover [
 	
 
 	box2 := BrLabel new
-		look: BrGlamorousLabelLook new;
+		aptitude: BrGlamorousLabelAptitude new;
 		background: Color red;
 		size: 20@20.
 	
@@ -320,9 +320,9 @@ GT_BA_Examples >> nodesWithTooltip [
 			geometry: (BlRectangle cornerRadius: 1);
 			size: 10 @ 10;
 			background: Color gray;
-			look: (BrGlamorousWithLabelTooltipLook 
+			aptitude: (BrGlamorousWithLabelTooltipAptitude 
 				content: [BrLabel new
-					look: BrGlamorousLabelLook new glamorousRegularFontAndSize;
+					aptitude: BrGlamorousLabelAptitude new glamorousRegularFontAndSize;
 					alignCenter;
 					text: 'abc' asRopedText]);
 			yourself];
@@ -339,9 +339,9 @@ GT_BA_Examples >> nodesWithTooltipWithoutDelay [
 	view := GtMondrian new.
 	view nodes 
 	shape: [:x |BlElement new 
-		look: (BrGlamorousWithTooltipLook new
+		aptitude: (BrGlamorousWithTooltipAptitude new
 			contentStencil: [BrLabel new
-				look: BrGlamorousLabelLook new glamorousRegularFontAndSize;
+				aptitude: BrGlamorousLabelAptitude new glamorousRegularFontAndSize;
 				alignCenter;
 				text: x];
 			showDelay: 0;

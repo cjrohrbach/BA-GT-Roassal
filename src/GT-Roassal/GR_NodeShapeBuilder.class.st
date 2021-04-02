@@ -14,12 +14,12 @@ Class {
 GR_NodeShapeBuilder >> addToolTip: labelText [
 	| label |
 	label := [BrLabel new 
-		look: BrGlamorousLabelLook new  
+		aptitude: BrGlamorousLabelAptitude new  
 			glamorousRegularFontAndSize;
 			alignCenter;
 			text: labelText].
 		
-	shape look: (BrGlamorousWithTooltipLook new
+	shape aptitude: (BrGlamorousWithTooltipAptitude new
 		showDelay: 0;
 		hideDelay: 0;
 		contentStencil: label).

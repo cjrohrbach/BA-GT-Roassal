@@ -13,13 +13,13 @@ GR_NodeElement >> addHoverEffekt: originalColor effectColor: aColor [
 { #category : #accessing }
 GR_NodeElement >> addToolTip: labelText [
 	| label |
-	label := [BrLabel new look: 
-		BrGlamorousLabelLook new  
+	label := [BrLabel new aptitude: 
+		BrGlamorousLabelAptitude new  
 			glamorousRegularFontAndSize;
 			alignCenter;
 			text: labelText].
 		
-	self look: (BrGlamorousWithTooltipLook new
+	self aptitude: (BrGlamorousWithTooltipAptitude new
 		showDelay: 0;
 		hideDelay: 0;
 		contentStencil: label)

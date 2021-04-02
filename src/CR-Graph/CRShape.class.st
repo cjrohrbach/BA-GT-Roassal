@@ -12,13 +12,13 @@ Class {
 { #category : #accessing }
 CRShape >> addToolTip [
 	| label |
-	label := [BrLabel new look: 
-		BrGlamorousLabelLook new  
+	label := [BrLabel new aptitude: 
+		BrGlamorousLabelAptitude new  
 			glamorousRegularFontAndSize;
 			alignCenter;
 			text: model].
 		
-	self look: (BrGlamorousWithTooltipLook new
+	self aptitude: (BrGlamorousWithTooltipAptitude new
 		showDelay: 0;
 		hideDelay: 0;
 		contentStencil: label)
