@@ -1,17 +1,17 @@
 Class {
-	#name : #'GR_NodeElement',
+	#name : #GRNodeElement,
 	#superclass : #BlElement,
 	#category : #'GT-Roassal-GT-Roassal'
 }
 
 { #category : #accessing }
-GR_NodeElement >> addHoverEffekt: originalColor effectColor: aColor [
+GRNodeElement >> addHoverEffekt: originalColor effectColor: aColor [
 	self addEventHandlerOn: BlMouseEnterEvent do: [self background: aColor].
 	self addEventHandlerOn: BlMouseLeaveEvent do: [self background: originalColor].
 ]
 
 { #category : #accessing }
-GR_NodeElement >> addToolTip: labelText [
+GRNodeElement >> addToolTip: labelText [
 	| label |
 	label := [BrLabel new aptitude: 
 		BrGlamorousLabelAptitude new  
@@ -26,7 +26,7 @@ GR_NodeElement >> addToolTip: labelText [
 ]
 
 { #category : #accessing }
-GR_NodeElement >> initialize [
+GRNodeElement >> initialize [
 	super initialize.
 	^ self
 ]

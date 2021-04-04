@@ -1,5 +1,5 @@
 Class {
-	#name : #'GR_NodeShapeBuilder',
+	#name : #GRNodeShapeBuilder,
 	#superclass : #Object,
 	#instVars : [
 		'shape',
@@ -11,7 +11,7 @@ Class {
 }
 
 { #category : #accessing }
-GR_NodeShapeBuilder >> addToolTip: labelText [
+GRNodeShapeBuilder >> addToolTip: labelText [
 	| label |
 	label := [BrLabel new 
 		aptitude: BrGlamorousLabelAptitude new  
@@ -26,41 +26,41 @@ GR_NodeShapeBuilder >> addToolTip: labelText [
 ]
 
 { #category : #accessing }
-GR_NodeShapeBuilder >> clone [
+GRNodeShapeBuilder >> clone [
 	| clonedElement |
 	clonedElement := super clone.
 	clonedElement setShape: (shape clone).
 ]
 
 { #category : #accessing }
-GR_NodeShapeBuilder >> color [
+GRNodeShapeBuilder >> color [
 	^ color
 ]
 
 { #category : #accessing }
-GR_NodeShapeBuilder >> color: aColor [
+GRNodeShapeBuilder >> color: aColor [
 	color := aColor.
 	"shape background: aColor."
 ]
 
 { #category : #accessing }
-GR_NodeShapeBuilder >> colorOnHover [
+GRNodeShapeBuilder >> colorOnHover [
 	^colorOnHover
 ]
 
 { #category : #accessing }
-GR_NodeShapeBuilder >> colorOnHover: aColor [
+GRNodeShapeBuilder >> colorOnHover: aColor [
 	colorOnHover := aColor
 ]
 
 { #category : #accessing }
-GR_NodeShapeBuilder >> customShape: aBlElement [
+GRNodeShapeBuilder >> customShape: aBlElement [
 	shape := aBlElement
 ]
 
 { #category : #accessing }
-GR_NodeShapeBuilder >> getElement [
-	^ GR_NodeElement new
+GRNodeShapeBuilder >> getElement [
+	^ GRNodeElement new
 		geometry: (shape geometry);
 		background: (shape background);
 		border: (shape border);
@@ -68,9 +68,9 @@ GR_NodeShapeBuilder >> getElement [
 ]
 
 { #category : #accessing }
-GR_NodeShapeBuilder >> getElement: labelText toolTip: showToolTip hoverEffect: useHover [
+GRNodeShapeBuilder >> getElement: labelText toolTip: showToolTip hoverEffect: useHover [
 	| el |
-	el := GR_NodeElement new
+	el := GRNodeElement new
 		geometry: (shape geometry);
 		background: color;
 		border: (shape border);
@@ -83,7 +83,7 @@ GR_NodeShapeBuilder >> getElement: labelText toolTip: showToolTip hoverEffect: u
 ]
 
 { #category : #accessing }
-GR_NodeShapeBuilder >> initialize [
+GRNodeShapeBuilder >> initialize [
 	size := 10@10.
 	color := Color black.
 	colorOnHover := Color green.
@@ -92,12 +92,12 @@ GR_NodeShapeBuilder >> initialize [
 ]
 
 { #category : #accessing }
-GR_NodeShapeBuilder >> shape [
+GRNodeShapeBuilder >> shape [
 	^shape
 ]
 
 { #category : #accessing }
-GR_NodeShapeBuilder >> shape: aShape [
+GRNodeShapeBuilder >> shape: aShape [
 | dict |
 	dict := {
 		#square ->(BlElement new
@@ -118,7 +118,7 @@ GR_NodeShapeBuilder >> shape: aShape [
 ]
 
 { #category : #accessing }
-GR_NodeShapeBuilder >> size: aSize [
+GRNodeShapeBuilder >> size: aSize [
 	size := aSize.
 	shape size: aSize.
 ]

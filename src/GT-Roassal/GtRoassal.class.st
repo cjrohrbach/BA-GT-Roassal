@@ -72,7 +72,7 @@ GtRoassal >> initialize [
 	showTooltip := true.
 	hoverEffect := false.
 	nodeLayout := #grid.
-	nodeShapeBuilder := GR_NodeShapeBuilder new.
+	nodeShapeBuilder := GRNodeShapeBuilder new.
 	mondrianInst := GtMondrian new.
 	^ self
 ]
