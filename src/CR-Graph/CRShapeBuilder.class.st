@@ -18,8 +18,8 @@ CRShapeBuilder >> borderColor [
 ]
 
 { #category : #accessing }
-CRShapeBuilder >> borderColor: aColor [
-	borderColor := aColor
+CRShapeBuilder >> borderColor: aColorOrAOneArgBlock [
+	borderColor := aColorOrAOneArgBlock
 ]
 
 { #category : #accessing }
@@ -28,8 +28,8 @@ CRShapeBuilder >> borderWidth [
 ]
 
 { #category : #accessing }
-CRShapeBuilder >> borderWidth: anInteger [
-	borderWidth := anInteger
+CRShapeBuilder >> borderWidth: aValueOrAOneArgBlock [
+	borderWidth := aValueOrAOneArgBlock
 ]
 
 { #category : #accessing }
@@ -50,8 +50,8 @@ CRShapeBuilder >> color [
 ]
 
 { #category : #accessing }
-CRShapeBuilder >> color: aColor [
-	color := aColor.
+CRShapeBuilder >> color: aColorOrAnArgBlock [
+	color := aColorOrAnArgBlock.
 	^self
 ]
 
@@ -68,8 +68,8 @@ CRShapeBuilder >> height [
 ]
 
 { #category : #accessing }
-CRShapeBuilder >> height: aHeight [
-	height = aHeight.
+CRShapeBuilder >> height: aValueOrAOneArgBlock [
+	height := aValueOrAOneArgBlock.
 	^self
 ]
 
@@ -96,15 +96,15 @@ CRShapeBuilder >> shapesOn: someObjects [
 			model: obj;
 			group: group.
 		result highlightOnClick.
-		width ifNotNil: [result width: (width)].
-		height ifNotNil: [result height: (height)].
-		color ifNotNil: [result color: (color)].
+		width ifNotNil: [result width: (width rsValue: obj)].
+		height ifNotNil: [result height: (height rsValue: obj)].
+		color ifNotNil: [result color: (color rsValue: obj)].
 		
 		(borderWidth notNil and: [borderColor notNil])
-			ifTrue: [result border: (BlBorder paint: borderColor width: borderWidth)]
+			ifTrue: [result border: (BlBorder paint: (borderColor rsValue: obj) width: (borderWidth rsValue: obj))]
 			ifFalse: [
-				borderWidth ifNotNil: [result border: (BlBorder paint: Color black width: borderWidth)].
-				borderColor ifNotNil: [result border: (BlBorder paint: borderColor width: 4)]].
+				borderWidth ifNotNil: [result border: (BlBorder paint: Color black width: (borderWidth rsValue: obj))].
+				borderColor ifNotNil: [result border: (BlBorder paint: (borderColor rsValue: obj) width: 4)]].
 		result
 		]).
 		
@@ -112,9 +112,9 @@ CRShapeBuilder >> shapesOn: someObjects [
 ]
 
 { #category : #accessing }
-CRShapeBuilder >> size: anInteger [
-	width := anInteger.
-	height := anInteger.
+CRShapeBuilder >> size: aValueOrAOneArgBlock [
+	width := aValueOrAOneArgBlock.
+	height := aValueOrAOneArgBlock.
 	^self
 ]
 
@@ -124,7 +124,7 @@ CRShapeBuilder >> width [
 ]
 
 { #category : #accessing }
-CRShapeBuilder >> width: aWidth [
-	width = aWidth.
+CRShapeBuilder >> width: aValueOrAOneArgBlock [
+	width := aValueOrAOneArgBlock.
 	^self
 ]
