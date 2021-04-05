@@ -9,7 +9,9 @@ Class {
 		'shapeBuilder',
 		'layoutBuilder',
 		'depth',
-		'canvas'
+		'canvas',
+		'edges',
+		'edgeBuilder'
 	],
 	#category : #'CR-Graph'
 }
@@ -22,6 +24,14 @@ CRMondrian >> applyLayout [
 { #category : #accessing }
 CRMondrian >> build [
 	self applyLayout.
+]
+
+{ #category : #accessing }
+CRMondrian >> edges: aToBlock [
+	edgeBuilder shapes: nodesForLayout.
+	edges := edgeBuilder connectTo: aToBlock.
+	canvas addAll: edges.
+	^edges
 ]
 
 { #category : #accessing }
@@ -47,6 +57,7 @@ CRMondrian >> initialize [
 	super initialize.
 	shapeBuilder := CRShapeBuilder new.
 	layoutBuilder := CRLayoutBuilder new. 
+	edgeBuilder := CREdgeBuilder new.
 	canvas := CRCanvas new.
 	nodesForLayout := CRGroup new.
 	depth := 0.

@@ -19,3 +19,16 @@ CRGroup >> initialize [
 	super initialize.
 	^ self
 ]
+
+{ #category : #accessing }
+CRGroup >> shapesFromModel: aObject [
+" returns all shapes matching the objects as new CRGroup "
+	| group |
+	group := CRGroup new.
+	
+	self do: [:shape | (shape model = aObject) ifTrue: [group add: shape]].
+	
+	^ group
+
+	
+]

@@ -56,6 +56,14 @@ CRShapeBuilder >> color: aColorOrAnArgBlock [
 ]
 
 { #category : #accessing }
+CRShapeBuilder >> evaluate: aBlockClosure on: aObject [
+" checks wheter the given Block is a Block or if it's just a value "
+	(aBlockClosure class = BlockClosure) 
+		ifTrue: [^ (aBlockClosure cull: aObject)]
+		ifFalse: [^aBlockClosure]
+]
+
+{ #category : #accessing }
 CRShapeBuilder >> extent: aPoint [
 	width := aPoint x.
 	height := aPoint y. 
@@ -96,15 +104,15 @@ CRShapeBuilder >> shapesOn: someObjects [
 			model: obj;
 			group: group.
 		result highlightOnClick.
-		width ifNotNil: [result width: (width rsValue: obj)].
-		height ifNotNil: [result height: (height rsValue: obj)].
-		color ifNotNil: [result color: (color rsValue: obj)].
+		width ifNotNil: [result width: (self evaluate: width on: obj)].
+		height ifNotNil: [result height: (self evaluate: height on: obj)].
+		color ifNotNil: [result color: (self evaluate: color on: obj)].
 		
 		(borderWidth notNil and: [borderColor notNil])
-			ifTrue: [result border: (BlBorder paint: (borderColor rsValue: obj) width: (borderWidth rsValue: obj))]
+			ifTrue: [result border: (BlBorder paint:(self evaluate: borderColor on: obj) width: (self evaluate: borderWidth on: obj))]
 			ifFalse: [
-				borderWidth ifNotNil: [result border: (BlBorder paint: Color black width: (borderWidth rsValue: obj))].
-				borderColor ifNotNil: [result border: (BlBorder paint: (borderColor rsValue: obj) width: 4)]].
+				borderWidth ifNotNil: [result border: (BlBorder paint: Color black width: (self evaluate: borderWidth on: obj))].
+				borderColor ifNotNil: [result border: (BlBorder paint: (self evaluate: borderColor on: obj) width: 4)]].
 		result
 		]).
 		

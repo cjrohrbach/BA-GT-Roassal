@@ -8,6 +8,28 @@ Class {
 }
 
 { #category : #accessing }
+CRMondrianExamples >> edgesToHalf [
+	<gtExample>
+	| m |
+	m := CRMondrian new.
+	m shape point.
+	m nodes: (1 to: 10).
+	m edges: [:x | x/2].
+	^m
+]
+
+{ #category : #accessing }
+CRMondrianExamples >> evenAndUnevenNumbersSeparatedByColor [
+	<gtExample>
+	| m |
+	m := CRMondrian new.
+	m shape box 
+		color: [:x | x%2=0 ifTrue: [Color green ] ifFalse: [Color red]].
+	m nodes: (1 to:10).
+	^m
+]
+
+{ #category : #accessing }
 CRMondrianExamples >> smallAndBigCircles [
 	<gtExample>
 	| c |
