@@ -2,23 +2,36 @@ Class {
 	#name : #CRCanvas,
 	#superclass : #Object,
 	#instVars : [
-		'shapes',
 		'canvas',
-		'layout'
+		'layout',
+		'edges',
+		'nodes'
 	],
 	#category : #'CR-Graph-CR-Graph'
 }
 
 { #category : #accessing }
-CRCanvas >> add: aShape [
-	shapes add: aShape.
-	canvas addChild: aShape
+CRCanvas >> addAllEdges: shapeCollection [
+	edges addAll: shapeCollection.
+	canvas addChildren: shapeCollection.
 ]
 
 { #category : #accessing }
-CRCanvas >> addAll: shapeCollection [
-	shapes addAll: shapeCollection.
+CRCanvas >> addAllNodes: shapeCollection [
+	nodes addAll: shapeCollection.
 	canvas addChildren: shapeCollection.
+]
+
+{ #category : #accessing }
+CRCanvas >> addEdge: aShape [
+	edges add: aShape.
+	canvas addChild: aShape.
+]
+
+{ #category : #accessing }
+CRCanvas >> addNode: aShape [
+	nodes add: aShape.
+	canvas addChild: aShape.
 ]
 
 { #category : #accessing }
@@ -29,7 +42,8 @@ CRCanvas >> asPannableElement [
 { #category : #accessing }
 CRCanvas >> initialize [
 	super initialize.
-	shapes := CRGroup new.
+	nodes := CRGroup new.
+	edges := CRGroup new.
 	canvas := BlElement new.
 	canvas properties 
 			addProperty: (BlElementLayoutHorizontalResizerProperty new fitContent);
@@ -40,6 +54,11 @@ CRCanvas >> initialize [
 { #category : #accessing }
 CRCanvas >> layout: aLayout [
 	canvas layout: aLayout.
+]
+
+{ #category : #accessing }
+CRCanvas >> nodeCount [
+	^nodes size
 ]
 
 { #category : #accessing }

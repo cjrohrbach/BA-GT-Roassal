@@ -30,7 +30,7 @@ CRMondrian >> build [
 CRMondrian >> edges: aToBlock [
 	edgeBuilder shapes: nodesForLayout.
 	edges := edgeBuilder connectTo: aToBlock.
-	canvas addAll: edges.
+	canvas addAllEdges: edges.
 	^edges
 ]
 
@@ -74,7 +74,7 @@ CRMondrian >> nodes: aCollection [
 	| nodes |
 	self assert: [aCollection isCollection] description: 'You need to provide a collection'.
 	nodes := self shapesOn: aCollection .
-	canvas addAll: nodes.
+	canvas addAllNodes: nodes.
 	nodesForLayout addAll: nodes.
 	^ nodes
 ]
