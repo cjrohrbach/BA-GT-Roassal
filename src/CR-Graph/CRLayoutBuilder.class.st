@@ -24,3 +24,8 @@ CRLayoutBuilder >> initialize [
 CRLayoutBuilder >> on: aCanvas [
 	layout on: aCanvas
 ]
+
+{ #category : #accessing }
+CRLayoutBuilder >> tree [
+	layout := CRTreeLayout new.
+]
