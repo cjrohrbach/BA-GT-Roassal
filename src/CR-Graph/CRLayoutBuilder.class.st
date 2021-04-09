@@ -9,6 +9,12 @@ Class {
 }
 
 { #category : #accessing }
+CRLayoutBuilder >> force [
+	layout := CRForceLayout new.
+	^layout.
+]
+
+{ #category : #accessing }
 CRLayoutBuilder >> grid [
 	layout := CRGridLayout new.
 	^layout

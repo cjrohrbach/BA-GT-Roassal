@@ -34,6 +34,12 @@ CRGroup >> nodesFromModel: aObject [
 ]
 
 { #category : #accessing }
+CRGroup >> removeHighlights [
+	highlightedNode ifNotNil: [ highlightedNode removeHighlight].
+	highlightedNode := nil.
+]
+
+{ #category : #accessing }
 CRGroup >> shapesFromModel: aObject [
 " returns all shapes matching the objects as new CRGroup "
 	| group |
@@ -44,4 +50,16 @@ CRGroup >> shapesFromModel: aObject [
 	^ group
 
 	
+]
+
+{ #category : #accessing }
+CRGroup >> shapesFromModelArray: aArray [
+	| group |
+	group := CRGroup new.
+	
+	aArray do: [:model | 
+		group addAll: (self shapesFromModel: model).
+	].
+	
+	^ group
 ]

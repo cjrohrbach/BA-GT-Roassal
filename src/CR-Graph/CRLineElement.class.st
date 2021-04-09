@@ -7,7 +7,7 @@ Class {
 { #category : #accessing }
 CRLineElement >> initialize [
 	super initialize.
-	self border: (BlBorder paint: (Color black alpha: 1) width: 2).
+	self border: (BlBorder paint: (Color black alpha: 0.5) width: 2).
 	self zIndex: -1.
 	^self
 ]

@@ -2,27 +2,30 @@ Class {
 	#name : #CREdgeBuilder,
 	#superclass : #Object,
 	#instVars : [
-		'nodes'
+		'canvas'
 	],
 	#category : #'CR-Graph-CR-Graph'
 }
 
 { #category : #accessing }
+CREdgeBuilder >> canvas: aCRCanvas [
+	canvas := aCRCanvas
+]
+
+{ #category : #accessing }
 CREdgeBuilder >> connectTo: toBlock [
-| group line coll |
+| line coll nodes|
 	
-	group := CRGroup new.
+	nodes := canvas nodes.
 	
 	nodes do: [:node | 
 		coll := (self evaluate: toBlock on: node).
 		(coll notNil and: coll size > 0) ifTrue: [coll do: [:res | 
 			
 			self createGraphEdgeAndAddConstraintsFrom: res to: node.
-			group add: (self createVisibleEdgeFrom: res to: node).
+			canvas addEdge: (self createVisibleEdgeFrom: res to: node).
 			
 		]]].
-		
-	^group
 		
 ]
 
@@ -48,7 +51,14 @@ CREdgeBuilder >> evaluate: aBlock on: aCRNode [
 	" evaluates the given block on the object and then returns a CRGroup with all shapes that match the result "
 	| result |
 	result := aBlock cull: (aCRNode model).
-	^nodes shapesFromModel: result.
+	
+	
+	(result class = Array) 
+		ifTrue: [^ canvas nodes shapesFromModelArray: result.]
+		ifFalse: [^ canvas nodes shapesFromModel: result].
+	
+	
+	
 ]
 
 { #category : #accessing }

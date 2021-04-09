@@ -27,10 +27,14 @@ CRMondrian >> build [
 ]
 
 { #category : #accessing }
-CRMondrian >> edges: aToBlock [
+CRMondrian >> edge [
 	edgeBuilder nodes: nodesForLayout.
+	^ edgeBuilder
+]
+
+{ #category : #accessing }
+CRMondrian >> edges: aToBlock [
 	edges := edgeBuilder connectTo: aToBlock.
-	canvas addAllEdges: edges.
 	^edges
 ]
 
@@ -56,9 +60,11 @@ CRMondrian >> gtLiveViewOn: aView [
 CRMondrian >> initialize [
 	super initialize.
 	shapeBuilder := CRShapeBuilder new.
-	layoutBuilder := CRLayoutBuilder new. 
-	edgeBuilder := CREdgeBuilder new.
-	canvas := CRCanvas new.
+	layoutBuilder := CRLayoutBuilder new.
+	canvas := CRCanvas new. 
+	edgeBuilder := CREdgeBuilder new
+		canvas: canvas.
+	
 	nodesForLayout := CRGroup new.
 	depth := 0.
 	

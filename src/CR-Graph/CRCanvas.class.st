@@ -49,6 +49,8 @@ CRCanvas >> initialize [
 			addProperty: (BlElementLayoutHorizontalResizerProperty new fitContent);
 			addProperty: (BlElementLayoutVerticalResizerProperty new fitContent).		
 	canvas clipChildren: false.
+	
+	self removeAllHighlightsOnClick.
 ]
 
 { #category : #accessing }
@@ -64,6 +66,11 @@ CRCanvas >> nodeCount [
 { #category : #accessing }
 CRCanvas >> nodes [
 	^nodes
+]
+
+{ #category : #accessing }
+CRCanvas >> removeAllHighlightsOnClick [
+	canvas addEventHandlerOn: BlClickEvent do: [nodes removeHighlights]
 ]
 
 { #category : #accessing }
