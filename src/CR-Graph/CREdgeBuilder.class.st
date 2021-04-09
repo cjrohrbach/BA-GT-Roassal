@@ -17,8 +17,8 @@ CREdgeBuilder >> connectTo: toBlock [
 		coll := (self evaluate: toBlock on: node).
 		(coll notNil and: coll size > 0) ifTrue: [coll do: [:res | 
 			
-			self createGraphEdgeAndAddConstraintsFrom: node to: res.
-			group add: (self createVisibleEdgeFrom: node to: res).
+			self createGraphEdgeAndAddConstraintsFrom: res to: node.
+			group add: (self createVisibleEdgeFrom: res to: node).
 			
 		]]].
 		

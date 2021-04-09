@@ -11,6 +11,7 @@ Class {
 { #category : #accessing }
 CRLayoutBuilder >> grid [
 	layout := CRGridLayout new.
+	^layout
 ]
 
 { #category : #accessing }
@@ -28,4 +29,5 @@ CRLayoutBuilder >> on: aCanvas [
 { #category : #accessing }
 CRLayoutBuilder >> tree [
 	layout := CRTreeLayout new.
+	^layout
 ]

@@ -7,12 +7,12 @@ Class {
 { #category : #accessing }
 CRTreeLayout >> initialize [
 	super initialize.
+	self verticalGap: 50.
+	self horizontalGap: 50.
 	^self
 ]
 
 { #category : #accessing }
 CRTreeLayout >> on: aCanvas [
-	| nodes |
-	nodes := aCanvas nodes.
-	
+	aCanvas layout: (BlOnceLayout new layout: self).
 ]

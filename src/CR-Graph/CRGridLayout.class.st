@@ -8,6 +8,7 @@ Class {
 CRGridLayout >> initialize [
 	super initialize .
 	self cellSpacing: 10.
+	self horizontal.
 	^ self 
 ]
 

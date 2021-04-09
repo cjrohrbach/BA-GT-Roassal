@@ -50,6 +50,18 @@ CRMondrianExamples >> someCircles [
 ]
 
 { #category : #accessing }
+CRMondrianExamples >> someConnectedPointsTree [
+	<gtExample>
+	| m |
+	m := CRMondrian new.
+	m shape point.
+	m nodes: (1 to: 100).
+	m edges: [:nb | nb // 2].
+	m layout tree.
+	^m
+]
+
+{ #category : #accessing }
 CRMondrianExamples >> someNumbers [
 	<gtExample>
 	| c |

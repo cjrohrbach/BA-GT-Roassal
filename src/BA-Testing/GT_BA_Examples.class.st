@@ -361,7 +361,6 @@ GT_BA_Examples >> packageTreeView [
 	packagesToDisplay := Set new.
 	packagesToDisplay add: 'BA-Testing'.
 	packagesToDisplay add: 'GToolkit-Mondrian'.
-	packagesToDisplay add: 'IMAD-Cards'.
 			
 	packages := Set new.
 	
