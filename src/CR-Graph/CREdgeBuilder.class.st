@@ -2,7 +2,7 @@ Class {
 	#name : #CREdgeBuilder,
 	#superclass : #Object,
 	#instVars : [
-		'shapes'
+		'nodes'
 	],
 	#category : #'CR-Graph-CR-Graph'
 }
@@ -13,12 +13,17 @@ CREdgeBuilder >> connectTo: toBlock [
 	
 	group := CRGroup new.
 	
-	shapes do: [:shape | 
-		coll := (self evaluate: toBlock on: shape).
+	nodes do: [:node | 
+		coll := (self evaluate: toBlock on: node).
 		(coll notNil and: coll size > 0) ifTrue: [coll do: [:res | 
+			
+			"add child and parent to the nodes"
+			res addChildNode: node.
+			node addParentNode: res.
+			
 			line := CRLineElement new.
-			line fromAnchor: (BlElementCenterAnchor referenceElement: shape relatedTo: res).
-			line toAnchor: (BlElementCenterAnchor referenceElement: res relatedTo: shape).
+			line fromAnchor: (BlElementCenterAnchor referenceElement: node relatedTo: res).
+			line toAnchor: (BlElementCenterAnchor referenceElement: res relatedTo: node).
 			line constraints ignoreByLayout.
 			group add: line.
 		]]].
@@ -28,11 +33,11 @@ CREdgeBuilder >> connectTo: toBlock [
 ]
 
 { #category : #accessing }
-CREdgeBuilder >> evaluate: aBlock on: aShape [
+CREdgeBuilder >> evaluate: aBlock on: aCRNode [
 	" evaluates the given block on the object and then returns a CRGroup with all shapes that match the result "
 	| result |
-	result := aBlock cull: (aShape model).
-	^shapes shapesFromModel: result.
+	result := aBlock cull: (aCRNode model).
+	^nodes shapesFromModel: result.
 ]
 
 { #category : #accessing }
@@ -42,6 +47,6 @@ CREdgeBuilder >> initialize [
 ]
 
 { #category : #accessing }
-CREdgeBuilder >> shapes: aCRGroup [
-	shapes := aCRGroup
+CREdgeBuilder >> nodes: aCRGroup [
+	nodes := aCRGroup
 ]

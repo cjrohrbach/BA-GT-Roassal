@@ -1,6 +1,6 @@
 Class {
 	#name : #CRCircle,
-	#superclass : #CRShape,
+	#superclass : #CRNode,
 	#category : #'CR-Graph'
 }
 

@@ -1,7 +1,7 @@
 Class {
 	#name : #CRTreeLayout,
-	#superclass : #GtGradVerticalTreeLayout,
-	#category : #'CR-Graph-CR-Graph'
+	#superclass : #CRLayout,
+	#category : #'CR-Graph-Layout'
 }
 
 { #category : #accessing }
@@ -12,5 +12,7 @@ CRTreeLayout >> initialize [
 
 { #category : #accessing }
 CRTreeLayout >> on: aCanvas [
-	aCanvas layout: (BlOnceLayout new layout: self).
+	| nodes |
+	nodes := aCanvas nodes.
+	
 ]

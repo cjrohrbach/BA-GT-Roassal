@@ -1,16 +1,32 @@
+"
+I represent the node elements.
+
+"
 Class {
-	#name : #CRShape,
+	#name : #CRNode,
 	#superclass : #BlElement,
 	#instVars : [
 		'model',
 		'originalBorder',
-		'group'
+		'group',
+		'childNodes',
+		'parentNodes'
 	],
 	#category : #'CR-Graph-CR-Graph'
 }
 
 { #category : #accessing }
-CRShape >> addToolTip [
+CRNode >> addChildNode: aCRNode [
+	childNodes add: aCRNode
+]
+
+{ #category : #accessing }
+CRNode >> addParentNode: aCRNode [
+	parentNodes add: aCRNode.
+]
+
+{ #category : #accessing }
+CRNode >> addToolTip [
 	| label |
 	label := [BrLabel new aptitude: 
 		BrGlamorousLabelAptitude new  
@@ -25,61 +41,63 @@ CRShape >> addToolTip [
 ]
 
 { #category : #accessing }
-CRShape >> color: aColor [
+CRNode >> color: aColor [
 	self background: aColor
 ]
 
 { #category : #accessing }
-CRShape >> group [
+CRNode >> group [
 	^group
 ]
 
 { #category : #accessing }
-CRShape >> group: aCRGroup [
+CRNode >> group: aCRGroup [
 	group := aCRGroup
 ]
 
 { #category : #accessing }
-CRShape >> highlight [
+CRNode >> highlight [
 	originalBorder := self border.
 	self border: (BlBorder paint: (Color green alpha: 0.5) width: 5).
 ]
 
 { #category : #accessing }
-CRShape >> highlightOnClick [
+CRNode >> highlightOnClick [
 	self addEventFilterOn: BlClickEvent do: [group highlightElement: self].
 ]
 
 { #category : #accessing }
-CRShape >> initialize [
+CRNode >> initialize [
 	super initialize.
 	self addToolTip.
 	self makeDraggable.
 	self openModelOnClick.
+	childNodes := CRGroup new.
+	parentNodes := CRGroup new.
 	^self
 ]
 
 { #category : #accessing }
-CRShape >> makeDraggable [
+CRNode >> makeDraggable [
 	self addEventHandler: BlPullHandler new allowOutOfBounds.
 ]
 
 { #category : #accessing }
-CRShape >> model [
+CRNode >> model [
 	^ model
 ]
 
 { #category : #accessing }
-CRShape >> model: anObject [
+CRNode >> model: anObject [
 	model := anObject
 ]
 
 { #category : #accessing }
-CRShape >> openModelOnClick [
+CRNode >> openModelOnClick [
 	self addEventHandlerOn: BlClickEvent do:[:e | e target phlow spawnObject: model].
 ]
 
 { #category : #accessing }
-CRShape >> removeHighlight [
+CRNode >> removeHighlight [
 	self border: originalBorder
 ]

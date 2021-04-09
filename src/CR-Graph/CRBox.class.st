@@ -1,6 +1,6 @@
 Class {
 	#name : #CRBox,
-	#superclass : #CRShape,
+	#superclass : #CRNode,
 	#instVars : [
 		'height',
 		'width',

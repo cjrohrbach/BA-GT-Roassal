@@ -1,7 +1,7 @@
 Class {
 	#name : #CRGridLayout,
 	#superclass : #BlGridLayout,
-	#category : #'CR-Graph-CR-Graph'
+	#category : #'CR-Graph-Layout'
 }
 
 { #category : #accessing }

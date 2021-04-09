@@ -62,6 +62,11 @@ CRCanvas >> nodeCount [
 ]
 
 { #category : #accessing }
+CRCanvas >> nodes [
+	^nodes
+]
+
+{ #category : #accessing }
 CRCanvas >> shapeCount [
 	^shapes size
 ]

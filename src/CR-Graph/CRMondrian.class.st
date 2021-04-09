@@ -28,7 +28,7 @@ CRMondrian >> build [
 
 { #category : #accessing }
 CRMondrian >> edges: aToBlock [
-	edgeBuilder shapes: nodesForLayout.
+	edgeBuilder nodes: nodesForLayout.
 	edges := edgeBuilder connectTo: aToBlock.
 	canvas addAllEdges: edges.
 	^edges
