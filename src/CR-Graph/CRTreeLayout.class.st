@@ -1,6 +1,6 @@
 Class {
 	#name : #CRTreeLayout,
-	#superclass : #CRLayout,
+	#superclass : #GtGraphTreeLayout,
 	#category : #'CR-Graph-Layout'
 }
 

@@ -8,22 +8,10 @@ Class {
 	#instVars : [
 		'model',
 		'originalBorder',
-		'group',
-		'childNodes',
-		'parentNodes'
+		'group'
 	],
 	#category : #'CR-Graph-CR-Graph'
 }
-
-{ #category : #accessing }
-CRNode >> addChildNode: aCRNode [
-	childNodes add: aCRNode
-]
-
-{ #category : #accessing }
-CRNode >> addParentNode: aCRNode [
-	parentNodes add: aCRNode.
-]
 
 { #category : #accessing }
 CRNode >> addToolTip [
@@ -69,11 +57,12 @@ CRNode >> highlightOnClick [
 { #category : #accessing }
 CRNode >> initialize [
 	super initialize.
+	
 	self addToolTip.
 	self makeDraggable.
 	self openModelOnClick.
-	childNodes := CRGroup new.
-	parentNodes := CRGroup new.
+	self graph beNode.
+	
 	^self
 ]
 

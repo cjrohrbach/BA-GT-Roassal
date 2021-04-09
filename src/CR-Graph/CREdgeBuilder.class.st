@@ -17,19 +17,30 @@ CREdgeBuilder >> connectTo: toBlock [
 		coll := (self evaluate: toBlock on: node).
 		(coll notNil and: coll size > 0) ifTrue: [coll do: [:res | 
 			
-			"add child and parent to the nodes"
-			res addChildNode: node.
-			node addParentNode: res.
+			self createGraphEdgeAndAddConstraintsFrom: node to: res.
+			group add: (self createVisibleEdgeFrom: node to: res).
 			
-			line := CRLineElement new.
-			line fromAnchor: (BlElementCenterAnchor referenceElement: node relatedTo: res).
-			line toAnchor: (BlElementCenterAnchor referenceElement: res relatedTo: node).
-			line constraints ignoreByLayout.
-			group add: line.
 		]]].
 		
 	^group
 		
+]
+
+{ #category : #accessing }
+CREdgeBuilder >> createGraphEdgeAndAddConstraintsFrom: fromNode to: toNode [
+	| edge |
+	edge := GtGraphEdge new from: fromNode to: toNode.
+	fromNode constraints graph addConnectedEdge: edge.
+	toNode constraints graph addConnectedEdge: edge.
+]
+
+{ #category : #accessing }
+CREdgeBuilder >> createVisibleEdgeFrom: fromNode to: toNode [
+	| line |
+	line := CRLineElement new.
+	line fromAnchor: (BlElementCenterAnchor element: fromNode).
+	line toAnchor: (BlElementCenterAnchor element: toNode).
+	^ line
 ]
 
 { #category : #accessing }
