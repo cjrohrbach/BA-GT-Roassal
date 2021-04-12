@@ -30,6 +30,21 @@ CRMondrianExamples >> evenAndUnevenNumbersSeparatedByColor [
 ]
 
 { #category : #accessing }
+CRMondrianExamples >> normalizerAndForceLayout [
+	<gtExample>
+	| m |
+
+	m := CRMondrian new.
+	(m normalizeHeight: #numberOfMethods) from: 10  to: 50.
+	(m normalizeWidth: [:x | x slots size]) from: 10  to: 50.
+	m nodes: Collection withAllSubclasses.
+	m edges: #dependentClasses.
+	m layout force.
+
+	^m
+]
+
+{ #category : #accessing }
 CRMondrianExamples >> smallAndBigCircles [
 	<gtExample>
 	| c |

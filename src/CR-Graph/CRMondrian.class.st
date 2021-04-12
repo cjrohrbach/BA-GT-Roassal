@@ -110,13 +110,17 @@ CRMondrian >> normalizeHeight: anArgBlockOrSymbol [
 
 { #category : #accessing }
 CRMondrian >> normalizeWidth: anArgBlockOrSymbol [
-	normalizerCollection add: (
-		CRNormalizer new
+	| norm |
+	
+	norm := CRNormalizer new
 			key: anArgBlockOrSymbol;
 			attribute: [:node :value | node width: value];
 			from: 10;
-			to: 50
-	).
+			to: 50.
+
+	normalizerCollection add: norm.
+	
+	^norm
 ]
 
 { #category : #accessing }

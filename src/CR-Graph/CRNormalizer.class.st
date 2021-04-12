@@ -20,6 +20,24 @@ CRNormalizer >> attribute: aNodeAttributeAsBlock [
 ]
 
 { #category : #accessing }
+CRNormalizer >> evaluateScope [
+" I should only be called once key and nodes have been set. I evaluate the max and min value of the nodes with the given key"
+	| min max |
+	min := (key cull:(nodes at: 1) model).
+	max := (key cull: (nodes at: (nodes size)) model).
+	nodes do: [:x | 
+		| res |
+		res := key cull: (x model).
+	
+		(res < min) ifTrue: [min := (res)].
+		(res > max) ifTrue: [max := (res)].
+	].
+	
+	minValue := min.
+	maxValue := max.
+]
+
+{ #category : #accessing }
 CRNormalizer >> from: aValue [
 	from := aValue
 ]
