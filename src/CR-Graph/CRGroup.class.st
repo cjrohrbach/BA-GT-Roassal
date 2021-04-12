@@ -1,3 +1,7 @@
+"
+I represent an OrderedCollection, with some specific methods to help build graphs.
+I usually hold nodes and edges.
+"
 Class {
 	#name : #CRGroup,
 	#superclass : #OrderedCollection,

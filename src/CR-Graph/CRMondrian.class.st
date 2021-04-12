@@ -11,7 +11,8 @@ Class {
 		'depth',
 		'canvas',
 		'edges',
-		'edgeBuilder'
+		'edgeBuilder',
+		'normalizerCollection'
 	],
 	#category : #'CR-Graph'
 }
@@ -23,6 +24,13 @@ CRMondrian >> applyLayout [
 
 { #category : #accessing }
 CRMondrian >> build [
+
+	normalizerCollection do: [:normalizer |
+		normalizer nodes: nodesForLayout.
+		normalizer evaluateScope.
+		normalizer normalize.
+	].
+
 	self applyLayout.
 ]
 
@@ -67,6 +75,7 @@ CRMondrian >> initialize [
 	
 	nodesForLayout := CRGroup new.
 	depth := 0.
+	normalizerCollection := OrderedCollection new.
 	
 ]
 
@@ -83,6 +92,31 @@ CRMondrian >> nodes: aCollection [
 	canvas addAllNodes: nodes.
 	nodesForLayout addAll: nodes.
 	^ nodes
+]
+
+{ #category : #accessing }
+CRMondrian >> normalizeHeight: anArgBlockOrSymbol [
+	| norm |
+	
+	norm := CRNormalizer new
+			key: anArgBlockOrSymbol;
+			attribute: [:node :value | node height: value];
+			from: 10;
+			to: 50.
+	
+	normalizerCollection add: norm.
+	^norm
+]
+
+{ #category : #accessing }
+CRMondrian >> normalizeWidth: anArgBlockOrSymbol [
+	normalizerCollection add: (
+		CRNormalizer new
+			key: anArgBlockOrSymbol;
+			attribute: [:node :value | node width: value];
+			from: 10;
+			to: 50
+	).
 ]
 
 { #category : #accessing }

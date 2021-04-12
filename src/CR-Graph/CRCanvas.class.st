@@ -1,3 +1,6 @@
+"
+I hold all nodes and edges that are displayed in a graph.
+"
 Class {
 	#name : #CRCanvas,
 	#superclass : #Object,

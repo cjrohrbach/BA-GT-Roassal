@@ -7,28 +7,28 @@ Class {
 		'key',
 		'nodes',
 		'to',
-		'from'
+		'from',
+		'attributeBlock'
 	],
 	#category : #'CR-Graph-CR-Graph'
 }
 
 { #category : #accessing }
-CRNormalizer >> from: aValue [
-	from := aValue
+CRNormalizer >> attribute: aNodeAttributeAsBlock [
+	" the block must be given like this: [ :node :value | node height: value ] "
+	attributeBlock := aNodeAttributeAsBlock
 ]
 
 { #category : #accessing }
-CRNormalizer >> initialize [
-	super initialize.
-	^self
+CRNormalizer >> attribute: aNodeAttributeAsBlock
+	" the block must be given like this: [ :node :value | node height: value ] "
+	attribute: aAttribute [
 ]
 
 { #category : #accessing }
-CRNormalizer >> key: anArgBlockOrSymbol [
+CRNormalizer >> evaluateScope [
+" I should only be called once key and nodes have been set. I evaluate the max and min value of the nodes with the given key"
 	| min max |
-	
-	key := anArgBlockOrSymbol.
-	
 	min := (key cull:(nodes at: 1) model).
 	max := (key cull: (nodes at: (nodes size)) model).
 	nodes do: [:x | 
@@ -41,7 +41,28 @@ CRNormalizer >> key: anArgBlockOrSymbol [
 	
 	minValue := min.
 	maxValue := max.
-	
+]
+
+{ #category : #accessing }
+CRNormalizer >> from: aValue [
+	from := aValue
+]
+
+{ #category : #accessing }
+CRNormalizer >> from: fromValue to: toValue [
+	from := fromValue.
+	to := toValue.
+]
+
+{ #category : #accessing }
+CRNormalizer >> initialize [
+	super initialize.
+	^self
+]
+
+{ #category : #accessing }
+CRNormalizer >> key: anArgBlockOrSymbol [
+	key := anArgBlockOrSymbol.
 ]
 
 { #category : #accessing }
@@ -62,7 +83,17 @@ CRNormalizer >> nodes: someCRNodes [
 ]
 
 { #category : #accessing }
-CRNormalizer >> normalize: anAttributeOfTheNode [
+CRNormalizer >> normalize [
+
+	nodes do: [:node | attributeBlock cull: node cull: (self valueFor: node)]
+	
+]
+
+{ #category : #accessing }
+CRNormalizer >> normalize: aBlock [
+" the block must be given like this: [ :node :value | node height: value ] "
+
+	nodes do: [:node | aBlock cull: node cull: (self valueFor: node)]
 	
 ]
 
