@@ -50,8 +50,8 @@ CRMondrianExamples >> normalizerAndForceLayout [
 	| m |
 
 	m := CRMondrian new.
-	(m normalizeHeight: #numberOfMethods) from: 10  to: 50.
-	(m normalizeWidth: [:x | x slots size]) from: 10  to: 50.
+	(m normalizeHeight: #numberOfMethods) from: 5  to: 50.
+	(m normalizeWidth: [:x | x slots size]) from: 5  to: 50.
 	m nodes: Collection withAllSubclasses.
 	m edges: #dependentClasses.
 	m layout force.

@@ -103,10 +103,12 @@ CRNormalizer >> to: aValue [
 
 { #category : #accessing }
 CRNormalizer >> valueFor: aNode [
-	| nodeValue ratio |
+	| nodeValue ratio value |
 	nodeValue := key cull: (aNode model).
 	
-	ratio := nodeValue / (maxValue - minValue).
+	ratio := (nodeValue - minValue) / (maxValue - minValue).
 	
-	^ (to - from) * ratio
+	value := from + ((to - from) * ratio).
+	
+	^value
 ]
