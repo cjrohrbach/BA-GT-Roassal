@@ -36,7 +36,7 @@ CRMondrian >> build [
 
 { #category : #accessing }
 CRMondrian >> edge [
-	edgeBuilder nodes: nodesForLayout.
+	edgeBuilder canvas: canvas.
 	^ edgeBuilder
 ]
 

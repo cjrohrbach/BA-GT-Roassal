@@ -2,7 +2,10 @@ Class {
 	#name : #CREdgeBuilder,
 	#superclass : #Object,
 	#instVars : [
-		'canvas'
+		'canvas',
+		'edgeShape',
+		'width',
+		'color'
 	],
 	#category : #'CR-Graph-CR-Graph'
 }
@@ -10,6 +13,11 @@ Class {
 { #category : #accessing }
 CREdgeBuilder >> canvas: aCRCanvas [
 	canvas := aCRCanvas
+]
+
+{ #category : #accessing }
+CREdgeBuilder >> color: aColor [
+	color := aColor
 ]
 
 { #category : #accessing }
@@ -40,7 +48,11 @@ CREdgeBuilder >> createGraphEdgeAndAddConstraintsFrom: fromNode to: toNode [
 { #category : #accessing }
 CREdgeBuilder >> createVisibleEdgeFrom: fromNode to: toNode [
 	| line |
-	line := CRLineElement new.
+	line := edgeShape new.
+	
+	width ifNotNil: [line width: (width)].
+	color ifNotNil: [line color: (color)].
+	
 	line fromAnchor: (BlElementCenterAnchor element: fromNode).
 	line toAnchor: (BlElementCenterAnchor element: toNode).
 	^ line
@@ -64,10 +76,16 @@ CREdgeBuilder >> evaluate: aBlock on: aCRNode [
 { #category : #accessing }
 CREdgeBuilder >> initialize [
 	super initialize.
+	self line.
 	^self
 ]
 
 { #category : #accessing }
-CREdgeBuilder >> nodes: aCRGroup [
-	nodes := aCRGroup
+CREdgeBuilder >> line [
+	edgeShape := CRLineElement
+]
+
+{ #category : #accessing }
+CREdgeBuilder >> width: aValue [
+	width := aValue
 ]

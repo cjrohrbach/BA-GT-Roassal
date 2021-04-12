@@ -14,8 +14,23 @@ CRMondrianExamples >> edgesToHalf [
 	m := CRMondrian new.
 	m shape point.
 	m nodes: (1 to: 10).
-	m edges: [:x | x/2].
+	(m edge connectTo: [:x | x/2]) width: 500.
 	^m
+]
+
+{ #category : #accessing }
+CRMondrianExamples >> edgesWithColorAndWidthSpecified [
+	<gtExample>
+	| m |
+	m := CRMondrian new.
+	m nodes: (1 to: 10).
+	m edge 
+		width: 2;
+		color: Color blue; 
+		connectTo: [:x | x//2].
+	m layout tree.
+	
+	^ m
 ]
 
 { #category : #accessing }
