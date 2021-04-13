@@ -38,6 +38,11 @@ CRCanvas >> addNode: aShape [
 ]
 
 { #category : #accessing }
+CRCanvas >> asElement [
+	^canvas
+]
+
+{ #category : #accessing }
 CRCanvas >> asPannableElement [
 	^canvas asPannableElement
 ]

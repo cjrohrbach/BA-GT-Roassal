@@ -35,6 +35,21 @@ CRMondrian >> build [
 ]
 
 { #category : #accessing }
+CRMondrian >> customViewOn: aView [
+	<gtView>
+	| el |
+	^ aView explicit
+		title: 'Custom';
+		priority: 5;
+		stencil: [
+			self build.
+			el := BlPinchableElement new.
+			el contentElement: canvas.
+			el
+		]
+]
+
+{ #category : #accessing }
 CRMondrian >> edge [
 	edgeBuilder canvas: canvas.
 	^ edgeBuilder
@@ -92,6 +107,20 @@ CRMondrian >> nodes: aCollection [
 	canvas addAllNodes: nodes.
 	nodesForLayout addAll: nodes.
 	^ nodes
+]
+
+{ #category : #accessing }
+CRMondrian >> normalizeColor: anArgBlockOrSymbol [
+	| norm |
+	norm := CRColorNormalizer new
+		key: anArgBlockOrSymbol;
+		attribute: [:node :value | node background: value];
+		from: (Color gray alpha: 0.2);
+		to: Color gray.
+		
+	normalizerCollection add: norm.
+	^norm
+		
 ]
 
 { #category : #accessing }

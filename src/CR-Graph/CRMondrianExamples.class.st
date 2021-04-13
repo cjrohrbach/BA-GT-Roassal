@@ -45,6 +45,16 @@ CRMondrianExamples >> evenAndUnevenNumbersSeparatedByColor [
 ]
 
 { #category : #accessing }
+CRMondrianExamples >> normalizeColor [
+	<gtExample>
+	| m |
+	m := CRMondrian new.
+	m normalizeColor: #linesOfCode.
+	m nodes: Collection withAllSubclasses.
+	^ m 
+]
+
+{ #category : #accessing }
 CRMondrianExamples >> normalizerAndForceLayout [
 	<gtExample>
 	| m |
