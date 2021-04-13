@@ -6,10 +6,21 @@ Class {
 	#name : #CRGroup,
 	#superclass : #OrderedCollection,
 	#instVars : [
-		'highlightedNode'
+		'highlightedNode',
+		'identifier'
 	],
 	#category : #'CR-Graph-CR-Graph'
 }
+
+{ #category : #accessing }
+CRGroup >> bindNodeToThisGroup [
+	self do: [:x | x group: self].
+]
+
+{ #category : #accessing }
+CRGroup >> createIdentifier [
+	identifier := (Random new nextInt: 100000).
+]
 
 { #category : #accessing }
 CRGroup >> highlightElement: aNode [ 
@@ -21,6 +32,7 @@ CRGroup >> highlightElement: aNode [
 { #category : #accessing }
 CRGroup >> initialize [
 	super initialize.
+	self createIdentifier.
 	^ self
 ]
 

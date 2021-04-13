@@ -104,9 +104,10 @@ CRMondrian >> nodes: aCollection [
 	| nodes |
 	self assert: [aCollection isCollection] description: 'You need to provide a collection'.
 	nodes := self shapesOn: aCollection .
-	canvas addAllNodes: nodes.
 	nodesForLayout addAll: nodes.
-	^ nodes
+	nodesForLayout bindNodeToThisGroup.
+	canvas setNodeGroup: nodesForLayout.
+	^ nodesForLayout
 ]
 
 { #category : #accessing }

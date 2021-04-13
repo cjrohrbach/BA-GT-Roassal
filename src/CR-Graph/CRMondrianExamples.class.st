@@ -109,3 +109,17 @@ CRMondrianExamples >> someNumbers [
 	c nodes: (1 to: 9).
 	^c
 ]
+
+{ #category : #accessing }
+CRMondrianExamples >> systemComplexity [
+	<gtExample>
+	| m |
+	m := CRMondrian new.
+	(m normalizeHeight: #numberOfMethods) from: 5 to: 25.
+	(m normalizeWidth: [:x | x slots size]) from: 5 to: 25.
+	m normalizeColor: #linesOfCode.
+	m nodes: (RPackageOrganizer default packageNamed: 'Kernel') classes.
+	m edges: #superclass.
+	m layout tree.
+	^m
+]
