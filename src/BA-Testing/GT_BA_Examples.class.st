@@ -43,31 +43,31 @@ GT_BA_Examples >> boxWithColorChangeOnHover [
 
 { #category : #accessing }
 GT_BA_Examples >> boxWithLabelOnHover: labelContent [
- "create a BlElement with a label poping up when the mouse is over it"
+	"create a BlElement with a label poping up when the mouse is over it"
+
 	| box label |
 	box := BlElement new
 		geometry: (BlRectangle cornerRadius: 5);
 		background: Color gray;
-		size: 50@50;
+		size: 50 @ 50;
 		clipChildren: false;
 		zIndex: 1;
 		yourself.
-		
 	label := BrLabel new
-		look: BrGlamorousLabelLook new;
+		aptitude: BrGlamorousLabelLook new;
 		background: Color red;
 		text: labelContent asRopedText;
-		size: 40@40;
-		zIndex:100.
-		
-	box addEventHandlerOn: BlMouseEnterEvent do: [
-		"label relocate: (pos x)@(pos y)."
-		box addChild: label.
-		box zIndex: 100].
-	box addEventHandlerOn: BlMouseLeaveEvent do: [
-		box removeChild: label. 
-		box zIndex: 1].
-		
+		size: 40 @ 40;
+		zIndex: 100.
+	box
+		addEventHandlerOn: BlMouseEnterEvent
+		do: [ "label relocate: (pos x)@(pos y)."
+			box addChild: label.
+			box zIndex: 100 ].
+	box
+		addEventHandlerOn: BlMouseLeaveEvent
+		do: [ box removeChild: label.
+			box zIndex: 1 ].
 	^ box
 ]
 

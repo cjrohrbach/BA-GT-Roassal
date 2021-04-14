@@ -20,21 +20,8 @@ CRCanvas >> addAllEdges: shapeCollection [
 ]
 
 { #category : #accessing }
-CRCanvas >> addAllNodes: shapeCollection [
-	nodes addAll: shapeCollection.
-	canvas addChildren: shapeCollection.
-]
-
-{ #category : #accessing }
 CRCanvas >> addEdge: aShape [
 	edges add: aShape.
-	canvas addChild: aShape.
-]
-
-{ #category : #accessing }
-CRCanvas >> addNode: aShape [
-	nodes add: aShape.
-	canvas addChild: aShape.
 ]
 
 { #category : #accessing }
@@ -50,7 +37,6 @@ CRCanvas >> asPannableElement [
 { #category : #accessing }
 CRCanvas >> initialize [
 	super initialize.
-	nodes := CRGroup new.
 	edges := CRGroup new.
 	canvas := BlElement new.
 	canvas properties 
@@ -76,6 +62,13 @@ CRCanvas >> nodes [
 ]
 
 { #category : #accessing }
+CRCanvas >> paint [
+	self assert: [nodes notNil] description: 'You need to set the nodeGroup first'.
+	canvas addChildren: nodes.
+	canvas addChildren: edges
+]
+
+{ #category : #accessing }
 CRCanvas >> removeAllHighlightsOnClick [
 	canvas addEventHandlerOn: BlClickEvent do: [nodes removeHighlights]
 ]
@@ -88,10 +81,4 @@ CRCanvas >> setEdgeGroup: aCRGroup [
 { #category : #accessing }
 CRCanvas >> setNodeGroup: aCRGroup [
 	nodes := aCRGroup.
-	canvas addChildren: nodes.
-]
-
-{ #category : #accessing }
-CRCanvas >> shapeCount [
-	^shapes size
 ]

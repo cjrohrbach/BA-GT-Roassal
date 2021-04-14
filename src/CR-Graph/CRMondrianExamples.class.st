@@ -12,8 +12,9 @@ CRMondrianExamples >> edgesToHalf [
 	<gtExample>
 	| m |
 	m := CRMondrian new.
-	m shape point.
-	m nodes: (1 to: 10).
+	m nodes
+		point;
+		with: (1 to: 10).
 	(m edge connectTo: [:x | x/2]) width: 500.
 	^m
 ]
@@ -23,7 +24,7 @@ CRMondrianExamples >> edgesWithColorAndWidthSpecified [
 	<gtExample>
 	| m |
 	m := CRMondrian new.
-	m nodes: (1 to: 10).
+	m nodes with: (1 to: 10).
 	m edge 
 		width: 2;
 		color: Color blue; 
@@ -38,10 +39,28 @@ CRMondrianExamples >> evenAndUnevenNumbersSeparatedByColor [
 	<gtExample>
 	| m |
 	m := CRMondrian new.
-	m shape box 
-		color: [:x | x%2=0 ifTrue: [Color green ] ifFalse: [Color red]].
-	m nodes: (1 to:10).
+	m nodes 
+		box;
+		color: [:x | x%2=0 ifTrue: [Color green ] ifFalse: [Color red]];
+		with: (1 to: 10).
 	^m
+]
+
+{ #category : #accessing }
+CRMondrianExamples >> nodesWithDifferentScopes [
+	<gtExample>
+	| c |
+	c := CRMondrian new.
+	c nodes
+		point;
+		color: (Color gray);
+		with: (1 to: 10). 
+
+	c nodes
+		label;
+		color: (Color white);
+		with: (1 to: 10). 
+	^c
 ]
 
 { #category : #accessing }
@@ -49,8 +68,9 @@ CRMondrianExamples >> normalizeColor [
 	<gtExample>
 	| m |
 	m := CRMondrian new.
-	m normalizeColor: #linesOfCode.
-	m nodes: Collection withAllSubclasses.
+	m nodes
+		normalizeColor: #linesOfCode;
+		with: Collection withAllSubclasses.
 	^ m 
 ]
 
@@ -60,9 +80,11 @@ CRMondrianExamples >> normalizerAndForceLayout [
 	| m |
 
 	m := CRMondrian new.
-	(m normalizeHeight: #numberOfMethods) from: 5  to: 50.
-	(m normalizeWidth: [:x | x slots size]) from: 5  to: 50.
-	m nodes: Collection withAllSubclasses.
+	m nodes
+		normalizeHeight: #numberOfMethods;
+		normalizeWidth: [:x | x slots size];
+		normalizeColor: #linesOfCode;
+		with: Collection withAllSubclasses.
 	m edges: #dependentClasses.
 	m layout force.
 
@@ -74,8 +96,9 @@ CRMondrianExamples >> smallAndBigCircles [
 	<gtExample>
 	| c |
 	c := CRMondrian new.
-	c shape circle size: [ :aNumber | aNumber ].
-	c nodes: (1 to: 100).
+	c nodes 
+		circle size: [:x | x];
+		with: (1 to: 100).
 	^c
 ]
 
@@ -84,8 +107,9 @@ CRMondrianExamples >> someCircles [
 	<gtExample>
 	| c |
 	c := CRMondrian new.
-	c shape circle size: 20.
-	c nodes: (1 to: 100).
+	c nodes 
+		circle size: 20;
+		with: (1 to: 100).
 	^c
 ]
 
@@ -94,9 +118,13 @@ CRMondrianExamples >> someConnectedPointsTree [
 	<gtExample>
 	| m |
 	m := CRMondrian new.
-	m shape point.
-	m nodes: (1 to: 100).
-	m edges: [:nb | nb // 2].
+	m nodes 
+		point; 
+		with: (1 to: 100).
+	m edge
+		width: 1; 
+		color: Color gray;
+		connectTo: [:nb | nb // 2].
 	m layout tree.
 	^m
 ]
@@ -106,7 +134,7 @@ CRMondrianExamples >> someNumbers [
 	<gtExample>
 	| c |
 	c := CRMondrian new.
-	c nodes: (1 to: 9).
+	c nodes with: (1 to: 9).
 	^c
 ]
 
@@ -115,10 +143,11 @@ CRMondrianExamples >> systemComplexity [
 	<gtExample>
 	| m |
 	m := CRMondrian new.
-	(m normalizeHeight: #numberOfMethods) from: 5 to: 25.
-	(m normalizeWidth: [:x | x slots size]) from: 5 to: 25.
-	m normalizeColor: #linesOfCode.
-	m nodes: (RPackageOrganizer default packageNamed: 'Kernel') classes.
+	m nodes
+		normalizeHeight: #numberOfMethods from: 5 to: 25;
+		normalizeWidth: [:x | x slots size] from: 5 to: 25;
+		normalizeColor: #linesOfCode;
+		with: (RPackageOrganizer default packageNamed: 'Kernel') classes.
 	m edges: #superclass.
 	m layout tree.
 	^m

@@ -1,12 +1,25 @@
 Class {
 	#name : #CRLineElement,
 	#superclass : #BlLineElement,
+	#instVars : [
+		'group'
+	],
 	#category : #'CR-Graph-CR-Graph'
 }
 
 { #category : #accessing }
 CRLineElement >> color: aColor [
 	self border: (BlBorder paint: (aColor) width: (self border width)).
+]
+
+{ #category : #accessing }
+CRLineElement >> group [
+	^group
+]
+
+{ #category : #accessing }
+CRLineElement >> group: aCRGroup [
+	group := aCRGroup
 ]
 
 { #category : #accessing }

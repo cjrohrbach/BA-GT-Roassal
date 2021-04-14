@@ -13,6 +13,12 @@ Class {
 }
 
 { #category : #accessing }
+CRGroup >> addLast: newObject [
+	super addLast: newObject.
+	newObject group: self.
+]
+
+{ #category : #accessing }
 CRGroup >> bindNodeToThisGroup [
 	self do: [:x | x group: self].
 ]
