@@ -15,7 +15,7 @@ CRLabelBuilder >> background: aColorOrArgBlock [
 { #category : #accessing }
 CRLabelBuilder >> createShapeFor: obj [
 	| result |
-	result := CRBox new 
+	result := CRLabel new 
 			model: obj.
 		background ifNotNil: [result color: (self evaluate: background on: obj)].
 		^ result
