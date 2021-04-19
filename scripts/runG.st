@@ -1,6 +1,6 @@
 Metacello new
 	baseline: 'BAGTRoassal';
-	repository: 'github://cjrohrbach/BA-GT-Roassal/src';
+	repository: 'github://bergel/BA-GT-Roassal/src';
 	load.
 
 path := '/tmp/result.txt'.
