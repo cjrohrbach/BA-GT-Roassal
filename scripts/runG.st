@@ -10,8 +10,8 @@ file := path asFileReference writeStream.
 CRMondrianExamples selectors do: [:k | 
 	| gotError |
 	gotError := false.
-	[ CRMondrianExamples new perform: k ] on: Error do: [ :ex | gotError := true. file nextPutAll: ' ERROR '. ].
-	gotError ifFalse: [ file nextPutAll: 'PASS ' ].
+	[ CRMondrianExamples new perform: k ] on: Error do: [ :ex | gotError := true. file nextPutAll: 'Error: '. ].
+	gotError ifFalse: [ file nextPutAll: 'Pass: ' ].
 	file nextPutAll: 'CRMondrianExamples>>', k asString; crlf ].
 
 file close.
