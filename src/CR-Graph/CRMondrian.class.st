@@ -10,7 +10,7 @@ Class {
 		'canvas',
 		'edges',
 		'edgeBuilder',
-		'shapeBuilderCollection'
+		'scopeBuilderCollection'
 	],
 	#category : #'CR-Graph'
 }
@@ -81,7 +81,7 @@ CRMondrian >> initialize [
 	super initialize.
 	nodesForLayout := CRGroup new.
 	
-	shapeBuilderCollection := OrderedCollection new.
+	scopeBuilderCollection := OrderedCollection new.
 	layoutBuilder := CRLayoutBuilder new.
 	
 	
@@ -103,9 +103,9 @@ CRMondrian >> layout [
 
 { #category : #accessing }
 CRMondrian >> nodes [
-	| shapeBuilder |
-	shapeBuilder := CRShapeBuilder new.
-	shapeBuilder mondrian: self.
-	shapeBuilderCollection add: shapeBuilder.
-	^ shapeBuilder
+	| scopeBuilder |
+	scopeBuilder := CRScopeBuilder new.
+	scopeBuilder mondrian: self.
+	scopeBuilderCollection add: scopeBuilder.
+	^ scopeBuilder
 ]

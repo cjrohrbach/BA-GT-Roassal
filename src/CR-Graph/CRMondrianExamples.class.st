@@ -13,25 +13,10 @@ CRMondrianExamples >> edgesToHalf [
 	| m |
 	m := CRMondrian new.
 	m nodes
-		point;
+		point
 		with: (1 to: 10).
 	(m edge connectTo: [:x | x/2]) width: 500.
 	^m
-]
-
-{ #category : #accessing }
-CRMondrianExamples >> edgesWithColorAndWidthSpecified [
-	<gtExample>
-	| m |
-	m := CRMondrian new.
-	m nodes with: (1 to: 10).
-	m edge 
-		width: 2;
-		color: Color blue; 
-		connectTo: [:x | x//2].
-	m layout tree.
-	
-	^ m
 ]
 
 { #category : #accessing }
@@ -40,8 +25,8 @@ CRMondrianExamples >> evenAndUnevenNumbersSeparatedByColor [
 	| m |
 	m := CRMondrian new.
 	m nodes 
-		box;
-		color: [:x | x%2=0 ifTrue: [Color green ] ifFalse: [Color red]];
+		box
+		background: [:x | x%2=0 ifTrue: [Color green ] ifFalse: [Color red]];
 		with: (1 to: 10).
 	^m
 ]
@@ -52,13 +37,13 @@ CRMondrianExamples >> nodesWithDifferentScopes [
 	| c |
 	c := CRMondrian new.
 	c nodes
-		point;
-		color: (Color gray);
+		point
+		background: (Color gray);
 		with: (1 to: 10). 
 
 	c nodes
-		label;
-		color: (Color white);
+		label
+		background: (Color white);
 		with: (1 to: 10). 
 	^c
 ]
@@ -69,6 +54,7 @@ CRMondrianExamples >> normalizeColor [
 	| m |
 	m := CRMondrian new.
 	m nodes
+		box
 		normalizeColor: #linesOfCode;
 		with: Collection withAllSubclasses.
 	^ m 
@@ -81,6 +67,7 @@ CRMondrianExamples >> normalizerAndForceLayout [
 
 	m := CRMondrian new.
 	m nodes
+		box
 		normalizeHeight: #numberOfMethods;
 		normalizeWidth: [:x | x slots size];
 		normalizeColor: #linesOfCode;
@@ -119,7 +106,7 @@ CRMondrianExamples >> someConnectedPointsTree [
 	| m |
 	m := CRMondrian new.
 	m nodes 
-		point; 
+		point
 		with: (1 to: 100).
 	m edge
 		width: 1; 
@@ -134,7 +121,7 @@ CRMondrianExamples >> someNumbers [
 	<gtExample>
 	| c |
 	c := CRMondrian new.
-	c nodes with: (1 to: 9).
+	c nodes box with: (1 to: 9).
 	^c
 ]
 
@@ -144,6 +131,7 @@ CRMondrianExamples >> systemComplexity [
 	| m |
 	m := CRMondrian new.
 	m nodes
+		box
 		normalizeHeight: #numberOfMethods from: 5 to: 25;
 		normalizeWidth: [:x | x slots size] from: 5 to: 25;
 		normalizeColor: #linesOfCode;
