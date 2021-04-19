@@ -8,12 +8,6 @@ Class {
 }
 
 { #category : #accessing }
-CRMondrianExamples >> anotherFailingExample [
-	<gtExample>
-	Object new + 42
-]
-
-{ #category : #accessing }
 CRMondrianExamples >> edgesToHalf [
 	<gtExample>
 	| m |
