@@ -5,7 +5,7 @@ cp ../scripts/runG.st .
 ./glamoroustoolkit --headless GlamorousToolkit.image runG.st
 
 cat /tmp/result.txt
-if grep -q ERROR "/tmp/result.txt"; then
+if grep -q Error "/tmp/result.txt"; then
 	echo "Errors: Some tests failed"
 	exit 1
 else
