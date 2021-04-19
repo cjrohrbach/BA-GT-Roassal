@@ -5,11 +5,10 @@ cp ../scripts/runG.st .
 ./glamoroustoolkit --headless GlamorousToolkit.image runG.st
 
 cat /tmp/result.txt
-set RES = `grep ERROR /tmp/result.txt`
-
-if [ -n "$RES" ]; then
-		exit 1
+if grep -q Error "/tmp/result.txt"; then
+	echo "Errors: Some tests failed"
+	exit 1
 else
-		echo "ALL TEST PASSED"
-		exit 0
+	echo "Passed: all the tests passed"
+	exit 0
 fi		
