@@ -1,4 +1,4 @@
-![example workflow](https://github.com/bergel/BA-GT-Roassal/actions/workflows/runG.yml/badge.svg)
+![example workflow](https://github.com/cjrohrbach/BA-GT-Roassal/actions/workflows/runG.yml/badge.svg)
 
 
 This is my Bachelor Thesis.
