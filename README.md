@@ -5,6 +5,7 @@ This is my Bachelor Thesis.
 The goal is to create an easy to use API to create visualizations in GlamorousToolkit.
 
 
+
 Load me as follows:
 
 ```Smalltalk
