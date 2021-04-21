@@ -70,20 +70,6 @@ CRPointBuilder >> normalizeColor: anArgBlockOrSymbol from: fromValue to: toValue
 ]
 
 { #category : #accessing }
-CRPointBuilder >> normalizeHeight: anArgBlockOrSymbol [
-	| norm |
-	
-	norm := CRNormalizer new
-			key: anArgBlockOrSymbol;
-			attribute: [:node :value | node height: value];
-			from: 10;
-			to: 50.
-	
-	normalizerCollection add: norm.
-	^ norm
-]
-
-{ #category : #accessing }
 CRPointBuilder >> normalizeSize: anArgBlockOrSymbol [
 	| norm |
 	

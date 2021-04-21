@@ -38,14 +38,6 @@ CRScopeBuilder >> createShapeFor: obj [
 ]
 
 { #category : #accessing }
-CRScopeBuilder >> evaluate: aBlockClosure on: aObject [
-" checks wheter the given Block is a Block or if it's just a value "
-	(aBlockClosure class = BlockClosure) 
-		ifTrue: [^ (aBlockClosure cull: aObject)]
-		ifFalse: [^aBlockClosure]
-]
-
-{ #category : #accessing }
 CRScopeBuilder >> initialize [
 	super initialize.
 	normalizerCollection := OrderedCollection new.
