@@ -25,13 +25,54 @@ CRCanvas >> addEdge: aShape [
 ]
 
 { #category : #accessing }
+CRCanvas >> addScrollToZoom [
+	| eh |
+	eh := BlEventHandler new 
+	action: [ :e |
+		(e isScrollDown) ifTrue: [canvas zoomOut].
+		(e isScrollUp) ifTrue: [canvas zoomIn].
+		];
+	eventClass: (BlMouseWheelEvent).
+	
+	canvas addEventHandler: eh.
+]
+
+{ #category : #accessing }
+CRCanvas >> addScrollToZoom: aElement [
+	| eh |
+	eh := BlEventHandler new 
+	action: [ :e |
+		(e isScrollDown) ifTrue: [aElement zoomOut].
+		(e isScrollUp) ifTrue: [aElement zoomIn].
+		];
+	eventClass: (BlMouseWheelEvent).
+	
+	aElement addEventHandler: eh.
+]
+
+{ #category : #accessing }
 CRCanvas >> asElement [
 	^canvas
 ]
 
 { #category : #accessing }
 CRCanvas >> asPannableElement [
-	^canvas asPannableElement
+	| c |
+	
+	c := BlZoomableElement new contentElement: canvas.
+	c clipChildren: false.
+	self addScrollToZoom: c.
+	^c asPannableElement
+]
+
+{ #category : #accessing }
+CRCanvas >> gtCanvasViewOn: aView [
+	<gtView>
+	^ aView explicit 
+		title: 'Canvas';
+		priority: 5;
+		stencil: [
+			self asPannableElement].
 ]
 
 { #category : #accessing }
@@ -41,9 +82,8 @@ CRCanvas >> initialize [
 	canvas := BlElement new.
 	canvas properties 
 			addProperty: (BlElementLayoutHorizontalResizerProperty new fitContent);
-			addProperty: (BlElementLayoutVerticalResizerProperty new fitContent).		
+			addProperty: (BlElementLayoutVerticalResizerProperty new fitContent).
 	canvas clipChildren: false.
-	
 ]
 
 { #category : #accessing }

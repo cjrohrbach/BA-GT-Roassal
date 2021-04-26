@@ -55,13 +55,6 @@ CRMondrian >> gtCanvasViewOn: aView [
 ]
 
 { #category : #accessing }
-CRMondrian >> gtLiveViewOn: aView [
-	<gtView>
-	self build.
-	^ (canvas asPannableElement) gtLiveFor: aView
-]
-
-{ #category : #accessing }
 CRMondrian >> initialize [
 	super initialize.
 	nodesForLayout := CRGroup new.
