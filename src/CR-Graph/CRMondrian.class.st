@@ -32,21 +32,6 @@ CRMondrian >> build [
 ]
 
 { #category : #accessing }
-CRMondrian >> customViewOn: aView [
-	<gtView>
-	| el |
-	^ aView explicit
-		title: 'Custom';
-		priority: 5;
-		stencil: [
-			self build.
-			el := BlPinchableElement new.
-			el contentElement: canvas.
-			el
-		]
-]
-
-{ #category : #accessing }
 CRMondrian >> edge [
 	edgeBuilder canvas: canvas.
 	^ edgeBuilder
@@ -61,11 +46,11 @@ CRMondrian >> edges: aToBlock [
 { #category : #accessing }
 CRMondrian >> gtCanvasViewOn: aView [
 	<gtView>
+	self build.
 	^ aView explicit 
 		title: 'Canvas';
 		priority: 5;
 		stencil: [
-			self build.
 			canvas asPannableElement].
 ]
 
