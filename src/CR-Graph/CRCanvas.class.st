@@ -25,19 +25,6 @@ CRCanvas >> addEdge: aShape [
 ]
 
 { #category : #accessing }
-CRCanvas >> addScrollToZoom [
-	| eh |
-	eh := BlEventHandler new 
-	action: [ :e |
-		(e isScrollDown) ifTrue: [canvas zoomOut].
-		(e isScrollUp) ifTrue: [canvas zoomIn].
-		];
-	eventClass: (BlMouseWheelEvent).
-	
-	canvas addEventHandler: eh.
-]
-
-{ #category : #accessing }
 CRCanvas >> addScrollToZoom: aElement [
 	| eh |
 	eh := BlEventHandler new 
@@ -62,6 +49,7 @@ CRCanvas >> asPannableElement [
 	c := BlZoomableElement new contentElement: canvas.
 	c clipChildren: false.
 	self addScrollToZoom: c.
+	self jumpToInitialZoomOnSpace: c.
 	^c asPannableElement
 ]
 
@@ -84,6 +72,23 @@ CRCanvas >> initialize [
 			addProperty: (BlElementLayoutHorizontalResizerProperty new fitContent);
 			addProperty: (BlElementLayoutVerticalResizerProperty new fitContent).
 	canvas clipChildren: false.
+]
+
+{ #category : #accessing }
+CRCanvas >> jumpToInitialZoomOnSpace [
+	
+]
+
+{ #category : #accessing }
+CRCanvas >> jumpToInitialZoomOnSpace: aElement [
+	aElement addShortcut: ( 
+	BlShortcutWithAction new
+		combination: (BlSingleKeyCombination space);
+		action: [ aElement zoomToFit ]).
+
+	aElement addEventHandlerOn: BlClickEvent do: [:e | 
+		e consumed: true. 
+		e currentTarget requestFocus].
 ]
 
 { #category : #accessing }
