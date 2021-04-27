@@ -79,6 +79,7 @@ CREdgeBuilder >> createVisibleEdgeFrom: fromNode to: toNode [
 	
 	line fromAnchor: (fromAnchor element: fromNode).
 	line toAnchor: (toAnchor element: toNode).
+	
 	^ line
 ]
 

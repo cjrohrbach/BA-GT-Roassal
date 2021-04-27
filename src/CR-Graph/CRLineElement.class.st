@@ -27,10 +27,17 @@ CRLineElement >> initialize [
 	super initialize.
 	self border: (BlBorder paint: (Color gray alpha: 0.5) width: 0.5).
 	self zIndex: -1.
+	
+	self aptitude:
+		(BrStyleCommonAptitude new
+			default: [:l | l border: (BlBorder paint: (Color gray alpha: 0.5) width: 0.5)];
+			hovered: [ :l | l border: (BlBorder paint: Color blue width: 2) ]).
+			
+	
 	^self
 ]
 
 { #category : #accessing }
 CRLineElement >> width: aValue [
-	self border: (BlBorder paint: (self border paint) width: aValue).
+	self aptitude default border: (BlBorder paint: (self border paint) width: aValue).
 ]
