@@ -29,6 +29,7 @@ CRMondrian >> applyLayout [
 CRMondrian >> build [
 	canvas paint.
 	self applyLayout.
+	canvas createInteractableElement.
 ]
 
 { #category : #accessing }
@@ -51,7 +52,25 @@ CRMondrian >> gtCanvasViewOn: aView [
 		title: 'Canvas';
 		priority: 5;
 		stencil: [
-			canvas asPannableElement].
+			canvas asPannableElement];
+		actionStencil: [ 
+			BrButton new
+				aptitude: BrGlamorousButtonWithIconAptitude;
+				icon: BrGlamorousIcons actualsize asElement;
+				label: 'Zoom to fit' asRopedText;
+				action: [ canvas zoomToFit ] ];
+		actionStencil: [ 
+			BrButton new 
+				aptitude: BrGlamorousButtonWithIconAptitude;
+				icon: BrGlamorousIcons zoomin asElement;
+				label: 'Zoom In' asRopedText;
+				action: [ canvas zoomIn ] ];
+		actionStencil: [ 
+			BrButton new 
+				aptitude: BrGlamorousButtonWithIconAptitude;
+				icon: BrGlamorousIcons zoomout asElement;
+				label: 'Zoom Out' asRopedText;
+				action: [ canvas zoomOut ] ]
 ]
 
 { #category : #accessing }

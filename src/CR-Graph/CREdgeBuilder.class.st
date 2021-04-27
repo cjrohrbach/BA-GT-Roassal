@@ -5,10 +5,18 @@ Class {
 		'canvas',
 		'edgeShape',
 		'width',
-		'color'
+		'color',
+		'fromAnchor',
+		'toAnchor'
 	],
 	#category : #'CR-Graph-CR-Graph'
 }
+
+{ #category : #accessing }
+CREdgeBuilder >> arrow [
+	edgeShape := CRArrowElement.
+	toAnchor := BlElementTopCenterAnchor.
+]
 
 { #category : #accessing }
 CREdgeBuilder >> canvas: aCRCanvas [
@@ -21,7 +29,7 @@ CREdgeBuilder >> color: aColor [
 ]
 
 { #category : #accessing }
-CREdgeBuilder >> connectTo: toBlock [
+CREdgeBuilder >> connectFrom: toBlock [
 | line coll nodes|
 	
 	nodes := canvas nodes.
@@ -32,6 +40,22 @@ CREdgeBuilder >> connectTo: toBlock [
 			
 			self createGraphEdgeAndAddConstraintsFrom: res to: node.
 			canvas addEdge: (self createVisibleEdgeFrom: res to: node).
+			
+		]]].
+]
+
+{ #category : #accessing }
+CREdgeBuilder >> connectTo: toBlock [
+| line coll nodes|
+	
+	nodes := canvas nodes.
+	
+	nodes do: [:node | 
+		coll := (self evaluate: toBlock on: node).
+		(coll notNil and: coll size > 0) ifTrue: [coll do: [:res | 
+			
+			self createGraphEdgeAndAddConstraintsFrom: node to: res.
+			canvas addEdge: (self createVisibleEdgeFrom: node to: res).
 			
 		]]].
 		
@@ -53,8 +77,8 @@ CREdgeBuilder >> createVisibleEdgeFrom: fromNode to: toNode [
 	width ifNotNil: [line width: (width)].
 	color ifNotNil: [line color: (color)].
 	
-	line fromAnchor: (BlElementCenterAnchor element: fromNode).
-	line toAnchor: (BlElementCenterAnchor element: toNode).
+	line fromAnchor: (fromAnchor element: fromNode).
+	line toAnchor: (toAnchor element: toNode).
 	^ line
 ]
 
@@ -74,15 +98,27 @@ CREdgeBuilder >> evaluate: aBlock on: aCRNode [
 ]
 
 { #category : #accessing }
+CREdgeBuilder >> fromAnchor: aAnchor [
+	fromAnchor := aAnchor
+]
+
+{ #category : #accessing }
 CREdgeBuilder >> initialize [
 	super initialize.
 	self line.
+	toAnchor := BlElementCenterAnchor.
+	fromAnchor := BlElementCenterAnchor.
 	^self
 ]
 
 { #category : #accessing }
 CREdgeBuilder >> line [
 	edgeShape := CRLineElement
+]
+
+{ #category : #accessing }
+CREdgeBuilder >> toAnchor: aAnchor [
+	toAnchor := aAnchor
 ]
 
 { #category : #accessing }

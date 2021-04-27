@@ -20,6 +20,21 @@ CRMondrianExamples >> edgesToHalf [
 ]
 
 { #category : #accessing }
+CRMondrianExamples >> edgesToHalfWithArrow [
+	<gtExample>
+	| m |
+	m := CRMondrian new.
+	m nodes
+		label
+		with: (1 to: 10).
+	m edge
+		arrow; 
+		connectFrom: [:x | x//2].
+	m layout tree.
+	^m
+]
+
+{ #category : #accessing }
 CRMondrianExamples >> evenAndUnevenNumbersSeparatedByColor [
 	<gtExample>
 	| m |
@@ -111,7 +126,7 @@ CRMondrianExamples >> someConnectedPointsTree [
 	m edge
 		width: 1; 
 		color: Color gray;
-		connectTo: [:nb | nb // 2].
+		connectFrom: [:nb | nb // 2].
 	m layout tree.
 	^m
 ]

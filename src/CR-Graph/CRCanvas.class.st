@@ -44,13 +44,16 @@ CRCanvas >> asElement [
 
 { #category : #accessing }
 CRCanvas >> asPannableElement [
-	| c |
-	
-	c := BlZoomableElement new contentElement: canvas.
-	c clipChildren: false.
-	self addScrollToZoom: c.
-	self jumpToInitialZoomOnSpace: c.
-	^c asPannableElement
+	^canvas asPannableElement
+]
+
+{ #category : #accessing }
+CRCanvas >> createInteractableElement [
+	canvas := BlZoomableElement new contentElement: canvas.
+	canvas clipChildren: false.
+	self requestFocusOnClick: canvas.
+	self addScrollToZoom: canvas.
+	self jumpToInitialZoomOnSpace: canvas.
 ]
 
 { #category : #accessing }
@@ -75,20 +78,12 @@ CRCanvas >> initialize [
 ]
 
 { #category : #accessing }
-CRCanvas >> jumpToInitialZoomOnSpace [
-	
-]
-
-{ #category : #accessing }
 CRCanvas >> jumpToInitialZoomOnSpace: aElement [
 	aElement addShortcut: ( 
 	BlShortcutWithAction new
 		combination: (BlSingleKeyCombination space);
-		action: [ aElement zoomToFit ]).
-
-	aElement addEventHandlerOn: BlClickEvent do: [:e | 
-		e consumed: true. 
-		e currentTarget requestFocus].
+		action: [ 
+			aElement zoomToFit.]).
 ]
 
 { #category : #accessing }
@@ -110,12 +105,20 @@ CRCanvas >> nodes [
 CRCanvas >> paint [
 	self assert: [nodes notNil] description: 'You need to set the nodeGroup first'.
 	canvas addChildren: nodes.
-	canvas addChildren: edges
+	canvas addChildren: edges.
+
 ]
 
 { #category : #accessing }
 CRCanvas >> removeAllHighlightsOnClick [
 	canvas addEventHandlerOn: BlClickEvent do: [nodes removeHighlights]
+]
+
+{ #category : #accessing }
+CRCanvas >> requestFocusOnClick: aElement [
+	aElement addEventHandlerOn: BlClickEvent do: [:e | 
+		e consumed: true. 
+		e currentTarget requestFocus].
 ]
 
 { #category : #accessing }
@@ -126,4 +129,19 @@ CRCanvas >> setEdgeGroup: aCRGroup [
 { #category : #accessing }
 CRCanvas >> setNodeGroup: aCRGroup [
 	nodes := aCRGroup.
+]
+
+{ #category : #accessing }
+CRCanvas >> zoomIn [
+	canvas zoomIn
+]
+
+{ #category : #accessing }
+CRCanvas >> zoomOut [
+	canvas zoomOut
+]
+
+{ #category : #accessing }
+CRCanvas >> zoomToFit [
+	canvas zoomToFit
 ]
