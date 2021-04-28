@@ -47,6 +47,12 @@ CRMondrianExamples >> evenAndUnevenNumbersSeparatedByColor [
 ]
 
 { #category : #accessing }
+CRMondrianExamples >> failingExample [
+	<gtExample>
+	^self fail
+]
+
+{ #category : #accessing }
 CRMondrianExamples >> nodesWithDifferentScopes [
 	<gtExample>
 	| c |
