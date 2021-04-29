@@ -29,7 +29,24 @@ CREdgeBuilder >> color: aColor [
 ]
 
 { #category : #accessing }
-CREdgeBuilder >> connectFrom: toBlock [
+CREdgeBuilder >> connectFrom: aBlockOrASymbol [
+	| nodes |
+	nodes := canvas nodes.
+	
+	nodes do: [:node |
+		| fromNodeModel fromNode|
+		fromNodeModel := aBlockOrASymbol cull: (node model).
+		fromNode := canvas nodes nodeFromModel: fromNodeModel.
+		
+		fromNode ifNotNil:
+			[self createEdgeFrom: fromNode to: node].
+		
+		
+	]
+]
+
+{ #category : #accessing }
+CREdgeBuilder >> connectFromAll: toBlock [
 | line coll nodes|
 	
 	nodes := canvas nodes.
@@ -38,14 +55,29 @@ CREdgeBuilder >> connectFrom: toBlock [
 		coll := (self evaluate: toBlock on: node).
 		(coll notNil and: coll size > 0) ifTrue: [coll do: [:res | 
 			
-			self createGraphEdgeAndAddConstraintsFrom: res to: node.
-			canvas addEdge: (self createVisibleEdgeFrom: res to: node).
+			self createEdgeFrom: res to: node.
 			
 		]]].
 ]
 
 { #category : #accessing }
-CREdgeBuilder >> connectTo: toBlock [
+CREdgeBuilder >> connectTo: aBlockOrASymbol [
+	| nodes |
+	nodes := canvas nodes.
+	
+	nodes do: [:node |
+		| toNodeModel toNode|
+		toNodeModel := aBlockOrASymbol cull: (node model).
+		toNode := canvas nodes nodeFromModel: toNodeModel.
+		
+		toNode ifNotNil:
+			[self createEdgeFrom: node to: toNode].
+		
+	]
+]
+
+{ #category : #accessing }
+CREdgeBuilder >> connectToAll: toBlock [
 | line coll nodes|
 	
 	nodes := canvas nodes.
@@ -54,11 +86,16 @@ CREdgeBuilder >> connectTo: toBlock [
 		coll := (self evaluate: toBlock on: node).
 		(coll notNil and: coll size > 0) ifTrue: [coll do: [:res | 
 			
-			self createGraphEdgeAndAddConstraintsFrom: node to: res.
-			canvas addEdge: (self createVisibleEdgeFrom: node to: res).
+			self createEdgeFrom: node to: res.
 			
 		]]].
 		
+]
+
+{ #category : #accessing }
+CREdgeBuilder >> createEdgeFrom: fromNode to: toNode [
+	self createGraphEdgeAndAddConstraintsFrom: fromNode to: toNode.
+	canvas addEdge: ((self createVisibleEdgeFrom: fromNode to: toNode))
 ]
 
 { #category : #accessing }
@@ -91,8 +128,8 @@ CREdgeBuilder >> evaluate: aBlock on: aCRNode [
 	
 	
 	(result class = Array) 
-		ifTrue: [^ canvas nodes shapesFromModelArray: result.]
-		ifFalse: [^ canvas nodes shapesFromModel: result].
+		ifTrue: [^ canvas nodes nodesFromModelArray: result.]
+		ifFalse: [^ canvas nodes nodesFromModel: result].
 	
 	
 	

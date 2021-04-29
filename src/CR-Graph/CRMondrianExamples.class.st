@@ -8,6 +8,21 @@ Class {
 }
 
 { #category : #accessing }
+CRMondrianExamples >> edgesFromHalfWithArrow [
+	<gtExample>
+	| m |
+	m := CRMondrian new.
+	m nodes
+		label
+		with: (1 to: 10).
+	m edge
+		arrow; 
+		connectFromAll: [:x | x//2].
+	m layout tree.
+	^m
+]
+
+{ #category : #accessing }
 CRMondrianExamples >> edgesToHalf [
 	<gtExample>
 	| m |
@@ -29,7 +44,7 @@ CRMondrianExamples >> edgesToHalfWithArrow [
 		with: (1 to: 10).
 	m edge
 		arrow; 
-		connectFrom: [:x | x//2].
+		connectFromAll: [:x | x//2].
 	m layout tree.
 	^m
 ]
@@ -44,12 +59,6 @@ CRMondrianExamples >> evenAndUnevenNumbersSeparatedByColor [
 		background: [:x | x%2=0 ifTrue: [Color green ] ifFalse: [Color red]];
 		with: (1 to: 10).
 	^m
-]
-
-{ #category : #accessing }
-CRMondrianExamples >> failingExample [
-	<gtExample>
-	^self fail
 ]
 
 { #category : #accessing }
@@ -93,7 +102,7 @@ CRMondrianExamples >> normalizerAndForceLayout [
 		normalizeWidth: [:x | x slots size];
 		normalizeColor: #linesOfCode;
 		with: Collection withAllSubclasses.
-	m edges: #dependentClasses.
+	m edge connectToAll: #dependentClasses.
 	m layout force.
 
 	^m
@@ -157,7 +166,7 @@ CRMondrianExamples >> systemComplexity [
 		normalizeWidth: [:x | x slots size] from: 5 to: 25;
 		normalizeColor: #linesOfCode;
 		with: (RPackageOrganizer default packageNamed: 'Kernel') classes.
-	m edges: #superclass.
+	m edge connectFrom: #superclass.
 	m layout tree.
 	^m
 ]

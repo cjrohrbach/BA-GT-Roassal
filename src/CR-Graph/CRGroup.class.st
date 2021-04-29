@@ -43,45 +43,39 @@ CRGroup >> initialize [
 ]
 
 { #category : #accessing }
+CRGroup >> nodeFromModel: aObject [
+	"returns a single node matching the ojbect. Returns nil if no matching node is found"
+	self do: [:node | (node model = aObject) ifTrue: [^node]].
+	^nil
+]
+
+{ #category : #accessing }
 CRGroup >> nodesFromModel: aObject [
 " returns all shapes matching the objects as new CRGroup "
 	| group |
 	group := CRGroup new.
 	
-	self do: [:shape | (shape model = aObject) ifTrue: [group add: shape]].
+	self do: [:node | (node model = aObject) ifTrue: [group add: node]].
 	
 	^ group
 
 	
+]
+
+{ #category : #accessing }
+CRGroup >> nodesFromModelArray: aArray [
+	| group |
+	group := CRGroup new.
+	
+	aArray do: [:model | 
+		group addAll: (self nodesFromModel: model).
+	].
+	
+	^ group
 ]
 
 { #category : #accessing }
 CRGroup >> removeHighlights [
 	highlightedNode ifNotNil: [ highlightedNode removeHighlight].
 	highlightedNode := nil.
-]
-
-{ #category : #accessing }
-CRGroup >> shapesFromModel: aObject [
-" returns all shapes matching the objects as new CRGroup "
-	| group |
-	group := CRGroup new.
-	
-	self do: [:shape | (shape model = aObject) ifTrue: [group add: shape]].
-	
-	^ group
-
-	
-]
-
-{ #category : #accessing }
-CRGroup >> shapesFromModelArray: aArray [
-	| group |
-	group := CRGroup new.
-	
-	aArray do: [:model | 
-		group addAll: (self shapesFromModel: model).
-	].
-	
-	^ group
 ]
