@@ -67,6 +67,12 @@ CRNode >> initialize [
 ]
 
 { #category : #accessing }
+CRNode >> initializeForCanvas [
+	super initialize.
+	^self
+]
+
+{ #category : #accessing }
 CRNode >> makeDraggable [
 	self addEventHandler: BlPullHandler new allowOutOfBounds.
 ]

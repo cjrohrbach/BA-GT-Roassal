@@ -1,3 +1,8 @@
+"
+I am a scope builder I help to generate the diffrent scopes for mondrian. 
+
+A scope is a set of nodes with similar shape and behaviour.
+"
 Class {
 	#name : #CRScopeBuilder,
 	#superclass : #Object,
@@ -52,13 +57,20 @@ CRScopeBuilder >> label [
 ]
 
 { #category : #accessing }
-CRScopeBuilder >> mondrian [ 
+CRScopeBuilder >> mondrian [
 	^mondrian
 ]
 
 { #category : #accessing }
 CRScopeBuilder >> mondrian: aCRMondrian [
 	mondrian := aCRMondrian
+]
+
+{ #category : #accessing }
+CRScopeBuilder >> mondrianNodes [ 
+	builder := CRMondrianAsNode new.
+	builder scopeBuilder: self.
+	^builder
 ]
 
 { #category : #accessing }

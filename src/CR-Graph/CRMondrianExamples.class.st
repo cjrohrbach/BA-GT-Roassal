@@ -31,6 +31,8 @@ CRMondrianExamples >> edgesToHalf [
 		point
 		with: (1 to: 10).
 	(m edge connectTo: [:x | x/2]) width: 500.
+	
+	
 	^m
 ]
 

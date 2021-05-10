@@ -10,7 +10,8 @@ Class {
 		'canvas',
 		'edges',
 		'edgeBuilder',
-		'scopeBuilderCollection'
+		'scopeBuilderCollection',
+		'isBuilt'
 	],
 	#category : #'CR-Graph'
 }
@@ -27,9 +28,13 @@ CRMondrian >> applyLayout [
 
 { #category : #accessing }
 CRMondrian >> build [
-	canvas paint.
-	self applyLayout.
-	canvas createInteractableElement.
+	isBuilt ifFalse: [
+		canvas paint.
+		self applyLayout.
+		"canvas createInteractableElement."
+		isBuilt := true.
+	]
+	
 ]
 
 { #category : #accessing }
@@ -45,6 +50,17 @@ CRMondrian >> edges: aToBlock [
 ]
 
 { #category : #accessing }
+CRMondrian >> getCanvas [
+	^canvas
+]
+
+{ #category : #accessing }
+CRMondrian >> getCanvasAsBlElement [
+	self build.
+	^canvas asElement
+]
+
+{ #category : #accessing }
 CRMondrian >> gtCanvasViewOn: aView [
 	<gtView>
 	self build.
@@ -52,7 +68,7 @@ CRMondrian >> gtCanvasViewOn: aView [
 		title: 'Canvas';
 		priority: 5;
 		stencil: [
-			canvas asPannableElement];
+			canvas canvasForView];
 		actionStencil: [ 
 			BrButton new
 				aptitude: BrGlamorousButtonWithIconAptitude;
@@ -82,13 +98,13 @@ CRMondrian >> initialize [
 	layoutBuilder := CRLayoutBuilder new.
 	
 	
-	canvas := CRCanvas new.
+	canvas := CRCanvas2 new.
 	canvas setNodeGroup: nodesForLayout. 
 	
 	edgeBuilder := CREdgeBuilder new
 		canvas: canvas.
 	
-	
+	isBuilt := false.
 
 	
 ]

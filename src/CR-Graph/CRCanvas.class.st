@@ -8,7 +8,8 @@ Class {
 		'canvas',
 		'layout',
 		'edges',
-		'nodes'
+		'nodes',
+		'canvasForView'
 	],
 	#category : #'CR-Graph-CR-Graph'
 }
@@ -48,12 +49,22 @@ CRCanvas >> asPannableElement [
 ]
 
 { #category : #accessing }
+CRCanvas >> canvas: aBlElement [
+	canvas := aBlElement
+]
+
+{ #category : #accessing }
+CRCanvas >> canvasForView [
+	^canvasForView asPannableElement
+]
+
+{ #category : #accessing }
 CRCanvas >> createInteractableElement [
-	canvas := BlZoomableElement new contentElement: canvas.
-	canvas clipChildren: false.
-	self requestFocusOnClick: canvas.
-	self addScrollToZoom: canvas.
-	self jumpToInitialZoomOnSpace: canvas.
+	canvasForView := BlZoomableElement new contentElement: canvas.
+	canvasForView clipChildren: false.
+	self requestFocusOnClick: canvasForView.
+	self addScrollToZoom: canvasForView.
+	self jumpToInitialZoomOnSpace: canvasForView.
 ]
 
 { #category : #accessing }
@@ -70,11 +81,12 @@ CRCanvas >> gtCanvasViewOn: aView [
 CRCanvas >> initialize [
 	super initialize.
 	edges := CRGroup new.
-	canvas := BlElement new.
+	canvas := CRNode new.
 	canvas properties 
 			addProperty: (BlElementLayoutHorizontalResizerProperty new fitContent);
 			addProperty: (BlElementLayoutVerticalResizerProperty new fitContent).
 	canvas clipChildren: false.
+	^self
 ]
 
 { #category : #accessing }
@@ -104,6 +116,7 @@ CRCanvas >> nodes [
 { #category : #accessing }
 CRCanvas >> paint [
 	self assert: [nodes notNil] description: 'You need to set the nodeGroup first'.
+	
 	canvas addChildren: nodes.
 	canvas addChildren: edges.
 

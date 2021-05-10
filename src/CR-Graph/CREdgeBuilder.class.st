@@ -1,3 +1,6 @@
+"
+I build all the edges for the mondrian and then add them to the canvas.
+"
 Class {
 	#name : #CREdgeBuilder,
 	#superclass : #Object,
