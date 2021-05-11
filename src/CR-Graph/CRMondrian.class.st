@@ -11,7 +11,8 @@ Class {
 		'edges',
 		'edgeBuilder',
 		'scopeBuilderCollection',
-		'isBuilt'
+		'isBuilt',
+		'allNodes'
 	],
 	#category : #'CR-Graph'
 }
@@ -19,6 +20,11 @@ Class {
 { #category : #accessing }
 CRMondrian >> addNodesToLayout: aCRGroup [
 	nodesForLayout addAll: aCRGroup
+]
+
+{ #category : #accessing }
+CRMondrian >> allNodes [
+	^allNodes
 ]
 
 { #category : #accessing }
@@ -39,6 +45,12 @@ CRMondrian >> build [
 
 { #category : #accessing }
 CRMondrian >> edge [
+	nodesForLayout do: [ :n | 
+		allNodes add: n.
+		(n class = CRCanvas ) ifTrue: 
+		[ allNodes addAll: (n nodes)].
+	].
+	edgeBuilder mondrian: self.
 	edgeBuilder canvas: canvas.
 	^ edgeBuilder
 ]
@@ -55,50 +67,46 @@ CRMondrian >> getCanvas [
 ]
 
 { #category : #accessing }
-CRMondrian >> getCanvasAsBlElement [
-	self build.
-	^canvas asElement
-]
-
-{ #category : #accessing }
 CRMondrian >> gtCanvasViewOn: aView [
 	<gtView>
+	| canv |
 	self build.
 	^ aView explicit 
 		title: 'Canvas';
 		priority: 5;
 		stencil: [
-			canvas canvasForView];
+			canv := canvas canvasForView];
 		actionStencil: [ 
 			BrButton new
 				aptitude: BrGlamorousButtonWithIconAptitude;
 				icon: BrGlamorousIcons actualsize asElement;
 				label: 'Zoom to fit' asRopedText;
-				action: [ canvas zoomToFit ] ];
+				action: [ canv zoomToFit ] ];
 		actionStencil: [ 
 			BrButton new 
 				aptitude: BrGlamorousButtonWithIconAptitude;
 				icon: BrGlamorousIcons zoomin asElement;
 				label: 'Zoom In' asRopedText;
-				action: [ canvas zoomIn ] ];
+				action: [ canv zoomIn ] ];
 		actionStencil: [ 
 			BrButton new 
 				aptitude: BrGlamorousButtonWithIconAptitude;
 				icon: BrGlamorousIcons zoomout asElement;
 				label: 'Zoom Out' asRopedText;
-				action: [ canvas zoomOut ] ]
+				action: [ canv zoomOut ] ]
 ]
 
 { #category : #accessing }
 CRMondrian >> initialize [
 	super initialize.
-	nodesForLayout := CRGroup new.
+	nodesForLayout := CRBindingGroup new.
+	allNodes := CRGroup new.
 	
 	scopeBuilderCollection := OrderedCollection new.
 	layoutBuilder := CRLayoutBuilder new.
 	
 	
-	canvas := CRCanvas2 new.
+	canvas := CRCanvas new.
 	canvas setNodeGroup: nodesForLayout. 
 	
 	edgeBuilder := CREdgeBuilder new

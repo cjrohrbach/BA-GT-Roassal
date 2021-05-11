@@ -14,7 +14,7 @@ CRMondrianAsNode >> createShapeFor: obj [
 	mondrian := mondrianStencil cull: obj.
 	mondrian build.
 	result := mondrian getCanvas canvasAsNode.
-	result model: mondrian.
+	result model: obj.
 	^ result
 ]
 

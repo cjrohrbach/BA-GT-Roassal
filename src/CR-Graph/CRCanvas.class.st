@@ -1,15 +1,9 @@
-"
-I hold all nodes and edges that are displayed in a graph.
-"
 Class {
 	#name : #CRCanvas,
-	#superclass : #Object,
+	#superclass : #CRNode,
 	#instVars : [
-		'canvas',
-		'layout',
-		'edges',
 		'nodes',
-		'canvasForView'
+		'edges'
 	],
 	#category : #'CR-Graph-CR-Graph'
 }
@@ -17,7 +11,6 @@ Class {
 { #category : #accessing }
 CRCanvas >> addAllEdges: shapeCollection [
 	edges addAll: shapeCollection.
-	canvas addChildren: shapeCollection.
 ]
 
 { #category : #accessing }
@@ -39,53 +32,41 @@ CRCanvas >> addScrollToZoom: aElement [
 ]
 
 { #category : #accessing }
-CRCanvas >> asElement [
-	^canvas
-]
-
-{ #category : #accessing }
-CRCanvas >> asPannableElement [
-	^canvas asPannableElement
-]
-
-{ #category : #accessing }
-CRCanvas >> canvas: aBlElement [
-	canvas := aBlElement
+CRCanvas >> canvasAsNode [
+	| c |
+	"c := CRNode new.
+	c size: 100@100.
+	c clipChildren: false.
+	c addChild: self.
+	^c"
+	self addToolTip.
+	self makeDraggable.
+	self openModelOnClick.
+	self graph beNode.
+	self border: (BlBorder paint: Color black width: 2).
+	^self
 ]
 
 { #category : #accessing }
 CRCanvas >> canvasForView [
-	^canvasForView asPannableElement
-]
-
-{ #category : #accessing }
-CRCanvas >> createInteractableElement [
-	canvasForView := BlZoomableElement new contentElement: canvas.
-	canvasForView clipChildren: false.
-	self requestFocusOnClick: canvasForView.
-	self addScrollToZoom: canvasForView.
-	self jumpToInitialZoomOnSpace: canvasForView.
-]
-
-{ #category : #accessing }
-CRCanvas >> gtCanvasViewOn: aView [
-	<gtView>
-	^ aView explicit 
-		title: 'Canvas';
-		priority: 5;
-		stencil: [
-			self asPannableElement].
+	| c |
+	c := BlZoomableElement new contentElement: self.
+	c clipChildren: false.
+	self requestFocusOnClick: c.
+	self addScrollToZoom: c.
+	self jumpToInitialZoomOnSpace: c.
+	^ c asPannableElement
 ]
 
 { #category : #accessing }
 CRCanvas >> initialize [
-	super initialize.
+	super initializeForCanvas.
+	nodes := CRGroup new.
 	edges := CRGroup new.
-	canvas := CRNode new.
-	canvas properties 
+	self properties 
 			addProperty: (BlElementLayoutHorizontalResizerProperty new fitContent);
 			addProperty: (BlElementLayoutVerticalResizerProperty new fitContent).
-	canvas clipChildren: false.
+	self clipChildren: false.
 	^self
 ]
 
@@ -96,11 +77,6 @@ CRCanvas >> jumpToInitialZoomOnSpace: aElement [
 		combination: (BlSingleKeyCombination space);
 		action: [ 
 			aElement zoomToFit.]).
-]
-
-{ #category : #accessing }
-CRCanvas >> layout: aLayout [
-	canvas layout: aLayout.
 ]
 
 { #category : #accessing }
@@ -116,15 +92,8 @@ CRCanvas >> nodes [
 { #category : #accessing }
 CRCanvas >> paint [
 	self assert: [nodes notNil] description: 'You need to set the nodeGroup first'.
-	
-	canvas addChildren: nodes.
-	canvas addChildren: edges.
-
-]
-
-{ #category : #accessing }
-CRCanvas >> removeAllHighlightsOnClick [
-	canvas addEventHandlerOn: BlClickEvent do: [nodes removeHighlights]
+	self addChildren: nodes.
+	self addChildren: edges.
 ]
 
 { #category : #accessing }
@@ -136,25 +105,10 @@ CRCanvas >> requestFocusOnClick: aElement [
 
 { #category : #accessing }
 CRCanvas >> setEdgeGroup: aCRGroup [
-	edges := aCRGroup.
+	edges := aCRGroup
 ]
 
 { #category : #accessing }
 CRCanvas >> setNodeGroup: aCRGroup [
 	nodes := aCRGroup.
-]
-
-{ #category : #accessing }
-CRCanvas >> zoomIn [
-	canvas zoomIn
-]
-
-{ #category : #accessing }
-CRCanvas >> zoomOut [
-	canvas zoomOut
-]
-
-{ #category : #accessing }
-CRCanvas >> zoomToFit [
-	canvas zoomToFit
 ]

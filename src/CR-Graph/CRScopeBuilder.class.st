@@ -46,7 +46,7 @@ CRScopeBuilder >> createShapeFor: obj [
 CRScopeBuilder >> initialize [
 	super initialize.
 	normalizerCollection := OrderedCollection new.
-	nodes := CRGroup new.
+	nodes := CRBindingGroup new.
 ]
 
 { #category : #accessing }

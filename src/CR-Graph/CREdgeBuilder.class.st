@@ -10,7 +10,8 @@ Class {
 		'width',
 		'color',
 		'fromAnchor',
-		'toAnchor'
+		'toAnchor',
+		'mondrian'
 	],
 	#category : #'CR-Graph-CR-Graph'
 }
@@ -34,12 +35,12 @@ CREdgeBuilder >> color: aColor [
 { #category : #accessing }
 CREdgeBuilder >> connectFrom: aBlockOrASymbol [
 	| nodes |
-	nodes := canvas nodes.
+	nodes := mondrian allNodes.
 	
 	nodes do: [:node |
 		| fromNodeModel fromNode|
 		fromNodeModel := aBlockOrASymbol cull: (node model).
-		fromNode := canvas nodes nodeFromModel: fromNodeModel.
+		fromNode := nodes nodeFromModel: fromNodeModel.
 		
 		fromNode ifNotNil:
 			[self createEdgeFrom: fromNode to: node].
@@ -52,7 +53,7 @@ CREdgeBuilder >> connectFrom: aBlockOrASymbol [
 CREdgeBuilder >> connectFromAll: toBlock [
 | line coll nodes|
 	
-	nodes := canvas nodes.
+	nodes := mondrian allNodes.
 	
 	nodes do: [:node | 
 		coll := (self evaluate: toBlock on: node).
@@ -66,12 +67,12 @@ CREdgeBuilder >> connectFromAll: toBlock [
 { #category : #accessing }
 CREdgeBuilder >> connectTo: aBlockOrASymbol [
 	| nodes |
-	nodes := canvas nodes.
+	nodes := mondrian allNodes.
 	
 	nodes do: [:node |
 		| toNodeModel toNode|
 		toNodeModel := aBlockOrASymbol cull: (node model).
-		toNode := canvas nodes nodeFromModel: toNodeModel.
+		toNode := nodes nodeFromModel: toNodeModel.
 		
 		toNode ifNotNil:
 			[self createEdgeFrom: node to: toNode].
@@ -83,7 +84,7 @@ CREdgeBuilder >> connectTo: aBlockOrASymbol [
 CREdgeBuilder >> connectToAll: toBlock [
 | line coll nodes|
 	
-	nodes := canvas nodes.
+	nodes := mondrian allNodes.
 	
 	nodes do: [:node | 
 		coll := (self evaluate: toBlock on: node).
@@ -155,6 +156,11 @@ CREdgeBuilder >> initialize [
 { #category : #accessing }
 CREdgeBuilder >> line [
 	edgeShape := CRLineElement
+]
+
+{ #category : #accessing }
+CREdgeBuilder >> mondrian: aMondrian [
+	mondrian := aMondrian
 ]
 
 { #category : #accessing }

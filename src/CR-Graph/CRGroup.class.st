@@ -13,22 +13,6 @@ Class {
 }
 
 { #category : #accessing }
-CRGroup >> addLast: newObject [
-	super addLast: newObject.
-	newObject group: self.
-]
-
-{ #category : #accessing }
-CRGroup >> bindNodeToThisGroup [
-	self do: [:x | x group: self].
-]
-
-{ #category : #accessing }
-CRGroup >> createIdentifier [
-	identifier := (Random new nextInt: 100000).
-]
-
-{ #category : #accessing }
 CRGroup >> highlightElement: aNode [ 
 	highlightedNode ifNotNil: [ highlightedNode removeHighlight].
 	highlightedNode := aNode.
@@ -38,7 +22,6 @@ CRGroup >> highlightElement: aNode [
 { #category : #accessing }
 CRGroup >> initialize [
 	super initialize.
-	self createIdentifier.
 	^ self
 ]
 

@@ -8,14 +8,17 @@ Class {
 	#instVars : [
 		'model',
 		'originalBorder',
-		'group'
+		'group',
+		'toolTipContent'
 	],
 	#category : #'CR-Graph-CR-Graph'
 }
 
 { #category : #accessing }
 CRNode >> addToolTip [
-	| label |
+	| label labelText |
+	
+
 	label := [BrLabel new aptitude: 
 		BrGlamorousLabelAptitude new  
 			glamorousRegularFontAndSize;
@@ -95,4 +98,9 @@ CRNode >> openModelOnClick [
 { #category : #accessing }
 CRNode >> removeHighlight [
 	self border: originalBorder
+]
+
+{ #category : #accessing }
+CRNode >> toolTipContent: someText [
+	toolTipContent := someText.
 ]
