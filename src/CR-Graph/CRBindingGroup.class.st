@@ -9,9 +9,3 @@ CRBindingGroup >> addLast: newObject [
 	super addLast: newObject.
 	newObject group: self.
 ]
-
-{ #category : #accessing }
-CRBindingGroup >> initialize [
-	super initialize.
-	^self
-]

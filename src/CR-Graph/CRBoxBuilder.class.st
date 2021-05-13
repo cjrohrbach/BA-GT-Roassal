@@ -31,7 +31,6 @@ CRBoxBuilder >> createShapeFor: obj [
 	| result |
 	result := CRBox new 
 			model: obj.
-		result highlightOnClick.
 		width ifNotNil: [result width: (self evaluate: width on: obj)].
 		height ifNotNil: [result height: (self evaluate: height on: obj)].
 		background ifNotNil: [result color: (self evaluate: background on: obj)].

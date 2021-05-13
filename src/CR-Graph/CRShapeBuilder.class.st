@@ -2,8 +2,8 @@ Class {
 	#name : #CRShapeBuilder,
 	#superclass : #Object,
 	#instVars : [
-		'scopeBuilder',
-		'normalizerCollection'
+		'normalizerCollection',
+		'modelCollection'
 	],
 	#category : #'CR-Graph-CR-Graph'
 }
@@ -15,6 +15,17 @@ CRShapeBuilder >> applyNormalizer: someNodes [
 		normalizer evaluateScope.
 		normalizer normalize.
 	].
+]
+
+{ #category : #accessing }
+CRShapeBuilder >> createNodes [
+	| nodes |
+	
+	self assert: [modelCollection isCollection] description: 'You need to provide a collection'.
+	nodes := self shapesOn: modelCollection.
+	self applyNormalizer: nodes.
+	
+	^nodes
 ]
 
 { #category : #accessing }
@@ -33,26 +44,13 @@ CRShapeBuilder >> evaluate: aBlockClosure on: aObject [
 { #category : #accessing }
 CRShapeBuilder >> initialize [
 	super initialize.
-	
 	normalizerCollection := OrderedCollection new.
 	^self
 ]
 
-{ #category : #initialization }
-CRShapeBuilder >> initializeWithScope: aScopeBuilder [
-	self initialize.
-	scopeBuilder := aScopeBuilder.
-	^self
-]
-
-{ #category : #accessing }
-CRShapeBuilder >> scopeBuilder: aCRScopeBuilder [
-	scopeBuilder := aCRScopeBuilder
-]
-
 { #category : #accessing }
 CRShapeBuilder >> shapesOn: someObjects [
-	| result group |
+	| group |
 	
 	group := CRGroup new.
 	group addAll: (someObjects collect: [ :obj | 
@@ -64,11 +62,6 @@ CRShapeBuilder >> shapesOn: someObjects [
 
 { #category : #accessing }
 CRShapeBuilder >> with: aCollection [
-	| nodes |
 	self assert: [aCollection isCollection] description: 'You need to provide a collection'.
-	nodes := self shapesOn: aCollection.
-	
-	self applyNormalizer: nodes.
-	
-	scopeBuilder addInstancesToMondrian: nodes.
+	modelCollection := aCollection
 ]

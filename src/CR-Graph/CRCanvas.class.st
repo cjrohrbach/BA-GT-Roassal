@@ -9,6 +9,15 @@ Class {
 }
 
 { #category : #accessing }
+CRCanvas class >> newFrom: someNodes edges: someEdges [
+	| c |
+	c := CRCanvas new .
+	c setNodeGroup: someNodes.
+	c setEdgeGroup: someEdges.
+	^c
+]
+
+{ #category : #accessing }
 CRCanvas >> addAllEdges: shapeCollection [
 	edges addAll: shapeCollection.
 ]
