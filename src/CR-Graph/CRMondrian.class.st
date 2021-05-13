@@ -80,19 +80,19 @@ CRMondrian >> gtCanvasViewOn: aView [
 				aptitude: BrGlamorousButtonWithIconAptitude;
 				icon: BrGlamorousIcons actualsize asElement;
 				label: 'Zoom to fit' asRopedText;
-				action: [ canvas zoomToFit ] ];
+				action: [ canv zoomToFit ] ];
 		actionStencil: [ 
 			BrButton new 
 				aptitude: BrGlamorousButtonWithIconAptitude;
 				icon: BrGlamorousIcons zoomin asElement;
 				label: 'Zoom In' asRopedText;
-				action: [ canvas zoomIn ] ];
+				action: [ canv zoomIn ] ];
 		actionStencil: [ 
 			BrButton new 
 				aptitude: BrGlamorousButtonWithIconAptitude;
 				icon: BrGlamorousIcons zoomout asElement;
 				label: 'Zoom Out' asRopedText;
-				action: [ canvas zoomOut ] ]
+				action: [ canv zoomOut ] ]
 ]
 
 { #category : #accessing }
