@@ -8,21 +8,6 @@ Class {
 }
 
 { #category : #accessing }
-CRMondrianExamples >> edgesFromHalfWithArrow [
-	<gtExample>
-	| m |
-	m := CRMondrian new.
-	m nodes
-		label
-		with: (1 to: 10).
-	m edge
-		arrow; 
-		connectFromAll: [:x | x//2].
-	m layout tree.
-	^m
-]
-
-{ #category : #accessing }
 CRMondrianExamples >> edgesToHalf [
 	<gtExample>
 	| m |
@@ -45,7 +30,7 @@ CRMondrianExamples >> edgesToHalfWithArrow [
 		label
 		with: (1 to: 10).
 	m edge
-		arrow; 
+		arrow;
 		connectFromAll: [:x | x//2].
 	m layout tree.
 	^m

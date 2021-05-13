@@ -1,74 +1,80 @@
-"
-I'm a simple API to generate some visualizations with nodes and edges.
-"
 Class {
 	#name : #CRMondrian,
 	#superclass : #Object,
 	#instVars : [
-		'nodesForLayout',
-		'layoutBuilder',
-		'canvas',
-		'edges',
-		'edgeBuilder',
-		'scopeBuilderCollection',
-		'isBuilt'
+		'edgeBuilderCollection',
+		'shapeBuilderCollection',
+		'layoutBuilder'
 	],
-	#category : #'CR-Graph'
+	#category : #'CR-Graph-CR-Graph'
 }
 
 { #category : #accessing }
-CRMondrian >> addNodesToLayout: aCRGroup [
-	nodesForLayout addAll: aCRGroup
+CRMondrian >> addEdgeBuilder: edgeBuilder [
+	edgeBuilderCollection add: edgeBuilder.
 ]
 
 { #category : #accessing }
-CRMondrian >> applyLayout [
-	layoutBuilder on: canvas
-]
-
-{ #category : #accessing }
-CRMondrian >> build [
-	isBuilt ifFalse: [
-		canvas paint.
-		self applyLayout.
-		"canvas createInteractableElement."
-		isBuilt := true.
-	]
+CRMondrian >> addEdgeFactory: edgeFactory [
 	
 ]
 
 { #category : #accessing }
+CRMondrian >> addShapeBuilder: aShapeBuilder [
+	shapeBuilderCollection add: aShapeBuilder
+]
+
+{ #category : #accessing }
+CRMondrian >> buildEdges: nodes [
+	| edges |
+	edges := CRGroup new.
+	
+	edgeBuilderCollection do: [ :edgeBuilder |
+		edges addAll: (edgeBuilder createEdges: nodes).
+	].
+	
+	^edges.
+]
+
+{ #category : #accessing }
+CRMondrian >> buildNodes [
+	| nodes |
+	
+	nodes := CRGroup new.
+	shapeBuilderCollection do: [ :shapeBuilder | 
+		nodes addAll: (shapeBuilder createNodes).
+	].
+	
+	^nodes
+]
+
+{ #category : #accessing }
+CRMondrian >> createCanvas [
+	| nodes edges canvas layout|
+	nodes := self buildNodes.
+	edges := self buildEdges: nodes.
+	
+	canvas := CRCanvas newFrom: nodes edges: edges.
+	canvas paint. 
+	layoutBuilder on: canvas.
+	^ canvas
+]
+
+{ #category : #accessing }
 CRMondrian >> edge [
-	edgeBuilder canvas: canvas.
-	^ edgeBuilder
-]
-
-{ #category : #accessing }
-CRMondrian >> edges: aToBlock [
-	edges := edgeBuilder connectTo: aToBlock.
-	^edges
-]
-
-{ #category : #accessing }
-CRMondrian >> getCanvas [
-	^canvas
-]
-
-{ #category : #accessing }
-CRMondrian >> getCanvasAsBlElement [
-	self build.
-	^canvas asElement
+	^ CREdgeBuilder newWithMondrian: self
 ]
 
 { #category : #accessing }
 CRMondrian >> gtCanvasViewOn: aView [
 	<gtView>
-	self build.
+	| canvas |
+	canvas := self createCanvas canvasForView.
 	^ aView explicit 
 		title: 'Canvas';
 		priority: 5;
 		stencil: [
-			canvas canvasForView];
+			canvas];
 		actionStencil: [ 
 			BrButton new
 				aptitude: BrGlamorousButtonWithIconAptitude;
@@ -92,33 +98,19 @@ CRMondrian >> gtCanvasViewOn: aView [
 { #category : #accessing }
 CRMondrian >> initialize [
 	super initialize.
-	nodesForLayout := CRGroup new.
+	shapeBuilderCollection := OrderedCollection new.
+	edgeBuilderCollection := OrderedCollection new.
 	
-	scopeBuilderCollection := OrderedCollection new.
 	layoutBuilder := CRLayoutBuilder new.
-	
-	
-	canvas := CRCanvas2 new.
-	canvas setNodeGroup: nodesForLayout. 
-	
-	edgeBuilder := CREdgeBuilder new
-		canvas: canvas.
-	
-	isBuilt := false.
-
-	
+	^self
 ]
 
 { #category : #accessing }
 CRMondrian >> layout [
-	^ layoutBuilder
+	^layoutBuilder
 ]
 
 { #category : #accessing }
 CRMondrian >> nodes [
-	| scopeBuilder |
-	scopeBuilder := CRScopeBuilder new.
-	scopeBuilder mondrian: self.
-	scopeBuilderCollection add: scopeBuilder.
-	^ scopeBuilder
+	^ CRShapeBuilderBuilder newWithMondrian: self
 ]
