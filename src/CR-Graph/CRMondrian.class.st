@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'edgeBuilderCollection',
 		'shapeBuilderCollection',
-		'layoutBuilder'
+		'layoutBuilder',
+		'canvasForView'
 	],
 	#category : #'CR-Graph-CR-Graph'
 }
@@ -62,6 +63,7 @@ CRMondrian >> createCanvas [
 
 { #category : #accessing }
 CRMondrian >> edge [
+	canvasForView := nil.
 	^ CREdgeBuilder newWithMondrian: self
 ]
 
@@ -69,30 +71,32 @@ CRMondrian >> edge [
 CRMondrian >> gtCanvasViewOn: aView [
 	<gtView>
 	| canvas |
-	canvas := self createCanvas canvasForView.
+	(canvasForView isNil) ifTrue: [ 
+		canvasForView := self createCanvas canvasForView 
+	].
 	^ aView explicit 
 		title: 'Canvas';
 		priority: 5;
 		stencil: [
-			canvas];
+			canvasForView];
 		actionStencil: [ 
 			BrButton new
 				aptitude: BrGlamorousButtonWithIconAptitude;
 				icon: BrGlamorousIcons actualsize asElement;
 				label: 'Zoom to fit' asRopedText;
-				action: [ canv zoomToFit ] ];
+				action: [ canvasForView zoomToFit ] ];
 		actionStencil: [ 
 			BrButton new 
 				aptitude: BrGlamorousButtonWithIconAptitude;
 				icon: BrGlamorousIcons zoomin asElement;
 				label: 'Zoom In' asRopedText;
-				action: [ canv zoomIn ] ];
+				action: [ canvasForView zoomIn ] ];
 		actionStencil: [ 
 			BrButton new 
 				aptitude: BrGlamorousButtonWithIconAptitude;
 				icon: BrGlamorousIcons zoomout asElement;
 				label: 'Zoom Out' asRopedText;
-				action: [ canv zoomOut ] ]
+				action: [ canvasForView zoomOut ] ]
 ]
 
 { #category : #accessing }
@@ -107,10 +111,12 @@ CRMondrian >> initialize [
 
 { #category : #accessing }
 CRMondrian >> layout [
+	canvasForView := nil.
 	^layoutBuilder
 ]
 
 { #category : #accessing }
 CRMondrian >> nodes [
+	canvasForView := nil.
 	^ CRShapeBuilderBuilder newWithMondrian: self
 ]
