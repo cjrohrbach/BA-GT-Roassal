@@ -23,7 +23,7 @@ CRNode >> addToolTip [
 		BrGlamorousLabelAptitude new  
 			glamorousRegularFontAndSize;
 			alignCenter;
-			text: model].
+			text: toolTipContent].
 		
 	self aptitude: (BrGlamorousWithTooltipAptitude new
 		showDelay: 0;
@@ -87,7 +87,8 @@ CRNode >> model [
 
 { #category : #accessing }
 CRNode >> model: anObject [
-	model := anObject
+	model := anObject.
+	toolTipContent := model
 ]
 
 { #category : #accessing }

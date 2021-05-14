@@ -55,10 +55,14 @@ CRMondrianExamples >> mondrianAsNode [
 	q := CRMondrian new.
 	q nodes 
 		mondrianNodes
+		toolTip: #name;
 		stencil: 
 		[ :p | | m |
 			m := CRMondrian new .
-			m nodes box with: (p methods ).
+			m nodes 
+				box
+				toolTip: #name; 
+				with: (p methods ).
 			m];
 		with: ( (RPackageOrganizer default packageNamed: 'CR-Graph') classes ).
 		

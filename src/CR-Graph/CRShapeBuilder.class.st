@@ -3,7 +3,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'normalizerCollection',
-		'modelCollection'
+		'modelCollection',
+		'toolTipContent'
 	],
 	#category : #'CR-Graph-CR-Graph'
 }
@@ -36,7 +37,7 @@ CRShapeBuilder >> createShapeFor: obj [
 { #category : #accessing }
 CRShapeBuilder >> evaluate: aBlockClosure on: aObject [
 " checks wheter the given Block is a Block or if it's just a value "
-	(aBlockClosure class = BlockClosure) 
+	(aBlockClosure class = BlockClosure or: aBlockClosure class = ByteSymbol) 
 		ifTrue: [^ (aBlockClosure cull: aObject)]
 		ifFalse: [^aBlockClosure]
 ]
@@ -58,6 +59,11 @@ CRShapeBuilder >> shapesOn: someObjects [
 		]).
 		
 	^ group
+]
+
+{ #category : #accessing }
+CRShapeBuilder >> toolTip: someValueOrBlock [
+	toolTipContent := someValueOrBlock
 ]
 
 { #category : #accessing }

@@ -15,6 +15,7 @@ CRMondrianAsNode >> createShapeFor: obj [
 	mondrian.
 	result := mondrian createCanvas canvasAsNode.
 	result model: mondrian.
+	toolTipContent ifNotNil: [result toolTipContent: (self evaluate: toolTipContent on: obj)].
 	^ result
 ]
 

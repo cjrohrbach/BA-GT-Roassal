@@ -34,6 +34,7 @@ CRBoxBuilder >> createShapeFor: obj [
 		width ifNotNil: [result width: (self evaluate: width on: obj)].
 		height ifNotNil: [result height: (self evaluate: height on: obj)].
 		background ifNotNil: [result color: (self evaluate: background on: obj)].
+		toolTipContent ifNotNil: [result toolTipContent: (self evaluate: toolTipContent on: obj)].
 		
 		(borderWidth notNil and: [borderColor notNil])
 			ifTrue: [result border: (BlBorder paint:(self evaluate: borderColor on: obj) width: (self evaluate: borderWidth on: obj))]

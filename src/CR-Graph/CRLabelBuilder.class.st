@@ -26,3 +26,8 @@ CRLabelBuilder >> initialize [
 	super initialize.
 	^self
 ]
+
+{ #category : #accessing }
+CRLabelBuilder >> toolTip: someValue [
+	^self shouldNotImplement
+]
