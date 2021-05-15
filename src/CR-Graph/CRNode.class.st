@@ -64,6 +64,7 @@ CRNode >> initialize [
 	self addToolTip.
 	self makeDraggable.
 	self openModelOnClick.
+	self openNodeOnShiftClick.
 	self graph beNode.
 	
 	^self
@@ -94,6 +95,21 @@ CRNode >> model: anObject [
 { #category : #accessing }
 CRNode >> openModelOnClick [
 	self addEventHandlerOn: BlClickEvent do:[:e | e target phlow spawnObject: model].
+]
+
+{ #category : #accessing }
+CRNode >> openNodeOnClick [
+	self addEventHandlerOn: BlClickEvent do: [ :e |
+		(e modifiers isShift) ifTrue: [ e target phlow spanwObject: self]
+	]
+]
+
+{ #category : #accessing }
+CRNode >> openNodeOnShiftClick [
+	self addEventHandlerOn: BlClickEvent do: [ :e |
+		e consumed: true.
+		(e modifiers isShift) ifTrue: [ e target phlow spawnObject: self]
+	]
 ]
 
 { #category : #accessing }

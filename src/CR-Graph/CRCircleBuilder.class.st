@@ -30,7 +30,6 @@ CRCircleBuilder >> createShapeFor: obj [
 	| result |
 	result := CRCircle new 
 			model: obj.
-		result highlightOnClick.
 		size ifNotNil: [result size: ((self evaluate: size on: obj) asPoint)].
 		background ifNotNil: [result color: (self evaluate: background on: obj)].
 		toolTipContent ifNotNil: [result toolTipContent: (self evaluate: toolTipContent on: obj)].
