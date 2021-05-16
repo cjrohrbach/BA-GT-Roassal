@@ -69,5 +69,9 @@ CRLabel >> model: anObject [
 
 { #category : #accessing }
 CRLabel >> openModelOnClick [
-	self addEventHandlerOn: BlClickEvent do:[:e | e target phlow spawnObject: model].
+	self addEventHandlerOn: BlClickEvent do: [ :e |
+		e consumed: true.
+		(e modifiers isShift) ifTrue: [ e target phlow spawnObject: self]
+		ifFalse: [e target phlow spawnObject: model].
+	]
 ]
