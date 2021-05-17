@@ -79,12 +79,6 @@ CRCanvas >> canvasForView [
 ]
 
 { #category : #accessing }
-CRCanvas >> enableDebugView [
-	self border: (BlBorder paint: Color red width: 2 ).
-	self children do: [:c | c border: (BlBorder paint: Color red width: 2 )].
-]
-
-{ #category : #accessing }
 CRCanvas >> initialize [
 	super initializeForCanvas.
 	nodes := CRGroup new.
@@ -93,7 +87,13 @@ CRCanvas >> initialize [
 			addProperty: (BlElementLayoutHorizontalResizerProperty new fitContent);
 			addProperty: (BlElementLayoutVerticalResizerProperty new fitContent).
 	self clipChildren: false.
-	self toggleDebugView.
+	
+	self aptitude:
+			(BrGlamorousWithContextMenuAptitude
+				content: [ BrGlamorousSimpleContextMenuContent new
+						items: {('Toggle Debug View' -> [ self toggleDebugView ])};
+						yourself ]).
+	
 	^self
 ]
 
@@ -156,18 +156,9 @@ CRCanvas >> setNodeGroup: aCRGroup [
 
 { #category : #accessing }
 CRCanvas >> toggleDebugView [
-	self addShortcut: ( 
-	BlShortcutWithAction new
-		combination: (BlSingleKeyCombination arrowDown);
-		action: [ 
-			self enableDebugView]).
-]
-
-{ #category : #accessing }
-CRCanvas >> toggleDebugView: aElement [
-	aElement addShortcut: ( 
-	BlShortcutWithAction new
-		combination: (BlSingleKeyCombination arrowDown);
-		action: [ 
-			aElement enableDebugView]).
+	super toggleDebugView.
+	nodes do: [:node |
+		node toggleDebugView.
+	].
+	
 ]

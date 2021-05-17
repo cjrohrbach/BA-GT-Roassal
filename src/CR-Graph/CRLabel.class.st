@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'originalBorder',
 		'group',
-		'model'
+		'model',
+		'isDebugViewActive'
 	],
 	#category : #'CR-Graph-CR-Graph'
 }
@@ -74,4 +75,18 @@ CRLabel >> openModelOnClick [
 		(e modifiers isShift) ifTrue: [ e target phlow spawnObject: self]
 		ifFalse: [e target phlow spawnObject: model].
 	]
+]
+
+{ #category : #accessing }
+CRLabel >> toggleDebugView [
+	isDebugViewActive
+		ifTrue: [
+			self border: originalBorder.
+			isDebugViewActive := false.
+			]
+		ifFalse: [
+			originalBorder := self border.
+			self border: (BlBorder paint: Color red width: 2).
+			isDebugViewActive := true.
+		].
 ]

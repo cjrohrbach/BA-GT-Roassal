@@ -9,7 +9,8 @@ Class {
 		'model',
 		'originalBorder',
 		'group',
-		'toolTipContent'
+		'toolTipContent',
+		'isDebugViewActive'
 	],
 	#category : #'CR-Graph-CR-Graph'
 }
@@ -60,6 +61,7 @@ CRNode >> highlightOnClick [
 { #category : #accessing }
 CRNode >> initialize [
 	super initialize.
+	isDebugViewActive := false.
 	
 	self addToolTip.
 	self makeDraggable.
@@ -73,6 +75,7 @@ CRNode >> initialize [
 { #category : #accessing }
 CRNode >> initializeForCanvas [
 	super initialize.
+	isDebugViewActive := false.
 	^self
 ]
 
@@ -109,6 +112,21 @@ CRNode >> openNodeOnShiftClick [
 { #category : #accessing }
 CRNode >> removeHighlight [
 	self border: originalBorder
+]
+
+{ #category : #accessing }
+CRNode >> toggleDebugView [
+	isDebugViewActive
+		ifTrue: [
+			self border: originalBorder.
+			isDebugViewActive := false.
+			]
+		ifFalse: [
+			originalBorder := self border.
+			self border: (BlBorder paint: Color red width: 2).
+			isDebugViewActive := true.
+		].
+	
 ]
 
 { #category : #accessing }
