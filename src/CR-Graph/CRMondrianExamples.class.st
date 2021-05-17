@@ -71,6 +71,30 @@ CRMondrianExamples >> mondrianAsNode [
 ]
 
 { #category : #accessing }
+CRMondrianExamples >> mondrianAsNodeWithEdges [
+	<gtExample>
+	| m |
+	m := CRMondrian new.
+	m nodes 
+		mondrianNodes
+			toolTip: #value;
+			stencil: 
+			[ :p | | q |
+				q := CRMondrian new .
+				q nodes 
+					box
+					with: (1 to: 9).
+				q edge connectFromAll: [:x | x//2].
+				q layout tree.
+				q
+			];
+			with: ( 1 to: 9 ).
+	m edge connectFromAll: [:x | x//2].
+	m layout tree.
+	^m
+]
+
+{ #category : #accessing }
 CRMondrianExamples >> nodesWithDifferentScopes [
 	<gtExample>
 	| c |

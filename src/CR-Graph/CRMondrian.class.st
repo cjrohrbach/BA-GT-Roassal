@@ -5,7 +5,8 @@ Class {
 		'edgeBuilderCollection',
 		'shapeBuilderCollection',
 		'layoutBuilder',
-		'canvasForView'
+		'canvasForView',
+		'canvasCache'
 	],
 	#category : #'CR-Graph-CR-Graph'
 }
@@ -39,41 +40,86 @@ CRMondrian >> buildEdges: nodes [
 
 { #category : #accessing }
 CRMondrian >> buildNodes [
-	| nodes |
+	| nodes allNodes result |
 	
 	nodes := CRGroup new.
-	shapeBuilderCollection do: [ :shapeBuilder | 
-		nodes addAll: (shapeBuilder createNodes).
+	allNodes := CRGroup new.
+	shapeBuilderCollection do: [ :shapeBuilder | | shapeNodes |
+		
+		shapeNodes := shapeBuilder createNodes.
+	
+		nodes addAll: shapeNodes.
+		allNodes addAll: shapeNodes.
+		
+		(shapeBuilder class = CRMondrianAsNode) ifTrue: [
+			
+			shapeNodes do: [ :sn | | subNodes |
+			
+				subNodes := sn nodes.
+				"subNodes do: [:n | 
+					n ignoredByLayout: true
+				]."
+		
+				allNodes addAll: subNodes.
+			]
+		]
 	].
 	
-	^nodes
+	result := OrderedCollection new.
+	result add: nodes.
+	result add: allNodes.
+	
+	^result
+]
+
+{ #category : #accessing }
+CRMondrian >> collectNodesOfMondrianNodes: nodes [
+	| allNodes |
+	allNodes := CRGroup new.
+	nodes do: [ :node |
+		| sn |
+		sn := node model getNodes.
+		sn do: [:n | n ignoredByLayout: true].
+		allNodes addAll: sn.
+	].
+	
+	^allNodes
+	
 ]
 
 { #category : #accessing }
 CRMondrian >> createCanvas [
 	| nodes edges canvas layout|
 	nodes := self buildNodes.
-	edges := self buildEdges: nodes.
+	edges := self buildEdges: (nodes at: 2).
 	
-	canvas := CRCanvas newFrom: nodes edges: edges.
+	canvas := CRCanvas newFrom: (nodes at: 1) edges: edges mondrian: self.
 	canvas paint. 
 	layoutBuilder on: canvas.
+	canvasCache := canvas.
 	^ canvas
 ]
 
 { #category : #accessing }
 CRMondrian >> edge [
 	canvasForView := nil.
+	canvasCache := nil.
 	^ CREdgeBuilder newWithMondrian: self
+]
+
+{ #category : #accessing }
+CRMondrian >> getNodes [
+	canvasCache ifNil: [
+		self createCanvas
+	].
+	
+	^canvasCache nodes 
 ]
 
 { #category : #accessing }
 CRMondrian >> gtCanvasViewOn: aView [
 	<gtView>
-	| canvas |
-	(canvasForView isNil) ifTrue: [ 
-		canvasForView := self createCanvas canvasForView 
-	].
+	canvasForView := self createCanvas canvasForView.
 	^ aView explicit 
 		title: 'Canvas';
 		priority: 5;
@@ -112,11 +158,13 @@ CRMondrian >> initialize [
 { #category : #accessing }
 CRMondrian >> layout [
 	canvasForView := nil.
+	canvasCache := nil.
 	^layoutBuilder
 ]
 
 { #category : #accessing }
 CRMondrian >> nodes [
 	canvasForView := nil.
+	canvasCache := nil.
 	^ CRShapeBuilderBuilder newWithMondrian: self
 ]

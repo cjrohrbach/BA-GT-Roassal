@@ -3,7 +3,8 @@ Class {
 	#superclass : #CRNode,
 	#instVars : [
 		'nodes',
-		'edges'
+		'edges',
+		'mondrian'
 	],
 	#category : #'CR-Graph-CR-Graph'
 }
@@ -14,6 +15,16 @@ CRCanvas class >> newFrom: someNodes edges: someEdges [
 	c := CRCanvas new .
 	c setNodeGroup: someNodes.
 	c setEdgeGroup: someEdges.
+	^c
+]
+
+{ #category : #accessing }
+CRCanvas class >> newFrom: someNodes edges: someEdges mondrian: aMondrian [
+	| c |
+	c := CRCanvas new .
+	c setNodeGroup: someNodes.
+	c setEdgeGroup: someEdges.
+	c mondrian: aMondrian.
 	^c
 ]
 
@@ -50,7 +61,7 @@ CRCanvas >> canvasAsNode [
 	^c"
 	self addToolTip.
 	self makeDraggable.
-	self openModelOnClick.
+	self openMondrianOnClick.
 	self graph beNode.
 	self border: (BlBorder paint: Color black width: 2).
 	^self
@@ -68,6 +79,12 @@ CRCanvas >> canvasForView [
 ]
 
 { #category : #accessing }
+CRCanvas >> enableDebugView [
+	self border: (BlBorder paint: Color red width: 2 ).
+	self children do: [:c | c border: (BlBorder paint: Color red width: 2 )].
+]
+
+{ #category : #accessing }
 CRCanvas >> initialize [
 	super initializeForCanvas.
 	nodes := CRGroup new.
@@ -76,6 +93,7 @@ CRCanvas >> initialize [
 			addProperty: (BlElementLayoutHorizontalResizerProperty new fitContent);
 			addProperty: (BlElementLayoutVerticalResizerProperty new fitContent).
 	self clipChildren: false.
+	self toggleDebugView.
 	^self
 ]
 
@@ -89,6 +107,11 @@ CRCanvas >> jumpToInitialZoomOnSpace: aElement [
 ]
 
 { #category : #accessing }
+CRCanvas >> mondrian: aMondrian [
+	mondrian := aMondrian.
+]
+
+{ #category : #accessing }
 CRCanvas >> nodeCount [
 	^nodes size
 ]
@@ -96,6 +119,15 @@ CRCanvas >> nodeCount [
 { #category : #accessing }
 CRCanvas >> nodes [
 	^nodes
+]
+
+{ #category : #accessing }
+CRCanvas >> openMondrianOnClick [
+	self addEventHandlerOn: BlClickEvent do: [ :e |
+		e consumed: true.
+		(e modifiers isShift) ifTrue: [ e target phlow spawnObject: self]
+		ifFalse: [e target phlow spawnObject: mondrian].
+	]
 ]
 
 { #category : #accessing }
@@ -120,4 +152,22 @@ CRCanvas >> setEdgeGroup: aCRGroup [
 { #category : #accessing }
 CRCanvas >> setNodeGroup: aCRGroup [
 	nodes := aCRGroup.
+]
+
+{ #category : #accessing }
+CRCanvas >> toggleDebugView [
+	self addShortcut: ( 
+	BlShortcutWithAction new
+		combination: (BlSingleKeyCombination arrowDown);
+		action: [ 
+			self enableDebugView]).
+]
+
+{ #category : #accessing }
+CRCanvas >> toggleDebugView: aElement [
+	aElement addShortcut: ( 
+	BlShortcutWithAction new
+		combination: (BlSingleKeyCombination arrowDown);
+		action: [ 
+			aElement enableDebugView]).
 ]
