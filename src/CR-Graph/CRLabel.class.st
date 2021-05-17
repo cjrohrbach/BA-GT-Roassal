@@ -1,40 +1,10 @@
 Class {
 	#name : #CRLabel,
 	#superclass : #BlTextElement,
-	#instVars : [
-		'originalBorder',
-		'group',
-		'model',
-		'isDebugViewActive'
-	],
+	#traits : 'TCRNode',
+	#classTraits : 'TCRNode classTrait',
 	#category : #'CR-Graph-CR-Graph'
 }
-
-{ #category : #accessing }
-CRLabel >> color: aColor [
-	self background: aColor
-]
-
-{ #category : #accessing }
-CRLabel >> group [
-	^group
-]
-
-{ #category : #accessing }
-CRLabel >> group: aCRGroup [
-	group := aCRGroup
-]
-
-{ #category : #accessing }
-CRLabel >> highlight [
-	originalBorder := self border.
-	self border: (BlBorder paint: (Color green alpha: 0.5) width: 5).
-]
-
-{ #category : #accessing }
-CRLabel >> highlightOnClick [
-	self addEventFilterOn: BlClickEvent do: [group highlightElement: self].
-]
 
 { #category : #accessing }
 CRLabel >> initialize [
@@ -42,7 +12,7 @@ CRLabel >> initialize [
 	
 	self graph beNode.
 	self makeDraggable.
-	self openModelOnClick.
+	self openNodeOnShiftClick.
 	
 	self background: Color white.
 	self margin: (BlInsets all: 20).
@@ -53,40 +23,8 @@ CRLabel >> initialize [
 ]
 
 { #category : #accessing }
-CRLabel >> makeDraggable [
-	self addEventHandler: BlPullHandler new allowOutOfBounds.
-]
-
-{ #category : #accessing }
-CRLabel >> model [
-	^ model
-]
-
-{ #category : #accessing }
 CRLabel >> model: anObject [
 	model := anObject.
+	toolTipContent := model.
 	self text: model asRopedText glamorousRegularFont.
-]
-
-{ #category : #accessing }
-CRLabel >> openModelOnClick [
-	self addEventHandlerOn: BlClickEvent do: [ :e |
-		e consumed: true.
-		(e modifiers isShift) ifTrue: [ e target phlow spawnObject: self]
-		ifFalse: [e target phlow spawnObject: model].
-	]
-]
-
-{ #category : #accessing }
-CRLabel >> toggleDebugView [
-	isDebugViewActive
-		ifTrue: [
-			self border: originalBorder.
-			isDebugViewActive := false.
-			]
-		ifFalse: [
-			originalBorder := self border.
-			self border: (BlBorder paint: Color red width: 2).
-			isDebugViewActive := true.
-		].
 ]

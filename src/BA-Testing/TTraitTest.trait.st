@@ -1,7 +1,15 @@
 Trait {
 	#name : #TTraitTest,
+	#instVars : [
+		'abc'
+	],
 	#category : #'BA-Testing-TraitTesting'
 }
+
+{ #category : #accessing }
+TTraitTest >> abc: something [
+	abc := something
+]
 
 { #category : #accessing }
 TTraitTest >> changeColor [
