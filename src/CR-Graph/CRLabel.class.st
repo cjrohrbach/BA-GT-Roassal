@@ -6,7 +6,7 @@ Class {
 	#category : #'CR-Graph-CR-Graph'
 }
 
-{ #category : #accessing }
+{ #category : #initialization }
 CRLabel >> initialize [
 	super initialize.
 	
