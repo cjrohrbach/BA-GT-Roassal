@@ -14,12 +14,14 @@ Class {
 CRNode >> initialize [
 	super initialize.
 	isDebugViewActive := false.
+	isHighlighted := false.
 	
 	self addToolTip.
 	self makeDraggable.
-	"self openModelOnClick."
+	self highlightOnClick.
 	self openNodeOnShiftClick.
 	self graph beNode.
+	
 	
 	^self
 ]
@@ -28,5 +30,6 @@ CRNode >> initialize [
 CRNode >> initializeForCanvas [
 	super initialize.
 	isDebugViewActive := false.
+	isHighlighted := false.
 	^self
 ]

@@ -48,5 +48,6 @@ c addChild: instance.
 c addChild: implementor.
 c addChild: accessor.
 c addChild: attribute.
-c layout: (BlGridLayout new)
+c layout: (BlGridLayout new).
+^c
 ]

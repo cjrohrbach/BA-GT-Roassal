@@ -123,6 +123,12 @@ CRBoxBuilder >> normalizeWidth: anArgBlockOrSymbol from: fromValue to: toValue [
 ]
 
 { #category : #accessing }
+CRBoxBuilder >> size: aValueOrAOneArgBlock [
+	width := aValueOrAOneArgBlock x.
+	height := aValueOrAOneArgBlock y.
+]
+
+{ #category : #accessing }
 CRBoxBuilder >> width: aValueOrAOneArgBlock [
 	width := aValueOrAOneArgBlock.
 ]

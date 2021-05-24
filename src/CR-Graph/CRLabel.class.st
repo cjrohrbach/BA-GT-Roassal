@@ -1,3 +1,10 @@
+"
+I represent a Node with Label Shape used in ${class:CRMondrian}$.
+
+I extend ${class:BlTextElement}$ and implement ${class:TCRNode}$.
+
+
+"
 Class {
 	#name : #CRLabel,
 	#superclass : #BlTextElement,
@@ -13,6 +20,10 @@ CRLabel >> initialize [
 	self graph beNode.
 	self makeDraggable.
 	self openNodeOnShiftClick.
+	self highlightOnClick.
+	
+	isDebugViewActive := false.
+	isHighlighted := false.
 	
 	self background: Color white.
 	self margin: (BlInsets all: 20).

@@ -10,7 +10,9 @@ Trait {
 		'isDebugViewActive',
 		'group',
 		'originalBorder',
-		'model'
+		'model',
+		'isHighlighted',
+		'borderBeforeHighlight'
 	],
 	#category : #'CR-Graph-CR-Graph'
 }
@@ -49,8 +51,15 @@ TCRNode >> group: aCRGroup [
 
 { #category : #accessing }
 TCRNode >> highlight [
-	originalBorder := self border.
+	isDebugViewActive ifTrue: [
+		borderBeforeHighlight := originalBorder.
+	]
+	ifFalse: [
+		borderBeforeHighlight := self border.
+	].
+
 	self border: (BlBorder paint: (Color green alpha: 0.5) width: 5).
+	isHighlighted := true.
 ]
 
 { #category : #accessing }
@@ -85,7 +94,8 @@ TCRNode >> openNodeOnShiftClick [
 
 { #category : #accessing }
 TCRNode >> removeHighlight [
-	self border: originalBorder
+	self border: borderBeforeHighlight.
+	isHighlighted := false.
 ]
 
 { #category : #accessing }
@@ -96,7 +106,11 @@ TCRNode >> toggleDebugView [
 			isDebugViewActive := false.
 			]
 		ifFalse: [
-			originalBorder := self border.
+		
+			isHighlighted ifTrue: [
+				originalBorder := borderBeforeHighlight.
+			]
+			ifFalse: [ originalBorder := self border ].
 			self border: (BlBorder paint: Color red width: 2).
 			isDebugViewActive := true.
 		].

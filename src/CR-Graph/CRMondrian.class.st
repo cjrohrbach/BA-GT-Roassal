@@ -6,19 +6,37 @@ Class {
 		'shapeBuilderCollection',
 		'layoutBuilder',
 		'canvasForView',
-		'canvasCache'
+		'canvasCache',
+		'actionBuilderCollection'
 	],
 	#category : #'CR-Graph-CR-Graph'
 }
 
 { #category : #accessing }
-CRMondrian >> addEdgeBuilder: edgeBuilder [
-	edgeBuilderCollection add: edgeBuilder.
+CRMondrian >> action [
+	| actionBuilder |
+	canvasForView := nil.
+	canvasCache := nil.
+	actionBuilder := CRActionBuilder new.
+	actionBuilder mondrian: self.
+	^actionBuilder
 ]
 
 { #category : #accessing }
-CRMondrian >> addEdgeFactory: edgeFactory [
-	
+CRMondrian >> addActionBuilder: aCRActionBuilder [
+	actionBuilderCollection add: aCRActionBuilder
+]
+
+{ #category : #accessing }
+CRMondrian >> addActions: someNodes [
+	actionBuilderCollection do: [:ab |
+		ab addActionToNodes: someNodes
+	]
+]
+
+{ #category : #accessing }
+CRMondrian >> addEdgeBuilder: edgeBuilder [
+	edgeBuilderCollection add: edgeBuilder.
 ]
 
 { #category : #accessing }
@@ -42,7 +60,7 @@ CRMondrian >> buildEdges: nodes [
 CRMondrian >> buildNodes [
 	| nodes allNodes result |
 	
-	nodes := CRGroup new.
+	nodes := CRBindingGroup new.
 	allNodes := CRGroup new.
 	shapeBuilderCollection do: [ :shapeBuilder | | shapeNodes |
 		
@@ -92,6 +110,8 @@ CRMondrian >> createCanvas [
 	| nodes edges canvas layout|
 	nodes := self buildNodes.
 	edges := self buildEdges: (nodes at: 2).
+	
+	self addActions: (nodes at: 2).
 	
 	canvas := CRCanvas newFrom: (nodes at: 1) edges: edges mondrian: self.
 	canvas paint. 
@@ -150,7 +170,8 @@ CRMondrian >> initialize [
 	super initialize.
 	shapeBuilderCollection := OrderedCollection new.
 	edgeBuilderCollection := OrderedCollection new.
-	
+	actionBuilderCollection := OrderedCollection new.
+		
 	layoutBuilder := CRLayoutBuilder new.
 	^self
 ]

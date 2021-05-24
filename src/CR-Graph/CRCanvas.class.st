@@ -81,6 +81,7 @@ CRCanvas >> canvasForView [
 { #category : #accessing }
 CRCanvas >> initialize [
 	super initializeForCanvas.
+	self removeHighlightOnClick.
 	nodes := CRGroup new.
 	edges := CRGroup new.
 	self properties 
@@ -135,6 +136,13 @@ CRCanvas >> paint [
 	self assert: [nodes notNil] description: 'You need to set the nodeGroup first'.
 	self addChildren: nodes.
 	self addChildren: edges.
+]
+
+{ #category : #accessing }
+CRCanvas >> removeHighlightOnClick [
+	self addEventHandlerOn: BlClickEvent do: [:e |
+		(e target = self) ifTrue: [nodes removeHighlights]
+	]
 ]
 
 { #category : #accessing }
