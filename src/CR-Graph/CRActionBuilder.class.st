@@ -34,3 +34,11 @@ CRActionBuilder >> primeSieve [
 	^action
 	
 ]
+
+{ #category : #accessing }
+CRActionBuilder >> randomBackground [
+	| action |
+	action := CRRandomBackgroundAction new.
+	mondrian addActionBuilder: action.
+	^action
+]

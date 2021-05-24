@@ -142,6 +142,28 @@ CRMondrianExamples >> normalizerAndForceLayout [
 ]
 
 { #category : #accessing }
+CRMondrianExamples >> primeSieveAction [
+	<gtExample>
+	| m |
+	
+	m := CRMondrian new.
+	m nodes circle with: (1 to: 100).
+	m action primeSieve.
+	^m
+]
+
+{ #category : #accessing }
+CRMondrianExamples >> randomBackgroundAction [
+	<gtExample>
+	| m |
+	
+	m := CRMondrian new.
+	m nodes box with: (1 to: 9).
+	m action randomBackground.
+	^m
+]
+
+{ #category : #accessing }
 CRMondrianExamples >> smallAndBigCircles [
 	<gtExample>
 	| c |
