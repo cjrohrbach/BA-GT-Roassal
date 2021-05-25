@@ -1,3 +1,6 @@
+"
+I implement a prime sieve. When I'm added to a mondrian all nodes will receive a Eventhandler that works as a prime sive.
+"
 Class {
 	#name : #CRPrimeSieveAction,
 	#superclass : #CRAction,

@@ -8,6 +8,18 @@ Class {
 }
 
 { #category : #accessing }
+CRMondrianExamples >> customAction [
+	<gtExample>
+	| m |
+	m := CRMondrian new.
+	m nodes box with: (1 to: 9).
+	m action 
+		custom
+		on: BlClickEvent do: [:x | x target background: Color random].
+	^m
+]
+
+{ #category : #accessing }
 CRMondrianExamples >> edgesToHalf [
 	<gtExample>
 	| m |
@@ -108,6 +120,7 @@ CRMondrianExamples >> nodesWithDifferentScopes [
 		label
 		background: (Color white);
 		with: (1 to: 10). 
+	
 	^c
 ]
 
@@ -147,7 +160,7 @@ CRMondrianExamples >> primeSieveAction [
 	| m |
 	
 	m := CRMondrian new.
-	m nodes circle with: (1 to: 100).
+	m nodes circle borderWidth: 0.4; with: (1 to: 100).
 	m action primeSieve.
 	^m
 ]

@@ -21,6 +21,7 @@ CRNode >> initialize [
 	self highlightOnClick.
 	self openNodeOnShiftClick.
 	self graph beNode.
+	self zIndex: 10.
 	
 	
 	^self

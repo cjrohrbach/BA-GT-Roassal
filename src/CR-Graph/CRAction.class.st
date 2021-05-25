@@ -1,3 +1,6 @@
+"
+I am a action. I can be used to apply the same EventHandler to all the nodes of a CRMondrian.
+"
 Class {
 	#name : #CRAction,
 	#superclass : #Object,
@@ -10,6 +13,7 @@ Class {
 
 { #category : #accessing }
 CRAction >> addActionToNodes: someNodes [
+"adds an Eventhandler matching the action to all supplied nodes"
 	someNodes do: [:node | 
 		node addEventHandler: (self getEventHandler).
 	]
@@ -17,6 +21,7 @@ CRAction >> addActionToNodes: someNodes [
 
 { #category : #accessing }
 CRAction >> getEventHandler [
+"return a BlEventHandler that matches the action, which can be added to BlElements"
 	^ BlEventHandler on: event do: block
 ]
 
