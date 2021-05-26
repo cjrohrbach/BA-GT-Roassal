@@ -34,8 +34,8 @@ CRCanvas >> addScrollToZoom: aElement [
 	| eh |
 	eh := BlEventHandler new 
 	action: [ :e |
-		(e isScrollDown) ifTrue: [aElement zoomOut].
-		(e isScrollUp) ifTrue: [aElement zoomIn].
+		(e isScrollDown) ifTrue: [aElement zoomLevel: ((aElement zoomLevel) - (aElement zoomLevel * aElement zoomStep))].
+		(e isScrollUp) ifTrue: [aElement zoomLevel: ((aElement zoomLevel) + (aElement zoomLevel * aElement zoomStep))].
 		];
 	eventClass: (BlMouseWheelEvent).
 	
