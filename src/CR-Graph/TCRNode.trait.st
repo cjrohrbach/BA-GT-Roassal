@@ -40,6 +40,11 @@ TCRNode >> color: aColor [
 ]
 
 { #category : #accessing }
+TCRNode >> getNodes [
+	^ {self}
+]
+
+{ #category : #accessing }
 TCRNode >> group [
 	^group
 ]

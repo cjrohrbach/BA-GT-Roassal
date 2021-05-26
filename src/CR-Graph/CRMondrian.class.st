@@ -7,7 +7,10 @@ Class {
 		'layoutBuilder',
 		'canvasForView',
 		'canvasCache',
-		'actionBuilderCollection'
+		'actionBuilderCollection',
+		'canvasType',
+		'modelForCanvas',
+		'nodeCache'
 	],
 	#category : #'CR-Graph-CR-Graph'
 }
@@ -67,27 +70,60 @@ CRMondrian >> buildNodes [
 		shapeNodes := shapeBuilder createNodes.
 	
 		nodes addAll: shapeNodes.
-		allNodes addAll: shapeNodes.
 		
-		(shapeBuilder class = CRMondrianAsNode) ifTrue: [
+		shapeNodes do: [ :sn | 
+			
+			allNodes addAll: (sn getNodes).
+		
+		].
+		
+		"(shapeBuilder class = CRMondrianAsNode) ifTrue: [
 			
 			shapeNodes do: [ :sn | | subNodes |
 			
 				subNodes := sn nodes.
-				"subNodes do: [:n | 
-					n ignoredByLayout: true
-				]."
 		
 				allNodes addAll: subNodes.
 			]
-		]
+		]"
 	].
 	
 	result := OrderedCollection new.
 	result add: nodes.
 	result add: allNodes.
 	
+	nodeCache := result.
+	
 	^result
+]
+
+{ #category : #accessing }
+CRMondrian >> classBlueprintCanvas [
+	canvasType := CRClassBlueprintCanvas
+]
+
+{ #category : #accessing }
+CRMondrian >> classModelFor: aClass [
+	canvasType := CRClassBlueprintCanvas.
+	modelForCanvas := aClass.
+	self nodes 
+		mondrianNodes
+		toolTip: #name;
+		stencil: 
+		[ :p | | m |
+			m := CRMondrian new .
+			m nodes 
+				box
+				toolTip: #name; 
+				with: (p methods ).
+			m];
+			with: {CRMondrian}.
+		
+]
+
+{ #category : #accessing }
+CRMondrian >> classicCanvas [
+	canvasType := CRCanvas
 ]
 
 { #category : #accessing }
@@ -113,8 +149,13 @@ CRMondrian >> createCanvas [
 	
 	self addActions: (nodes at: 2).
 	
-	canvas := CRCanvas newFrom: (nodes at: 1) edges: edges mondrian: self.
+	canvas := canvasType newFrom: (nodes at: 1) edges: edges mondrian: self.
+	
+	modelForCanvas ifNotNil: [canvas model: modelForCanvas].
+	
 	canvas paint. 
+	
+	
 	layoutBuilder on: canvas.
 	canvasCache := canvas.
 	^ canvas
@@ -173,6 +214,8 @@ CRMondrian >> initialize [
 	actionBuilderCollection := OrderedCollection new.
 		
 	layoutBuilder := CRLayoutBuilder new.
+	
+	self classicCanvas.
 	^self
 ]
 
@@ -181,6 +224,12 @@ CRMondrian >> layout [
 	canvasForView := nil.
 	canvasCache := nil.
 	^layoutBuilder
+]
+
+{ #category : #accessing }
+CRMondrian >> model: aObject [
+	modelForCanvas := aObject.
+	
 ]
 
 { #category : #accessing }

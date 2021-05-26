@@ -10,18 +10,9 @@ Class {
 }
 
 { #category : #accessing }
-CRCanvas class >> newFrom: someNodes edges: someEdges [
-	| c |
-	c := CRCanvas new .
-	c setNodeGroup: someNodes.
-	c setEdgeGroup: someEdges.
-	^c
-]
-
-{ #category : #accessing }
 CRCanvas class >> newFrom: someNodes edges: someEdges mondrian: aMondrian [
 	| c |
-	c := CRCanvas new .
+	c := self new .
 	c setNodeGroup: someNodes.
 	c setEdgeGroup: someEdges.
 	c mondrian: aMondrian.
@@ -76,6 +67,11 @@ CRCanvas >> canvasForView [
 	self addScrollToZoom: c.
 	self jumpToInitialZoomOnSpace: c.
 	^ c asPannableElement
+]
+
+{ #category : #accessing }
+CRCanvas >> getNodes [
+	^nodes collectAll: [:n | n getNodes]
 ]
 
 { #category : #accessing }

@@ -32,6 +32,14 @@ CRShapeBuilderBuilder >> circle [
 ]
 
 { #category : #accessing }
+CRShapeBuilderBuilder >> classBlueprint [
+	| builder |
+	builder := CRClassBlueprintBuilder new.
+	mondrian addShapeBuilder: builder.
+	^builder
+]
+
+{ #category : #accessing }
 CRShapeBuilderBuilder >> initialize [
 	super initialize.
 	^self
