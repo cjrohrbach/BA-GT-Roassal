@@ -7,6 +7,11 @@ Trait {
 }
 
 { #category : #accessing }
+TTraitTest >> abc [
+	^abc
+]
+
+{ #category : #accessing }
 TTraitTest >> abc: something [
 	abc := something
 ]

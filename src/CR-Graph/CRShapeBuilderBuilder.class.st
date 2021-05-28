@@ -73,3 +73,9 @@ CRShapeBuilderBuilder >> point [
 	mondrian addShapeBuilder: builder.
 	^builder
 ]
+
+{ #category : #accessing }
+CRShapeBuilderBuilder >> with: someCollection [ 
+	"If the collection is provided without choosing the shape, the default shape is box"
+	self box with: someCollection.
+]

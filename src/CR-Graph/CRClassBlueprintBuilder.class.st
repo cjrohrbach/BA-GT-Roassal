@@ -6,26 +6,29 @@ Class {
 
 { #category : #accessing }
 CRClassBlueprintBuilder >> createShapeFor: obj [
-	| mondrian methods instance initialization implementor accessor attribute coll shape |
+	| mondrian methods interface initialization implementor accessor attribute coll shape |
 	methods := obj methods.
 	
-	initialization := OrderedCollection new.
-	instance := OrderedCollection new.
-	implementor := OrderedCollection new.
-	accessor := OrderedCollection new.
-	attribute := obj slots.
+	initialization := CRGroup new name: 'initialization'.
+	interface := CRGroup new name: 'interface'.
+	implementor := CRGroup new name: 'implementor'.
+	accessor := CRGroup new name: 'accessor'.
+	attribute := CRGroup new name: 'attribute'.
+	
+	attribute addAll: obj slots.
 
 	coll := OrderedCollection new.
 	coll add: initialization.
-	coll add: instance.
+	coll add: interface.
 	coll add: implementor.
 	coll add: accessor.
 	coll add: attribute.
 	
 	methods do: [ :method |
-		"something ..."
-		accessor add: method.
-		instance add: method.
+		
+		(method isAccessor or: method isSetter) ifTrue: [accessor add: method].
+		
+		interface add: method.
 		implementor add: method.
 		initialization add: method.
 	].
@@ -33,12 +36,15 @@ CRClassBlueprintBuilder >> createShapeFor: obj [
 	shape := CRClassBlueprintCanvas new.
 	shape model: obj.
 	
-	coll do: [:c | | m |
+	coll do: [:c | | m canv |
 		m := CRMondrian new.
 		m nodes box
 			toolTip: #name;
 			with: c.
-		shape addContainer: (m createCanvas canvasAsNode).
+		
+		canv := m createCanvas canvasAsNode toolTipContent: c name.
+			
+		shape addContainer: (canv).
 	].
 	
 	^shape

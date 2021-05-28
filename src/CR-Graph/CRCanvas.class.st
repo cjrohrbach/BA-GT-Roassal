@@ -45,11 +45,6 @@ CRCanvas >> addScrollToZoom: aElement [
 { #category : #accessing }
 CRCanvas >> canvasAsNode [
 	| c |
-	"c := CRNode new.
-	c size: 100@100.
-	c clipChildren: false.
-	c addChild: self.
-	^c"
 	self addToolTip.
 	self makeDraggable.
 	self openMondrianOnClick.

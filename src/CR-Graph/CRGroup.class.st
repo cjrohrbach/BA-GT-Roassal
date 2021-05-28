@@ -7,13 +7,19 @@ Class {
 	#superclass : #OrderedCollection,
 	#instVars : [
 		'highlightedNode',
-		'identifier'
+		'identifier',
+		'name'
 	],
 	#category : #'CR-Graph-CR-Graph'
 }
 
 { #category : #accessing }
 CRGroup >> highlightElement: aNode [ 
+"
+	Highlight a specific element of mine. 
+	But first the current highlights get removed.
+
+"
 	highlightedNode ifNotNil: [ highlightedNode removeHighlight].
 	highlightedNode := aNode.
 	aNode highlight.
@@ -23,6 +29,18 @@ CRGroup >> highlightElement: aNode [
 CRGroup >> initialize [
 	super initialize.
 	^ self
+]
+
+{ #category : #accessing }
+CRGroup >> name [
+"returns my name"
+	^name
+]
+
+{ #category : #accessing }
+CRGroup >> name: aName [
+"Give me a name"
+	name := aName.
 ]
 
 { #category : #accessing }

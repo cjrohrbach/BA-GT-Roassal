@@ -15,9 +15,32 @@ CompiledMethod >> isAccessor [
 	
 	
 	var := ret children first.
-	var class == RBVariableNode ifFalse: [ ^ false ].
+	var class == RBInstanceVariableNode ifFalse: [ ^ false ].
 	
 	^ self selector = var name
+]
+
+{ #category : #'*CR-Graph' }
+CompiledMethod >> isPrivateIn: someClasses [
+	"Return true if I am public, i.e., at least one method that is not in my class may call me
+	
+	(CompiledMethod >> #isPublic) isPublic
+	"
+	^ (self isPublicIn: someClasses) not
+]
+
+{ #category : #'*CR-Graph' }
+CompiledMethod >> isPublicIn: someClasses [
+	"Return true if I am public, i.e., at least one method that is not in my class may call me
+	
+	(CompiledMethod >> #isPublic) isPublic
+	"
+	
+	| someCompiledMethods |
+	someCompiledMethods := someClasses flatCollect: [ :cls | cls methods ].
+	someCompiledMethods do: [ :cm | 
+		(((cm messages includes: self selector) and: [ cm methodClass ~~ self methodClass ]) and: [ cm selector ~= #DoIt ]) ifTrue: [ ^ true ] ].
+	^ false
 ]
 
 { #category : #'*CR-Graph' }
@@ -32,11 +55,6 @@ CompiledMethod >> isSetter [
 	
 	ass := seq children first.
 	ass children size = 2 ifFalse: [ ^ false ].
-	ass children second class == RBVariableNode ifFalse: [ ^ false ].
+	ass children second class == RBInstanceVariableNode ifFalse: [ ^ false ].
 	^ self methodClass instVarNames includes: ass children second name
-]
-
-{ #category : #'*CR-Graph' }
-CompiledMethod >> test12434 [
-	^'test'
 ]
