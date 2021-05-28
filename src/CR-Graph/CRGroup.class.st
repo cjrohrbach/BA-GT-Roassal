@@ -58,6 +58,12 @@ CRGroup >> nodesFromModelArray: aArray [
 ]
 
 { #category : #accessing }
+CRGroup >> removeAllHighlights [
+	highlightedNode := nil.
+	self do: [:n | n removeHighlight]
+]
+
+{ #category : #accessing }
 CRGroup >> removeHighlights [
 	highlightedNode ifNotNil: [ highlightedNode removeHighlight].
 	highlightedNode := nil.

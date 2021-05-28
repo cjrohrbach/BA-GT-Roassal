@@ -135,6 +135,12 @@ CRCanvas >> paint [
 ]
 
 { #category : #accessing }
+CRCanvas >> removeHighlight [
+	super removeHighlight.
+	nodes removeHighlights
+]
+
+{ #category : #accessing }
 CRCanvas >> removeHighlightOnClick [
 	self addEventHandlerOn: BlClickEvent do: [:e |
 		(e target = self) ifTrue: [nodes removeHighlights]

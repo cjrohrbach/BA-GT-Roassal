@@ -206,7 +206,7 @@ CRMondrian >> gtCanvasViewOn: aView [
 				action: [ canvasForView zoomOut ] ]
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
 CRMondrian >> initialize [
 	super initialize.
 	shapeBuilderCollection := OrderedCollection new.

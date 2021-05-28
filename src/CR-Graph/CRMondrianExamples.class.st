@@ -8,6 +8,21 @@ Class {
 }
 
 { #category : #accessing }
+CRMondrianExamples >> classBlueprint [
+	<gtExample>
+	| coll view |
+	
+	coll := OrderedCollection new.
+	coll add: CRMondrian.
+	coll add: CRActionBuilder.
+	coll add: CRNode.
+
+	view := CRMondrian new.
+	view nodes classBlueprint with: (coll).
+	^view
+]
+
+{ #category : #accessing }
 CRMondrianExamples >> customAction [
 	<gtExample>
 	| m |

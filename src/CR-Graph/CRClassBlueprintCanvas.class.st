@@ -49,7 +49,7 @@ CRClassBlueprintCanvas >> getNodes [
 CRClassBlueprintCanvas >> initialize [
 	super initialize.
 	
-	nodes := OrderedCollection new.
+	nodes := CRGroup new.
 	
 	self properties 
 			addProperty: (BlElementLayoutHorizontalResizerProperty new fitContent);
@@ -57,7 +57,7 @@ CRClassBlueprintCanvas >> initialize [
 	self clipChildren: false.
 
 	self border: (BlBorder paint: Color darkGray width: 1).
-	self background: Color white.
+	"self background: Color white."
 	self layout: (BlGridLayout new columnCount:5; cellSpacing: 20).
 	
 	^self
@@ -68,4 +68,10 @@ CRClassBlueprintCanvas >> model: anObject [
 	model := anObject.
 	toolTipContent := model.
 	self createLabel.
+]
+
+{ #category : #accessing }
+CRClassBlueprintCanvas >> removeHighlight [
+	super removeHighlight.
+	nodes removeAllHighlights
 ]
