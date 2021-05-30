@@ -21,6 +21,13 @@ CompiledMethod >> isAccessor [
 ]
 
 { #category : #'*CR-Graph' }
+CompiledMethod >> isInitialization [
+	(self protocol includesSubstring:'initialize' ) ifTrue: [^true].
+	(self name includesSubstring: 'init') ifTrue: [^true].
+	^false
+]
+
+{ #category : #'*CR-Graph' }
 CompiledMethod >> isPrivateIn: someClasses [
 	"Return true if I am public, i.e., at least one method that is not in my class may call me
 	

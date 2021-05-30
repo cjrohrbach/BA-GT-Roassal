@@ -26,11 +26,16 @@ CRClassBlueprintBuilder >> createShapeFor: obj [
 	
 	methods do: [ :method |
 		
-		(method isAccessor or: method isSetter) ifTrue: [accessor add: method].
-		
-		interface add: method.
-		implementor add: method.
-		initialization add: method.
+		(method isAccessor or: method isSetter) ifTrue: [accessor add: method]
+		ifFalse: [
+			(method isInitialization) ifTrue: [initialization add: method]
+				ifFalse: [
+					(method isPrivateIn: modelCollection) ifTrue: [implementor add: method]
+						ifFalse: [
+							interface add: method.
+						].
+				].
+		].
 	].
 	
 	shape := CRClassBlueprintCanvas new.
