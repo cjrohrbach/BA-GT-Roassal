@@ -19,9 +19,11 @@ Trait {
 
 { #category : #accessing }
 TCRNode >> addToolTip [
+	"I add a tooltip to the node. 
+	The tooltip label text is the toolTipContent that can be defined. 
+	The ToolTip gets shown when the mouse hovers over the node.
+	"
 	| label labelText |
-	
-
 	label := [BrLabel new aptitude: 
 		BrGlamorousLabelAptitude new  
 			glamorousRegularFontAndSize;
@@ -36,26 +38,34 @@ TCRNode >> addToolTip [
 
 { #category : #accessing }
 TCRNode >> color: aColor [
+	"Setter method for the background of the Node"
 	self background: aColor.
 ]
 
 { #category : #accessing }
 TCRNode >> getNodes [
+	"
+	I return myself in a collection.
+	This method is overritten when the node contains other nodes, in this case it has to return all subnodes as a collection.
+	"
 	^ {self}
 ]
 
 { #category : #accessing }
 TCRNode >> group [
+	"Return the ${class:CRBindingGroup}$ I was last added to"
 	^group
 ]
 
 { #category : #accessing }
 TCRNode >> group: aCRGroup [
+	"Setter for the group. group is used to keep track of the CRBindingGroup I belong to."
 	group := aCRGroup
 ]
 
 { #category : #accessing }
 TCRNode >> highlight [
+	"I change my border color to highlight myself, i.e. when I'm clicked on and my model opens"
 	isDebugViewActive ifTrue: [
 		borderBeforeHighlight := originalBorder.
 	]
@@ -69,11 +79,15 @@ TCRNode >> highlight [
 
 { #category : #accessing }
 TCRNode >> highlightOnClick [
+	"Add eventHandler to highlight myself when clicked on. 
+	This is done trough the group because other highlighted nodes first have to have their highlight removed.
+	"
 	self addEventFilterOn: BlClickEvent do: [group highlightElement: self].
 ]
 
 { #category : #accessing }
 TCRNode >> makeDraggable [
+	"Add a eventHandler that makes me draggable"
 	self addEventHandler: BlPullHandler new allowOutOfBounds.
 ]
 
@@ -90,6 +104,9 @@ TCRNode >> model: anObject [
 
 { #category : #accessing }
 TCRNode >> openNodeOnShiftClick [
+	"Add a EventHandler that opens my model when I am clicked on. 
+	If the shift key is pressed during the click open myself in a inspector instead of the model.
+	"
 	self addEventHandlerOn: BlClickEvent do: [ :e |
 		e consumed: true.
 		(e modifiers isShift) ifTrue: [ e target phlow spawnObject: self]
@@ -99,6 +116,7 @@ TCRNode >> openNodeOnShiftClick [
 
 { #category : #accessing }
 TCRNode >> removeHighlight [
+	"Reset my border to the original one to remove my highlight"
 	self border: borderBeforeHighlight.
 	isHighlighted := false.
 ]
@@ -123,5 +141,6 @@ TCRNode >> toggleDebugView [
 
 { #category : #accessing }
 TCRNode >> toolTipContent: someText [
+	"Add the content for the toolTip. This can be a attribute, or just text "
 	toolTipContent := someText.
 ]

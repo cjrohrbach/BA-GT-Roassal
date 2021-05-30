@@ -13,6 +13,7 @@ Class {
 
 { #category : #accessing }
 CRPrimeSieveAction >> blo [
+"I create the block used for a prime sieve action"
 | b |
 b := [:e | | node multiples sorted |
 
@@ -54,19 +55,5 @@ CRPrimeSieveAction >> initialize [
 	event := BlClickEvent.
 	block :=  self blo.
 	
-	"[:e | | node multiples |
-		e consumed: true.
-		node := e target.
-		(node background paint color = nonPrimeColor) ifTrue: [
-			""the node was already categroised as non prime""
-			
-		]
-		ifFalse: [
-			node background: primeColor.
-			multiples := node group select: [:x | (x model \\ node model) = 0 ].
-			multiples allButFirst do: [:m | m background: nonPrimeColor].
-		]
-		
-	]."
 	^self
 ]

@@ -8,6 +8,7 @@ Class {
 CRClassBlueprintBuilder >> createShapeFor: obj [
 	| mondrian methods interface initialization implementor accessor attribute coll shape |
 	methods := obj methods.
+	methods addAll: obj class methods.
 	
 	initialization := CRGroup new name: 'initialization'.
 	interface := CRGroup new name: 'interface'.

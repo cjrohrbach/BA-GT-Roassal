@@ -22,7 +22,9 @@ CompiledMethod >> isAccessor [
 
 { #category : #'*CR-Graph' }
 CompiledMethod >> isInitialization [
-	(self protocol includesSubstring:'initialize' ) ifTrue: [^true].
+	"Return ture if I am a method used for initialization, meaning my protocol or name includes the substring init.
+	"
+	(self protocol includesSubstring:'init' ) ifTrue: [^true].
 	(self name includesSubstring: 'init') ifTrue: [^true].
 	^false
 ]

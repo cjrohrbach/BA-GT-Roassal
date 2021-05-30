@@ -19,7 +19,7 @@ CRActionBuilder >> custom [
 	^action
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
 CRActionBuilder >> initialize [
 	super initialize.
 	^self
@@ -30,8 +30,9 @@ CRActionBuilder >> mondrian: aMondrian [
 	mondrian := aMondrian
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
 CRActionBuilder >> newWithMondrian: aMondrian [
+" initialize myself with the provided mondrian "
 	| instance | 
 	instance := CRActionBuilder new .
 	instance mondrian: aMondrian.

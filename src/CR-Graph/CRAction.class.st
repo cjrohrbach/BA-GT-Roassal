@@ -33,6 +33,7 @@ CRAction >> initialize [
 
 { #category : #accessing }
 CRAction >> on: eventClass do: someBlock [
+	"I add the eventClass as well as the do block for the eventHandler"
 	event := eventClass.
 	block := someBlock.
 ]
