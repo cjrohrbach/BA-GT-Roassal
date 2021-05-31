@@ -53,7 +53,7 @@ TCRNode >> getNodes [
 
 { #category : #accessing }
 TCRNode >> group [
-	"Return the ${class:CRBindingGroup}$ I was last added to"
+	"Return the CRBindingGroup I was last added to"
 	^group
 ]
 
@@ -123,6 +123,12 @@ TCRNode >> removeHighlight [
 
 { #category : #accessing }
 TCRNode >> toggleDebugView [
+	"I enable or disable the debug view.
+	
+	The debug view is just a visible red border.
+	
+	This method has to be overritten for nodes that contian other nodes.
+	"
 	isDebugViewActive
 		ifTrue: [
 			self border: originalBorder.

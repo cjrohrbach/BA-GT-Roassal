@@ -75,3 +75,11 @@ CRClassBlueprintCanvas >> removeHighlight [
 	super removeHighlight.
 	nodes removeAllHighlights
 ]
+
+{ #category : #accessing }
+CRClassBlueprintCanvas >> toggleDebugView [
+	super toggleDebugView.
+	nodes do: [:node |
+		node toggleDebugView.
+	].
+]

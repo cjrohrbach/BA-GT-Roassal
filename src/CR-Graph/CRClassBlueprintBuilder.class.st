@@ -60,6 +60,7 @@ CRClassBlueprintBuilder >> createShapeFor: obj [
 
 { #category : #accessing }
 CRClassBlueprintBuilder >> test [
+"I hold an example of the layout with a label and 5 conatainers. I should be moved or removed later on"
 <gtExample>
 | c init instance implementor accessor attribute label |
 

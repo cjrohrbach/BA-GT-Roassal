@@ -7,8 +7,9 @@ Class {
 	#category : #'CR-Graph-CR-Graph'
 }
 
-{ #category : #accessing }
+{ #category : #initialization }
 CRShapeBuilderBuilder class >> newWithMondrian: aMondrian [
+"I am a constructor for CRShapeBuilderBuilder. I take a Mondrian instance that gets added to the new CRShapeBuilderBuilder"
 	| instance | 
 	instance := CRShapeBuilderBuilder new .
 	instance mondrian: aMondrian.
@@ -17,6 +18,7 @@ CRShapeBuilderBuilder class >> newWithMondrian: aMondrian [
 
 { #category : #accessing }
 CRShapeBuilderBuilder >> box [
+"I return a CRBoxBuilder to create mondrians with box nodes. I also add this builder to the mondrian instance."
 	| builder |
 	builder := CRBoxBuilder new.
 	mondrian addShapeBuilder: builder.
@@ -25,6 +27,7 @@ CRShapeBuilderBuilder >> box [
 
 { #category : #accessing }
 CRShapeBuilderBuilder >> circle [
+"I return a CRCricleBuilder to create mondrians with circle nodes. I also add this builder to the mondrian instance."
 	| builder |
 	builder := CRCircleBuilder new.
 	mondrian addShapeBuilder: builder.
@@ -33,13 +36,14 @@ CRShapeBuilderBuilder >> circle [
 
 { #category : #accessing }
 CRShapeBuilderBuilder >> classBlueprint [
+"I return a CRClassBlueprintBuilder to create mondrians with classBlueprint nodes. I also add this builder to the mondrian instance."
 	| builder |
 	builder := CRClassBlueprintBuilder new.
 	mondrian addShapeBuilder: builder.
 	^builder
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
 CRShapeBuilderBuilder >> initialize [
 	super initialize.
 	^self
@@ -47,6 +51,7 @@ CRShapeBuilderBuilder >> initialize [
 
 { #category : #accessing }
 CRShapeBuilderBuilder >> label [
+"I return a CRLabelBuilder to create mondrians with label nodes. I also add this builder to the mondrian instance."
 	| builder |
 	builder := CRLabelBuilder new.
 	mondrian addShapeBuilder: builder.
@@ -60,6 +65,7 @@ CRShapeBuilderBuilder >> mondrian: aMondrian [
 
 { #category : #accessing }
 CRShapeBuilderBuilder >> mondrianNodes [
+"I return a CRMondrianAsNode to create mondrians with a mondrian as node. I also add this builder to the mondrian instance."
 	| builder |
 	builder := CRMondrianAsNode new.
 	mondrian addShapeBuilder: builder.
@@ -68,6 +74,7 @@ CRShapeBuilderBuilder >> mondrianNodes [
 
 { #category : #accessing }
 CRShapeBuilderBuilder >> point [
+"I return a CRPointBuilder to create mondrians with point nodes. I also add this builder to the mondrian instance."	
 	| builder |
 	builder := CRPointBuilder new.
 	mondrian addShapeBuilder: builder.

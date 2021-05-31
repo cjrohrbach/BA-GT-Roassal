@@ -49,7 +49,7 @@ CRBoxBuilder >> height: aValueOrAOneArgBlock [
 	height := aValueOrAOneArgBlock.
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
 CRBoxBuilder >> initialize [
 	super initialize.
 	^self

@@ -14,7 +14,7 @@ Class {
 		'isBuilt',
 		'allNodes'
 	],
-	#category : #'CR-Graph'
+	#category : #'BA-Testing-toDeleteLater'
 }
 
 { #category : #accessing }

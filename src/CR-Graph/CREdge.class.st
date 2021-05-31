@@ -14,32 +14,38 @@ Class {
 
 { #category : #accessing }
 CREdge >> color: aColor [
+"Setter method for the color the edge should have"
 	color := aColor
 ]
 
 { #category : #accessing }
 CREdge >> connect: someNodes [
+
 	^self subclassResponsibility
 ]
 
 { #category : #accessing }
 CREdge >> connectionBlock: aBlockOrASymbol [
+"Setter method for the connectionBlock"
 	connectionBlock := aBlockOrASymbol
 ]
 
 { #category : #accessing }
 CREdge >> createEdgeFrom: fromNode to: toNode [
+"I delegate the creation of the edge. Therefore I use methods creating the graph constraints as well as the visible edge"
 	self createGraphEdgeAndAddConstraintsFrom: fromNode to: toNode.
 	^(self createVisibleEdgeFrom: fromNode to: toNode)
 ]
 
 { #category : #accessing }
 CREdge >> createEdges: someNodes [
+"I delegate the creation of the edges between the given set of nodes."
 	^self connect: someNodes.
 ]
 
 { #category : #accessing }
 CREdge >> createGraphEdgeAndAddConstraintsFrom: fromNode to: toNode [
+"I create the graph constraints between the two nodes. This is necessary for the layouts to work."
 	| edge |
 	edge := GtGraphEdge new from: fromNode to: toNode.
 	fromNode constraints graph addConnectedEdge: edge.
@@ -48,6 +54,8 @@ CREdge >> createGraphEdgeAndAddConstraintsFrom: fromNode to: toNode [
 
 { #category : #accessing }
 CREdge >> createVisibleEdgeFrom: fromNode to: toNode [
+"I create the actual line between the two nodes. Therefore I use the edge shape and the provided specifications."
+
 	| line |
 	line := edgeShape new.
 	
@@ -62,6 +70,7 @@ CREdge >> createVisibleEdgeFrom: fromNode to: toNode [
 
 { #category : #accessing }
 CREdge >> edgeShape: aEdgeShape [
+"Setter method for the shape of the edge."
 	edgeShape := aEdgeShape
 ]
 
@@ -79,10 +88,11 @@ CREdge >> evaluate: aBlock on: aCRNode nodes: nodes [
 
 { #category : #accessing }
 CREdge >> fromAnchorPosition: aAnchor [
+"Setter method for the fromAnchorPosition"
 	fromAnchorPosition := aAnchor
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
 CREdge >> initialize [
 	super initialize.
 	toAnchorPosition := BlElementCenterAnchor.
@@ -92,10 +102,12 @@ CREdge >> initialize [
 
 { #category : #accessing }
 CREdge >> toAnchorPosition: aAnchor [
+"Setter method for the toAnchorPosition"
 	toAnchorPosition := aAnchor
 ]
 
 { #category : #accessing }
 CREdge >> width: aValue [
+"Setter method for the width of the edges"
 	width := aValue.
 ]

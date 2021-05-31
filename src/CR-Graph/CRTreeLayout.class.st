@@ -4,7 +4,7 @@ Class {
 	#category : #'CR-Graph-Layout'
 }
 
-{ #category : #accessing }
+{ #category : #initialization }
 CRTreeLayout >> initialize [
 	super initialize.
 	self verticalGap: 50.

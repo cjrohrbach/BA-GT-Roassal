@@ -4,7 +4,7 @@ Class {
 	#category : #'CR-Graph-Layout'
 }
 
-{ #category : #accessing }
+{ #category : #initialization }
 CRGridLayout >> initialize [
 	super initialize .
 	self cellSpacing: 10.
@@ -14,6 +14,7 @@ CRGridLayout >> initialize [
 
 { #category : #accessing }
 CRGridLayout >> on: aCanvas [
+"I apply the layout to the given Canvas. But first I calculate the neccessary columns to have a nice layout and create a BlOnceLayout from myself to allow draggable nodes"
 	self columnCount: ((aCanvas nodeCount sqrt) floor) .
 	aCanvas layout: (BlOnceLayout new layout: self).
 ]

@@ -25,7 +25,7 @@ CRAction >> getEventHandler [
 	^ BlEventHandler on: event do: block
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
 CRAction >> initialize [
 	super initialize.
 	^self

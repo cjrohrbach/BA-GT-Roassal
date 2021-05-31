@@ -45,7 +45,7 @@ b := [:e | | node multiples sorted |
 ^b
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
 CRPrimeSieveAction >> initialize [
 	super initialize.
 	

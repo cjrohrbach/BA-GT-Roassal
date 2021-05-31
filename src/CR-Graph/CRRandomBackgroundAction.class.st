@@ -8,7 +8,7 @@ Class {
 	#category : #'CR-Graph-CR-Graph'
 }
 
-{ #category : #accessing }
+{ #category : #initialization }
 CRRandomBackgroundAction >> initialize [
 	super initialize.
 	event := BlClickEvent.

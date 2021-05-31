@@ -13,6 +13,12 @@ Class {
 	#category : #'CR-Graph-CR-Graph'
 }
 
+{ #category : #accessing }
+CRLabel >> group [
+	"Return the CRBindingGroup I was last added to"
+	^group
+]
+
 { #category : #initialization }
 CRLabel >> initialize [
 	super initialize.
@@ -35,6 +41,7 @@ CRLabel >> initialize [
 
 { #category : #accessing }
 CRLabel >> model: anObject [
+"I am a setter method for the model. I add the model as toolTipContent and as text that I display"
 	model := anObject.
 	toolTipContent := model.
 	self text: model asRopedText glamorousRegularFont.

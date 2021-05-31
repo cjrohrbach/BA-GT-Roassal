@@ -25,7 +25,7 @@ CRGroup >> highlightElement: aNode [
 	aNode highlight.
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
 CRGroup >> initialize [
 	super initialize.
 	^ self
@@ -52,7 +52,7 @@ CRGroup >> nodeFromModel: aObject [
 
 { #category : #accessing }
 CRGroup >> nodesFromModel: aObject [
-" returns all shapes matching the objects as new CRGroup "
+" returns all nodes matching the objects as new CRGroup "
 	| group |
 	group := CRGroup new.
 	
@@ -65,6 +65,7 @@ CRGroup >> nodesFromModel: aObject [
 
 { #category : #accessing }
 CRGroup >> nodesFromModelArray: aArray [
+"I return all nodes with a model that matches the a model in the given array"
 	| group |
 	group := CRGroup new.
 	
@@ -77,12 +78,14 @@ CRGroup >> nodesFromModelArray: aArray [
 
 { #category : #accessing }
 CRGroup >> removeAllHighlights [
+"I remove all highlights from all my nodes."
 	highlightedNode := nil.
 	self do: [:n | n removeHighlight]
 ]
 
 { #category : #accessing }
 CRGroup >> removeHighlights [
+"I remove the highlight from the node that was last highlighted"
 	highlightedNode ifNotNil: [ highlightedNode removeHighlight].
 	highlightedNode := nil.
 ]

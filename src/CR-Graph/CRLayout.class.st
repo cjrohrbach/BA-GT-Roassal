@@ -4,7 +4,7 @@ Class {
 	#category : #'CR-Graph-Layout'
 }
 
-{ #category : #accessing }
+{ #category : #initialization }
 CRLayout >> initialize [
 	super initialize.
 	^ self
