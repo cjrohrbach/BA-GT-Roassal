@@ -100,6 +100,29 @@ CRMondrianExamples >> methodsAndClassesWithoutCommentHighlighted [
 { #category : #accessing }
 CRMondrianExamples >> methodsWithoutCommentHighlighted [
 	<gtExample>
+	| q |
+	q := CRMondrian new.
+	q nodes 
+		mondrianNodes
+		toolTip: #name;
+		stencil: 
+		[ :p | | m |
+			m := CRMondrian new .
+			m nodes 
+				box
+				toolTip: #name; 
+				background: [:x | (x comment = nil and: ((x name includesSubstring: 'initialize' ) not)) ifTrue: [Color red] ifFalse: [Color gray] ];
+				with: (p methods ).
+			m];
+		with: (( (RPackageOrganizer default packageNamed: 'CR-Graph') classes)).
+		
+
+	^q
+]
+
+{ #category : #accessing }
+CRMondrianExamples >> methodsWithoutCommentHighlighted [
+	<gtExample>
 	| q package|
 	package :=(((RPackageOrganizer default packageNamed: 'CR-Graph') classes)).
 	package remove: CompiledMethod.
@@ -121,29 +144,6 @@ CRMondrianExamples >> methodsWithoutCommentHighlighted [
 			m];
 		with: package.
 	q edge connectTo: [:x | (x isClass) ifTrue: [x superclass]].
-
-	^q
-]
-
-{ #category : #accessing }
-CRMondrianExamples >> methodsWithoutCommentHighlighted [
-	<gtExample>
-	| q |
-	q := CRMondrian new.
-	q nodes 
-		mondrianNodes
-		toolTip: #name;
-		stencil: 
-		[ :p | | m |
-			m := CRMondrian new .
-			m nodes 
-				box
-				toolTip: #name; 
-				background: [:x | (x comment = nil and: ((x name includesSubstring: 'initialize' ) not)) ifTrue: [Color red] ifFalse: [Color gray] ];
-				with: (p methods ).
-			m];
-		with: (( (RPackageOrganizer default packageNamed: 'CR-Graph') classes)).
-		
 
 	^q
 ]
