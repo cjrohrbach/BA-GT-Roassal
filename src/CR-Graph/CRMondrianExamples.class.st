@@ -16,10 +16,17 @@ CRMondrianExamples >> classBlueprint [
 	coll := OrderedCollection new.
 	coll addAll: CRNode subclasses.
 	coll add: CRNode. 
+	
+	"coll := {CRCanvas}."
 
 	view := CRMondrian new.
 	view nodes classBlueprint with: (coll).
 	view edge width: 5; forAll: [:x | x isClass]; connectFrom: [:x | x superclass].
+	view edge 
+		arrow;
+		color: Color blue;
+		forAll: [:x | x class = CompiledMethod]; 
+		connectFromAll: [:x | x callingMethodsIn: coll ].
 	view layout tree.
 	^view
 ]
@@ -44,7 +51,7 @@ CRMondrianExamples >> edgesToHalf [
 	m nodes
 		point
 		with: (1 to: 10).
-	(m edge connectTo: [:x | x/2]) width: 500.
+	m edge connectTo: [:x | x/2].
 	
 	
 	^m

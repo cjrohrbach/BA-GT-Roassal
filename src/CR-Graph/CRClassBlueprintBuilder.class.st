@@ -1,3 +1,6 @@
+"
+I am a ClassBlueprint builder and I'm used to build class blueprints for the given collection
+"
 Class {
 	#name : #CRClassBlueprintBuilder,
 	#superclass : #CRShapeBuilder,

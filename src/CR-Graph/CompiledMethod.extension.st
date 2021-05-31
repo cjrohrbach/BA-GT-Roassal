@@ -1,6 +1,20 @@
 Extension { #name : #CompiledMethod }
 
 { #category : #'*CR-Graph' }
+CompiledMethod >> callingMethodsIn: someClasses [
+" I collect and return all methods in the provided classes that call this method "
+
+	| callers someMethods |
+	
+	someMethods := someClasses flatCollect: [:cls | cls methods].
+	callers := someMethods collect: [ :cm |
+		(cm messages includes: self selector) ifTrue: [ cm ] 
+	] thenSelect: [:cm | cm  ~= nil].
+	^callers
+	
+]
+
+{ #category : #'*CR-Graph' }
 CompiledMethod >> isAccessor [
 	| ast seq ret var |
 	ast := self ast.

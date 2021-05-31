@@ -1,3 +1,6 @@
+"
+I can be used to normalize some values over a specific scope.
+"
 Class {
 	#name : #CRNormalizer,
 	#superclass : #Object,

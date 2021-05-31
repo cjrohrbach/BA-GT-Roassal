@@ -1,3 +1,6 @@
+"
+I extent the ${class:GtGraphForceBasedLayout}$ and I am used to apply an force layout to a CRMondrian
+"
 Class {
 	#name : #CRForceLayout,
 	#superclass : #GtGraphForceBasedLayout,

@@ -1,3 +1,6 @@
+"
+I represent a ShapeBuilder specific for building CRPoint nodes
+"
 Class {
 	#name : #CRPointBuilder,
 	#superclass : #CRShapeBuilder,

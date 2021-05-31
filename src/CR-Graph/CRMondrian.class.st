@@ -1,3 +1,6 @@
+"
+I am a Mondrian instance. I can be used to create different visualisations of data sets.
+"
 Class {
 	#name : #CRMondrian,
 	#superclass : #Object,

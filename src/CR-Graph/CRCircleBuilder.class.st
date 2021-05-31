@@ -1,3 +1,6 @@
+"
+I represent a ShapeBuilder specific for building CRCircle nodes
+"
 Class {
 	#name : #CRCircleBuilder,
 	#superclass : #CRShapeBuilder,

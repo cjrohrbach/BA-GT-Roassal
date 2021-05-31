@@ -1,3 +1,6 @@
+"
+I can be used to normalize colors over a scope
+"
 Class {
 	#name : #CRColorNormalizer,
 	#superclass : #CRNormalizer,

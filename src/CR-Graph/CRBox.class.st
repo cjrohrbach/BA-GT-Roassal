@@ -1,3 +1,7 @@
+"
+I represent a box. 
+I'm just a BlElement with BlRectangleGeometry.
+"
 Class {
 	#name : #CRBox,
 	#superclass : #CRNode,

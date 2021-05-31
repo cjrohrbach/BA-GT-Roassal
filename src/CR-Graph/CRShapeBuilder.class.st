@@ -1,3 +1,6 @@
+"
+I represent a ShapeBuilder, and I am used to create nodes for models.
+"
 Class {
 	#name : #CRShapeBuilder,
 	#superclass : #Object,

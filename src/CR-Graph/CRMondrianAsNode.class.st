@@ -1,3 +1,6 @@
+"
+I am a ShapeBuilder thats used to create mondrians as node
+"
 Class {
 	#name : #CRMondrianAsNode,
 	#superclass : #CRShapeBuilder,

@@ -1,3 +1,6 @@
+"
+I am used to choose and create the ShapeBuilder
+"
 Class {
 	#name : #CRShapeBuilderBuilder,
 	#superclass : #Object,

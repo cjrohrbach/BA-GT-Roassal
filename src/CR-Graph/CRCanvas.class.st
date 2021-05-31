@@ -1,3 +1,6 @@
+"
+I am the canvas. i hold all elements and I'm the element that is displayed.
+"
 Class {
 	#name : #CRCanvas,
 	#superclass : #CRNode,

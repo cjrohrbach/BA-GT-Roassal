@@ -1,3 +1,7 @@
+"
+I am a template to display classes with methods in categories. 
+My main purpose is to be used in class blueprints.
+"
 Class {
 	#name : #CRClassBlueprintCanvas,
 	#superclass : #CRNode,

@@ -1,3 +1,6 @@
+"
+I am a CRNode with BlCircle geometry
+"
 Class {
 	#name : #CRCircle,
 	#superclass : #CRNode,

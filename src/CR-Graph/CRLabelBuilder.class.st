@@ -1,3 +1,6 @@
+"
+I represent a ShapeBuilder specific for building CRLabel nodes
+"
 Class {
 	#name : #CRLabelBuilder,
 	#superclass : #CRShapeBuilder,
