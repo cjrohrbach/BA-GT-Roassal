@@ -100,7 +100,7 @@ CREdgeBuilder >> connectToAll: aBlockOrASymbol [
 ]
 
 { #category : #initialization }
-CREdgeBuilder >> initiailze [
+CREdgeBuilder >> initialize [
 	super initialize.
 	self line.
 	^self

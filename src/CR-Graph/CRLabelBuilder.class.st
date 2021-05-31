@@ -9,11 +9,13 @@ Class {
 
 { #category : #accessing }
 CRLabelBuilder >> background: aColorOrArgBlock [
+"I am a setter method for the background."
 	background := aColorOrArgBlock
 ]
 
 { #category : #accessing }
 CRLabelBuilder >> createShapeFor: obj [
+"I create a new label for the given object with the given color"
 	| result |
 	result := CRLabel new 
 			model: obj.
@@ -21,7 +23,7 @@ CRLabelBuilder >> createShapeFor: obj [
 		^ result
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
 CRLabelBuilder >> initialize [
 	super initialize.
 	^self
@@ -29,5 +31,6 @@ CRLabelBuilder >> initialize [
 
 { #category : #accessing }
 CRLabelBuilder >> toolTip: someValue [
+"A label shouldn't have a toolTip"
 	^self shouldNotImplement
 ]

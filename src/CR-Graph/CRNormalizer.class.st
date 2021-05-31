@@ -39,16 +39,23 @@ CRNormalizer >> evaluateScope [
 
 { #category : #accessing }
 CRNormalizer >> from: aValue [
+"
+	I am a setter method for the from value.
+	The from value is the smallest value that could be assigned to a node.	
+"
 	from := aValue
 ]
 
 { #category : #accessing }
 CRNormalizer >> from: fromValue to: toValue [
+"
+	I am a setter method for the from and the to value.
+"
 	from := fromValue.
 	to := toValue.
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
 CRNormalizer >> initialize [
 	super initialize.
 	^self
@@ -56,16 +63,28 @@ CRNormalizer >> initialize [
 
 { #category : #accessing }
 CRNormalizer >> key: anArgBlockOrSymbol [
+"
+	I am a setter method for the key. 
+	The key is the block or the attribute that should be used to determine the value for the node.
+"
 	key := anArgBlockOrSymbol.
 ]
 
 { #category : #accessing }
 CRNormalizer >> maximumValue: aValue [
+"
+	I am a setter method for the maximum value.
+	The maximumValue is the biggest value of the key in the scope.
+"
 	maxValue := aValue
 ]
 
 { #category : #accessing }
 CRNormalizer >> minimumValue: aValue [
+"
+	I am a setter method for the maximum value.
+	The maximumValue is the smallest value of the key in the scope.
+"
 	minValue := aValue
 ]
 
@@ -78,7 +97,7 @@ CRNormalizer >> nodes: someCRNodes [
 
 { #category : #accessing }
 CRNormalizer >> normalize [
-
+"Apply the normlaizer to the whole nodes provided"
 	nodes do: [:node | attributeBlock cull: node cull: (self valueFor: node)]
 	
 ]
@@ -92,17 +111,21 @@ CRNormalizer >> normalize: aBlock [
 ]
 
 { #category : #accessing }
-CRNormalizer >> normalizeHeight [
-	nodes do: [:node | node height: (self valueFor: node)].
-]
-
-{ #category : #accessing }
 CRNormalizer >> to: aValue [
+"
+	I am a setter method for the to value.
+	The to value is the biggest value that could be assigned to a node.	
+"
 	to := aValue
 ]
 
 { #category : #accessing }
 CRNormalizer >> valueFor: aNode [
+"
+	I return the value for the given node.
+	Therefore I calculate the ratio for the given
+	node and then blend the from and the to value.
+"
 	| nodeValue ratio value |
 	nodeValue := key cull: (aNode model).
 	

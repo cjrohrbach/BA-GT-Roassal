@@ -93,11 +93,13 @@ TCRNode >> makeDraggable [
 
 { #category : #accessing }
 TCRNode >> model [
+"I am getter method for the model"
 	^model
 ]
 
 { #category : #accessing }
 TCRNode >> model: anObject [
+"I am a setter method for the model. I add the model as toolTipContent"
 	model := anObject.
 	toolTipContent := model
 ]

@@ -9,6 +9,11 @@ Class {
 
 { #category : #accessing }
 CRMondrianAsNode >> createShapeFor: obj [
+"
+	I create the node for the given object.
+	Therfore I create a new mondrian with the given stencil
+	and return the canvas of this mondrian as node.
+"
 	| result mondrian |
 	
 	mondrian := mondrianStencil cull: obj.
@@ -19,7 +24,7 @@ CRMondrianAsNode >> createShapeFor: obj [
 	^ result
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
 CRMondrianAsNode >> initialize [
 	super initialize.
 	^self
@@ -27,6 +32,7 @@ CRMondrianAsNode >> initialize [
 
 { #category : #accessing }
 CRMondrianAsNode >> stencil: aBlockWithAMondrianStencil [
+"I am a setter method for the Stencil that should be used to create the mondrians"
 	mondrianStencil := aBlockWithAMondrianStencil.
 	^self
 ]

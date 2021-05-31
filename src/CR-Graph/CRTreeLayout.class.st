@@ -14,5 +14,6 @@ CRTreeLayout >> initialize [
 
 { #category : #accessing }
 CRTreeLayout >> on: aCanvas [
+"I apply the layout to the given canvas. Therfore the layout is wrapped in a BlOnceLayout to maintain draggable nodes"
 	aCanvas layout: (BlOnceLayout new layout: self).
 ]

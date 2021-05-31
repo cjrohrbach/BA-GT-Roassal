@@ -27,6 +27,7 @@ CRActionBuilder >> initialize [
 
 { #category : #accessing }
 CRActionBuilder >> mondrian: aMondrian [
+"I am a setter method for the mondrian"
 	mondrian := aMondrian
 ]
 

@@ -13,21 +13,36 @@ Class {
 
 { #category : #accessing }
 CRBoxBuilder >> background: aValueOrAOneArgBlock [
+"
+	I am a setter method for the background.
+	I can receive either a symbol, a block or a color.
+"
 	background := aValueOrAOneArgBlock.
 ]
 
 { #category : #accessing }
 CRBoxBuilder >> borderColor: aColorOrAOneArgBlock [
+"
+	I am a setter method for the borderColor.
+	I can receive either a symbol, a block or a color.
+"
 	borderColor := aColorOrAOneArgBlock
 ]
 
 { #category : #accessing }
 CRBoxBuilder >> borderWidth: aValueOrAOneArgBlock [
+"
+	I am a setter method for the borderWidth.
+	I can receive either a symbol, a block or a value.
+"
 	borderWidth := aValueOrAOneArgBlock
 ]
 
 { #category : #accessing }
 CRBoxBuilder >> createShapeFor: obj [
+"
+	I create a CRCicle with the given object as model according to the stored specification.
+"
 	| result |
 	result := CRBox new 
 			model: obj.
@@ -46,6 +61,10 @@ CRBoxBuilder >> createShapeFor: obj [
 
 { #category : #accessing }
 CRBoxBuilder >> height: aValueOrAOneArgBlock [
+"
+	I am a setter method for the height.
+	I can receive either a symbol, a block or a value.
+"
 	height := aValueOrAOneArgBlock.
 ]
 
@@ -57,6 +76,11 @@ CRBoxBuilder >> initialize [
 
 { #category : #accessing }
 CRBoxBuilder >> normalizeColor: anArgBlockOrSymbol [
+"
+	I create a color normalizer using the given 
+	block or symobl as key and some predefined colors
+	as from and to color.
+"
 	| norm |
 	norm := CRColorNormalizer new
 		key: anArgBlockOrSymbol;
@@ -71,6 +95,10 @@ CRBoxBuilder >> normalizeColor: anArgBlockOrSymbol [
 
 { #category : #accessing }
 CRBoxBuilder >> normalizeColor: anArgBlockOrSymbol from: fromValue to: toValue [
+"
+	I create a color normalizer using the given block or symbol as key
+	and the fromValue and toValue as from and to color.
+"
 	| norm |
 	norm := self normalizeColor: anArgBlockOrSymbol.
 	norm from: fromValue to: toValue.
@@ -79,6 +107,11 @@ CRBoxBuilder >> normalizeColor: anArgBlockOrSymbol from: fromValue to: toValue [
 
 { #category : #accessing }
 CRBoxBuilder >> normalizeHeight: anArgBlockOrSymbol [
+"
+	I create a height normalizer using the given 
+	block or symobl as key and some predefined heights
+	as from and to value.
+"
 	| norm |
 	
 	norm := CRNormalizer new
@@ -93,6 +126,10 @@ CRBoxBuilder >> normalizeHeight: anArgBlockOrSymbol [
 
 { #category : #accessing }
 CRBoxBuilder >> normalizeHeight: anArgBlockOrSymbol from: fromValue to: toValue [
+"
+	I create a height normalizer using the given block or symbol as key
+	and the fromValue and toValue as from and to value.
+"
 	| norm |
 	norm := self normalizeHeight: anArgBlockOrSymbol.
 	norm from: fromValue to: toValue.
@@ -101,6 +138,11 @@ CRBoxBuilder >> normalizeHeight: anArgBlockOrSymbol from: fromValue to: toValue 
 
 { #category : #accessing }
 CRBoxBuilder >> normalizeWidth: anArgBlockOrSymbol [
+"
+	I create a width normalizer using the given 
+	block or symobl as key and some predefined values
+	as from and to value.
+"
 	| norm |
 	
 	norm := CRNormalizer new
@@ -116,6 +158,10 @@ CRBoxBuilder >> normalizeWidth: anArgBlockOrSymbol [
 
 { #category : #accessing }
 CRBoxBuilder >> normalizeWidth: anArgBlockOrSymbol from: fromValue to: toValue [
+"
+	I create a width normalizer using the given block or symbol as key
+	and the fromValue and toValue as from and to.
+"
 	| norm |
 	norm := self normalizeWidth: anArgBlockOrSymbol.
 	norm from: fromValue to: toValue.
@@ -124,11 +170,19 @@ CRBoxBuilder >> normalizeWidth: anArgBlockOrSymbol from: fromValue to: toValue [
 
 { #category : #accessing }
 CRBoxBuilder >> size: aValueOrAOneArgBlock [
+"
+	I am a setter method for the size.
+	I can receive either a symbol, a block or a value.
+"
 	width := aValueOrAOneArgBlock x.
 	height := aValueOrAOneArgBlock y.
 ]
 
 { #category : #accessing }
 CRBoxBuilder >> width: aValueOrAOneArgBlock [
+"
+	I am a setter method for the width.
+	I can receive either a symbol, a block or a value.
+"
 	width := aValueOrAOneArgBlock.
 ]

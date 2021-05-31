@@ -40,6 +40,12 @@ CRLabel >> initialize [
 ]
 
 { #category : #accessing }
+CRLabel >> model [
+"I am a getter method for the model"
+	^model
+]
+
+{ #category : #accessing }
 CRLabel >> model: anObject [
 "I am a setter method for the model. I add the model as toolTipContent and as text that I display"
 	model := anObject.

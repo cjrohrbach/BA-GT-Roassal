@@ -60,6 +60,7 @@ CRShapeBuilderBuilder >> label [
 
 { #category : #accessing }
 CRShapeBuilderBuilder >> mondrian: aMondrian [
+"I am a setter method for the mondrian isntance"
 	mondrian := aMondrian
 ]
 

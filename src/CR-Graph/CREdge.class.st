@@ -20,7 +20,11 @@ CREdge >> color: aColor [
 
 { #category : #accessing }
 CREdge >> connect: someNodes [
-
+	"
+	I have to be implemented in the subclass according to the kind of
+	connection it should be (1:n; 1:1; n:1).
+	I create the edges between the nodes according to the specifications.
+	"
 	^self subclassResponsibility
 ]
 

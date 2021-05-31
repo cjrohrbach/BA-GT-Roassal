@@ -28,6 +28,11 @@ CRColorNormalizer >> initialize [
 
 { #category : #accessing }
 CRColorNormalizer >> valueFor: aNode [
+"
+	I return the color for the given node.
+	Therefore I calculate the ratio for the given
+	node and then blend the from and the to color.
+"
 	| nodeValue ratio color |
 	nodeValue := key cull: (aNode model).
 	

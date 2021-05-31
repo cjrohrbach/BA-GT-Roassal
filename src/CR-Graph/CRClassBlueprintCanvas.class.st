@@ -9,22 +9,15 @@ Class {
 
 { #category : #accessing }
 CRClassBlueprintCanvas >> addContainer: aCRCanvas [
+"I add the CRCanvas (containing the methods in its category) to the canvas and its nodes to my nodes "
 	aCRCanvas border: (BlBorder paint: Color black width: 0.5).
 	nodes addAll: aCRCanvas getNodes.
 	self addChild: aCRCanvas.
 ]
 
 { #category : #accessing }
-CRClassBlueprintCanvas >> createContainer [
-	| c |
-	c := BlElement new
-		size: 100@200;
-		border: (BlBorder paint: Color black width: 0.5).
-	^c
-]
-
-{ #category : #accessing }
 CRClassBlueprintCanvas >> createLabel [
+"I create the label on top. The label contains the class name"
 	| label |
 	label := BlTextElement new.
 	label background: Color white.
@@ -42,10 +35,11 @@ CRClassBlueprintCanvas >> createLabel [
 
 { #category : #accessing }
 CRClassBlueprintCanvas >> getNodes [
+"I am a getter Method for the nodes"
 	^nodes
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
 CRClassBlueprintCanvas >> initialize [
 	super initialize.
 	
@@ -65,6 +59,10 @@ CRClassBlueprintCanvas >> initialize [
 
 { #category : #accessing }
 CRClassBlueprintCanvas >> model: anObject [
+"
+	I am a setter method for the model.
+	I add the model as toolTipContent.
+"
 	model := anObject.
 	toolTipContent := model.
 	self createLabel.
@@ -72,12 +70,14 @@ CRClassBlueprintCanvas >> model: anObject [
 
 { #category : #accessing }
 CRClassBlueprintCanvas >> removeHighlight [
+"I remove all highlights from my nodes and mine"
 	super removeHighlight.
 	nodes removeAllHighlights
 ]
 
 { #category : #accessing }
 CRClassBlueprintCanvas >> toggleDebugView [
+"I enable or disable the debug view for myself and all my nodes"
 	super toggleDebugView.
 	nodes do: [:node |
 		node toggleDebugView.

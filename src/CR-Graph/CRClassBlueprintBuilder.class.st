@@ -6,10 +6,18 @@ Class {
 
 { #category : #accessing }
 CRClassBlueprintBuilder >> createShapeFor: obj [
+"
+	I create a classBluePrint shape for the given objec, which should be a class.
+	Therefore I frist sort the methods into categories and then create a mondrian
+	for each categories. These mondrians are then added to the ClassBlueprintCanvas
+	as Nodes.
+"
 	| mondrian methods interface initialization implementor accessor attribute coll shape |
 	methods := obj methods.
 	methods addAll: obj class methods.
 	
+	
+	"create the Groups for the categorization"
 	initialization := CRGroup new name: 'initialization'.
 	interface := CRGroup new name: 'interface'.
 	implementor := CRGroup new name: 'implementor'.
@@ -25,6 +33,7 @@ CRClassBlueprintBuilder >> createShapeFor: obj [
 	coll add: accessor.
 	coll add: attribute.
 	
+	"sort the mthods"
 	methods do: [ :method |
 		
 		(method isAccessor or: method isSetter) ifTrue: [accessor add: method]
@@ -42,6 +51,7 @@ CRClassBlueprintBuilder >> createShapeFor: obj [
 	shape := CRClassBlueprintCanvas new.
 	shape model: obj.
 	
+	"create the mondrian for each category"
 	coll do: [:c | | m canv |
 		m := CRMondrian new.
 		m nodes box

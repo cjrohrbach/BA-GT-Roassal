@@ -17,6 +17,10 @@ Class {
 
 { #category : #accessing }
 CRMondrian >> action [
+"
+	I return a new Action builder. 
+	The canvas cache gets deleted
+"
 	| actionBuilder |
 	canvasForView := nil.
 	canvasCache := nil.
@@ -27,11 +31,13 @@ CRMondrian >> action [
 
 { #category : #accessing }
 CRMondrian >> addActionBuilder: aCRActionBuilder [
+"I add the given CRActionBuilder to the actionBuilderCollection"
 	actionBuilderCollection add: aCRActionBuilder
 ]
 
 { #category : #accessing }
 CRMondrian >> addActions: someNodes [
+"Add all the actions to all nodes"
 	actionBuilderCollection do: [:ab |
 		ab addActionToNodes: someNodes
 	]
@@ -39,16 +45,19 @@ CRMondrian >> addActions: someNodes [
 
 { #category : #accessing }
 CRMondrian >> addEdgeBuilder: edgeBuilder [
+"I add the given CREdgeBuilder to the edgeBuilderCollection"
 	edgeBuilderCollection add: edgeBuilder.
 ]
 
 { #category : #accessing }
 CRMondrian >> addShapeBuilder: aShapeBuilder [
+"I add the given CRShapeBuilder to the shapeBuilderCollection"
 	shapeBuilderCollection add: aShapeBuilder
 ]
 
 { #category : #accessing }
 CRMondrian >> buildEdges: nodes [
+"I delegate the creation of all edges for all edgeBuilders"
 	| edges |
 	edges := CRGroup new.
 	
@@ -61,6 +70,12 @@ CRMondrian >> buildEdges: nodes [
 
 { #category : #accessing }
 CRMondrian >> buildNodes [
+"
+	I delegate the creation of all nodes for all shapeBuilders.
+	I return an OrderedCollection containing the nodes that belong directly to this mondrian
+	at position 1 and the all the nodes (including the ones within nodes) at position 2
+"
+
 	| nodes allNodes result |
 	
 	nodes := CRBindingGroup new.
@@ -76,16 +91,6 @@ CRMondrian >> buildNodes [
 			allNodes addAll: (sn getNodes).
 		
 		].
-		
-		"(shapeBuilder class = CRMondrianAsNode) ifTrue: [
-			
-			shapeNodes do: [ :sn | | subNodes |
-			
-				subNodes := sn nodes.
-		
-				allNodes addAll: subNodes.
-			]
-		]"
 	].
 	
 	result := OrderedCollection new.
@@ -98,51 +103,19 @@ CRMondrian >> buildNodes [
 ]
 
 { #category : #accessing }
-CRMondrian >> classBlueprintCanvas [
-	canvasType := CRClassBlueprintCanvas
-]
-
-{ #category : #accessing }
-CRMondrian >> classModelFor: aClass [
-	canvasType := CRClassBlueprintCanvas.
-	modelForCanvas := aClass.
-	self nodes 
-		mondrianNodes
-		toolTip: #name;
-		stencil: 
-		[ :p | | m |
-			m := CRMondrian new .
-			m nodes 
-				box
-				toolTip: #name; 
-				with: (p methods ).
-			m];
-			with: {CRMondrian}.
-		
-]
-
-{ #category : #accessing }
 CRMondrian >> classicCanvas [
+"I set the Canvas type to the normal CRCanvas"
 	canvasType := CRCanvas
 ]
 
 { #category : #accessing }
-CRMondrian >> collectNodesOfMondrianNodes: nodes [
-	| allNodes |
-	allNodes := CRGroup new.
-	nodes do: [ :node |
-		| sn |
-		sn := node model getNodes.
-		sn do: [:n | n ignoredByLayout: true].
-		allNodes addAll: sn.
-	].
-	
-	^allNodes
-	
-]
-
-{ #category : #accessing }
 CRMondrian >> createCanvas [
+"
+	I am responsible for creating the canvas.
+	Therefore I create the nodes, edges add the actions,
+	the layout and then return the created canvas and 
+	store it in the canvasCache.	
+"
 	| nodes edges canvas layout|
 	nodes := self buildNodes.
 	edges := self buildEdges: (nodes at: 2).
@@ -163,6 +136,10 @@ CRMondrian >> createCanvas [
 
 { #category : #accessing }
 CRMondrian >> edge [
+"
+	I return a new CREdgeBuilder.
+	Since this changes the canvas the cache is deleted.
+"
 	canvasForView := nil.
 	canvasCache := nil.
 	^ CREdgeBuilder newWithMondrian: self
@@ -170,6 +147,10 @@ CRMondrian >> edge [
 
 { #category : #accessing }
 CRMondrian >> getNodes [
+"
+	I return the nodes contained in this mondrian.
+	If the canvas and therefore the nodes aren't created yet, I'll create them.
+"
 	canvasCache ifNil: [
 		self createCanvas
 	].
@@ -179,6 +160,9 @@ CRMondrian >> getNodes [
 
 { #category : #accessing }
 CRMondrian >> gtCanvasViewOn: aView [
+"
+	I am responsible for the presentation of the canvas.
+"
 	<gtView>
 	canvasForView := self createCanvas canvasForView.
 	^ aView explicit 
@@ -221,6 +205,10 @@ CRMondrian >> initialize [
 
 { #category : #accessing }
 CRMondrian >> layout [
+"
+	I return a new CRLayoutBuilder.
+	Since this changes the canvas I delete the cache.
+"
 	canvasForView := nil.
 	canvasCache := nil.
 	^layoutBuilder
@@ -228,12 +216,17 @@ CRMondrian >> layout [
 
 { #category : #accessing }
 CRMondrian >> model: aObject [
+"I am a setter method for the model that should be passed on to the canvas"
 	modelForCanvas := aObject.
 	
 ]
 
 { #category : #accessing }
 CRMondrian >> nodes [
+"
+	I return a new CRShapeBuilderBuilder.
+	Since this changes the canvas I delete the cache.
+"
 	canvasForView := nil.
 	canvasCache := nil.
 	^ CRShapeBuilderBuilder newWithMondrian: self

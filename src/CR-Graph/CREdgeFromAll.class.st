@@ -6,6 +6,13 @@ Class {
 
 { #category : #accessing }
 CREdgeFromAll >> connect: nodes [
+"
+	I create the edges according to the given block and specification.
+	Therefore I'll, for each node, evaluate the connectionBlock with its
+	model, fetch all nodes matching the result and then create the edges.
+	
+	All edges are collected in a CRGroup and then returned.
+"
 	| edges |
 	
 	edges := CRGroup new.

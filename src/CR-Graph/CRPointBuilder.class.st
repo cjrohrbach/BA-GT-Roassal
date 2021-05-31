@@ -12,21 +12,29 @@ Class {
 
 { #category : #accessing }
 CRPointBuilder >> background: aValueOrArgBlock [
+"I am a setter method for the background"
 	background := aValueOrArgBlock
 ]
 
 { #category : #accessing }
 CRPointBuilder >> borderColor: aValueOrArgBlock [
+"I am a setter method for the borderColor"
 	borderColor := aValueOrArgBlock
 ]
 
 { #category : #accessing }
 CRPointBuilder >> borderWidth: aValueOrArgBlock [
+"I am a setter method for the borderWidth"
 	borderWidth := aValueOrArgBlock
 ]
 
 { #category : #accessing }
 CRPointBuilder >> createShapeFor: obj [
+"
+	I create the node for the given object.
+	Therfore I create a new CRpoint, add the object as model
+	and then adapt the point to match the specifications.
+"
 	| result |
 	result := CRPoint new 
 			model: obj.
@@ -42,7 +50,7 @@ CRPointBuilder >> createShapeFor: obj [
 		^ result
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
 CRPointBuilder >> initialize [
 	super initialize.
 	^self
@@ -50,6 +58,11 @@ CRPointBuilder >> initialize [
 
 { #category : #accessing }
 CRPointBuilder >> normalizeColor: anArgBlockOrSymbol [
+"
+	I create a color normalizer using the given 
+	block or symobl as key and some predefined colors
+	as from and to color.
+"
 	| norm |
 	norm := CRColorNormalizer new
 		key: anArgBlockOrSymbol;
@@ -63,6 +76,10 @@ CRPointBuilder >> normalizeColor: anArgBlockOrSymbol [
 
 { #category : #accessing }
 CRPointBuilder >> normalizeColor: anArgBlockOrSymbol from: fromValue to: toValue [
+"
+	I create a color normalizer using the given block or symbol as key
+	and the fromValue and toValue as from and to color.
+"
 	| norm |
 	norm := self normalizeColor: anArgBlockOrSymbol.
 	norm from: fromValue to: toValue.
@@ -71,6 +88,11 @@ CRPointBuilder >> normalizeColor: anArgBlockOrSymbol from: fromValue to: toValue
 
 { #category : #accessing }
 CRPointBuilder >> normalizeSize: anArgBlockOrSymbol [
+"
+	I create a size normalizer using the given 
+	block or symobl as key and some predefined sizes
+	as from and to size.
+"
 	| norm |
 	
 	norm := CRNormalizer new
@@ -85,6 +107,10 @@ CRPointBuilder >> normalizeSize: anArgBlockOrSymbol [
 
 { #category : #accessing }
 CRPointBuilder >> normalizeSize: anArgBlockOrSymbol from: fromValue to: toValue [
+"
+	I create a size normalizer using the given block or symbol as key
+	and the fromValue and toValue as from and to size.
+"
 	| norm |
 	norm := self normalizeSize: anArgBlockOrSymbol.
 	norm from: fromValue to: toValue.
@@ -93,5 +119,6 @@ CRPointBuilder >> normalizeSize: anArgBlockOrSymbol from: fromValue to: toValue 
 
 { #category : #accessing }
 CRPointBuilder >> size: aValueOrArgBlock [
+"I am a setter method for the size of the point. This can be a value, a symobl or a block"
 	size := aValueOrArgBlock
 ]

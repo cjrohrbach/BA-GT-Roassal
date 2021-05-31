@@ -10,6 +10,7 @@ Class {
 
 { #category : #accessing }
 CRLayoutBuilder >> force [
+"I return a new CRForceLayout."
 	layout := CRForceLayout new.
 	^layout.
 ]
