@@ -89,14 +89,16 @@ CRMondrian >> buildNodes [
 	
 		nodes addAll: shapeNodes.
 		
-		shapeNodes do: [ :sn | 
+		shapeNodes do: [ :sn | | snn |
+			allNodes add: sn.
+			snn := sn getNodes.
+			((snn size > 1) or: ((snn at: 1) ~= sn)) ifTrue: [
+				allNodes addAll: snn.
+			]
 			
-			allNodes addAll: (sn getNodes).
 		
 		].
 	].
-	
-	allNodes addAll: nodes.
 	
 	result := OrderedCollection new.
 	result add: nodes.

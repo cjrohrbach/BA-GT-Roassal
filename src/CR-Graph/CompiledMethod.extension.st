@@ -10,6 +10,7 @@ CompiledMethod >> callingMethodsIn: someClasses [
 	callers := someMethods collect: [ :cm |
 		(cm messages includes: self selector) ifTrue: [ cm ] 
 	] thenSelect: [:cm | cm  ~= nil].
+	
 	^callers
 	
 ]

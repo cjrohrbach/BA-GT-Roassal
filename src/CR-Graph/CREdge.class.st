@@ -100,7 +100,7 @@ CREdge >> evaluate: aBlock on: aCRNode nodes: nodes [
 	result := aBlock cull: (aCRNode model).
 	
 	
-	(result class = Array) 
+	(result isCollection) 
 		ifTrue: [^ nodes nodesFromModelArray: result.]
 		ifFalse: [^ nodes nodesFromModel: result].
 ]
