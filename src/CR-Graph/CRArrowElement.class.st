@@ -1,3 +1,6 @@
+"
+I am a CRLineElement with an arrowhead
+"
 Class {
 	#name : #CRArrowElement,
 	#superclass : #CRLineElement,

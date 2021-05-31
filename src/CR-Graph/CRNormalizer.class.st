@@ -129,6 +129,9 @@ CRNormalizer >> valueFor: aNode [
 	| nodeValue ratio value |
 	nodeValue := key cull: (aNode model).
 	
+	( (maxValue - minValue) <= 0 ) ifTrue:
+		[^to].
+	
 	ratio := (nodeValue - minValue) / (maxValue - minValue).
 	
 	value := from + ((to - from) * ratio).

@@ -1,3 +1,6 @@
+"
+I create edges from the given block to the node
+"
 Class {
 	#name : #CREdgeFrom,
 	#superclass : #CREdge,
@@ -19,16 +22,19 @@ CREdgeFrom >> connect: nodes [
 	
 	nodes do: [:node | 
 		|fromNodeModel fromNode |
-		fromNodeModel := connectionBlock cull: (node model).
-		fromNode := nodes nodeFromModel: fromNodeModel.
 		
-		fromNode ifNotNil: [
-			| edge |
-			edge := self createEdgeFrom: fromNode to: node.
-			edge ifNotNil: [
-				edges add: edge.
+		(condition cull: node model) ifTrue: [
+			fromNodeModel := connectionBlock cull: (node model).
+			fromNode := nodes nodeFromModel: fromNodeModel.
+		
+			fromNode ifNotNil: [
+				| edge |
+				edge := self createEdgeFrom: fromNode to: node.
+				edge ifNotNil: [
+					edges add: edge.
+				]
 			]
-		]
+		]	
 	].
 	
 	^edges

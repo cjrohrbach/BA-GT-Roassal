@@ -1,3 +1,6 @@
+"
+I am used to choose the layout that should be used for the canvas
+"
 Class {
 	#name : #CRLayoutBuilder,
 	#superclass : #Object,

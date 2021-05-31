@@ -36,7 +36,11 @@ CRColorNormalizer >> valueFor: aNode [
 	| nodeValue ratio color |
 	nodeValue := key cull: (aNode model).
 	
+	( (maxValue - minValue) <= 0 ) ifTrue:
+		[^to].
+	
 	ratio := (nodeValue - minValue) / (maxValue - minValue).
+	
 	
 	color := (self blend: from with: to weight: ratio).
 	

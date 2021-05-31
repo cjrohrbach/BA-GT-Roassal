@@ -93,6 +93,8 @@ CRMondrian >> buildNodes [
 		].
 	].
 	
+	allNodes addAll: nodes.
+	
 	result := OrderedCollection new.
 	result add: nodes.
 	result add: allNodes.

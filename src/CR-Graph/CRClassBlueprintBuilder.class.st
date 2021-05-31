@@ -13,7 +13,8 @@ CRClassBlueprintBuilder >> createShapeFor: obj [
 	as Nodes.
 "
 	| mondrian methods interface initialization implementor accessor attribute coll shape |
-	methods := obj methods.
+	methods := OrderedCollection new.
+	methods addAll: obj methods.
 	methods addAll: obj class methods.
 	
 	
@@ -24,14 +25,52 @@ CRClassBlueprintBuilder >> createShapeFor: obj [
 	accessor := CRGroup new name: 'accessor'.
 	attribute := CRGroup new name: 'attribute'.
 	
-	attribute addAll: obj slots.
+	attribute addAll: obj allSlots.
 
-	coll := OrderedCollection new.
-	coll add: initialization.
-	coll add: interface.
-	coll add: implementor.
-	coll add: accessor.
+	coll := self sortMethods: methods.
+	
 	coll add: attribute.
+	
+	shape := CRClassBlueprintCanvas new.
+	shape model: obj.
+	
+	"create the mondrian for each category"
+	coll do: [:c | | m canv |
+		m := CRMondrian new.
+		m nodes box
+			toolTip: #name; 
+			with: c.
+		
+		canv := m createCanvas canvasAsNode toolTipContent: c name.
+			
+		shape addContainer: (canv).
+	].
+	
+	^shape
+	
+
+]
+
+{ #category : #accessing }
+CRClassBlueprintBuilder >> sortMethods: methods [
+"I sort the provided method in groups and return the groups as collection"
+
+	| collection initialization interface implementor accessor attribute |
+	collection := OrderedCollection new.
+	
+	"create the Groups for the categorization"
+	initialization := CRGroup new name: 'initialization'.
+	interface := CRGroup new name: 'interface'.
+	implementor := CRGroup new name: 'implementor'.
+	accessor := CRGroup new name: 'accessor'.
+	attribute := CRGroup new name: 'attribute'.
+	
+
+	collection := OrderedCollection new.
+	collection add: initialization.
+	collection add: interface.
+	collection add: implementor.
+	collection add: accessor.
 	
 	"sort the mthods"
 	methods do: [ :method |
@@ -48,24 +87,8 @@ CRClassBlueprintBuilder >> createShapeFor: obj [
 		].
 	].
 	
-	shape := CRClassBlueprintCanvas new.
-	shape model: obj.
+	^collection
 	
-	"create the mondrian for each category"
-	coll do: [:c | | m canv |
-		m := CRMondrian new.
-		m nodes box
-			toolTip: #name;
-			with: c.
-		
-		canv := m createCanvas canvasAsNode toolTipContent: c name.
-			
-		shape addContainer: (canv).
-	].
-	
-	^shape
-	
-
 ]
 
 { #category : #accessing }

@@ -12,13 +12,15 @@ CRMondrianExamples >> classBlueprint [
 	<gtExample>
 	| coll view |
 	
+	"coll := (RPackageOrganizer default packageNamed: 'CR-Graph') classes."
 	coll := OrderedCollection new.
-	coll add: CRMondrian.
-	coll add: CRActionBuilder.
-	coll add: CRNode.
+	coll addAll: CRNode subclasses.
+	coll add: CRNode. 
 
 	view := CRMondrian new.
 	view nodes classBlueprint with: (coll).
+	view edge width: 5; forAll: [:x | x isClass]; connectFrom: [:x | x superclass].
+	view layout tree.
 	^view
 ]
 

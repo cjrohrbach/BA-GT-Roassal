@@ -1,3 +1,6 @@
+"
+I am the superclass of all edge types and I'm used to share methods between them
+"
 Class {
 	#name : #CREdge,
 	#superclass : #Object,
@@ -7,7 +10,8 @@ Class {
 		'color',
 		'width',
 		'edgeShape',
-		'connectionBlock'
+		'connectionBlock',
+		'condition'
 	],
 	#category : #'CR-Graph-CR-Graph'
 }
@@ -16,6 +20,17 @@ Class {
 CREdge >> color: aColor [
 "Setter method for the color the edge should have"
 	color := aColor
+]
+
+{ #category : #accessing }
+CREdge >> condition [
+"I am a setter for the condition block that has to be true on all nodes that are used for the edges"
+]
+
+{ #category : #accessing }
+CREdge >> condition: aTrueFalseBlock [		
+"I am a setter for the condition block that has to be true on all nodes that are used for the edges"
+	condition := aTrueFalseBlock
 ]
 
 { #category : #accessing }
@@ -101,6 +116,7 @@ CREdge >> initialize [
 	super initialize.
 	toAnchorPosition := BlElementCenterAnchor.
 	fromAnchorPosition := BlElementCenterAnchor.
+	condition := [true].
 	^self
 ]
 

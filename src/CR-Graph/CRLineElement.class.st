@@ -1,3 +1,7 @@
+"
+I extend BlLineElement  and am used for edges. 
+I extend BlLineElement to predefine the behaviour and look.
+"
 Class {
 	#name : #CRLineElement,
 	#superclass : #BlLineElement,
@@ -31,11 +35,11 @@ CRLineElement >> initialize [
 	self border: (BlBorder paint: (Color gray alpha: 0.5) width: 0.5).
 	self zIndex: -1.
 	
-	"Add a aptitude that makes the line blue when hovering over it"
+	"Add a aptitude that makes the line blue when hovering over it
 	self aptitude:
 		(BrStyleCommonAptitude new
 			default: [:l | l border: (BlBorder paint: (Color gray alpha: 0.5) width: 0.5)];
-			hovered: [ :l | l border: (BlBorder paint: Color blue width: 2) ]).
+			hovered: [ :l | l border: (BlBorder paint: Color blue width: 2) ])."
 			
 	
 	^self
@@ -44,5 +48,5 @@ CRLineElement >> initialize [
 { #category : #accessing }
 CRLineElement >> width: aValue [
 "Setter method for the width the line should have"
-	self aptitude default border: (BlBorder paint: (self border paint) width: aValue).
+	self border: (BlBorder paint: (self border paint) width: aValue).
 ]

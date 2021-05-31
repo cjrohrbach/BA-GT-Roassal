@@ -1,3 +1,6 @@
+"
+I create edges to all block results from the node
+"
 Class {
 	#name : #CREdgeToAll,
 	#superclass : #CREdge,
@@ -18,16 +21,17 @@ CREdgeToAll >> connect: nodes [
 	edges := CRGroup new.
 	
 	nodes do: [:node |
-		| coll |
-		coll := (self evaluate: connectionBlock on: node nodes: nodes).
-		(coll notNil and: coll size > 0)
-			ifTrue: [
+		(condition cull: node model) ifTrue: [
+			| coll |
+			coll := (self evaluate: connectionBlock on: node nodes: nodes).
+			(coll notNil and: coll size > 0) ifTrue: [
 				coll do: [: res |
 					| edge |
 					edge := self createEdgeFrom: node to: res.
 					edge ifNotNil: [edges add: edge].
 				]
 			]
+		]
 	].
 		
 	^edges

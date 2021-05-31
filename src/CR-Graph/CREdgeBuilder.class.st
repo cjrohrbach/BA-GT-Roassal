@@ -1,3 +1,6 @@
+"
+I am used to create the edge Builders Edges
+"
 Class {
 	#name : #CREdgeBuilder,
 	#superclass : #Object,
@@ -7,7 +10,8 @@ Class {
 		'width',
 		'edgeShape',
 		'toAnchorPosition',
-		'fromAnchorPosition'
+		'fromAnchorPosition',
+		'condition'
 	],
 	#category : #'CR-Graph-CR-Graph'
 }
@@ -74,7 +78,7 @@ CREdgeBuilder >> connectTo: aBlockOrASymbol [
 	This CREdgeTo I'll add to the mondrian instance
 "
 	| edge |
-	edge := CREdgeToAll new.
+	edge := CREdgeTo new.
 	edge connectionBlock: aBlockOrASymbol.
 	
 	self passAttributesToEdge: edge.
@@ -97,6 +101,12 @@ CREdgeBuilder >> connectToAll: aBlockOrASymbol [
 	
 	mondrian addEdgeBuilder: edge.
 	^edge
+]
+
+{ #category : #accessing }
+CREdgeBuilder >> forAll: aTrueFalseBlock [
+"I am a setter for the condition. The edges are only created for nodes that return true with the block"
+	condition := aTrueFalseBlock
 ]
 
 { #category : #initialization }
@@ -126,6 +136,7 @@ CREdgeBuilder >> passAttributesToEdge: aEdge [
 	aEdge edgeShape: edgeShape.
 	toAnchorPosition ifNotNil: [aEdge toAnchorPosition: toAnchorPosition].
 	fromAnchorPosition ifNotNil: [aEdge fromAnchorPosition: fromAnchorPosition].
+	condition ifNotNil: [aEdge condition: condition].
 ]
 
 { #category : #accessing }
