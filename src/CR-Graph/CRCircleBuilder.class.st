@@ -4,11 +4,11 @@ I represent a ShapeBuilder specific for building CRCircle nodes
 Class {
 	#name : #CRCircleBuilder,
 	#superclass : #CRShapeBuilder,
-	#classVars : [
-		'background',
-		'borderColor',
+	#instVars : [
+		'size',
 		'borderWidth',
-		'size'
+		'borderColor',
+		'background'
 	],
 	#category : #'CR-Graph-CR-Graph'
 }
