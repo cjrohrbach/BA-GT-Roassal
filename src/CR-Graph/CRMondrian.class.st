@@ -135,9 +135,9 @@ CRMondrian >> createCanvas [
 	
 	canvas paint. 
 	
-	
-	layoutBuilder on: canvas.
 	canvasCache := canvas.
+	layoutBuilder on: canvas.
+	
 	^ canvas
 ]
 

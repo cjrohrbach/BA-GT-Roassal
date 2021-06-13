@@ -4,6 +4,8 @@ I extent the ${class:BlGridLayout}$ and I am used to apply an force layout to a 
 Class {
 	#name : #CRGridLayout,
 	#superclass : #BlGridLayout,
+	#traits : 'TCRLayout',
+	#classTraits : 'TCRLayout classTrait',
 	#category : #'CR-Graph-Layout'
 }
 

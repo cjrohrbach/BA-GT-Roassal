@@ -4,6 +4,8 @@ I extent the ${class:GtGraphTreeLayout}$ and I am used to apply an force layout 
 Class {
 	#name : #CRTreeLayout,
 	#superclass : #GtGraphTreeLayout,
+	#traits : 'TCRLayout',
+	#classTraits : 'TCRLayout classTrait',
 	#category : #'CR-Graph-Layout'
 }
 
@@ -13,10 +15,4 @@ CRTreeLayout >> initialize [
 	self verticalGap: 50.
 	self horizontalGap: 50.
 	^self
-]
-
-{ #category : #accessing }
-CRTreeLayout >> on: aCanvas [
-"I apply the layout to the given canvas. Therfore the layout is wrapped in a BlOnceLayout to maintain draggable nodes"
-	aCanvas layout: (BlOnceLayout new layout: self).
 ]

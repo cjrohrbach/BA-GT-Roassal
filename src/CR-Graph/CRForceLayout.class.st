@@ -4,6 +4,8 @@ I extent the ${class:GtGraphForceBasedLayout}$ and I am used to apply an force l
 Class {
 	#name : #CRForceLayout,
 	#superclass : #GtGraphForceBasedLayout,
+	#traits : 'TCRLayout',
+	#classTraits : 'TCRLayout classTrait',
 	#category : #'CR-Graph-Layout'
 }
 
@@ -12,10 +14,4 @@ CRForceLayout >> initialize [
 	super initialize.
 	self length: 100.
 	^self
-]
-
-{ #category : #accessing }
-CRForceLayout >> on: aCanvas [
-"I apply the layout to the given Canvas. But first I create a BlOnceLayout from myself to allow draggable nodes"
-	aCanvas layout: (BlOnceLayout new layout: self)
 ]
