@@ -73,7 +73,7 @@ TCRNode >> highlight [
 		borderBeforeHighlight := self border.
 	].
 
-	self border: (BlBorder paint: (Color green alpha: 0.5) width: 5).
+	self border: (BlBorder paint: (Color green alpha: 0.5) width: ((self extent x) / 10)).
 	isHighlighted := true.
 ]
 

@@ -30,7 +30,8 @@ CREdgeBuilder class >> newWithMondrian: aMondrian [
 CREdgeBuilder >> arrow [
 "I change the shape of the edges to arrows"
 	edgeShape := CRArrowElement.
-	toAnchorPosition := BlElementTopCenterAnchor.
+	"toAnchorPosition := BlElementTopCenterAnchor."
+	toAnchorPosition := BlNearestPositionBoundsAnchor.
 ]
 
 { #category : #accessing }

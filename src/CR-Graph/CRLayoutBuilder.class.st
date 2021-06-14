@@ -12,6 +12,13 @@ Class {
 }
 
 { #category : #accessing }
+CRLayoutBuilder >> cluster [
+"I return a new CRClusterLayout."
+	layout := CRClusterLayout new.
+	^layout.
+]
+
+{ #category : #accessing }
 CRLayoutBuilder >> flow [
 "I return a new CRFlowLayout."
 	layout := CRFlowLayout new.
@@ -29,6 +36,7 @@ CRLayoutBuilder >> force [
 CRLayoutBuilder >> graphviz [
 "I return a new CRGraphvizLayout."
 	layout := CRGraphvizLayout new.
+	
 	^layout.
 ]
 

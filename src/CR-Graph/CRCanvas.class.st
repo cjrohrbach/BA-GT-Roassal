@@ -71,6 +71,7 @@ CRCanvas >> canvasForView [
 	self addScrollToZoom: c.
 	self jumpToInitialZoomOnSpace: c.
 	^ c asPannableElement
+
 ]
 
 { #category : #accessing }

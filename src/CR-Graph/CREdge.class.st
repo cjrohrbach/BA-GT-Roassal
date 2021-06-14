@@ -81,8 +81,10 @@ CREdge >> createVisibleEdgeFrom: fromNode to: toNode [
 	width ifNotNil: [line width: (width)].
 	color ifNotNil: [line color: (color)].
 	
-	line fromAnchor: (fromAnchorPosition element: fromNode).
-	line toAnchor: (toAnchorPosition element: toNode).
+	"line fromAnchor: (fromAnchorPosition element: fromNode)."
+	"line toAnchor: (toAnchorPosition element: toNode)."
+	line fromAnchor: (BlNearestPositionBoundsAnchor nearestTo: toNode from: fromNode).
+	line toAnchor: (BlNearestPositionBoundsAnchor nearestTo: fromNode from: toNode).
 	
 	^ line
 ]
@@ -114,7 +116,7 @@ CREdge >> fromAnchorPosition: aAnchor [
 { #category : #initialization }
 CREdge >> initialize [
 	super initialize.
-	toAnchorPosition := BlElementCenterAnchor.
+	toAnchorPosition :=  BlNearestPositionBoundsAnchor.
 	fromAnchorPosition := BlElementCenterAnchor.
 	condition := [true].
 	^self
