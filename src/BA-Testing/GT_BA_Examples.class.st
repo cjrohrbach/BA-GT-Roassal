@@ -146,6 +146,34 @@ GT_BA_Examples >> graphWithPackages [
 ]
 
 { #category : #accessing }
+GT_BA_Examples >> hospitalSystemMindmap [
+<gtExample>
+| dict m |
+	dict := Dictionary new.
+dict
+	add: HMSchedule -> HMHospitalSystem;
+	add: HMStaffMember -> HMHospitalSystem;
+	add: HMWorkingDay -> HMSchedule;
+	add: HMShiftConstraint -> HMShift;
+	add: HMConsecutiveNightShiftsConstraint -> HMShiftConstraint;
+	add: HMNightShiftConstraint -> HMShiftConstraint;
+	add: HMShiftExperiencedAndInexperiencedConstraint -> HMShiftConstraint;
+	add: HMShiftOneDoctorConstraint -> HMShiftConstraint;
+	add: HMDoctor -> HMStaffMember;
+	add: HMNurse -> HMStaffMember;
+	add: HMStaffConstraint -> HMStaffMember;
+	add: HMStaffConstraint -> HMStaffConstraintType.
+
+
+m := CRMondrian new.
+m nodes label with: ((RPackageOrganizer default packageNamed: 'Hospital-Management') classes).
+m edge connectFrom: [:c | 
+	dict at: c ifAbsent: [nil]].
+m layout.
+^m
+]
+
+{ #category : #accessing }
 GT_BA_Examples >> labelOnHover [
 	<gtExample>
 |	 box box2 |
