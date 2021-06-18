@@ -84,11 +84,17 @@ CRCanvas >> getNodes [
 CRCanvas >> initialize [
 	super initializeForCanvas.
 	self removeHighlightOnClick.
+	
+	self graph beChildrenContainer.
+	
 	nodes := CRGroup new.
 	edges := CRGroup new.
-	self properties 
+	"self properties 
 			addProperty: (BlElementLayoutHorizontalResizerProperty new fitContent);
-			addProperty: (BlElementLayoutVerticalResizerProperty new fitContent).
+			addProperty: (BlElementLayoutVerticalResizerProperty new fitContent)."
+	self constraintsDo: [ :c |
+				c horizontal fitContent.
+				c vertical fitContent].
 	self clipChildren: false.
 	
 	self aptitude:
