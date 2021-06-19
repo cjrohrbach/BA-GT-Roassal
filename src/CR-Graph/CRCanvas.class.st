@@ -89,6 +89,7 @@ CRCanvas >> initialize [
 	
 	nodes := CRGroup new.
 	edges := CRGroup new.
+	self beInSingleCompositionLayer.
 	"self properties 
 			addProperty: (BlElementLayoutHorizontalResizerProperty new fitContent);
 			addProperty: (BlElementLayoutVerticalResizerProperty new fitContent)."

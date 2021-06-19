@@ -304,7 +304,7 @@ GT_BA_Examples >> nodesWithGtMondrianClassesAndMethods [
 	view := GtMondrian new.
 	view nodes 
 		shape: [ :x | BlElement new
-			geometry: (BlRectangle cornerRadius: 10);
+			geometry: BlCircle new;
 			size: 10 @ 10;
 			background:(x isClass
 				ifTrue: [Color green]
