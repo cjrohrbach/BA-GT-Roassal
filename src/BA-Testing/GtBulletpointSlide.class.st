@@ -62,15 +62,8 @@ GtBulletpointSlide >> create [
 				aptitude: (BrGlamorousEditorAptitude new lineSpacing: 5);
 				hFitContent;
 				vFitContent;
-			text: (p asRopedText glamorousRegularFont; fontSize: 20);
+			text: (p asRopedText glamorousRegularFont; fontSize: 27);
 			beReadOnlyWithSelection)).
-			
-			
-			
-			
-			"BlTextElement new
-			text: (p asRopedText glamorousRegularFont; fontSize: 20))
-			)."
 	].
 
 
@@ -100,5 +93,5 @@ GtBulletpointSlide >> initialize [
 
 { #category : #accessing }
 GtBulletpointSlide >> title: aTitle [
-	title := aTitle asRopedText fontSize: 30; glamorousRegularFont
+	title := aTitle asRopedText fontSize: 40; glamorousRegularFont; bold
 ]

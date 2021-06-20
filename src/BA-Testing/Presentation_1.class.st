@@ -5,15 +5,148 @@ Class {
 }
 
 { #category : #accessing }
+Presentation_1 >> classesAsCollection [
+	| col |
+	col := OrderedCollection new.
+	col addAll: CRNode subclasses.
+	col add: CRNode.
+	^col
+]
+
+{ #category : #accessing }
 Presentation_1 >> crMondrianPointLabelColor [
 <gtExample>
 	| m |
 	m := CRMondrian new.
 	m nodes 
 		point
-		background: [:x | x even ifTrue: [Color green ] ifFalse: [Color red]];
-		with: (1 to: 9).
-	^m
+		with: self classesAsCollection.
+	m edge arrow; connectFrom: #superclass.
+	m layout tree.
+	^m 
+]
+
+{ #category : #accessing }
+Presentation_1 >> crMondrianWithMethods [
+<gtExample>
+	| m |
+	m := CRMondrian new.
+	m nodes 
+		mondrianNodes
+		stencil: [ :p | | v |
+			v := CRMondrian new .
+			v nodes 
+				box
+				toolTip: #name; 
+				with: (p methods ).
+			v
+			];
+		with: self classesAsCollection.
+	m edge arrow; forAll: [:x | x isClass]; connectFrom: #superclass.
+	m layout tree.
+	^m 
+]
+
+{ #category : #accessing }
+Presentation_1 >> createMondrianExplainView [
+<gtExample>
+	| x m e1 e2 container line e3 |
+	x:= OrderedCollection new.
+x addAll: CRNode subclasses. 
+x add: CRNode.
+
+m := CRMondrian new.
+m nodes label with: x.
+m edge connectFrom: #superclass.
+m layout tree.
+
+e1 := (((x) gtViewsFor: GtPhlowView empty) 
+			asElementDo: [:e | 
+				BlElement new 
+					aptitude: BrShadowAptitude; 
+					background: Color white;
+					margin: (BlInsets all: 20);
+					addChild: e]) size: 400@300; relocate: 140@40.
+
+e2 := (((m) gtViewsFor: GtPhlowView empty) 
+			asElementDo: [:e | 
+				BlElement new 
+					aptitude: BrShadowAptitude; 
+					background: Color white;
+					margin: (BlInsets all: 20);
+					addChild: e]) size: 600@250; relocate: 50@700.
+
+e3 := (((Presentation_1>>#methodForMondrianExplain) gtViewsFor: GtPhlowView empty) 
+			asElementDo: [:e | 
+				BlElement new 
+					aptitude: BrShadowAptitude; 
+					background: Color white;
+					margin: (BlInsets all: 20);
+					addChild: e]) size: 600@340; relocate: 400@330.
+					
+line := CRArrowElement new 
+	border: (BlBorder paint: (Color black) width: (10));
+	fromAnchor: (BlNearestPositionBoundsAnchor nearestTo: e2 from: e1);
+	toAnchor: (BlNearestPositionBoundsAnchor nearestTo: e1 from: e2).
+
+container := BlElement new
+	size: 1050@1000;
+	clipChildren: false;
+	zIndex: -1.
+	
+container addChildren: {e1. e2. e3. line.}.
+	
+^container
+]
+
+{ #category : #slides }
+Presentation_1 >> demoSlide2: aSlide [
+	<gtSlide>
+	^ aSlide element
+		priority: 5;
+		element: [ (GtPlaygroundLiveSlide new snippets: {
+		'| m |
+m := CRMondrian new.
+m nodes 
+	mondrianNodes
+	stencil: [ :p | | v |
+		v := CRMondrian new .
+		v nodes 
+			box
+			toolTip: #name; 
+			with: (p methods ).
+		v
+		];
+	with: self classesAsCollection.
+m edge arrow; forAll: [:x | x isClass]; connectFrom: #superclass.
+m layout tree.
+m'
+		}) create ]
+]
+
+{ #category : #slides }
+Presentation_1 >> demoSlide: aSlide [
+	<gtSlide>
+	^ aSlide element
+		priority: 4;
+		element: [ (GtPlaygroundLiveSlide new snippets: {
+		'classes := OrderedCollection new. classes addAll: CRNode subclasses. classes add: CRNode.'.
+
+		}) create ]
+]
+
+{ #category : #slides }
+Presentation_1 >> explainSlide: aSlide [
+	<gtSlide>
+	"Rename this method to be more representative for your slide"
+	^ aSlide text
+		priority: 6;
+		newTextWithFormat: ('How does it work' asRopedText glamorousRegularFont; fontSize: 40; bold);
+		newTextWithFormat: ('Main Components:
+		- CRMondrian is the base element that holds and creates all other elements
+		- Canvas holds all nodes and edges and is displayed to the user
+		- Builders for nodes, edges and layouts
+The elements (nodes, edges and canvas) are instances of BlElement and created just before beeing displayed' asRopedText glamorousRegularFont; fontSize: 27)
 ]
 
 { #category : #accessing }
@@ -24,7 +157,7 @@ Presentation_1 >> gtMondrianPoint [
 	m nodes shape: [ :x | BlElement new
 			geometry: BlCircle new;
 			background: Color black];
-			with: (1 to: 9).
+			with: self classesAsCollection.
 	^m
 ]
 
@@ -46,7 +179,8 @@ Presentation_1 >> gtMondrianPointLabel [
 					alignCenter;
 					text: x])
 			];
-			with: (1 to: 9).
+			with: self classesAsCollection.
+	m layout grid.
 	^m
 ]
 
@@ -57,7 +191,7 @@ Presentation_1 >> gtMondrianPointLabelColor [
 	m := GtMondrian new.
 	m nodes shape: [ :x | BlElement new
 			geometry: BlCircle new;
-			background: ((x even) ifTrue: [Color green] ifFalse: [Color red]);
+			background: Color black;
 			aptitude: (BrGlamorousWithTooltipAptitude new
 				showDelay: 0;
 				hideDelay: 0;
@@ -67,9 +201,51 @@ Presentation_1 >> gtMondrianPointLabelColor [
 					alignCenter;
 					text: x])
 			];
-			with: (1 to: 9).
-	m layout grid.
+			with: self classesAsCollection.
+	m edges connectFrom: #superclass.
+	m layout tree.
 	^m
+]
+
+{ #category : #accessing }
+Presentation_1 >> methodForMondrianExplain [
+<gtExample>
+	| view coll |
+	coll:= self classesAsCollection.
+	view := CRMondrian new.
+	view nodes label with: (coll).
+	view edge connectFrom: #superclass.
+	view layout tree.
+	^ view
+]
+
+{ #category : #slides }
+Presentation_1 >> mondrianSlideFor: aSlide [
+	<gtSlide>
+	^ aSlide textAndElement
+		priority: 2;
+		newTextWithFormat: ('What is Mondrian' asRopedText 
+			fontSize: 40;
+			glamorousRegularFont;
+			bold);
+		newTextWithFormat: ('- Framework to build interactive visualizations' asRopedText
+			fontSize: 27;
+			glamorousRegularFont);
+		newTextWithFormat: ('- Allows the programmer to create complex visualizations with easy scripts'asRopedText
+			fontSize: 27;
+			glamorousRegularFont);
+		newTextWithFormat: ('- Mondrian helps overcome the gap between data and visualization'asRopedText
+			fontSize: 27;
+			glamorousRegularFont);
+		element: [BlElement new addChild: (self createMondrianExplainView asScalableElement fitAll) ]
+]
+
+{ #category : #slides }
+Presentation_1 >> questionsSlideFor: aSlide [
+	<gtSlide>
+	^ aSlide title
+		priority: 8;
+		titleWithFormat: ('Questions?' asRopedText fontSize: 50; glamorousRegularFont; bold)
 ]
 
 { #category : #accessing }
@@ -77,45 +253,18 @@ Presentation_1 >> simplegtMondrian [
 <gtExample>
 	| m |
 	m := GtMondrian new.
-	m nodes with: (1 to: 9).
+	m nodes with: self classesAsCollection.
 	^m
-]
-
-{ #category : #slides }
-Presentation_1 >> slide2For: aSlide [
-	<gtSlide>
-	"Rename this method to be more representative for your slide"
-	^ aSlide bulletPoint
-		priority: 4;
-		title: 'What is Mondrian?';
-		bulletPoint: 'Fluent API used to build graphs';
-		bulletPoint: 'Second';
-		bulletPoint: 'Thrid';
-		bulletPoint: 'Forth'
-]
-
-{ #category : #slides }
-Presentation_1 >> slideMondrianExplanationFor: aSlide [
-	<gtSlide>
-	^ aSlide textAndElement
-		priority: 2;
-		newTextWithFormat: ('What is Mondrian' asRopedText 
-			fontSize: 30;
-			glamorousRegularFont;
-			bold);
-		newText: 'Mondrian is a fluent API used for data visualization.';
-		newText: 'Allows the programmer to write scripts that do the transformation from data to visualization models';
-		newText: 'Frist Introduced 1997 by Martin Theus'
 ]
 
 { #category : #accessing }
 Presentation_1 >> startPresentation [
 	<gtExample>
-	^GtLiveShow create: Presentation_1 new.
+	^GtLiveShow createWithArrowsVisible: Presentation_1 new.
 ]
 
-{ #category : #accessing }
-Presentation_1 >> titleSlideFor: aSlide [
+{ #category : #slides }
+Presentation_1 >> titleSlide: aSlide [
 	<gtSlide>
 	^ aSlide title
 		priority: 1;
@@ -126,15 +275,38 @@ Presentation_1 >> titleSlideFor: aSlide [
 ]
 
 { #category : #slides }
-Presentation_1 >> whyGtFor: aSlide [
+Presentation_1 >> whatsLeftSlide: aSlide [
 	<gtSlide>
 	"Rename this method to be more representative for your slide"
+	^ aSlide text
+		priority: 7;
+		
+		newTextWithFormat: ('Whats left to do' asRopedText glamorousRegularFont; fontSize: 40; bold);
+		newTextWithFormat: ('- Add some more features and finish the implementation
+- Improve the performance
+- Add propper class comments with examples
+- Write the thesis and documentation' asRopedText glamorousRegularFont; fontSize: 27)
+]
+
+{ #category : #slides }
+Presentation_1 >> whyGtSlide: aSlide [
+	<gtSlide>
 	^ aSlide textAndElement
 		priority: 3;
-		newTextWithFormat: ('Why use Glamorous Toolkit' asRopedText 
-			fontSize: 30;
+		newTextWithFormat: ('Why Glamorous Toolkit' asRopedText 
+			fontSize: 40;
 			glamorousRegularFont;
 			bold);
-		newText: 'One Rendering Tree';
-		newText: 'Moldable Development'
+		newTextWithFormat: ('One Rendering Tree
+			- The UI and the canvas of a visualization exits in the 
+				same world
+			- This allows interaction between UI and visualizations
+			' asRopedText
+			fontSize: 27;
+			glamorousRegularFont);
+		newTextWithFormat: ('Moldable Development
+			- Different things should look different' asRopedText
+			fontSize: 27;
+			glamorousRegularFont);
+		element: [BlElement new addChild: (self createMondrianExplainView asScalableElement fitAll) ]
 ]
