@@ -308,5 +308,5 @@ Presentation_1 >> whyGtSlide: aSlide [
 			- Different things should look different' asRopedText
 			fontSize: 27;
 			glamorousRegularFont);
-		element: [BlElement new addChild: (self createMondrianExplainView asScalableElement fitAll) ]
+		element: [GtCustomViewsLiveSlide new asElement]
 ]
