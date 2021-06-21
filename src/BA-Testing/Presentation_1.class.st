@@ -106,6 +106,7 @@ Presentation_1 >> demoSlide2: aSlide [
 		priority: 5;
 		element: [ (GtPlaygroundLiveSlide new snippets: {
 		'| m |
+classes := OrderedCollection new. classes addAll: CRNode subclasses. classes add: CRNode.
 m := CRMondrian new.
 m nodes 
 	mondrianNodes
@@ -117,7 +118,7 @@ m nodes
 			with: (p methods ).
 		v
 		];
-	with: self classesAsCollection.
+	with: classes.
 m edge arrow; forAll: [:x | x isClass]; connectFrom: #superclass.
 m layout tree.
 m'
@@ -130,7 +131,9 @@ Presentation_1 >> demoSlide: aSlide [
 	^ aSlide element
 		priority: 4;
 		element: [ (GtPlaygroundLiveSlide new snippets: {
-		'classes := OrderedCollection new. classes addAll: CRNode subclasses. classes add: CRNode.'.
+		'classes := OrderedCollection new. 
+classes addAll: CRNode subclasses. 
+classes add: CRNode.'.
 
 		}) create ]
 ]
@@ -240,12 +243,16 @@ Presentation_1 >> mondrianSlideFor: aSlide [
 		element: [BlElement new addChild: (self createMondrianExplainView asScalableElement fitAll) ]
 ]
 
+{ #category : #accessing }
+Presentation_1 >> nil [
+]
+
 { #category : #slides }
 Presentation_1 >> questionsSlideFor: aSlide [
 	<gtSlide>
 	^ aSlide title
 		priority: 8;
-		titleWithFormat: ('Questions?' asRopedText fontSize: 50; glamorousRegularFont; bold)
+		titleWithFormat: ('Questions?' asRopedText fontSize: 70; glamorousRegularFont; bold)
 ]
 
 { #category : #accessing }
