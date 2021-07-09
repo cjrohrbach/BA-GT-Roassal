@@ -142,6 +142,20 @@ CRMondrian >> createCanvas [
 ]
 
 { #category : #accessing }
+CRMondrian >> createMindMap: mindMapStructure [
+	| m it coll |
+	it := MindMapIterator new mindMapStructure: mindMapStructure.
+	it hasStepLeft whileTrue: [
+		it popStep do: [:s | | sm |
+			sm := CRMondrian new.
+			sm nodes with: s.
+			
+		]
+	]
+	
+]
+
+{ #category : #accessing }
 CRMondrian >> edge [
 "
 	I return a new CREdgeBuilder.

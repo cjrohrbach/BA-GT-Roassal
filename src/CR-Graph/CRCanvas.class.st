@@ -67,6 +67,10 @@ CRCanvas >> canvasForView [
 	| c |
 	c := BlZoomableElement new contentElement: self.
 	c clipChildren: false.
+	c constraintsDo: [:con |
+		con horizontal matchParent.
+		con vertical matchParent.
+	].
 	self requestFocusOnClick: c.
 	self addScrollToZoom: c.
 	self jumpToInitialZoomOnSpace: c.

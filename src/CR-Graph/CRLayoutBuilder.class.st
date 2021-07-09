@@ -12,10 +12,25 @@ Class {
 }
 
 { #category : #accessing }
+CRLayoutBuilder >> circle [
+"I return a new CRCircleLayout."
+	layout := CRCircleLayout new.
+	^layout.
+]
+
+{ #category : #accessing }
 CRLayoutBuilder >> cluster [
 "I return a new CRClusterLayout."
 	layout := CRClusterLayout new.
 	^layout.
+]
+
+{ #category : #accessing }
+CRLayoutBuilder >> custom: aLayout [
+"I can receive any layout. I then create a CRCustomLayout wich stores it and later on applys it to the canvas"
+	layout := CRCustomLayout new.
+	layout layout: aLayout.
+	^layout
 ]
 
 { #category : #accessing }
