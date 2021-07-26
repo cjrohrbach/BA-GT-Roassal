@@ -38,6 +38,15 @@ MindMapIterator >> mindMapStructure: ms [
 { #category : #accessing }
 MindMapIterator >> popLastChildren [
 	(orderedChildren size > 0) ifTrue: [ | c step |
+		"((orderedChildren size = 1) and: ((orderedChildren at: 1 ) isRoot)) ifTrue: 
+		[
+			c := orderedChildren at: 1.
+			orderedChildren remove: c.
+			step := OrderedCollection new.
+			step add: c.
+			^step.
+		]."
+		
 		step := OrderedCollection new.
 		c := orderedChildren at: 1. 
 		step addAll: c parent getChildren.
@@ -70,7 +79,7 @@ MindMapIterator >> popStep [
 	(orderedChildren size > 0) ifTrue: [
 		step := OrderedCollection new.
 		step add: self popLastChildren.
-		((orderedChildren size > 0) and: (((orderedChildren at: 1) depth) = ((step at: 1 at: 1) depth))) whileTrue:
+		[(orderedChildren size > 0) and: (((orderedChildren at: 1) depth) = (((step at: 1) at: 1) depth))] whileTrue:
 		[
 			step add: (self popLastChildren)
 		].

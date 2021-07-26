@@ -13,6 +13,7 @@ Class {
 { #category : #accessing }
 CRNode >> initialize [
 	super initialize.
+	self clipChildren: false.
 	isDebugViewActive := false.
 	isHighlighted := false.
 	
@@ -30,6 +31,7 @@ CRNode >> initialize [
 { #category : #accessing }
 CRNode >> initializeForCanvas [
 	super initialize.
+	self clipChildren: false.
 	isDebugViewActive := false.
 	isHighlighted := false.
 	^self

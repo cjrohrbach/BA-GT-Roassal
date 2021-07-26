@@ -46,6 +46,23 @@ CRShapeBuilderBuilder >> classBlueprint [
 	^builder
 ]
 
+{ #category : #accessing }
+CRShapeBuilderBuilder >> custom [
+	| builder |
+	builder := CRCustomShapeBuilder new.
+	mondrian addShapeBuilder: builder.
+	^builder
+]
+
+{ #category : #accessing }
+CRShapeBuilderBuilder >> custom: aStencilBlock [
+	| builder |
+	builder := CRCustomShapeBuilder new.
+	builder stencil: aStencilBlock.
+	mondrian addShapeBuilder: builder.
+	^builder
+]
+
 { #category : #initialization }
 CRShapeBuilderBuilder >> initialize [
 	super initialize.

@@ -44,6 +44,19 @@ CRMondrianExamples >> customAction [
 ]
 
 { #category : #accessing }
+CRMondrianExamples >> customShape [
+<gtExample>
+| q |
+	q := CRMondrian new.
+q nodes custom stencil:  [ :x |
+	CRNode new
+		size: 20@50;
+		background: Color green.
+]; with: (1 to: 10).
+^q 
+]
+
+{ #category : #accessing }
 CRMondrianExamples >> edgesToHalf [
 	<gtExample>
 	| m |
