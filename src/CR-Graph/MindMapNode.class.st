@@ -61,6 +61,11 @@ MindMapNode >> getChildren [
 ]
 
 { #category : #accessing }
+MindMapNode >> getIsRoot [
+	^isRoot
+]
+
+{ #category : #accessing }
 MindMapNode >> hasChildren [ 
 	^children size = 0
 ]
@@ -70,6 +75,7 @@ MindMapNode >> initialize [
 	super initialize.
 	children := OrderedCollection new.
 	depth := 0.
+	isRoot := false.
 	^self 
 ]
 

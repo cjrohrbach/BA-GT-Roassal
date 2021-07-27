@@ -49,11 +49,18 @@ MindMapIterator >> popLastChildren [
 		
 		step := OrderedCollection new.
 		c := orderedChildren at: 1. 
-		step addAll: c parent getChildren.
 		
-		c parent getChildren do: [:cn | orderedChildren remove: cn].
+		(c getIsRoot) ifTrue: [
+			step add: c.
+			orderedChildren remove: c.
+			^step.
+		] ifFalse: [
+			step addAll: c parent getChildren.
+			c parent getChildren do: [:cn | orderedChildren remove: cn].
+			^step
+		].
 		
-		^step
+		
 	]
 	
 ]
@@ -79,7 +86,11 @@ MindMapIterator >> popStep [
 	(orderedChildren size > 0) ifTrue: [
 		step := OrderedCollection new.
 		step add: self popLastChildren.
-		[(orderedChildren size > 0) and: (((orderedChildren at: 1) depth) = (((step at: 1) at: 1) depth))] whileTrue:
+		[
+			(orderedChildren size > 0) ifTrue: [
+				(((orderedChildren at: 1) depth) = (((step at: 1) at: 1) depth)) ifTrue: [true] ifFalse: [false].
+			] ifFalse: [false].
+		] whileTrue:
 		[
 			step add: (self popLastChildren)
 		].

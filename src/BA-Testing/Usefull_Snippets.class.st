@@ -117,3 +117,38 @@ Usefull_Snippets >> getAllPackages [
 	<gtExample>
 	^ RPackageOrganizer default
 ]
+
+{ #category : #accessing }
+Usefull_Snippets >> mindMapCircleLayout [
+<gtExample>
+| c a m b |
+
+	c := BlElement new
+		constraintsDo: [ :co |
+			co horizontal matchParent.
+			co vertical matchParent];
+		border: (BlBorder paint: (Color blue) width: 4);
+		layout: BlFrameLayout new.
+	
+	a := BlElement new
+		border: (BlBorder paint: (Color green) width: 2);
+		size: 300@300;
+		layout: BlFrameLayout new.
+	
+	m := CRMondrian new.
+	m nodes with: (1 to: 10).
+	m layout circle.
+
+
+
+	b := BlElement new
+		size: 30@100;
+		background: Color red.
+	
+	b constraints frame horizontal alignCenter.
+	b constraints frame vertical alignCenter.
+
+	a addChild: b.
+	a addChild: (m createCanvas canvasForView).
+	^a
+]
