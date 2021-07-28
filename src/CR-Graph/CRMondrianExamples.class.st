@@ -241,6 +241,22 @@ CRMondrianExamples >> normalizerAndForceLayout [
 ]
 
 { #category : #accessing }
+CRMondrianExamples >> preBuiltNode [
+	<gtExample>
+	| node mondrian |
+	
+	node := CRBox new
+		size: 50@100;
+		background: Color blue;
+		border: (BlBorder paint: (Color gray) width: 5);
+		model: 'test Node'.
+	
+	mondrian := CRMondrian new.
+	mondrian nodes preBuiltNode addNode: (node).
+	^mondrian
+]
+
+{ #category : #accessing }
 CRMondrianExamples >> primeSieveAction [
 	<gtExample>
 	| m |

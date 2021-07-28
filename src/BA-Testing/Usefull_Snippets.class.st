@@ -113,6 +113,55 @@ Usefull_Snippets >> blElementsWithEdge [
 ]
 
 { #category : #accessing }
+Usefull_Snippets >> canvasPrototype [
+	<gtExample>
+	| z p canv a b c |
+	z := BlZoomableElement new
+	border: (BlBorder paint: (Color red) width:4);
+	constraintsDo: [:con |
+		con horizontal matchParent.
+		con vertical matchParent.
+	].
+
+p := BlPannableElement new
+	border: (BlBorder paint: (Color gray) width:4).
+	
+canv := BlElement new
+	border: (BlBorder paint: (Color pink) width: 3);
+	constraintsDo: [:con |
+		con horizontal fitContent.
+		con vertical fitContent.
+	];
+	clipChildren: false;
+	layout: (BlOnceLayout new layout: (BlGridLayout new
+		cellSpacing: 10; columnCount: 3)).
+	
+a := BlElement new
+	size: 50@50;
+	background: Color green;
+	addEventHandler: BlPullHandler new .
+
+b := BlElement new
+	size: 50@50;
+	background: Color blue;
+	addEventHandler: BlPullHandler new.
+
+c := BlElement new
+	size: 50@50;
+	background: Color red;
+	addEventHandler: BlPullHandler new.		
+	
+canv addChild: a.
+canv addChild: b.
+canv addChild: c.
+
+p addChild: canv.
+
+z contentElement: (p).
+^z zoomToFit
+]
+
+{ #category : #accessing }
 Usefull_Snippets >> getAllPackages [
 	<gtExample>
 	^ RPackageOrganizer default
@@ -123,12 +172,12 @@ Usefull_Snippets >> mindMapCircleLayout [
 <gtExample>
 | c a m b |
 
-	c := BlElement new
+	"c := BlElement new
 		constraintsDo: [ :co |
 			co horizontal matchParent.
 			co vertical matchParent];
 		border: (BlBorder paint: (Color blue) width: 4);
-		layout: BlFrameLayout new.
+		layout: BlFrameLayout new."
 	
 	a := BlElement new
 		border: (BlBorder paint: (Color green) width: 2);

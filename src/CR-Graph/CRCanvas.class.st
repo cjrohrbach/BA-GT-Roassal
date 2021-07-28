@@ -79,6 +79,32 @@ CRCanvas >> canvasForView [
 ]
 
 { #category : #accessing }
+CRCanvas >> canvasForView2 [
+	| p z |
+	p := BlPannableElement new
+		border: (BlBorder paint: (Color gray) width:4);
+		constraintsDo: [:con |
+			con horizontal matchParent.
+			con vertical matchParent.
+		].
+	z := BlZoomableElement new
+		border: (BlBorder paint: (Color red) width:4);
+		constraintsDo: [:con |
+			con horizontal matchParent.
+			con vertical matchParent.
+		].
+	
+	p addChild: self.
+	
+	z contentElement: p.
+	self requestFocusOnClick: z.
+	self addScrollToZoom: z.
+	self jumpToInitialZoomOnSpace: z.
+	^z zoomToFit
+	
+]
+
+{ #category : #accessing }
 CRCanvas >> getNodes [
 "I return all the nodes I contain and their subnodes"
 	^nodes collectAll: [:n | n getNodes]
@@ -89,24 +115,22 @@ CRCanvas >> initialize [
 	super initializeForCanvas.
 	self removeHighlightOnClick.
 	
-	self graph beChildrenContainer.
-	
-	nodes := CRGroup new.
-	edges := CRGroup new.
-	self beInSingleCompositionLayer.
-	"self properties 
-			addProperty: (BlElementLayoutHorizontalResizerProperty new fitContent);
-			addProperty: (BlElementLayoutVerticalResizerProperty new fitContent)."
-	self constraintsDo: [ :c |
-				c horizontal fitContent.
-				c vertical fitContent].
-	self clipChildren: false.
-	
 	self aptitude:
 			(BrGlamorousWithContextMenuAptitude
 				content: [ BrGlamorousSimpleContextMenuContent new
 						items: {('Toggle Debug View' -> [ self toggleDebugView ])};
 						yourself ]).
+	
+	
+	nodes := CRGroup new.
+	edges := CRGroup new.
+
+	self constraintsDo: [ :c |
+				c horizontal fitContent.
+				c vertical fitContent].
+	self clipChildren: false.
+	
+	
 	
 	^self
 ]

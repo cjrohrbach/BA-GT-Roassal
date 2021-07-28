@@ -6,5 +6,26 @@ Class {
 
 { #category : #accessing }
 CRMindMapBuilder >> createShapeFor: obj [
+	| c a b circle top center group |
 	
+	circle := CRMondrian new.
+	circle nodes box toolTip: #model; with: (obj getChildren).
+	circle edge connectTo: #parent.
+	circle layout circle.
+	
+	top := CRMondrian new.
+	top nodes preBuiltNode addNode: ((circle createCanvas canvasAsNode) model: (MindMapNode new); border: (BlBorder empty)).
+	top nodes preBuiltNode addNode: ((
+		CRBox new
+			model: obj;
+			toolTipContent: (obj model);
+			constraintsDo: [:con |
+				con frame horizontal alignCenter.
+				con frame vertical alignCenter.
+			]
+			)). 
+	top edge connectFrom: #parent.
+	top layout custom: BlFrameLayout new.
+		
+	^top createCanvas canvasForView
 ]
