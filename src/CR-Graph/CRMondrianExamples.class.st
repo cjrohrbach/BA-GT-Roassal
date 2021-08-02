@@ -14,8 +14,8 @@ CRMondrianExamples >> classBlueprint [
 	
 	"coll := (RPackageOrganizer default packageNamed: 'CR-Graph') classes."
 	coll := OrderedCollection new.
-	coll addAll: CRNode subclasses.
-	coll add: CRNode. 
+	coll addAll: CRShapeBuilder subclasses.
+	coll add: CRShapeBuilder. 
 	
 	"coll := {CRCanvas}."
 

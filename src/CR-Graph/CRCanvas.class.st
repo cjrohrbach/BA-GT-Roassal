@@ -7,7 +7,8 @@ Class {
 	#instVars : [
 		'nodes',
 		'edges',
-		'mondrian'
+		'mondrian',
+		'isDebugViewActive'
 	],
 	#category : #'CR-Graph-CR-Graph'
 }
@@ -72,10 +73,7 @@ CRCanvas >> addToolTip: content [
 CRCanvas >> canvasAsNode [
 "I return the canvas with all the properties of a normal node"
 	| c |
-	"self addToolTip.
-	self makeDraggable."
 	self openMondrianOnClick.
-	"self graph beNode."
 	self border: (BlBorder paint: Color black width: 2).
 	self background: (Color white).
 	^self
@@ -136,10 +134,12 @@ CRCanvas >> initialize [
 	"super initializeForCanvas."
 	self removeHighlightOnClick.
 	
+	self graph beChildrenContainer.
+	
 	self aptitude:
 			(BrGlamorousWithContextMenuAptitude
 				content: [ BrGlamorousSimpleContextMenuContent new
-						items: {('Toggle Debug View' -> [ self toggleDebugView ])};
+						items: {('Toggle Debug View' -> [ self parent el_ToggleDebugView ])};
 						yourself ]).
 	
 	
@@ -151,7 +151,7 @@ CRCanvas >> initialize [
 				c vertical fitContent].
 	self clipChildren: false.
 	
-	
+	isDebugViewActive := false.
 	
 	^self
 ]
@@ -240,14 +240,4 @@ CRCanvas >> setNodeGroup: aCRGroup [
 "I am a setter method for the nodes The nodes should be provided as CRBindingGroup"
 	self assert: [aCRGroup class = CRBindingGroup] description: 'You need to provide the nodes as CRBindingGroup'.
 	nodes := aCRGroup.
-]
-
-{ #category : #accessing }
-CRCanvas >> toggleDebugView [
-"I enable or disable the debug view for myself and all my nodes"
-	super toggleDebugView.
-	nodes do: [:node |
-		node toggleDebugView.
-	].
-	
 ]

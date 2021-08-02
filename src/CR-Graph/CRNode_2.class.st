@@ -82,7 +82,6 @@ CRNode_2 >> initialize [
 	
 	outGoingEdges := CRGroup new. 
 	isMarked := false.
-	isDebugViewActive := false.
 	
 	^self
 ]
@@ -145,23 +144,4 @@ CRNode_2 >> removeHighlightOutGoingEdges [
 CRNode_2 >> shape: aElement [
 	self centerElement: aElement.
 	self addToolTip.
-]
-
-{ #category : #accessing }
-CRNode_2 >> toggleDebugView [
-	"I enable or disable the debug view.
-	
-	The debug view is just a visible red border.
-	
-	This method has to be overritten for nodes that contian other nodes.
-	"
-	isDebugViewActive
-		ifTrue: [
-			self border: (BlBorder empty).
-			isDebugViewActive := false.
-			]
-		ifFalse: [
-			self border: (BlBorder paint: Color red width: 2).
-			isDebugViewActive := true.
-		].
 ]

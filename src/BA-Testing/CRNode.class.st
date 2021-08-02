@@ -7,7 +7,7 @@ Class {
 	#superclass : #BlElement,
 	#traits : 'TCRNode',
 	#classTraits : 'TCRNode classTrait',
-	#category : #'CR-Graph-CR-Graph'
+	#category : #'BA-Testing-CR-Graph'
 }
 
 { #category : #accessing }

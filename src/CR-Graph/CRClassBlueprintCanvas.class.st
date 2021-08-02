@@ -7,7 +7,9 @@ Class {
 	#superclass : #BlElement,
 	#instVars : [
 		'nodes',
-		'model'
+		'model',
+		'label',
+		'isDebugViewActive'
 	],
 	#category : #'CR-Graph-NodeShape'
 }
@@ -21,9 +23,14 @@ CRClassBlueprintCanvas >> addContainer: aCRCanvas [
 ]
 
 { #category : #accessing }
+CRClassBlueprintCanvas >> createAndAddLabel [
+	self createLabel.
+	self addChild: label.
+]
+
+{ #category : #accessing }
 CRClassBlueprintCanvas >> createLabel [
 "I create the label on top. The label contains the class name"
-	| label |
 	label := BlTextElement new.
 	label background: Color white.
 	label margin: (BlInsets all: 20).
@@ -32,10 +39,7 @@ CRClassBlueprintCanvas >> createLabel [
 	label constraintsDo: [ :con |
 		con grid horizontal span: 5.
 		con grid horizontal alignCenter].
-	label text: model asRopedText.
-	
-	
-	self addChild: label.
+	label text: 'model' asRopedText.
 ]
 
 { #category : #accessing }
@@ -48,6 +52,8 @@ CRClassBlueprintCanvas >> getNodes [
 CRClassBlueprintCanvas >> initialize [
 	super initialize.
 	
+	self graph beChildrenContainer.
+	
 	nodes := CRGroup new.
 	
 	self properties 
@@ -59,6 +65,10 @@ CRClassBlueprintCanvas >> initialize [
 	self background: (Color white).
 	self layout: (BlGridLayout new columnCount:5; cellSpacing: 20).
 	
+	self createAndAddLabel.
+	
+	isDebugViewActive := false.
+	
 	^self
 ]
 
@@ -69,7 +79,7 @@ CRClassBlueprintCanvas >> model: anObject [
 	I add the model as toolTipContent.
 "
 	model := anObject.
-	self createLabel.
+	self updateLabelText.
 ]
 
 { #category : #accessing }
@@ -87,8 +97,22 @@ CRClassBlueprintCanvas >> requiersModel [
 { #category : #accessing }
 CRClassBlueprintCanvas >> toggleDebugView [
 "I enable or disable the debug view for myself and all my nodes"
-	super toggleDebugView.
+	isDebugViewActive
+		ifTrue: [
+			self border: (BlBorder empty).
+			isDebugViewActive := false.
+			]
+		ifFalse: [
+			self border: (BlBorder paint: Color red width: 2).
+			isDebugViewActive := true.
+		].
+		
 	nodes do: [:node |
 		node toggleDebugView.
 	].
+]
+
+{ #category : #accessing }
+CRClassBlueprintCanvas >> updateLabelText [
+	label text: model asRopedText
 ]
