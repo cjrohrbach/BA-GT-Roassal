@@ -22,7 +22,7 @@ CRLabelBuilder >> createShapeFor: obj [
 	| result |
 	result := CRLabel new 
 			model: obj.
-		background ifNotNil: [result color: (self evaluate: background on: obj)].
+		background ifNotNil: [result background: (self evaluate: background on: obj)].
 		^ result
 ]
 

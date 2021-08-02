@@ -26,6 +26,10 @@ CRColorNormalizer >> blend: aColor with: aColorValue weight: wt [
 { #category : #accessing }
 CRColorNormalizer >> initialize [
 	super initialize.
+	
+	self from: (Color gray lighter lighter lighter lighter lighter).
+	self to: (Color gray darker).
+	
 	^self
 ]
 

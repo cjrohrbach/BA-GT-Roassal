@@ -44,7 +44,7 @@ CRClassBlueprintBuilder >> createShapeFor: obj [
 			toolTip: #name; 
 			with: c.
 		
-		canv := m createCanvas canvasAsNode toolTipContent: c name.
+		canv := m createCanvas canvasAsNode addToolTip: c name.
 			
 		shape addContainer: (canv).
 	].

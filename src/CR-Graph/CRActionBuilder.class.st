@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'mondrian'
 	],
-	#category : #'CR-Graph-CR-Graph'
+	#category : #'CR-Graph-Action'
 }
 
 { #category : #accessing }

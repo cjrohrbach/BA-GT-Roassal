@@ -50,13 +50,32 @@ CRCanvas >> addScrollToZoom: aElement [
 ]
 
 { #category : #accessing }
+CRCanvas >> addToolTip: content [
+	"I add a tooltip to the node. 
+	The tooltip label text is the content given. 
+	The ToolTip gets shown when the mouse hovers over the node.
+	"
+	| label labelText |
+	label := [BrLabel new aptitude: 
+		BrGlamorousLabelAptitude new  
+			glamorousRegularFontAndSize;
+			alignCenter;
+			text: content].
+		
+	self aptitude: (BrGlamorousWithTooltipAptitude new
+		showDelay: 0;
+		hideDelay: 0;
+		contentStencil: label)
+]
+
+{ #category : #accessing }
 CRCanvas >> canvasAsNode [
 "I return the canvas with all the properties of a normal node"
 	| c |
-	self addToolTip.
-	self makeDraggable.
+	"self addToolTip.
+	self makeDraggable."
 	self openMondrianOnClick.
-	self graph beNode.
+	"self graph beNode."
 	self border: (BlBorder paint: Color black width: 2).
 	self background: (Color white).
 	^self
@@ -115,7 +134,7 @@ CRCanvas >> getNodes [
 CRCanvas >> initialize [
 	super initialize.
 	"super initializeForCanvas."
-	"self removeHighlightOnClick."
+	self removeHighlightOnClick.
 	
 	self aptitude:
 			(BrGlamorousWithContextMenuAptitude

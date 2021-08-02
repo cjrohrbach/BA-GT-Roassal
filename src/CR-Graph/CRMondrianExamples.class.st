@@ -49,9 +49,9 @@ CRMondrianExamples >> customShape [
 | q |
 	q := CRMondrian new.
 q nodes custom stencil:  [ :x |
-	CRNode new
+	BlElement new
 		size: 20@50;
-		background: Color green.
+		background: Color gray.
 ]; with: (1 to: 10).
 ^q 
 ]

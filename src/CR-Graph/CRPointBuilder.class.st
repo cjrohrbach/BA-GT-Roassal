@@ -41,7 +41,7 @@ CRPointBuilder >> createShapeFor: obj [
 	| shape |
 	shape := CRPoint new.
 		size ifNotNil: [shape size: ((self evaluate: size on: obj) asPoint)].
-		background ifNotNil: [shape color: (self evaluate: background on: obj)].
+		background ifNotNil: [shape background: (self evaluate: background on: obj)].
 		toolTipContent ifNotNil: [shape toolTipContent: (self evaluate: toolTipContent on: obj)].
 		
 		(borderWidth notNil and: [borderColor notNil])
@@ -68,9 +68,7 @@ CRPointBuilder >> normalizeColor: anArgBlockOrSymbol [
 	| norm |
 	norm := CRColorNormalizer new
 		key: anArgBlockOrSymbol;
-		attribute: [:node :value | node background: value];
-		from: (Color gray alpha: 0.2);
-		to: Color gray.
+		attribute: [:node :value | node background: value].
 		
 	normalizerCollection add: norm.
 	^norm

@@ -84,8 +84,8 @@ CREdge >> createVisibleEdgeFrom: fromNode to: toNode [
 	
 	"line fromAnchor: (fromAnchorPosition element: fromNode)."
 	"line toAnchor: (toAnchorPosition element: toNode)."
-	line fromAnchor: (BlNearestPositionBoundsAnchor nearestTo: toNode centerElement from: fromNode centerElement).
-	line toAnchor: (BlNearestPositionBoundsAnchor nearestTo: fromNode centerElement from: toNode centerElement).
+	line fromAnchor: (BlNearestPositionEllipseAnchor nearestTo: toNode centerElement from: fromNode centerElement).
+	line toAnchor: (BlNearestPositionEllipseAnchor nearestTo: fromNode centerElement from: toNode centerElement).
 	
 	fromNode addOutGoingEdge: line.
 	

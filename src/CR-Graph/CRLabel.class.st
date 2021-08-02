@@ -19,10 +19,10 @@ CRLabel >> initialize [
 	super initialize.
 	
 	self background: Color white.
-	self margin: (BlInsets all: 20).
+	"self margin: (BlInsets all: 10)."
 	self padding: (BlInsets all: 5).
-	self effect: (BlGaussianShadowEffect color: (Color gray alpha: 0.5) width: 5 offset: 0@0).
-	
+	self effect: (BlGaussianShadowEffect color: (Color gray alpha: 0.5) width: 2 offset: 0@0).
+	self defaultFontSize: 20.
 	^self
 ]
 

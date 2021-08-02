@@ -12,10 +12,9 @@ CRCustomShapeBuilder >> createShapeFor: obj [
 "
 	I create a node accodring to the stencil
 "
-| result |
-	result := stencil cull: obj.
-	result model: obj.
-	^result
+| shape |
+	shape := stencil cull: obj.
+	^shape
 ]
 
 { #category : #accessing }

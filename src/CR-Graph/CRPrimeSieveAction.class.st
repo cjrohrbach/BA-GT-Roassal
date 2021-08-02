@@ -8,7 +8,7 @@ Class {
 		'nonPrimeColor',
 		'primeColor'
 	],
-	#category : #'CR-Graph-CR-Graph'
+	#category : #'CR-Graph-Action'
 }
 
 { #category : #accessing }
@@ -17,28 +17,31 @@ CRPrimeSieveAction >> blo [
 | b |
 b := [:e | | node multiples sorted |
 
-	node := e target.
-	(node model = 1) ifTrue: [ node background: nonPrimeColor ]
+	(e target class = CRNode_2) ifTrue: [node := e target]
+		ifFalse: [
+			(e target parent class = CRNode_2) ifTrue: [node := e target parent]
+		].
+	
+	
+	
+	(node model = 1) ifTrue: [ node centerElement background: nonPrimeColor ]
 	ifFalse: [
-		(node background class = BlTransparentBackground)
+		(node centerElement background class = BlTransparentBackground)
 			ifTrue: [
 				sorted := false.
 			]
 			ifFalse: [
-				sorted := ((node background paint color) = nonPrimeColor).
+				sorted := ((node centerElement background paint color) = nonPrimeColor).
 			].
 		sorted ifFalse: [
-			node background: primeColor.
+			node centerElement background: primeColor.
 			multiples := OrderedCollection new.
 			node group do: [ :n | 
 				((n model \\ node model) = 0) ifTrue: [
 						multiples add: n.
 					].
-				"(n ~= node) ifTrue: [
-					
-				]."
 			].
-			multiples allButFirst do: [:n | n background: nonPrimeColor].
+			multiples allButFirst do: [:n | n centerElement background: nonPrimeColor].
 		].
 	].
 ].

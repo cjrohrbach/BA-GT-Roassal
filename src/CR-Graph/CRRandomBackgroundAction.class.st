@@ -5,7 +5,7 @@ I'm actually only intended to use for testing, but can be used if someone would 
 Class {
 	#name : #CRRandomBackgroundAction,
 	#superclass : #CRAction,
-	#category : #'CR-Graph-CR-Graph'
+	#category : #'CR-Graph-Action'
 }
 
 { #category : #initialization }

@@ -73,6 +73,8 @@ CRNode_2 >> highlightOutGoingEdges [
 CRNode_2 >> initialize [
 	super initialize.
 	
+	self graph beNode.
+	
 	self makeDraggable.
 	self highlightOnHover.
 	self openNodeOnShiftClick.

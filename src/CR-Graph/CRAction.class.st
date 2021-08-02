@@ -8,7 +8,7 @@ Class {
 		'event',
 		'block'
 	],
-	#category : #'CR-Graph-CR-Graph'
+	#category : #'CR-Graph-Action'
 }
 
 { #category : #accessing }

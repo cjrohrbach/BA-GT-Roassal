@@ -4,11 +4,12 @@ My main purpose is to be used in class blueprints.
 "
 Class {
 	#name : #CRClassBlueprintCanvas,
-	#superclass : #CRNode,
+	#superclass : #BlElement,
 	#instVars : [
-		'nodes'
+		'nodes',
+		'model'
 	],
-	#category : #'CR-Graph-CR-Graph'
+	#category : #'CR-Graph-NodeShape'
 }
 
 { #category : #accessing }
@@ -55,7 +56,7 @@ CRClassBlueprintCanvas >> initialize [
 	self clipChildren: false.
 
 	self border: (BlBorder paint: Color darkGray width: 1).
-	"self background: Color white."
+	self background: (Color white).
 	self layout: (BlGridLayout new columnCount:5; cellSpacing: 20).
 	
 	^self
@@ -68,7 +69,6 @@ CRClassBlueprintCanvas >> model: anObject [
 	I add the model as toolTipContent.
 "
 	model := anObject.
-	toolTipContent := model.
 	self createLabel.
 ]
 
@@ -77,6 +77,11 @@ CRClassBlueprintCanvas >> removeHighlight [
 "I remove all highlights from my nodes and mine"
 	super removeHighlight.
 	nodes removeAllHighlights
+]
+
+{ #category : #accessing }
+CRClassBlueprintCanvas >> requiersModel [
+	^true
 ]
 
 { #category : #accessing }
