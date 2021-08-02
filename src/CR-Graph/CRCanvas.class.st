@@ -128,6 +128,15 @@ CRCanvas >> getNodes [
 	^nodes collectAll: [:n | n getNodes]
 ]
 
+{ #category : #accessing }
+CRCanvas >> holdsNodes [
+	"
+	I return true if I have nodes as children.
+	In this case I should implement a removeHighlight method wich removes all highlights from my children nodes.
+	"
+	^true
+]
+
 { #category : #initialization }
 CRCanvas >> initialize [
 	super initialize.
@@ -209,7 +218,6 @@ CRCanvas >> paint [
 { #category : #accessing }
 CRCanvas >> removeHighlight [
 "I remove the highlights of all nodes that I contain."
-	super removeHighlight.
 	nodes removeAllHighlights
 ]
 

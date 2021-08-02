@@ -48,6 +48,15 @@ CRClassBlueprintCanvas >> getNodes [
 	^nodes
 ]
 
+{ #category : #accessing }
+CRClassBlueprintCanvas >> holdsNodes [
+	"
+	I return true if I have nodes as children.
+	In this case I should implement a removeHighlight method wich removes all highlights from my children nodes.
+	"
+	^true
+]
+
 { #category : #initialization }
 CRClassBlueprintCanvas >> initialize [
 	super initialize.
@@ -85,7 +94,6 @@ CRClassBlueprintCanvas >> model: anObject [
 { #category : #accessing }
 CRClassBlueprintCanvas >> removeHighlight [
 "I remove all highlights from my nodes and mine"
-	super removeHighlight.
 	nodes removeAllHighlights
 ]
 

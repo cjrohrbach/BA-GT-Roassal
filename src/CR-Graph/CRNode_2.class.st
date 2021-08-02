@@ -132,6 +132,7 @@ CRNode_2 >> openNodeOnShiftClick [
 { #category : #highlighting }
 CRNode_2 >> removeHighlight [
 	self background: (Color transparent).
+	(centerElement holdsNodes) ifTrue: [centerElement removeHighlight].
 	isMarked := false.
 ]
 
