@@ -6,7 +6,8 @@ Class {
 	#name : #CRLineElement,
 	#superclass : #BlLineElement,
 	#instVars : [
-		'group'
+		'group',
+		'originalBorder'
 	],
 	#category : #'CR-Graph-CR-Graph'
 }
@@ -29,6 +30,13 @@ CRLineElement >> group: aCRGroup [
 	group := aCRGroup
 ]
 
+{ #category : #accessing }
+CRLineElement >> highlight [
+	originalBorder := self border.
+	self border: (BlBorder paint: (Color black) width: 1).
+	self toAnchor referenceElement parent highlightAsConnected
+]
+
 { #category : #initialization }
 CRLineElement >> initialize [
 	super initialize.
@@ -43,6 +51,12 @@ CRLineElement >> initialize [
 			
 	
 	^self
+]
+
+{ #category : #accessing }
+CRLineElement >> removeHighlight [
+	self border: originalBorder.
+	self toAnchor referenceElement parent removeHighlight
 ]
 
 { #category : #accessing }

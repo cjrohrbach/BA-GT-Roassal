@@ -38,19 +38,18 @@ CRPointBuilder >> createShapeFor: obj [
 	Therfore I create a new CRpoint, add the object as model
 	and then adapt the point to match the specifications.
 "
-	| result |
-	result := CRPoint new 
-			model: obj.
-		size ifNotNil: [result size: ((self evaluate: size on: obj) asPoint)].
-		background ifNotNil: [result color: (self evaluate: background on: obj)].
-		toolTipContent ifNotNil: [result toolTipContent: (self evaluate: toolTipContent on: obj)].
+	| shape |
+	shape := CRPoint new.
+		size ifNotNil: [shape size: ((self evaluate: size on: obj) asPoint)].
+		background ifNotNil: [shape color: (self evaluate: background on: obj)].
+		toolTipContent ifNotNil: [shape toolTipContent: (self evaluate: toolTipContent on: obj)].
 		
 		(borderWidth notNil and: [borderColor notNil])
-			ifTrue: [result border: (BlBorder paint:(self evaluate: borderColor on: obj) width: (self evaluate: borderWidth on: obj))]
+			ifTrue: [shape border: (BlBorder paint:(self evaluate: borderColor on: obj) width: (self evaluate: borderWidth on: obj))]
 			ifFalse: [
-				borderWidth ifNotNil: [result border: (BlBorder paint: Color black width: (self evaluate: borderWidth on: obj))].
-				borderColor ifNotNil: [result border: (BlBorder paint: (self evaluate: borderColor on: obj) width: 4)]].
-		^ result
+				borderWidth ifNotNil: [shape border: (BlBorder paint: Color black width: (self evaluate: borderWidth on: obj))].
+				borderColor ifNotNil: [shape border: (BlBorder paint: (self evaluate: borderColor on: obj) width: 4)]].
+		^ shape
 ]
 
 { #category : #initialization }

@@ -46,20 +46,24 @@ CRBoxBuilder >> createShapeFor: obj [
 "
 	I create a CRCicle with the given object as model according to the stored specification.
 "
-	| result |
-	result := CRBox new 
-			model: obj.
-		width ifNotNil: [result width: (self evaluate: width on: obj)].
-		height ifNotNil: [result height: (self evaluate: height on: obj)].
-		background ifNotNil: [result color: (self evaluate: background on: obj)].
-		toolTipContent ifNotNil: [result toolTipContent: (self evaluate: toolTipContent on: obj)].
+	| shape |
+	shape := CRBox new.
 		
-		(borderWidth notNil and: [borderColor notNil])
-			ifTrue: [result border: (BlBorder paint:(self evaluate: borderColor on: obj) width: (self evaluate: borderWidth on: obj))]
-			ifFalse: [
-				borderWidth ifNotNil: [result border: (BlBorder paint: Color black width: (self evaluate: borderWidth on: obj))].
-				borderColor ifNotNil: [result border: (BlBorder paint: (self evaluate: borderColor on: obj) width: 4)]].
-		^ result
+	width ifNotNil: [shape width: (self evaluate: width on: obj)].
+	height ifNotNil: [shape height: (self evaluate: height on: obj)].
+	background ifNotNil: [shape color: (self evaluate: background on: obj)].
+		
+	(borderWidth notNil and: [borderColor notNil])
+		ifTrue: [
+			shape border: (BlBorder paint:(self evaluate: borderColor on: obj) width: (self evaluate: borderWidth on: obj))
+		]
+		ifFalse: [
+			borderWidth ifNotNil: [shape border: (BlBorder paint: Color black width: (self evaluate: borderWidth on: obj))].
+			borderColor ifNotNil: [shape border: (BlBorder paint: (self evaluate: borderColor on: obj) width: 4)]
+		].
+	
+	
+	^ shape
 ]
 
 { #category : #accessing }

@@ -68,8 +68,14 @@ CRShapeBuilder >> shapesOn: someObjects [
 	| group |
 	
 	group := CRGroup new.
-	group addAll: (someObjects collect: [ :obj | 
-		self createShapeFor: obj
+	group addAll: (someObjects collect: [ :obj | | node |
+		node := CRNode_2 new
+			shape:(self createShapeFor: obj);
+			model: obj.
+			
+		toolTipContent ifNotNil: [node toolTipContent: (self evaluate: toolTipContent on: obj)].
+		
+		node
 		]).
 		
 	^ group

@@ -4,14 +4,31 @@ I'm just a BlElement with BlRectangleGeometry.
 "
 Class {
 	#name : #CRBox,
-	#superclass : #CRNode,
+	#superclass : #BlElement,
+	#traits : 'TCRShape',
+	#classTraits : 'TCRShape classTrait',
 	#instVars : [
 		'height',
 		'width',
 		'color'
 	],
-	#category : #'CR-Graph-CR-Graph'
+	#category : #'CR-Graph-NodeShape'
 }
+
+{ #category : #'as yet unclassified' }
+CRBox >> addToolTip: content [
+	| label labelText |
+	label := [BrLabel new aptitude: 
+		BrGlamorousLabelAptitude new  
+			glamorousRegularFontAndSize;
+			alignCenter;
+			text: content].
+		
+	self aptitude: (BrGlamorousWithTooltipAptitude new
+		showDelay: 0;
+		hideDelay: 0;
+		contentStencil: label)
+]
 
 { #category : #accessing }
 CRBox >> gtMondrianShape [

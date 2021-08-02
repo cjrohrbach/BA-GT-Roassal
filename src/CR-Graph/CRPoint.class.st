@@ -3,8 +3,8 @@ I am a CRNode with BlCircle geometry and filled background.
 "
 Class {
 	#name : #CRPoint,
-	#superclass : #CRNode,
-	#category : #'CR-Graph-CR-Graph'
+	#superclass : #BlElement,
+	#category : #'CR-Graph-NodeShape'
 }
 
 { #category : #accessing }

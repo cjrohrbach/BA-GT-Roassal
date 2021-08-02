@@ -3,7 +3,7 @@ I am the canvas. i hold all elements and I'm the element that is displayed.
 "
 Class {
 	#name : #CRCanvas,
-	#superclass : #CRNode,
+	#superclass : #BlElement,
 	#instVars : [
 		'nodes',
 		'edges',
@@ -58,6 +58,7 @@ CRCanvas >> canvasAsNode [
 	self openMondrianOnClick.
 	self graph beNode.
 	self border: (BlBorder paint: Color black width: 2).
+	self background: (Color white).
 	^self
 ]
 
@@ -112,8 +113,9 @@ CRCanvas >> getNodes [
 
 { #category : #initialization }
 CRCanvas >> initialize [
-	super initializeForCanvas.
-	self removeHighlightOnClick.
+	super initialize.
+	"super initializeForCanvas."
+	"self removeHighlightOnClick."
 	
 	self aptitude:
 			(BrGlamorousWithContextMenuAptitude

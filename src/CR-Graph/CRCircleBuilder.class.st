@@ -45,19 +45,24 @@ CRCircleBuilder >> createShapeFor: obj [
 "
 	I create a CRCicle with the given object as model according to the stored specification.
 "
-	| result |
-	result := CRCircle new 
-			model: obj.
-		size ifNotNil: [result size: ((self evaluate: size on: obj) asPoint)].
-		background ifNotNil: [result color: (self evaluate: background on: obj)].
-		toolTipContent ifNotNil: [result toolTipContent: (self evaluate: toolTipContent on: obj)].
+	| shape |
+	shape := CRCircle new.
+	size ifNotNil: [shape size: ((self evaluate: size on: obj) asPoint)].
+	background ifNotNil: [shape color: (self evaluate: background on: obj)].
 		
-		(borderWidth notNil and: [borderColor notNil])
-			ifTrue: [result border: (BlBorder paint:(self evaluate: borderColor on: obj) width: (self evaluate: borderWidth on: obj))]
-			ifFalse: [
-				borderWidth ifNotNil: [result border: (BlBorder paint: Color black width: (self evaluate: borderWidth on: obj))].
-				borderColor ifNotNil: [result border: (BlBorder paint: (self evaluate: borderColor on: obj) width: 4)]].
-		^ result
+	(borderWidth notNil and: [borderColor notNil])
+		ifTrue: [
+			shape border: (BlBorder paint:(self evaluate: borderColor on: obj) width: (self evaluate: borderWidth on: obj))
+		]
+		ifFalse: [
+			borderWidth ifNotNil: [
+				shape border: (BlBorder paint: Color black width: (self evaluate: borderWidth on: obj))
+			].
+			borderColor ifNotNil: [
+				shape border: (BlBorder paint: (self evaluate: borderColor on: obj) width: 4)
+			]
+		].
+		^ shape
 ]
 
 { #category : #initialization }

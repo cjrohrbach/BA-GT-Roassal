@@ -3,8 +3,8 @@ I am a CRNode with BlCircle geometry
 "
 Class {
 	#name : #CRCircle,
-	#superclass : #CRNode,
-	#category : #'CR-Graph'
+	#superclass : #BlElement,
+	#category : #'CR-Graph-NodeShape'
 }
 
 { #category : #accessing }

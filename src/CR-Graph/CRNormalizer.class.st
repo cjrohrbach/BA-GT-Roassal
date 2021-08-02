@@ -13,7 +13,7 @@ Class {
 		'from',
 		'attributeBlock'
 	],
-	#category : #'CR-Graph-CR-Graph'
+	#category : #'CR-Graph-Normalizer'
 }
 
 { #category : #accessing }
@@ -101,7 +101,7 @@ CRNormalizer >> nodes: someCRNodes [
 { #category : #accessing }
 CRNormalizer >> normalize [
 "Apply the normlaizer to the whole nodes provided"
-	nodes do: [:node | attributeBlock cull: node cull: (self valueFor: node)]
+	nodes do: [:node | attributeBlock cull: (node centerElement) cull: (self valueFor: node)]
 	
 ]
 

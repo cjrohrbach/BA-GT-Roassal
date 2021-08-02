@@ -12,10 +12,17 @@ Trait {
 		'originalBorder',
 		'model',
 		'isHighlighted',
-		'borderBeforeHighlight'
+		'borderBeforeHighlight',
+		'outGoingEdges'
 	],
 	#category : #'CR-Graph-CR-Graph'
 }
+
+{ #category : #accessing }
+TCRNode >> addOutGoingEdge: anEdge [
+	outGoingEdges add: anEdge.
+	
+]
 
 { #category : #accessing }
 TCRNode >> addToolTip [
@@ -52,40 +59,6 @@ TCRNode >> getNodes [
 ]
 
 { #category : #accessing }
-TCRNode >> group [
-	"Return the CRBindingGroup I was last added to"
-	^group
-]
-
-{ #category : #accessing }
-TCRNode >> group: aCRGroup [
-	"Setter for the group. group is used to keep track of the CRBindingGroup I belong to."
-	group := aCRGroup
-]
-
-{ #category : #accessing }
-TCRNode >> highlight [
-	"I change my border color to highlight myself, i.e. when I'm clicked on and my model opens"
-	isDebugViewActive ifTrue: [
-		borderBeforeHighlight := originalBorder.
-	]
-	ifFalse: [
-		borderBeforeHighlight := self border.
-	].
-
-	self border: (BlBorder paint: (Color green alpha: 0.5) width: ((self extent x) / 10)).
-	isHighlighted := true.
-]
-
-{ #category : #accessing }
-TCRNode >> highlightOnClick [
-	"Add eventHandler to highlight myself when clicked on. 
-	This is done trough the group because other highlighted nodes first have to have their highlight removed.
-	"
-	self addEventFilterOn: BlClickEvent do: [group highlightElement: self].
-]
-
-{ #category : #accessing }
 TCRNode >> makeDraggable [
 	"Add a eventHandler that makes me draggable"
 	self addEventHandler: BlPullHandler new allowOutOfBounds.
@@ -114,13 +87,6 @@ TCRNode >> openNodeOnShiftClick [
 		(e modifiers isShift) ifTrue: [ e target phlow spawnObject: self]
 		ifFalse: [e target phlow spawnObject: model].
 	]
-]
-
-{ #category : #accessing }
-TCRNode >> removeHighlight [
-	"Reset my border to the original one to remove my highlight"
-	self border: borderBeforeHighlight.
-	isHighlighted := false.
 ]
 
 { #category : #accessing }

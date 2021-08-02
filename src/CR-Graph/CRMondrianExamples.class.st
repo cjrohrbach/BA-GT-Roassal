@@ -66,7 +66,6 @@ CRMondrianExamples >> edgesToHalf [
 		with: (1 to: 10).
 	m edge connectTo: [:x | x/2].
 	
-	
 	^m
 ]
 
@@ -245,10 +244,11 @@ CRMondrianExamples >> preBuiltNode [
 	<gtExample>
 	| node mondrian |
 	
-	node := CRBox new
-		size: 50@100;
-		background: Color blue;
-		border: (BlBorder paint: (Color gray) width: 5);
+	node := CRNode_2 new
+		shape: (CRBox new
+			size: 50@100;
+			background: Color blue;
+			border: (BlBorder paint: (Color gray) width: 5));
 		model: 'test Node'.
 	
 	mondrian := CRMondrian new.

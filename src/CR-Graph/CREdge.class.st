@@ -75,16 +75,19 @@ CREdge >> createGraphEdgeAndAddConstraintsFrom: fromNode to: toNode [
 CREdge >> createVisibleEdgeFrom: fromNode to: toNode [
 "I create the actual line between the two nodes. Therefore I use the edge shape and the provided specifications."
 
-	| line |
+	| line l |
 	line := edgeShape new.
+	"l := CRNode_2 new shape: (line)."
 	
 	width ifNotNil: [line width: (width)].
 	color ifNotNil: [line color: (color)].
 	
 	"line fromAnchor: (fromAnchorPosition element: fromNode)."
 	"line toAnchor: (toAnchorPosition element: toNode)."
-	line fromAnchor: (BlNearestPositionBoundsAnchor nearestTo: toNode from: fromNode).
-	line toAnchor: (BlNearestPositionBoundsAnchor nearestTo: fromNode from: toNode).
+	line fromAnchor: (BlNearestPositionBoundsAnchor nearestTo: toNode centerElement from: fromNode centerElement).
+	line toAnchor: (BlNearestPositionBoundsAnchor nearestTo: fromNode centerElement from: toNode centerElement).
+	
+	fromNode addOutGoingEdge: line.
 	
 	^ line
 ]

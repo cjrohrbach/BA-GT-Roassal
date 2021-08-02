@@ -11,11 +11,17 @@ Class {
 }
 
 { #category : #accessing }
+CRNode >> asHighlightable [
+	^(CRHighlightable createHighlightable: self)
+]
+
+{ #category : #accessing }
 CRNode >> initialize [
 	super initialize.
 	self clipChildren: false.
 	isDebugViewActive := false.
 	isHighlighted := false.
+	outGoingEdges := OrderedCollection new.
 	
 	self addToolTip.
 	self makeDraggable.
@@ -34,5 +40,6 @@ CRNode >> initializeForCanvas [
 	self clipChildren: false.
 	isDebugViewActive := false.
 	isHighlighted := false.
+	outGoingEdges := OrderedCollection new.
 	^self
 ]

@@ -64,7 +64,7 @@ CRGroup >> highlightElement: aNode [
 "
 	highlightedNode ifNotNil: [ highlightedNode removeHighlight].
 	highlightedNode := aNode.
-	aNode highlight.
+	aNode markAsClicked.
 ]
 
 { #category : #initialization }

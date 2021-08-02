@@ -8,28 +8,15 @@ I extend ${class:BlTextElement}$ and implement ${class:TCRNode}$.
 Class {
 	#name : #CRLabel,
 	#superclass : #BlTextElement,
-	#traits : 'TCRNode',
-	#classTraits : 'TCRNode classTrait',
-	#category : #'CR-Graph-CR-Graph'
+	#instVars : [
+		'model'
+	],
+	#category : #'CR-Graph-NodeShape'
 }
-
-{ #category : #accessing }
-CRLabel >> group [
-	"Return the CRBindingGroup I was last added to"
-	^group
-]
 
 { #category : #initialization }
 CRLabel >> initialize [
 	super initialize.
-	
-	self graph beNode.
-	self makeDraggable.
-	self openNodeOnShiftClick.
-	self highlightOnClick.
-	
-	isDebugViewActive := false.
-	isHighlighted := false.
 	
 	self background: Color white.
 	self margin: (BlInsets all: 20).
@@ -49,6 +36,14 @@ CRLabel >> model [
 CRLabel >> model: anObject [
 "I am a setter method for the model. I add the model as toolTipContent and as text that I display"
 	model := anObject.
-	toolTipContent := model.
 	self text: model asRopedText glamorousRegularFont.
+]
+
+{ #category : #accessing }
+CRLabel >> requiersModel [
+"
+	Since my text should correspond with the model I represent, I require the model
+"
+
+	^true
 ]

@@ -4,7 +4,7 @@ I can be used to normalize colors over a scope
 Class {
 	#name : #CRColorNormalizer,
 	#superclass : #CRNormalizer,
-	#category : #'CR-Graph-CR-Graph'
+	#category : #'CR-Graph-Normalizer'
 }
 
 { #category : #accessing }
