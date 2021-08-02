@@ -5,8 +5,6 @@ I'm just a BlElement with BlRectangleGeometry.
 Class {
 	#name : #CRBox,
 	#superclass : #BlElement,
-	#traits : 'TCRShape',
-	#classTraits : 'TCRShape classTrait',
 	#instVars : [
 		'height',
 		'width',

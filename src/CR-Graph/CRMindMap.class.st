@@ -1,7 +1,5 @@
 Class {
 	#name : #CRMindMap,
-	#superclass : #CRNode,
-	#traits : 'TCRNode',
-	#classTraits : 'TCRNode classTrait',
+	#superclass : #AnObsoleteCRNode,
 	#category : #'CR-Graph-CR-Graph'
 }

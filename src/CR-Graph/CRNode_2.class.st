@@ -1,10 +1,13 @@
 Class {
 	#name : #'CRNode_2',
-	#superclass : #CRHighlightable,
-	#traits : 'TCRNode',
-	#classTraits : 'TCRNode classTrait',
+	#superclass : #BlElement,
 	#instVars : [
-		'isMarked'
+		'isMarked',
+		'model',
+		'toolTipContent',
+		'outGoingEdges',
+		'group',
+		'centerElement'
 	],
 	#category : #'CR-Graph-CR-Graph'
 }
@@ -31,6 +34,38 @@ CRNode_2 >> addToolTip [
 		showDelay: 0;
 		hideDelay: 0;
 		contentStencil: label)
+]
+
+{ #category : #accessing }
+CRNode_2 >> centerElement [
+	^centerElement
+]
+
+{ #category : #accessing }
+CRNode_2 >> centerElement: aElement [
+	centerElement := aElement.
+	self addChild: aElement.
+]
+
+{ #category : #accessing }
+CRNode_2 >> getNodes [
+	"
+	I return myself in a collection.
+	This method is overritten when the node contains other nodes, in this case it has to return all subnodes as a collection.
+	"
+	^ {self}
+]
+
+{ #category : #accessing }
+CRNode_2 >> group [
+"Return the CRBindingGroup I was last added to"
+	^group
+]
+
+{ #category : #accessing }
+CRNode_2 >> group: aCRBindingGroup [
+"Setter for the group. group is used to keep track of the CRBindingGroup I belong to."
+	group := aCRBindingGroup
 ]
 
 { #category : #highlighting }
@@ -73,6 +108,16 @@ CRNode_2 >> highlightOutGoingEdges [
 CRNode_2 >> initialize [
 	super initialize.
 	
+	self geometry: (BlRoundedRectangleGeometry cornerRadius: 5).
+	self layout: BlFrameLayout new.
+	
+	self constraintsDo: [:c |
+		c vertical fitContent.
+		c horizontal fitContent.
+	].
+	
+	self padding: (BlInsets all: 5).
+	
 	self graph beNode.
 	
 	self makeDraggable.
@@ -104,6 +149,12 @@ CRNode_2 >> markOnClick [
 	This is done trough the group because other highlighted nodes first have to have their highlight removed.
 	"
 	self addEventFilterOn: BlClickEvent do: [group highlightElement: self].
+]
+
+{ #category : #accessing }
+CRNode_2 >> model [
+"I am getter method for the model"
+	^model
 ]
 
 { #category : #accessing }
@@ -145,4 +196,10 @@ CRNode_2 >> removeHighlightOutGoingEdges [
 CRNode_2 >> shape: aElement [
 	self centerElement: aElement.
 	self addToolTip.
+]
+
+{ #category : #accessing }
+CRNode_2 >> toolTipContent: someText [
+	"Add the content for the toolTip. This can be a attribute, or just text "
+	toolTipContent := someText.
 ]
