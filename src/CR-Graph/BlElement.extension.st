@@ -16,6 +16,16 @@ BlElement >> el_ToggleDebugView [
 ]
 
 { #category : #'*CR-Graph' }
+BlElement >> holdsNodes [
+	"I return true if I have nodes as children.
+	If this is the case I have to implement a removeHighlight method that removes all highlights from my nodes.
+	"
+	
+	^false
+	
+]
+
+{ #category : #'*CR-Graph' }
 BlElement >> requiersModel [
 "
 	Default is false.
