@@ -1,3 +1,14 @@
+"
+I represent a Node Object.
+
+My size is changed according to the centerElement (also called shape) thats added to me.
+The centerElement can be any BlElement, when its added to me it becomes a node.
+It is important to change the center element if you want to change my shape or color, since I myself am actually only used to have a nice background that to use as highlight when the node is clicked on or hovered over.
+
+{{gtExample:CRNode_2>>#example}}
+
+
+"
 Class {
 	#name : #'CRNode_2',
 	#superclass : #BlElement,
@@ -45,6 +56,21 @@ CRNode_2 >> centerElement [
 CRNode_2 >> centerElement: aElement [
 	centerElement := aElement.
 	self addChild: aElement.
+]
+
+{ #category : #accessing }
+CRNode_2 >> example [
+	<gtExample>
+	| node shape | 
+	node := CRNode_2 new
+		model: 'some Model';
+		group: CRBindingGroup new.
+	shape := BlElement new
+		background: Color blue;
+		size: 100@100.
+	
+	node shape: shape.
+	^node
 ]
 
 { #category : #accessing }
