@@ -8,8 +8,8 @@ Class {
 Presentation_1 >> classesAsCollection [
 	| col |
 	col := OrderedCollection new.
-	col addAll: CRNode subclasses.
-	col add: CRNode.
+	col addAll: CRShapeBuilder subclasses.
+	col add: CRShapeBuilder.
 	^col
 ]
 
