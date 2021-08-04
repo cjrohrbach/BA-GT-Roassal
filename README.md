@@ -32,4 +32,4 @@ This gives the following result:
 <img width="1156" alt="image" src="https://user-images.githubusercontent.com/393742/128203947-f08df5ad-fa13-4015-8e7e-3b9d30c76611.png">
 
 
-Many more examples are offered by the class `CRMondrianExamples`. 
+Many more examples are offered by the class [`CRMondrianExamples`](https://github.com/cjrohrbach/BA-GT-Roassal/blob/master/src/CR-Graph/CRMondrianExamples.class.st)
