@@ -141,6 +141,12 @@ CREdgeBuilder >> passAttributesToEdge: aEdge [
 ]
 
 { #category : #accessing }
+CREdgeBuilder >> sigmoid [
+"I change the shape of the edges to sigmoid"
+	edgeShape := CRSigmoidElement.
+]
+
+{ #category : #accessing }
 CREdgeBuilder >> width: aValue [
 "I am a setter method for the width "
 	width := aValue

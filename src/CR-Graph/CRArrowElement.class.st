@@ -4,7 +4,7 @@ I am a CRLineElement with an arrowhead
 Class {
 	#name : #CRArrowElement,
 	#superclass : #CRLineElement,
-	#category : #'CR-Graph-CR-Graph'
+	#category : #'CR-Graph-EdgeShape'
 }
 
 { #category : #accessing }
