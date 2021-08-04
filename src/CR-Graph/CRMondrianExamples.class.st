@@ -279,6 +279,17 @@ CRMondrianExamples >> randomBackgroundAction [
 ]
 
 { #category : #accessing }
+CRMondrianExamples >> sigmoidEdges [
+	<gtExample>
+	| m |
+	m := CRMondrian new.
+	m nodes label text: #model; with: (MindMapExamples new simpleMindMapStructure allNodesAsCollection).
+	m edge sigmoid; connectFrom: #parent.
+	m layout tree.
+	^m
+]
+
+{ #category : #accessing }
 CRMondrianExamples >> smallAndBigCircles [
 	<gtExample>
 	| c |
