@@ -9,10 +9,17 @@ Class {
 	#name : #CRLabel,
 	#superclass : #BlTextElement,
 	#instVars : [
-		'model'
+		'model',
+		'modelAsText'
 	],
 	#category : #'CR-Graph-NodeShape'
 }
+
+{ #category : #accessing }
+CRLabel >> content: something [
+	modelAsText := false.
+	self text: something asRopedText glamorousRegularFont.
+]
 
 { #category : #initialization }
 CRLabel >> initialize [
@@ -23,6 +30,8 @@ CRLabel >> initialize [
 	self padding: (BlInsets all: 5).
 	self effect: (BlGaussianShadowEffect color: (Color gray alpha: 0.5) width: 2 offset: 0@0).
 	self defaultFontSize: 20.
+	
+	modelAsText := true.
 	^self
 ]
 
@@ -36,7 +45,7 @@ CRLabel >> model [
 CRLabel >> model: anObject [
 "I am a setter method for the model. I add the model as toolTipContent and as text that I display"
 	model := anObject.
-	self text: model asRopedText glamorousRegularFont.
+	modelAsText ifTrue: [self text: model asRopedText glamorousRegularFont].
 ]
 
 { #category : #accessing }

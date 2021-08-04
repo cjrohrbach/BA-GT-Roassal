@@ -5,7 +5,8 @@ Class {
 	#name : #CRLabelBuilder,
 	#superclass : #CRShapeBuilder,
 	#instVars : [
-		'background'
+		'background',
+		'text'
 	],
 	#category : #'CR-Graph-CR-Graph'
 }
@@ -20,9 +21,9 @@ CRLabelBuilder >> background: aColorOrArgBlock [
 CRLabelBuilder >> createShapeFor: obj [
 "I create a new label for the given object with the given color"
 	| result |
-	result := CRLabel new 
-			model: obj.
-		background ifNotNil: [result background: (self evaluate: background on: obj)].
+	result := CRLabel new.
+	background ifNotNil: [result background: (self evaluate: background on: obj)].
+	text ifNotNil: [result content: (self evaluate: text on: obj)].
 		^ result
 ]
 
@@ -30,6 +31,11 @@ CRLabelBuilder >> createShapeFor: obj [
 CRLabelBuilder >> initialize [
 	super initialize.
 	^self
+]
+
+{ #category : #accessing }
+CRLabelBuilder >> text: someTextOrBlock [
+	text := someTextOrBlock
 ]
 
 { #category : #accessing }

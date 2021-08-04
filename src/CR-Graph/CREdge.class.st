@@ -52,6 +52,10 @@ CREdge >> connectionBlock: aBlockOrASymbol [
 { #category : #accessing }
 CREdge >> createEdgeFrom: fromNode to: toNode [
 "I delegate the creation of the edge. Therefore I use methods creating the graph constraints as well as the visible edge"
+
+	"check if from and to node are the same"
+	(fromNode = toNode) ifTrue: [^nil].
+	
 	self createGraphEdgeAndAddConstraintsFrom: fromNode to: toNode.
 	^(self createVisibleEdgeFrom: fromNode to: toNode)
 ]
