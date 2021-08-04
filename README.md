@@ -14,3 +14,5 @@ Metacello new
 	repository: 'github://cjrohrbach/BA-GT-Roassal/src';
 	load
  ```
+
+A number of examples are offered by the class `CRMondrianExamples`. 
