@@ -22,11 +22,11 @@ CRMondrianExamples >> classBlueprint [
 	view := CRMondrian new.
 	view nodes classBlueprint 
 		with: (coll).
-	view edge 
+	view edges 
 		width: 5; 
 		forAll: [:x | x isClass]; 
 		connectFrom: [:x | x superclass].
-	view edge 
+	view edges 
 		arrow;
 		color: Color blue;
 		forAll: [:x | x class = CompiledMethod]; 
@@ -68,7 +68,7 @@ CRMondrianExamples >> edgesToHalf [
 	m nodes
 		point
 		with: (1 to: 10).
-	m edge connectTo: [:x | x/2].
+	m edges connectTo: [:x | x/2].
 	
 	^m
 ]
@@ -81,7 +81,7 @@ CRMondrianExamples >> edgesToHalfWithArrow [
 	m nodes
 		label
 		with: (1 to: 10).
-	m edge
+	m edges
 		arrow;
 		connectFromAll: [:x | x//2].
 	m layout tree.
@@ -185,12 +185,12 @@ CRMondrianExamples >> mondrianAsNodeWithEdges [
 				q nodes 
 					box
 					with: (1 to: 9).
-				q edge connectFromAll: [:x | x//2].
+				q edges connectFromAll: [:x | x//2].
 				q layout tree.
 				q
 			];
 			with: ( 1 to: 9 ).
-	m edge connectFromAll: [:x | x//2].
+	m edges connectFromAll: [:x | x//2].
 	m layout tree.
 	^m
 ]
@@ -237,7 +237,7 @@ CRMondrianExamples >> normalizerAndForceLayout [
 		normalizeWidth: [:x | x slots size];
 		normalizeColor: #linesOfCode;
 		with: Collection withAllSubclasses.
-	m edge connectToAll: #dependentClasses.
+	m edges connectToAll: #dependentClasses.
 	m layout force.
 
 	^m
@@ -288,7 +288,7 @@ CRMondrianExamples >> sigmoidEdges [
 	| m |
 	m := CRMondrian new.
 	m nodes label text: #model; with: (MindMapExamples new simpleMindMapStructure allNodesAsCollection).
-	m edge sigmoid; connectFrom: #parent.
+	m edges sigmoid; connectFrom: #parent.
 	m layout tree.
 	^m
 ]
@@ -323,7 +323,7 @@ CRMondrianExamples >> someConnectedPointsTree [
 	m nodes 
 		point
 		with: (1 to: 100).
-	m edge
+	m edges
 		width: 1; 
 		color: Color gray;
 		connectFrom: [:nb | nb // 2].
@@ -351,7 +351,7 @@ CRMondrianExamples >> systemComplexity [
 		normalizeWidth: [:x | x slots size] from: 5 to: 25;
 		normalizeColor: #linesOfCode;
 		with: (RPackageOrganizer default packageNamed: 'Kernel') classes.
-	m edge connectFrom: #superclass.
+	m edges connectFrom: #superclass.
 	m layout tree.
 	^m
 ]

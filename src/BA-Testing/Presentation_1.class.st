@@ -21,7 +21,7 @@ Presentation_1 >> crMondrianPointLabelColor [
 	m nodes 
 		point
 		with: self classesAsCollection.
-	m edge arrow; connectFrom: #superclass.
+	m edges arrow; connectFrom: #superclass.
 	m layout tree.
 	^m 
 ]
@@ -42,7 +42,7 @@ Presentation_1 >> crMondrianWithMethods [
 			v
 			];
 		with: self classesAsCollection.
-	m edge arrow; forAll: [:x | x isClass]; connectFrom: #superclass.
+	m edges arrow; forAll: [:x | x isClass]; connectFrom: #superclass.
 	m layout tree.
 	^m 
 ]
@@ -57,7 +57,7 @@ x add: CRNode.
 
 m := CRMondrian new.
 m nodes label with: x.
-m edge connectFrom: #superclass.
+m edges connectFrom: #superclass.
 m layout tree.
 
 e1 := (((x) gtViewsFor: GtPhlowView empty) 
@@ -217,7 +217,7 @@ Presentation_1 >> methodForMondrianExplain [
 	coll:= self classesAsCollection.
 	view := CRMondrian new.
 	view nodes label with: (coll).
-	view edge connectFrom: #superclass.
+	view edges connectFrom: #superclass.
 	view layout tree.
 	^ view
 ]

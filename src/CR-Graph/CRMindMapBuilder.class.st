@@ -10,7 +10,7 @@ CRMindMapBuilder >> createShapeFor: obj [
 	
 	circle := CRMondrian new.
 	circle nodes box toolTip: #model; with: (obj getChildren).
-	circle edge connectTo: #parent.
+	circle edges connectTo: #parent.
 	circle layout circle.
 	
 	top := CRMondrian new.
@@ -24,7 +24,7 @@ CRMindMapBuilder >> createShapeFor: obj [
 				con frame vertical alignCenter.
 			]
 			)). 
-	top edge connectFrom: #parent.
+	top edges connectFrom: #parent.
 	top layout custom: BlFrameLayout new.
 		
 	^top createCanvas canvasForView

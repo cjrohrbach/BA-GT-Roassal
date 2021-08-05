@@ -167,7 +167,7 @@ dict
 
 m := CRMondrian new.
 m nodes label with: ((RPackageOrganizer default packageNamed: 'Hospital-Management') classes).
-m edge connectFrom: [:c | 
+m edges connectFrom: [:c | 
 	dict at: c ifAbsent: [nil]].
 m layout.
 ^m

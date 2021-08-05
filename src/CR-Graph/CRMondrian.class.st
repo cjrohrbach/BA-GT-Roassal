@@ -145,7 +145,7 @@ CRMondrian >> createCanvas [
 CRMondrian >> createMindMap: mindMapStructure [
 
 	self nodes label text: #model; with: (mindMapStructure allNodesAsCollection).
-	self edge sigmoid; connectFrom: #parent.
+	self edges sigmoid; connectFrom: #parent.
 	self layout custom:  (GtGraphHorizontalTreeLayout new).
 	^self
 	
@@ -153,6 +153,11 @@ CRMondrian >> createMindMap: mindMapStructure [
 
 { #category : #accessing }
 CRMondrian >> edge [
+	self deprecated: 'This method is deprecated. Use edges instead'
+]
+
+{ #category : #accessing }
+CRMondrian >> edges [
 "
 	I return a new CREdgeBuilder.
 	Since this changes the canvas the cache is deleted.
