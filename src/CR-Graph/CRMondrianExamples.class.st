@@ -287,8 +287,8 @@ CRMondrianExamples >> sigmoidEdges [
 	<gtExample>
 	| m |
 	m := CRMondrian new.
-	m nodes label text: #model; with: (MindMapExamples new simpleMindMapStructure allNodesAsCollection).
-	m edges sigmoid; connectFrom: #parent.
+	m nodes with: (1 to: 20).
+	m edges sigmoid; connectFrom: [:x | x//2].
 	m layout tree.
 	^m
 ]
