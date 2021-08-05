@@ -11,7 +11,7 @@ Class {
 		'borderColor',
 		'background'
 	],
-	#category : #'CR-Graph-CR-Graph'
+	#category : #'CR-Graph-ShapeBuilder'
 }
 
 { #category : #accessing }
@@ -79,106 +79,6 @@ CRBoxBuilder >> height: aValueOrAOneArgBlock [
 CRBoxBuilder >> initialize [
 	super initialize.
 	^self
-]
-
-{ #category : #normalizer }
-CRBoxBuilder >> normalizeColor: anArgBlockOrSymbol [
-"
-	I create a color normalizer using the given 
-	block or symobl as key and some predefined colors
-	as from and to color.
-"
-	| norm |
-	norm := CRColorNormalizer new
-		key: anArgBlockOrSymbol;
-		attribute: [:node :value | node background: value].
-		
-	normalizerCollection add: norm.
-	^norm
-		
-]
-
-{ #category : #normalizer }
-CRBoxBuilder >> normalizeColor: anArgBlockOrSymbol from: fromValue to: toValue [
-"
-	I create a color normalizer using the given block or symbol as key
-	and the fromValue and toValue as from and to color.
-"
-	| norm |
-	norm := self normalizeColor: anArgBlockOrSymbol.
-	norm from: fromValue to: toValue.
-	^norm
-]
-
-{ #category : #normalizer }
-CRBoxBuilder >> normalizeHeight: anArgBlockOrSymbol [
-"
-	I create a height normalizer using the given 
-	block or symobl as key and some predefined heights
-	as from and to value.
-"
-	| norm |
-	
-	norm := CRNormalizer new
-			key: anArgBlockOrSymbol;
-			attribute: [:node :value | node height: value];
-			from: 10;
-			to: 50.
-	
-	normalizerCollection add: norm.
-	^ norm
-]
-
-{ #category : #normalizer }
-CRBoxBuilder >> normalizeHeight: anArgBlockOrSymbol from: fromValue to: toValue [
-"
-	I create a height normalizer using the given block or symbol as key
-	and the fromValue and toValue as from and to value.
-"
-	| norm |
-	norm := self normalizeHeight: anArgBlockOrSymbol.
-	norm from: fromValue to: toValue.
-	^norm
-]
-
-{ #category : #normalizer }
-CRBoxBuilder >> normalizeHeight: anArgBlockOrSymbol from: fromValue to: toValue forAll: aTrueFalseBlock [
-	| norm |
-	norm := self normalizeHeight: anArgBlockOrSymbol from: fromValue to: toValue.
-	norm condition: aTrueFalseBlock.
-	^norm
-]
-
-{ #category : #normalizer }
-CRBoxBuilder >> normalizeWidth: anArgBlockOrSymbol [
-"
-	I create a width normalizer using the given 
-	block or symobl as key and some predefined values
-	as from and to value.
-"
-	| norm |
-	
-	norm := CRNormalizer new
-			key: anArgBlockOrSymbol;
-			attribute: [:node :value | node width: value];
-			from: 10;
-			to: 50.
-
-	normalizerCollection add: norm.
-	
-	^norm
-]
-
-{ #category : #normalizer }
-CRBoxBuilder >> normalizeWidth: anArgBlockOrSymbol from: fromValue to: toValue [
-"
-	I create a width normalizer using the given block or symbol as key
-	and the fromValue and toValue as from and to.
-"
-	| norm |
-	norm := self normalizeWidth: anArgBlockOrSymbol.
-	norm from: fromValue to: toValue.
-	^norm
 ]
 
 { #category : #accessing }

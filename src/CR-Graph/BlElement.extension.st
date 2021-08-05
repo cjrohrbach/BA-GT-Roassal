@@ -1,6 +1,12 @@
 Extension { #name : #BlElement }
 
 { #category : #'*CR-Graph' }
+BlElement >> borderColor: aColor [
+"I change the color of the border"
+	self border: (BlBorder paint: (aColor) width: (self border width))
+]
+
+{ #category : #'*CR-Graph' }
 BlElement >> el_ToggleDebugView [
 	
 	(self userData at: #isDebugViewActive ifAbsentPut: false) ifTrue: [

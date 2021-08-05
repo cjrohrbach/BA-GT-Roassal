@@ -9,7 +9,7 @@ Class {
 	#instVars : [
 		'nodes'
 	],
-	#category : #'CR-Graph-CR-Graph'
+	#category : #'CR-Graph-ShapeBuilder'
 }
 
 { #category : #accessing }

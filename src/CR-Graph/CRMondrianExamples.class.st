@@ -220,7 +220,7 @@ CRMondrianExamples >> normalizeColor [
 	m := CRMondrian new.
 	m nodes
 		box
-		normalizeColor: #linesOfCode;
+		normalizeBackground: #linesOfCode;
 		with: Collection withAllSubclasses.
 	^ m 
 ]
@@ -235,7 +235,7 @@ CRMondrianExamples >> normalizerAndForceLayout [
 		box
 		normalizeHeight: #numberOfMethods;
 		normalizeWidth: [:x | x slots size];
-		normalizeColor: #linesOfCode;
+		normalizeBackground: #linesOfCode;
 		with: Collection withAllSubclasses.
 	m edges connectToAll: #dependentClasses.
 	m layout force.
@@ -349,7 +349,7 @@ CRMondrianExamples >> systemComplexity [
 		box
 		normalizeHeight: #numberOfMethods from: 5 to: 25;
 		normalizeWidth: [:x | x slots size] from: 5 to: 25;
-		normalizeColor: #linesOfCode;
+		normalizeBackground: #linesOfCode;
 		with: (RPackageOrganizer default packageNamed: 'Kernel') classes.
 	m edges connectFrom: #superclass.
 	m layout tree.

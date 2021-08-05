@@ -10,7 +10,7 @@ Class {
 		'borderWidth',
 		'size'
 	],
-	#category : #'CR-Graph-CR-Graph'
+	#category : #'CR-Graph-ShapeBuilder'
 }
 
 { #category : #accessing }
@@ -56,65 +56,6 @@ CRPointBuilder >> createShapeFor: obj [
 CRPointBuilder >> initialize [
 	super initialize.
 	^self
-]
-
-{ #category : #accessing }
-CRPointBuilder >> normalizeColor: anArgBlockOrSymbol [
-"
-	I create a color normalizer using the given 
-	block or symobl as key and some predefined colors
-	as from and to color.
-"
-	| norm |
-	norm := CRColorNormalizer new
-		key: anArgBlockOrSymbol;
-		attribute: [:node :value | node background: value].
-		
-	normalizerCollection add: norm.
-	^norm
-]
-
-{ #category : #accessing }
-CRPointBuilder >> normalizeColor: anArgBlockOrSymbol from: fromValue to: toValue [
-"
-	I create a color normalizer using the given block or symbol as key
-	and the fromValue and toValue as from and to color.
-"
-	| norm |
-	norm := self normalizeColor: anArgBlockOrSymbol.
-	norm from: fromValue to: toValue.
-	^norm
-]
-
-{ #category : #accessing }
-CRPointBuilder >> normalizeSize: anArgBlockOrSymbol [
-"
-	I create a size normalizer using the given 
-	block or symobl as key and some predefined sizes
-	as from and to size.
-"
-	| norm |
-	
-	norm := CRNormalizer new
-			key: anArgBlockOrSymbol;
-			attribute: [:node :value | node size: value@value];
-			from: 10;
-			to: 50.
-	
-	normalizerCollection add: norm.
-	^ norm
-]
-
-{ #category : #accessing }
-CRPointBuilder >> normalizeSize: anArgBlockOrSymbol from: fromValue to: toValue [
-"
-	I create a size normalizer using the given block or symbol as key
-	and the fromValue and toValue as from and to size.
-"
-	| norm |
-	norm := self normalizeSize: anArgBlockOrSymbol.
-	norm from: fromValue to: toValue.
-	^norm
 ]
 
 { #category : #accessing }

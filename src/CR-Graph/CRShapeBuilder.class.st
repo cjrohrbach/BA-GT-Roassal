@@ -9,7 +9,7 @@ Class {
 		'modelCollection',
 		'toolTipContent'
 	],
-	#category : #'CR-Graph-CR-Graph'
+	#category : #'CR-Graph-ShapeBuilder'
 }
 
 { #category : #accessing }
@@ -44,6 +44,22 @@ CRShapeBuilder >> createNodes [
 	^nodes
 ]
 
+{ #category : #normalizer }
+CRShapeBuilder >> createNormalizer: anArgBlockOrSymbol from: fromValue to: toValue forAll: aTrueFalseBlock attribute: aBlockSpecifingTheAttribute [
+	"I create a normlaizer using the given specification"	
+			
+	| norm |
+	norm := CRNormalizer new
+		key: anArgBlockOrSymbol; 
+		attribute: aBlockSpecifingTheAttribute;
+		from: fromValue;  
+		to: toValue;  
+		condition: aTrueFalseBlock.
+
+	normalizerCollection add: norm.
+	^norm
+]
+
 { #category : #'node-creation' }
 CRShapeBuilder >> createShapeFor: obj [
 "I take an model and create and return a node matching the provided specifications. 
@@ -67,9 +83,209 @@ CRShapeBuilder >> initialize [
 	^self
 ]
 
-{ #category : #accessing }
-CRShapeBuilder >> normalize: aKey forAll: aCondition [
+{ #category : #normalizer }
+CRShapeBuilder >> normalizeBackground: anArgBlockOrSymbol [
+"
+	I create a color normalizer using the given 
+	block or symobl as key and some predefined colors
+	as from and to color.
+"
+	^self normalizeBackground: anArgBlockOrSymbol 
+				from: (Color gray lighter lighter lighter lighter lighter) 
+				to: (Color gray darker) 
+				forAll: [ true ]
+		
+]
+
+{ #category : #normalizer }
+CRShapeBuilder >> normalizeBackground: anArgBlockOrSymbol forAll: aTrueFalseBlock [
+"
+	I create a background normalizer using the given 
+	block or symobl as key and some predefined heights
+	as from and to value.
+	The normalizer is only applied to the objects that return true for the trueFalseBlock
+"
 	
+	 ^ self normalizeBackground: anArgBlockOrSymbol 
+				from: (Color gray lighter lighter lighter lighter lighter) 
+				to: (Color gray darker) 
+				forAll: aTrueFalseBlock
+]
+
+{ #category : #normalizer }
+CRShapeBuilder >> normalizeBackground: anArgBlockOrSymbol from: fromValue to: toValue [
+"
+	I create a color normalizer using the given block or symbol as key
+	and the fromValue and toValue as from and to color.
+"
+	^self normalizeBackground: anArgBlockOrSymbol 
+				from: fromValue 
+				to: toValue
+				forAll: [ true ]
+]
+
+{ #category : #normalizer }
+CRShapeBuilder >> normalizeBackground: anArgBlockOrSymbol from: fromValue to: toValue forAll: aTrueFalseBlock [
+"
+	I create a normalizer for the backgroundcolor, according to the specification I'm given
+"
+	| norm |
+	norm := CRColorNormalizer new
+			key: anArgBlockOrSymbol;  
+			from: fromValue;
+			to: toValue;
+			condition: aTrueFalseBlock;  
+			attribute: [ :node : value | node background: value ].
+	normalizerCollection add: norm.
+	^norm
+]
+
+{ #category : #normalizer }
+CRShapeBuilder >> normalizeBorderColor: anArgBlockOrSymbol [
+"
+	I create a color normalizer using the given 
+	block or symobl as key and some predefined colors
+	as from and to color.
+"
+	^self normalizeBorderColor: anArgBlockOrSymbol 
+				from: (Color gray lighter lighter lighter lighter lighter) 
+				to: (Color gray darker) 
+				forAll: [ true ]
+]
+
+{ #category : #normalizer }
+CRShapeBuilder >> normalizeBorderColor: anArgBlockOrSymbol forAll: aTrueFalseBlock [
+"
+	I create a borderColor normalizer using the given 
+	block or symobl as key and some predefined heights
+	as from and to value.
+	The normalizer is only applied to the objects that return true for the trueFalseBlock
+"
+	
+	 ^ self normalizeBorderColor: anArgBlockOrSymbol 
+				from: (Color gray lighter lighter lighter lighter lighter) 
+				to: (Color gray darker) 
+				forAll: aTrueFalseBlock
+]
+
+{ #category : #normalizer }
+CRShapeBuilder >> normalizeBorderColor: anArgBlockOrSymbol from: fromValue to: toValue [
+"
+	I create a bordercolor normalizer using the given block or symbol as key
+	and the fromValue and toValue as from and to color.
+"
+	^self normalizeBorderColor: anArgBlockOrSymbol 
+				from: fromValue 
+				to: toValue
+				forAll: [ true ]
+]
+
+{ #category : #normalizer }
+CRShapeBuilder >> normalizeBorderColor: anArgBlockOrSymbol from: fromValue to: toValue forAll: aTrueFalseBlock [
+"
+	I create a normalizer for the bordercolor, according to the specification I'm given
+"
+	| norm |
+	norm := CRColorNormalizer new
+			key: anArgBlockOrSymbol;  
+			from: fromValue;
+			to: toValue;
+			condition: aTrueFalseBlock;  
+			attribute: [ :node : value | node borderColor: value ] .
+			
+	normalizerCollection add: norm.
+	^norm
+]
+
+{ #category : #normalizer }
+CRShapeBuilder >> normalizeHeight: anArgBlockOrSymbol [
+"
+	I create a height normalizer using the given 
+	block or symobl as key and some predefined heights
+	as from and to value.
+"
+	
+	^ self normalizeHeight: anArgBlockOrSymbol from: 10 to: 50 forAll: [ true ]
+]
+
+{ #category : #normalizer }
+CRShapeBuilder >> normalizeHeight: anArgBlockOrSymbol forAll: aTrueFalseBlock [
+"
+	I create a height normalizer using the given 
+	block or symobl as key and some predefined heights
+	as from and to value.
+	The normalizer is only applied to the objects that return true for the trueFalseBlock
+"
+	
+	 ^ self normalizeHeight: anArgBlockOrSymbol from: 10 to: 50 forAll: aTrueFalseBlock
+]
+
+{ #category : #normalizer }
+CRShapeBuilder >> normalizeHeight: anArgBlockOrSymbol from: fromValue to: toValue [
+"
+	I create a height normalizer using the given block or symbol as key
+	and the fromValue and toValue as from and to value.
+"
+	^self normalizeHeight: anArgBlockOrSymbol from: fromValue to: toValue forAll: [ true ]
+]
+
+{ #category : #normalizer }
+CRShapeBuilder >> normalizeHeight: anArgBlockOrSymbol from: fromValue to: toValue forAll: aTrueFalseBlock [
+"
+	I create a normalizer for the height, according to the specification I'm given
+"
+
+	^self createNormalizer: anArgBlockOrSymbol  
+				from: fromValue  
+				to: toValue 
+				forAll: aTrueFalseBlock  
+				attribute: [ :node : value | node height: value ]
+]
+
+{ #category : #normalizer }
+CRShapeBuilder >> normalizeWdith: anArgBlockOrSymbol forAll: aTrueFalseBlock [
+"
+	I create a width normalizer using the given 
+	block or symobl as key and some predefined heights
+	as from and to value.
+	The normalizer is onlay applied to the objects that return true for the trueFalseBlock
+"
+	
+	 ^ self normalizeWidth: anArgBlockOrSymbol from: 10 to: 50 forAll: aTrueFalseBlock
+]
+
+{ #category : #normalizer }
+CRShapeBuilder >> normalizeWidth: anArgBlockOrSymbol [
+"
+	I create a width normalizer using the given 
+	block or symobl as key and some predefined heights
+	as from and to value.
+"
+	
+	^ self normalizeWidth: anArgBlockOrSymbol from: 10 to: 50 forAll: [ true ]
+]
+
+{ #category : #normalizer }
+CRShapeBuilder >> normalizeWidth: anArgBlockOrSymbol from: fromValue to: toValue [
+"
+	I create a width normalizer using the given block or symbol as key
+	and the fromValue and toValue as from and to value.
+"
+	^self normalizeWidth: anArgBlockOrSymbol from: fromValue to: toValue forAll: [ true ]
+]
+
+{ #category : #normalizer }
+CRShapeBuilder >> normalizeWidth: anArgBlockOrSymbol from: fromValue to: toValue forAll: aTrueFalseBlock [
+"
+	I create a normalizer for the width, according to the specification I'm given
+"
+
+	^self createNormalizer: anArgBlockOrSymbol  
+				from: fromValue  
+				to: toValue 
+				forAll: aTrueFalseBlock  
+				attribute: [ :node : value | node width: value ]
+
 ]
 
 { #category : #'node-creation' }

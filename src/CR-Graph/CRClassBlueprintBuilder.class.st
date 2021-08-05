@@ -4,8 +4,14 @@ I am a ClassBlueprint builder and I'm used to build class blueprints for the giv
 Class {
 	#name : #CRClassBlueprintBuilder,
 	#superclass : #CRShapeBuilder,
-	#category : #'CR-Graph-CR-Graph'
+	#category : #'CR-Graph-ShapeBuilder'
 }
+
+{ #category : #normalizer }
+CRClassBlueprintBuilder >> createNormalizer: anArgBlockOrSymbol from: fromValue to: toValue forAll: aTrueFalseBlock attribute: aBlockSpecifingTheAttribute [
+	"A classblueprint shouldn't be normalized"
+	self shouldNotImplement 
+]
 
 { #category : #accessing }
 CRClassBlueprintBuilder >> createShapeFor: obj [
