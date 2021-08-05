@@ -31,15 +31,11 @@ CRClassBlueprintCanvas >> createAndAddLabel [
 { #category : #accessing }
 CRClassBlueprintCanvas >> createLabel [
 "I create the label on top. The label contains the class name"
-	label := BlTextElement new.
-	label background: Color white.
-	label margin: (BlInsets all: 20).
-	label padding: (BlInsets all: 5).
-	label effect: (BlGaussianShadowEffect color: (Color gray alpha: 0.5) width: 5 offset: 0@0).
+	label := CRLabel new.
 	label constraintsDo: [ :con |
 		con grid horizontal span: 5.
 		con grid horizontal alignCenter].
-	label text: 'model' asRopedText.
+	label text: 'model' asRopedText glamorousRegularFont.
 ]
 
 { #category : #accessing }

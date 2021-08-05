@@ -48,14 +48,6 @@ CRLayoutBuilder >> force [
 ]
 
 { #category : #accessing }
-CRLayoutBuilder >> graphviz [
-"I return a new CRGraphvizLayout."
-	layout := CRGraphvizLayout new.
-	
-	^layout.
-]
-
-{ #category : #accessing }
 CRLayoutBuilder >> grid [
 "I return a new CRGridLayout."
 	layout := CRGridLayout new.
