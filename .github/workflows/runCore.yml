@@ -32,4 +32,4 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Install GT and run examples
-        run: bash ./scripts/runG.sh
+        run: bash ./scripts/runCore.sh
