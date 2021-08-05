@@ -12,6 +12,12 @@ Class {
 	#category : #'CR-Graph-CR-Graph'
 }
 
+{ #category : #accessing }
+CRShapeBuilder >> addNormalizer: aCRNormalier [
+	self assert: [aCRNormalier class = CRNormalizer or: aCRNormalier class = CRColorNormalizer] description: 'You need to provide a CRNormalizer'.
+	normalizerCollection add: aCRNormalier.
+]
+
 { #category : #'node-creation' }
 CRShapeBuilder >> applyNormalizer: someNodes [
 "I normalize all provided nodes with the normalizers that were added druing creation."
@@ -59,6 +65,11 @@ CRShapeBuilder >> initialize [
 	super initialize.
 	normalizerCollection := OrderedCollection new.
 	^self
+]
+
+{ #category : #accessing }
+CRShapeBuilder >> normalize: aKey forAll: aCondition [
+	
 ]
 
 { #category : #'node-creation' }

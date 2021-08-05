@@ -194,6 +194,11 @@ CRNode_2 >> model: anObject [
 	].
 ]
 
+{ #category : #accessing }
+CRNode_2 >> noToolTip [
+	
+]
+
 { #category : #createProperties }
 CRNode_2 >> openNodeOnShiftClick [
 	"Add a EventHandler that opens my model when I am clicked on. 

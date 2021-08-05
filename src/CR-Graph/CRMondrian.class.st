@@ -143,15 +143,11 @@ CRMondrian >> createCanvas [
 
 { #category : #accessing }
 CRMondrian >> createMindMap: mindMapStructure [
-	| m it coll |
-	it := MindMapIterator new mindMapStructure: mindMapStructure.
-	it hasStepLeft whileTrue: [
-		it popStep do: [:s | | sm |
-			sm := CRMondrian new.
-			sm nodes with: s.
-			
-		]
-	]
+
+	self nodes label text: #model; with: (mindMapStructure allNodesAsCollection).
+	self edge sigmoid; connectFrom: #parent.
+	self layout custom:  (GtGraphHorizontalTreeLayout new).
+	^self
 	
 ]
 

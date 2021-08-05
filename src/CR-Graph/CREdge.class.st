@@ -24,7 +24,8 @@ CREdge >> color: aColor [
 
 { #category : #accessing }
 CREdge >> condition [
-"I am a setter for the condition block that has to be true on all nodes that are used for the edges"
+"I am a getter for the condition block that has to be true on all nodes that are used for the edges"
+	^condition
 ]
 
 { #category : #accessing }

@@ -15,7 +15,7 @@ CRClassBlueprintBuilder >> createShapeFor: obj [
 	for each categories. These mondrians are then added to the ClassBlueprintCanvas
 	as Nodes.
 "
-	| mondrian methods interface initialization implementor accessor attribute coll shape |
+	| mondrian methods interface initialization implementor accessor attribute coll shape methodHNorm slotHNorm |
 	methods := OrderedCollection new.
 	methods addAll: obj methods.
 	methods addAll: obj class methods.
@@ -37,10 +37,23 @@ CRClassBlueprintBuilder >> createShapeFor: obj [
 	shape := CRClassBlueprintCanvas new.
 	shape model: obj.
 	
+	slotHNorm := CRNormalizer new
+		key: #linesOfCode;
+		attribute: [:node :value | node height: value];
+		from: 10;
+		to: 75;
+		condition: [:x | x class = CompiledMethod].
+	
 	"create the mondrian for each category"
-	coll do: [:c | | m canv |
+	coll do: [:c | | m canv normH |
+		(c name = 'attribute') ifTrue: [
+			normH := self slotHeightNormalizer
+		] ifFalse: [
+			normH := self methodHeightNormalizer
+		].
 		m := CRMondrian new.
 		m nodes box
+			addNormalizer: normH;
 			toolTip: #name; 
 			with: c.
 		
@@ -52,6 +65,25 @@ CRClassBlueprintBuilder >> createShapeFor: obj [
 	^shape
 	
 
+]
+
+{ #category : #accessing }
+CRClassBlueprintBuilder >> methodHeightNormalizer [
+	^CRNormalizer new
+		key: #linesOfCode;
+		attribute: [:node :value | node height: value];
+		from: 10;
+		to: 75;
+		condition: [:x | x class = CompiledMethod]
+]
+
+{ #category : #accessing }
+CRClassBlueprintBuilder >> slotHeightNormalizer [
+	^CRNormalizer new
+		key: #size;
+		attribute: [:node :value | node height: value];
+		from: 10; to: 75; 
+		condition: [:x | x class = InstanceVariableSlot].
 ]
 
 { #category : #accessing }

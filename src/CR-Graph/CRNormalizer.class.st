@@ -11,7 +11,8 @@ Class {
 		'nodes',
 		'to',
 		'from',
-		'attributeBlock'
+		'attributeBlock',
+		'condition'
 	],
 	#category : #'CR-Graph-Normalizer'
 }
@@ -23,9 +24,16 @@ CRNormalizer >> attribute: aNodeAttributeAsBlock [
 ]
 
 { #category : #accessing }
+CRNormalizer >> condition: aTrueFalseBlock [		
+"I am a setter for the condition block that has to be true on all nodes that should be normalized"
+	condition := aTrueFalseBlock
+]
+
+{ #category : #accessing }
 CRNormalizer >> evaluateScope [
 " I should only be called once key and nodes have been set. I evaluate the max and min value of the nodes with the given key"
 	| min max |
+	(nodes size = 0 ) ifTrue: [^nil].
 	min := (key cull:(nodes at: 1) model).
 	max := (key cull: (nodes at: (nodes size)) model).
 	nodes do: [:x | 
@@ -61,6 +69,9 @@ CRNormalizer >> from: fromValue to: toValue [
 { #category : #initialization }
 CRNormalizer >> initialize [
 	super initialize.
+	
+	condition := [true].
+	
 	^self
 ]
 
@@ -95,7 +106,7 @@ CRNormalizer >> minimumValue: aValue [
 CRNormalizer >> nodes: someCRNodes [
 	"Set the elements that should be normalized"
 	someCRNodes ifNil: [ self error: 'Should not provide nil' ].
-	nodes := someCRNodes
+	nodes := someCRNodes flatCollect: [:x | (condition cull: x model) ifTrue: [{x}] ifFalse: [{}]]
 ]
 
 { #category : #accessing }

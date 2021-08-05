@@ -16,6 +16,13 @@ Class {
 }
 
 { #category : #accessing }
+CRLabel >> aptitude: aLook [
+"Tooltips on labels don't make sense"
+	(aLook class = BrGlamorousWithTooltipAptitude) ifFalse:
+		[super aptitude: aLook]
+]
+
+{ #category : #accessing }
 CRLabel >> content: something [
 	modelAsText := false.
 	self text: something asRopedText glamorousRegularFont.

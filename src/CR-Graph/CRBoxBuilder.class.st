@@ -81,7 +81,7 @@ CRBoxBuilder >> initialize [
 	^self
 ]
 
-{ #category : #accessing }
+{ #category : #normalizer }
 CRBoxBuilder >> normalizeColor: anArgBlockOrSymbol [
 "
 	I create a color normalizer using the given 
@@ -98,7 +98,7 @@ CRBoxBuilder >> normalizeColor: anArgBlockOrSymbol [
 		
 ]
 
-{ #category : #accessing }
+{ #category : #normalizer }
 CRBoxBuilder >> normalizeColor: anArgBlockOrSymbol from: fromValue to: toValue [
 "
 	I create a color normalizer using the given block or symbol as key
@@ -110,7 +110,7 @@ CRBoxBuilder >> normalizeColor: anArgBlockOrSymbol from: fromValue to: toValue [
 	^norm
 ]
 
-{ #category : #accessing }
+{ #category : #normalizer }
 CRBoxBuilder >> normalizeHeight: anArgBlockOrSymbol [
 "
 	I create a height normalizer using the given 
@@ -129,7 +129,7 @@ CRBoxBuilder >> normalizeHeight: anArgBlockOrSymbol [
 	^ norm
 ]
 
-{ #category : #accessing }
+{ #category : #normalizer }
 CRBoxBuilder >> normalizeHeight: anArgBlockOrSymbol from: fromValue to: toValue [
 "
 	I create a height normalizer using the given block or symbol as key
@@ -141,7 +141,15 @@ CRBoxBuilder >> normalizeHeight: anArgBlockOrSymbol from: fromValue to: toValue 
 	^norm
 ]
 
-{ #category : #accessing }
+{ #category : #normalizer }
+CRBoxBuilder >> normalizeHeight: anArgBlockOrSymbol from: fromValue to: toValue forAll: aTrueFalseBlock [
+	| norm |
+	norm := self normalizeHeight: anArgBlockOrSymbol from: fromValue to: toValue.
+	norm condition: aTrueFalseBlock.
+	^norm
+]
+
+{ #category : #normalizer }
 CRBoxBuilder >> normalizeWidth: anArgBlockOrSymbol [
 "
 	I create a width normalizer using the given 
@@ -161,7 +169,7 @@ CRBoxBuilder >> normalizeWidth: anArgBlockOrSymbol [
 	^norm
 ]
 
-{ #category : #accessing }
+{ #category : #normalizer }
 CRBoxBuilder >> normalizeWidth: anArgBlockOrSymbol from: fromValue to: toValue [
 "
 	I create a width normalizer using the given block or symbol as key

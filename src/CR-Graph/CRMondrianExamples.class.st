@@ -10,18 +10,22 @@ Class {
 { #category : #accessing }
 CRMondrianExamples >> classBlueprint [
 	<gtExample>
-	| coll view |
+	| coll view methodHNorm |
 	
 	"coll := (RPackageOrganizer default packageNamed: 'CR-Graph') classes."
 	coll := OrderedCollection new.
 	coll addAll: CRShapeBuilder subclasses.
 	coll add: CRShapeBuilder. 
 	
-	"coll := {CRCanvas}."
+	
 
 	view := CRMondrian new.
-	view nodes classBlueprint with: (coll).
-	view edge width: 5; forAll: [:x | x isClass]; connectFrom: [:x | x superclass].
+	view nodes classBlueprint 
+		with: (coll).
+	view edge 
+		width: 5; 
+		forAll: [:x | x isClass]; 
+		connectFrom: [:x | x superclass].
 	view edge 
 		arrow;
 		color: Color blue;
