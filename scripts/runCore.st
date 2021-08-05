@@ -1,7 +1,7 @@
 Metacello new
 	baseline: 'BAGTRoassal';
 	repository: 'github://cjrohrbach/BA-GT-Roassal/src';
-	load.
+	load: 'core'.
 
 path := '/tmp/result.txt'.
 path asFileReference exists ifTrue: [ path asFileReference delete ].
