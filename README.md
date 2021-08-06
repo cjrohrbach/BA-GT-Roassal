@@ -1,5 +1,3 @@
-![example workflow](https://github.com/cjrohrbach/BA-GT-Roassal/actions/workflows/runG.yml/badge.svg)
-
 The project BA-GT-Roassal brings some key components of [Roassal3](https://github.com/ObjectProfile/Roassal3) in [GlamourousToolkit (GT)](https://gtoolkit.com). In particular, the project defines a very simple API to build [polymetric views](https://ieeexplore.ieee.org/document/1232284) in GT.
 
 This project is the result of my Bachelor thesis, supervised by [Oscar Nierstrasz](http://scg.unibe.ch/staff/oscar) and [Alexandre Bergel](http://bergel.eu).
