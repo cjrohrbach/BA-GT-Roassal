@@ -3,7 +3,8 @@ curl -L https://dl.feenk.com/scripts/linux.sh | bash
 cd glamoroustoolkit
 cp ../scripts/runCore.st .
 #./glamoroustoolkit --headless GlamorousToolkit.image runCore.st
-./GlamorousToolkit-cli GlamorousToolkit.image runCore.st
+ls
+./bin/GlamorousToolkit-cli GlamorousToolkit.image runCore.st
 
 cat /tmp/result.txt
 FILE=/tmp/result.txt
