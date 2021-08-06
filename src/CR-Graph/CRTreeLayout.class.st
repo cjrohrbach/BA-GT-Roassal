@@ -12,7 +12,7 @@ Class {
 { #category : #initialization }
 CRTreeLayout >> initialize [
 	super initialize.
-	self verticalGap: 50.
-	self horizontalGap: 50.
+	"self verticalGap: 50.
+	self horizontalGap: 50."
 	^self
 ]
