@@ -19,6 +19,11 @@ CRPreBuiltNode >> addNode: aNode [
 ]
 
 { #category : #accessing }
+CRPreBuiltNode >> addNodeCollection: nodeCollection [
+	nodes addAll: nodeCollection.
+]
+
+{ #category : #accessing }
 CRPreBuiltNode >> createNodes [
 "nodes don't need to be created since they are allready provided"
 	^nodes

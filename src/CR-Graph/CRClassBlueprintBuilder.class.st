@@ -4,8 +4,49 @@ I am a ClassBlueprint builder and I'm used to build class blueprints for the giv
 Class {
 	#name : #CRClassBlueprintBuilder,
 	#superclass : #CRShapeBuilder,
+	#instVars : [
+		'accessEdgeColor',
+		'invocationEdgeColor',
+		'getterColor',
+		'setterColor',
+		'interfaceLayerColor',
+		'constantColor',
+		'delegationColor',
+		'extendingColor',
+		'abstractColor',
+		'attributeColor',
+		'overridingColor'
+	],
 	#category : #'CR-Graph-ShapeBuilder'
 }
+
+{ #category : #accessing }
+CRClassBlueprintBuilder >> createAttributeNodes: methods [
+	| shapeBuilder |
+	
+	shapeBuilder := CRBoxBuilder new.
+	shapeBuilder with: methods.
+	shapeBuilder addNormalizer: self methodHeightNormalizer.
+	shapeBuilder addNormalizer: self methodWidthNormalizer.
+	
+	^shapeBuilder createNodes
+	
+]
+
+{ #category : #accessing }
+CRClassBlueprintBuilder >> createMethodNodes: methods [
+	| shapeBuilder |
+	
+	shapeBuilder := CRBoxBuilder new.
+	shapeBuilder with: methods.
+	shapeBuilder addNormalizer: self methodHeightNormalizer.
+	shapeBuilder addNormalizer: self methodWidthNormalizer.
+	shapeBuilder toolTip: #name.
+	
+	
+	^shapeBuilder createNodes
+	
+]
 
 { #category : #normalizer }
 CRClassBlueprintBuilder >> createNormalizer: anArgBlockOrSymbol from: fromValue to: toValue forAll: aTrueFalseBlock attribute: aBlockSpecifingTheAttribute [
@@ -34,9 +75,9 @@ CRClassBlueprintBuilder >> createShapeFor: obj [
 	accessor := CRGroup new name: 'accessor'.
 	attribute := CRGroup new name: 'attribute'.
 	
-	attribute addAll: obj allSlots.
+	attribute addAll: (self createSlotNodes: (obj allSlots)).
 
-	coll := self sortMethods: methods.
+	coll := self sortMethodNodes: (self createMethodNodes: methods).
 	
 	coll add: attribute.
 	
@@ -46,20 +87,9 @@ CRClassBlueprintBuilder >> createShapeFor: obj [
 	
 	"create the mondrian for each category"
 	coll do: [:c | | m canv normH |
-		(c name = 'attribute') ifTrue: [
-			normH := self slotHeightNormalizer.
-			normW := normH.
-			
-		] ifFalse: [
-			normH := self methodHeightNormalizer.
-			normW := self methodWidthNormalizer.
-		].
 		m := CRMondrian new.
-		m nodes box
-			addNormalizer: normH;
-			addNormalizer: normW;
-			toolTip: #name; 
-			with: c.
+		m nodes preBuiltNode 
+			addNodeCollection: c.
 		
 		canv := m createCanvas canvasAsNode addToolTip: c name.
 			
@@ -72,23 +102,56 @@ CRClassBlueprintBuilder >> createShapeFor: obj [
 ]
 
 { #category : #accessing }
+CRClassBlueprintBuilder >> createSlotNodes: slots [
+	| shapeBuilder |
+	
+	shapeBuilder := CRBoxBuilder new.
+	shapeBuilder with: slots.
+	"shapeBuilder addNormalizer: self slotHeightNormalizer."
+	shapeBuilder addNormalizer: self slotWidthNormalizer.
+	shapeBuilder toolTip: #name.
+	^shapeBuilder createNodes
+	
+]
+
+{ #category : #accessing }
+CRClassBlueprintBuilder >> initialize [
+	super initialize.
+	
+	"Specify the colors"
+	accessEdgeColor := Color cyan.
+	invocationEdgeColor := Color blue.
+	
+	getterColor := Color red.
+	setterColor := Color orange.
+	interfaceLayerColor := Color white darker.
+	attributeColor := Color blue.
+	
+	constantColor := Color gray.
+	delegationColor := Color yellow.
+	extendingColor := Color orange.
+	overridingColor := Color brown.
+	abstractColor := Color cyan.
+	
+	^self
+]
+
+{ #category : #accessing }
 CRClassBlueprintBuilder >> methodHeightNormalizer [
 	^CRNormalizer new
 		key: #linesOfCode;
 		attribute: [:node :value | node height: value];
 		from: 10;
-		to: 75;
-		condition: [:x | x class = CompiledMethod]
+		to: 75.
 ]
 
 { #category : #accessing }
 CRClassBlueprintBuilder >> methodWidthNormalizer [
 	^CRNormalizer new
 		key: [:m | (m callingMethodsIn: modelCollection) size];
-		attribute: [:node :value | node height: value];
+		attribute: [:node :value | node width: value];
 		from: 10;
-		to: 75;
-		condition: [:x | x class = CompiledMethod]
+		to: 75.
 ]
 
 { #category : #accessing }
@@ -96,13 +159,20 @@ CRClassBlueprintBuilder >> slotHeightNormalizer [
 	^CRNormalizer new
 		key: #size;
 		attribute: [:node :value | node height: value];
-		from: 10; to: 75; 
-		condition: [:x | x class = InstanceVariableSlot].
+		from: 10; to: 75.
 ]
 
 { #category : #accessing }
-CRClassBlueprintBuilder >> sortMethods: methods [
-"I sort the provided method in groups and return the groups as collection"
+CRClassBlueprintBuilder >> slotWidthNormalizer [
+	^CRNormalizer new
+		key: [:slot | slot numberOfAccessesWithin: (slot owningClass allMethods)];
+		attribute: [:node :value | node width: value];
+		from: 10; to: 75.
+]
+
+{ #category : #accessing }
+CRClassBlueprintBuilder >> sortAndColorMethodNodes: methodNodes [
+"I sort the provided nodes in groups and return the groups as collection"
 
 	| collection initialization interface implementor accessor attribute |
 	collection := OrderedCollection new.
@@ -122,15 +192,57 @@ CRClassBlueprintBuilder >> sortMethods: methods [
 	collection add: accessor.
 	
 	"sort the mthods"
-	methods do: [ :method |
+	methodNodes do: [ :node | | method |
+		method := node model.
 		
-		(method isAccessor or: method isSetter) ifTrue: [accessor add: method]
+		(method isAccessor or: method isSetter) ifTrue: [accessor add: node]
 		ifFalse: [
-			(method isInitialization) ifTrue: [initialization add: method]
+			(method isInitialization) ifTrue: [initialization add: node]
 				ifFalse: [
-					(method isPrivateIn: modelCollection) ifTrue: [implementor add: method]
+					(method isPrivateIn: modelCollection) ifTrue: [implementor add: node]
 						ifFalse: [
-							interface add: method.
+							interface add: node.
+						].
+				].
+		].
+	].
+	
+	^collection
+	
+]
+
+{ #category : #accessing }
+CRClassBlueprintBuilder >> sortMethodNodes: methodNodes [
+"I sort the provided nodes in groups and return the groups as collection"
+
+	| collection initialization interface implementor accessor attribute |
+	collection := OrderedCollection new.
+	
+	"create the Groups for the categorization"
+	initialization := CRGroup new name: 'initialization'.
+	interface := CRGroup new name: 'interface'.
+	implementor := CRGroup new name: 'implementor'.
+	accessor := CRGroup new name: 'accessor'.
+	attribute := CRGroup new name: 'attribute'.
+	
+
+	collection := OrderedCollection new.
+	collection add: initialization.
+	collection add: interface.
+	collection add: implementor.
+	collection add: accessor.
+	
+	"sort the mthods"
+	methodNodes do: [ :node | | method |
+		method := node model.
+		
+		(method isAccessor or: method isSetter) ifTrue: [accessor add: node]
+		ifFalse: [
+			(method isInitialization) ifTrue: [initialization add: node]
+				ifFalse: [
+					(method isPrivateIn: modelCollection) ifTrue: [implementor add: node]
+						ifFalse: [
+							interface add: node.
 						].
 				].
 		].

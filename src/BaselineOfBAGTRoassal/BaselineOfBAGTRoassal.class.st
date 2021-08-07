@@ -32,13 +32,3 @@ BaselineOfBAGTRoassal >> baseline: spec [
 				group: 'withHospitalExample' with: #('default' 'MyMoldableRequirements' #'CR-Graph-MindMapExample')
 				 ]
 ]
-
-{ #category : #accessing }
-BaselineOfBAGTRoassal >> testWithoutgraphviz: spec [
-	spec
-		for: #common
-		do: [
-			spec 
-				package: #'CR-Graph'	
-		]
-]
