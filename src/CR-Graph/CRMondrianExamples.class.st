@@ -12,10 +12,10 @@ CRMondrianExamples >> classBlueprint [
 	<gtExample>
 	| coll view methodHNorm |
 	
-	"coll := (RPackageOrganizer default packageNamed: 'CR-Graph') classes."
-	coll := OrderedCollection new.
+	coll := (RPackageOrganizer default packageNamed: 'CR-Graph') classes.
+	"coll := OrderedCollection new.
 	coll addAll: CRShapeBuilder subclasses.
-	coll add: CRShapeBuilder. 
+	coll add: CRShapeBuilder. "
 	
 	
 

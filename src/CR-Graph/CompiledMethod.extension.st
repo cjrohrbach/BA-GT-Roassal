@@ -36,6 +36,17 @@ CompiledMethod >> isAccessor [
 ]
 
 { #category : #'*CR-Graph' }
+CompiledMethod >> isExtendingMethod [
+	"
+	Returns true if this method extends another method.
+	This is determined by searching for a super call.
+	"
+	
+	^self variableNodes contains: [:x | x class = RBSuperNode]
+	
+]
+
+{ #category : #'*CR-Graph' }
 CompiledMethod >> isInitialization [
 	"Return ture if I am a method used for initialization, meaning my protocol or name includes the substring init.
 	"
@@ -68,6 +79,16 @@ CompiledMethod >> isPublicIn: someClasses [
 ]
 
 { #category : #'*CR-Graph' }
+CompiledMethod >> isPureOverridingMethod [
+	"
+		Return true if this method overrides a method without calling its super method.
+	"
+	
+	^(self overriddenMethods size > 0) and: (self isExtendingMethod not)
+	
+]
+
+{ #category : #'*CR-Graph' }
 CompiledMethod >> isSetter [
 	| ast seq ass |
 	ast := self ast.
@@ -81,4 +102,12 @@ CompiledMethod >> isSetter [
 	ass children size = 2 ifFalse: [ ^ false ].
 	ass children second class == RBInstanceVariableNode ifFalse: [ ^ false ].
 	^ self methodClass instVarNames includes: ass children second name
+]
+
+{ #category : #'*CR-Graph' }
+CompiledMethod >> returnsConstant [
+	"
+		Return true If I return a constant value
+	"
+	
 ]

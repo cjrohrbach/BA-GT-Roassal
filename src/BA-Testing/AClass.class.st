@@ -13,3 +13,8 @@ AClass >> initialize [
 	self size: 100@100.
 	^self
 ]
+
+{ #category : #accessing }
+AClass >> test [
+	 ^Color green
+]

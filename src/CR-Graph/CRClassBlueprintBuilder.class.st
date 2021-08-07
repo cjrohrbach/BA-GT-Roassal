@@ -235,17 +235,31 @@ CRClassBlueprintBuilder >> sortMethodNodes: methodNodes [
 	"sort the mthods"
 	methodNodes do: [ :node | | method |
 		method := node model.
-		
-		(method isAccessor or: method isSetter) ifTrue: [accessor add: node]
-		ifFalse: [
-			(method isInitialization) ifTrue: [initialization add: node]
-				ifFalse: [
-					(method isPrivateIn: modelCollection) ifTrue: [implementor add: node]
-						ifFalse: [
-							interface add: node.
-						].
+		(method isAccessor) ifTrue: [
+			accessor add: node.
+			node background: getterColor.
+		] ifFalse: [
+			(method isSetter) ifTrue: [
+			accessor add: node.
+			node background: setterColor.
+			] ifFalse: [
+				(method isInitialization) ifTrue: [
+				initialization add: node.
+				] ifFalse: [
+					(method isPrivateIn: modelCollection) ifTrue: [
+						implementor add: node.
+						node background: interfaceLayerColor.
+					] ifFalse: [ 
+						"default case: "
+						interface add: node.
+						node background: interfaceLayerColor.
+					 ].
+					
+						
+					].
 				].
 		].
+		
 	].
 	
 	^collection
