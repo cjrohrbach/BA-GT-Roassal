@@ -5,10 +5,20 @@ Class {
 	#name : #CRMondrianAsNode,
 	#superclass : #CRShapeBuilder,
 	#instVars : [
-		'mondrianStencil'
+		'mondrianStencil',
+		'background'
 	],
 	#category : #'CR-Graph-ShapeBuilder'
 }
+
+{ #category : #accessing }
+CRMondrianAsNode >> background: aValueOrAOneArgBlock [
+"
+	I am a setter method for the background.
+	I can receive either a symbol, a block or a color.
+"
+	background := aValueOrAOneArgBlock.
+]
 
 { #category : #accessing }
 CRMondrianAsNode >> createShapeFor: obj [
@@ -22,6 +32,7 @@ CRMondrianAsNode >> createShapeFor: obj [
 	mondrian := mondrianStencil cull: obj.
 	mondrian.
 	result := mondrian createCanvas canvasAsNode.
+	background ifNotNil: [result background: (self evaluate: background on: obj)].
 	^ result
 ]
 

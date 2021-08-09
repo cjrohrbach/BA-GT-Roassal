@@ -79,7 +79,9 @@ CRNode_2 >> getNodes [
 	I return myself in a collection.
 	This method is overritten when the node contains other nodes, in this case it has to return all subnodes as a collection.
 	"
-	^ {self}
+	
+	(centerElement holdsNodes) ifTrue: [^centerElement getNodes] ifFalse: [^{self}]
+
 ]
 
 { #category : #accessing }

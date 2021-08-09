@@ -41,7 +41,7 @@ CRClassBlueprintCanvas >> createLabel [
 { #category : #accessing }
 CRClassBlueprintCanvas >> getNodes [
 "I am a getter Method for the nodes"
-	^nodes
+	^nodes collectAll: [:n | n getNodes]
 ]
 
 { #category : #accessing }

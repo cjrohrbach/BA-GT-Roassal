@@ -14,9 +14,9 @@ CRMondrianExamples >> classBlueprint [
 	
 	coll := (RPackageOrganizer default packageNamed: 'CR-Graph') classes.
 	
-	"coll := OrderedCollection new.
+	coll := OrderedCollection new.
 	coll addAll: CRShapeBuilder subclasses.
-	coll add: CRShapeBuilder. "
+	coll add: CRShapeBuilder. 
 	
 	
 
@@ -27,11 +27,11 @@ CRMondrianExamples >> classBlueprint [
 		width: 5; 
 		forAll: [:x | x isClass]; 
 		connectFrom: [:x | x superclass].
-	view edges 
+	"view edges 
 		arrow;
 		color: Color blue;
 		forAll: [:x | x class = CompiledMethod]; 
-		connectFromAll: [:x | x callingMethodsIn: coll ].
+		connectFromAll: [:x | x senders ]."
 	view layout tree.
 	^view
 ]
@@ -179,6 +179,7 @@ CRMondrianExamples >> mondrianAsNodeWithEdges [
 	m := CRMondrian new.
 	m nodes 
 		mondrianNodes
+			background: Color transparent;
 			toolTip: #value;
 			stencil: 
 			[ :p | | q |

@@ -61,8 +61,9 @@ CRMondrian >> addShapeBuilder: aShapeBuilder [
 { #category : #accessing }
 CRMondrian >> buildEdges: nodes [
 "I delegate the creation of all edges for all edgeBuilders"
-	| edges |
+	| edges allNodes |
 	edges := CRGroup new.
+	
 	
 	edgeBuilderCollection do: [ :edgeBuilder |
 		edges addAll: (edgeBuilder createEdges: nodes).
@@ -88,15 +89,10 @@ CRMondrian >> buildNodes [
 		shapeNodes := shapeBuilder createNodes.
 	
 		nodes addAll: shapeNodes.
-		
-		shapeNodes do: [ :sn | | snn |
-			allNodes add: sn.
-			snn := sn getNodes.
-			((snn size > 1) or: ((snn at: 1) ~= sn)) ifTrue: [
-				allNodes addAll: snn.
-			]
-			
-		
+	
+		shapeNodes do: [:n |
+			allNodes add: n.		
+			n allChildrenDepthFirstDo: [:x | (x class = CRNode_2) ifTrue: [allNodes add: x]].
 		].
 	].
 	
