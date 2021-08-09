@@ -18,7 +18,8 @@ Class {
 		'toolTipContent',
 		'outGoingEdges',
 		'group',
-		'centerElement'
+		'centerElement',
+		'anchorPosition'
 	],
 	#category : #'CR-Graph-CR-Graph'
 }
@@ -45,6 +46,16 @@ CRNode_2 >> addToolTip [
 		showDelay: 0;
 		hideDelay: 0;
 		contentStencil: label)
+]
+
+{ #category : #accessing }
+CRNode_2 >> anchorPosition [
+	^anchorPosition
+]
+
+{ #category : #accessing }
+CRNode_2 >> anchorPosition: aBlAnchor [
+	anchorPosition := aBlAnchor
 ]
 
 { #category : #accessing }
@@ -155,6 +166,7 @@ CRNode_2 >> initialize [
 	
 	outGoingEdges := CRGroup new. 
 	isMarked := false.
+	anchorPosition := BlNearestPositionEllipseAnchor.
 	
 	^self
 ]

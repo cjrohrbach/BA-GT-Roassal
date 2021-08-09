@@ -7,7 +7,8 @@ Class {
 	#instVars : [
 		'normalizerCollection',
 		'modelCollection',
-		'toolTipContent'
+		'toolTipContent',
+		'anchorPosition'
 	],
 	#category : #'CR-Graph-ShapeBuilder'
 }
@@ -16,6 +17,11 @@ Class {
 CRShapeBuilder >> addNormalizer: aCRNormalier [
 	self assert: [aCRNormalier class = CRNormalizer or: aCRNormalier class = CRColorNormalizer] description: 'You need to provide a CRNormalizer'.
 	normalizerCollection add: aCRNormalier.
+]
+
+{ #category : #accessing }
+CRShapeBuilder >> anchorPosition: aBlAnchor [
+	anchorPosition := aBlAnchor
 ]
 
 { #category : #'node-creation' }
@@ -301,6 +307,7 @@ CRShapeBuilder >> shapesOn: someObjects [
 			model: obj.
 			
 		toolTipContent ifNotNil: [node toolTipContent: (self evaluate: toolTipContent on: obj)].
+		anchorPosition ifNotNil: [node anchorPosition: (self evaluate: anchorPosition on: obj)].
 		
 		node
 		]).

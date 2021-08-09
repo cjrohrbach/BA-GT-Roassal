@@ -51,6 +51,16 @@ CREdge >> connectionBlock: aBlockOrASymbol [
 ]
 
 { #category : #accessing }
+CREdge >> createAnchorFor: fromNode to: toNode [
+"I create the anchor for the fromNode according to the position stored in the fromNode"
+	(fromNode anchorPosition superclass = BlNearestPositionAnchor) ifTrue: [
+		^fromNode anchorPosition nearestTo: toNode centerElement from: fromNode centerElement
+	] ifFalse: [
+		^fromNode anchorPosition element: fromNode centerElement
+	]
+]
+
+{ #category : #accessing }
 CREdge >> createEdgeFrom: fromNode to: toNode [
 "I delegate the creation of the edge. Therefore I use methods creating the graph constraints as well as the visible edge"
 
@@ -82,15 +92,12 @@ CREdge >> createVisibleEdgeFrom: fromNode to: toNode [
 
 	| line l |
 	line := edgeShape new.
-	"l := CRNode_2 new shape: (line)."
 	
 	width ifNotNil: [line width: (width)].
 	color ifNotNil: [line color: (color)].
 	
-	"line fromAnchor: (fromAnchorPosition element: fromNode)."
-	"line toAnchor: (toAnchorPosition element: toNode)."
-	line fromAnchor: (BlNearestPositionEllipseAnchor nearestTo: toNode centerElement from: fromNode centerElement).
-	line toAnchor: (BlNearestPositionEllipseAnchor nearestTo: fromNode centerElement from: toNode centerElement).
+	line fromAnchor: (self createAnchorFor: fromNode to: toNode).
+	line toAnchor: (self createAnchorFor: toNode to: fromNode).
 	
 	fromNode addOutGoingEdge: line.
 	

@@ -110,7 +110,7 @@ CRClassBlueprintBuilder >> createShapeFor: obj [
 		m nodes preBuiltNode 
 			addNodeCollection: c.
 		
-		canv := m createCanvas canvasAsNode addToolTip: c name.
+		canv := m createCanvas canvasAsNode addToolTip: c name; background: Color transparent.
 			
 		shape addContainer: (canv).
 	].
