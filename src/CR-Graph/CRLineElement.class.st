@@ -13,3 +13,10 @@ Class {
 	],
 	#category : #'CR-Graph-EdgeShape'
 }
+
+{ #category : #accessing }
+CRLineElement >> highlight [
+	originalBorder := self border.
+	self border: (BlBorder paint: (Color black) width: 1).
+	self toAnchor referenceElement parent highlightAsConnected
+]
