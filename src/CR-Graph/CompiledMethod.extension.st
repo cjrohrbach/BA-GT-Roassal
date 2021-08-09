@@ -47,6 +47,22 @@ CompiledMethod >> isExtendingMethod [
 ]
 
 { #category : #'*CR-Graph' }
+CompiledMethod >> isExternalInterfaceMethod [
+	^(self isInitialization not) and: ((self isAccessor or: self isSetter) not) and: (self isImplementationLayerMethod not)
+]
+
+{ #category : #'*CR-Graph' }
+CompiledMethod >> isImplementationLayerMethod [
+	
+	self methodClass methods do: [:m |
+		(m messages includes: self selector) ifTrue: [	
+			(m isInitialization) ifFalse: [^true]
+		].
+	].
+	^false
+]
+
+{ #category : #'*CR-Graph' }
 CompiledMethod >> isInitialization [
 	"Return ture if I am a method used for initialization, meaning my protocol or name includes the substring init.
 	"

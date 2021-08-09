@@ -21,6 +21,25 @@ Class {
 }
 
 { #category : #accessing }
+CRClassBlueprintBuilder >> colorMethod: aNode [
+	| method |
+	method := aNode model.
+	(method isSubclassResponsibility) ifTrue: [
+		aNode centerElement background: abstractColor.
+	] ifFalse: [
+		(method isExtendingMethod) ifTrue: [
+			aNode centerElement background: extendingColor.
+		] ifFalse: [
+			(method isPureOverridingMethod) ifTrue: [
+				aNode centerElement background: overridingColor.
+			] ifFalse: [
+				(method )
+			]
+		]
+	]
+]
+
+{ #category : #accessing }
 CRClassBlueprintBuilder >> createAttributeNodes: methods [
 	| shapeBuilder |
 	
@@ -235,30 +254,31 @@ CRClassBlueprintBuilder >> sortMethodNodes: methodNodes [
 	"sort the mthods"
 	methodNodes do: [ :node | | method |
 		method := node model.
-		(method isAccessor) ifTrue: [
-			accessor add: node.
-			node background: getterColor.
+		
+		(method isInitialization) ifTrue: [
+			initialization add: node.
+			
 		] ifFalse: [
-			(method isSetter) ifTrue: [
-			accessor add: node.
-			node background: setterColor.
+			(method isAccessor) ifTrue: [
+				accessor add: node.
+				node centerElement background: getterColor.
 			] ifFalse: [
-				(method isInitialization) ifTrue: [
-				initialization add: node.
+				(method isSetter) ifTrue: [
+					accessor add: node.
+					node centerElement background: setterColor.
 				] ifFalse: [
-					(method isPrivateIn: modelCollection) ifTrue: [
+					(method isImplementationLayerMethod) ifTrue: [
 						implementor add: node.
-						node background: interfaceLayerColor.
-					] ifFalse: [ 
-						"default case: "
+						node centerElement background: interfaceLayerColor.
+					] ifFalse: [
 						interface add: node.
-						node background: interfaceLayerColor.
-					 ].
-					
-						
+						node centerElement background: interfaceLayerColor.
 					].
 				].
+			].
 		].
+		
+		self colorMethod: node.
 		
 	].
 	
