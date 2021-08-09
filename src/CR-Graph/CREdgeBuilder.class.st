@@ -11,7 +11,10 @@ Class {
 		'edgeShape',
 		'toAnchorPosition',
 		'fromAnchorPosition',
-		'condition'
+		'condition',
+		'noHighlights',
+		'highlightColor',
+		'highlightWidth'
 	],
 	#category : #'CR-Graph-CR-Graph'
 }
@@ -110,10 +113,23 @@ CREdgeBuilder >> forAll: aTrueFalseBlock [
 	condition := aTrueFalseBlock
 ]
 
+{ #category : #accessing }
+CREdgeBuilder >> highlightColor: aColor [
+"set the color used to highlight edges when hovered over fromNode"
+	highlightColor := aColor
+]
+
+{ #category : #accessing }
+CREdgeBuilder >> highlightWidth: aNumber [
+"set the color used to highlight edges when hovered over fromNode"
+	highlightWidth := aNumber
+]
+
 { #category : #initialization }
 CREdgeBuilder >> initialize [
 	super initialize.
 	self line.
+	noHighlights := false.
 	^self
 ]
 
@@ -130,6 +146,12 @@ CREdgeBuilder >> mondrian: aMondrian [
 ]
 
 { #category : #accessing }
+CREdgeBuilder >> noHighlights [
+"remove all highlights when hovering over connected nodes"
+	noHighlights := true.
+]
+
+{ #category : #accessing }
 CREdgeBuilder >> passAttributesToEdge: aEdge [
 "I pass all the provided and stored specifications to the edge"
 	width ifNotNil: [aEdge width: width].
@@ -138,6 +160,10 @@ CREdgeBuilder >> passAttributesToEdge: aEdge [
 	toAnchorPosition ifNotNil: [aEdge toAnchorPosition: toAnchorPosition].
 	fromAnchorPosition ifNotNil: [aEdge fromAnchorPosition: fromAnchorPosition].
 	condition ifNotNil: [aEdge condition: condition].
+	noHighlights ifTrue: [aEdge noHighlights].
+	highlightColor ifNotNil: [aEdge highlightColor: highlightColor].
+	highlightWidth ifNotNil: [aEdge highlightWidth: highlightWidth].
+	
 ]
 
 { #category : #accessing }

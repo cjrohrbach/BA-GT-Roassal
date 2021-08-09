@@ -240,6 +240,19 @@ CRMondrian >> model: aObject [
 ]
 
 { #category : #accessing }
+CRMondrian >> noHighlights [
+"I remove all interaction highlights from nodes and edges"
+	edgeBuilderCollection do: [:eb | eb noHighlights].
+	shapeBuilderCollection do: [:sb | sb noHighlights].
+	
+]
+
+{ #category : #accessing }
+CRMondrian >> noHighlightsOnInteraction [
+"I remove all interaction highlights from nodes and edges"
+]
+
+{ #category : #accessing }
 CRMondrian >> nodes [
 "
 	I return a new CRShapeBuilderBuilder.

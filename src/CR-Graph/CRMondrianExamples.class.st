@@ -50,6 +50,26 @@ CRMondrianExamples >> customAction [
 ]
 
 { #category : #accessing }
+CRMondrianExamples >> customHighlights [
+	<gtExample>
+	| m |
+	m := CRMondrian new.
+	m nodes 
+		box 
+		hoverColor: (Color cyan); 
+		clickColor: (Color pink);
+		connectedColor: (Color yellow);
+		with: (1 to: 10).
+	m edges 
+		arrow;
+		highlightColor: (Color blue) ; 
+		highlightWidth: 3;
+		connectFrom: [:x | x//2].
+	m layout tree.
+	^m
+]
+
+{ #category : #accessing }
 CRMondrianExamples >> customShape [
 <gtExample>
 | q |
@@ -195,6 +215,19 @@ CRMondrianExamples >> mondrianAsNodeWithEdges [
 			with: ( 1 to: 9 ).
 	m edges connectFromAll: [:x | x//2].
 	m layout tree.
+	^m
+]
+
+{ #category : #accessing }
+CRMondrianExamples >> mondrianWithoutHighlights [
+"an example with no highlights for the nodes when clicking, hovering, etc"
+	<gtExample>
+	| m |
+	m := CRMondrian new.
+	m nodes box with: (1 to: 10).
+	m edges connectFrom: [:x | x//2].
+	m layout tree.
+	m noHighlights.
 	^m
 ]
 

@@ -8,10 +8,19 @@ Class {
 		'normalizerCollection',
 		'modelCollection',
 		'toolTipContent',
-		'anchorPosition'
+		'anchorPosition',
+		'constraintsBlock',
+		'noHighlights',
+		'hoverColor',
+		'connectedColor',
+		'clickColor'
 	],
 	#category : #'CR-Graph-ShapeBuilder'
 }
+
+{ #category : #accessing }
+CRShapeBuilder >> addLayoutConstraint: aLayoutConstaint [
+]
 
 { #category : #accessing }
 CRShapeBuilder >> addNormalizer: aCRNormalier [
@@ -32,6 +41,28 @@ CRShapeBuilder >> applyNormalizer: someNodes [
 		normalizer evaluateScope.
 		normalizer normalize.
 	].
+]
+
+{ #category : #accessing }
+CRShapeBuilder >> clickColor: aColor [
+"I change the color the node is highlighted with when clicked"
+	clickColor := aColor
+]
+
+{ #category : #accessing }
+CRShapeBuilder >> connectedColor: aColor [
+"I change the color the node is highlighted with when a connecting node is hovered over"
+	connectedColor := aColor
+]
+
+{ #category : #accessing }
+CRShapeBuilder >> constraintBlock: aConstraintBlock [
+	
+]
+
+{ #category : #accessing }
+CRShapeBuilder >> constraintsBlock: aConstraintBlock [
+	constraintsBlock := aConstraintBlock
 ]
 
 { #category : #'node-creation' }
@@ -82,11 +113,30 @@ CRShapeBuilder >> evaluate: aBlockClosure on: aObject [
 		ifFalse: [^aBlockClosure]
 ]
 
+{ #category : #accessing }
+CRShapeBuilder >> hoverColor: aColor [
+"I change the color the node is highlighted with when hovered over"
+	hoverColor := aColor
+]
+
 { #category : #initialization }
 CRShapeBuilder >> initialize [
 	super initialize.
 	normalizerCollection := OrderedCollection new.
+	noHighlights := false.
 	^self
+]
+
+{ #category : #accessing }
+CRShapeBuilder >> markedColor: aColor [
+"I change the color the node is highlighted with when clicked"
+	markedColor := aColor
+]
+
+{ #category : #accessing }
+CRShapeBuilder >> noHighlights [
+"I remove all interaction highlights"
+	noHighlights := true.
 ]
 
 { #category : #normalizer }
@@ -248,6 +298,14 @@ CRShapeBuilder >> normalizeHeight: anArgBlockOrSymbol from: fromValue to: toValu
 				attribute: [ :node : value | node height: value ]
 ]
 
+{ #category : #accessing }
+CRShapeBuilder >> normalizeSize: anArgBlockOrSymbol [
+"
+	I create a normalizer that for the size. (size meaning that width and height are normalized using the same specification and values)
+"
+	^self createNormalizer: anArgBlockOrSymbol from: 10 to: 50 forAll: [true] attribute: [ :node : value | node size: value@value ]
+]
+
 { #category : #normalizer }
 CRShapeBuilder >> normalizeWdith: anArgBlockOrSymbol forAll: aTrueFalseBlock [
 "
@@ -306,8 +364,15 @@ CRShapeBuilder >> shapesOn: someObjects [
 			shape:(self createShapeFor: obj);
 			model: obj.
 			
+		
 		toolTipContent ifNotNil: [node toolTipContent: (self evaluate: toolTipContent on: obj)].
 		anchorPosition ifNotNil: [node anchorPosition: (self evaluate: anchorPosition on: obj)].
+		constraintsBlock ifNotNil: [node constraintsDo: constraintsBlock].
+		clickColor ifNotNil: [node clickColor: (self evaluate: clickColor on: obj)].
+		hoverColor ifNotNil: [node hoverColor: (self evaluate: hoverColor on: obj)].
+		connectedColor ifNotNil: [node connectedColor: (self evaluate: connectedColor on: obj)].
+		
+		noHighlights ifTrue: [node noHighlights].
 		
 		node
 		]).

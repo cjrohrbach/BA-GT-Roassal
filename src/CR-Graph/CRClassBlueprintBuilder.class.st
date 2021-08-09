@@ -39,34 +39,6 @@ CRClassBlueprintBuilder >> colorMethod: aNode [
 	]
 ]
 
-{ #category : #accessing }
-CRClassBlueprintBuilder >> createAttributeNodes: methods [
-	| shapeBuilder |
-	
-	shapeBuilder := CRBoxBuilder new.
-	shapeBuilder with: methods.
-	shapeBuilder addNormalizer: self methodHeightNormalizer.
-	shapeBuilder addNormalizer: self methodWidthNormalizer.
-	
-	^shapeBuilder createNodes
-	
-]
-
-{ #category : #accessing }
-CRClassBlueprintBuilder >> createMethodNodes: methods [
-	| shapeBuilder |
-	
-	shapeBuilder := CRBoxBuilder new.
-	shapeBuilder with: methods.
-	shapeBuilder addNormalizer: self methodHeightNormalizer.
-	shapeBuilder addNormalizer: self methodWidthNormalizer.
-	shapeBuilder toolTip: #name.
-	
-	
-	^shapeBuilder createNodes
-	
-]
-
 { #category : #normalizer }
 CRClassBlueprintBuilder >> createNormalizer: anArgBlockOrSymbol from: fromValue to: toValue forAll: aTrueFalseBlock attribute: aBlockSpecifingTheAttribute [
 	"A classblueprint shouldn't be normalized"
@@ -81,56 +53,59 @@ CRClassBlueprintBuilder >> createShapeFor: obj [
 	for each categories. These mondrians are then added to the ClassBlueprintCanvas
 	as Nodes.
 "
-	| mondrian methods interface initialization implementor accessor attribute coll shape methodHNorm slotHNorm normW |
+	|  sortedMethods methods slots cp |
 	methods := OrderedCollection new.
 	methods addAll: obj methods.
-	methods addAll: obj class methods.
 	
+	sortedMethods := self sortMethods: methods.
+	slots := CRGroup new name: 'slots'.
+	slots addAll: (obj slots).
 	
-	"create the Groups for the categorization"
-	initialization := CRGroup new name: 'initialization'.
-	interface := CRGroup new name: 'interface'.
-	implementor := CRGroup new name: 'implementor'.
-	accessor := CRGroup new name: 'accessor'.
-	attribute := CRGroup new name: 'attribute'.
-	
-	attribute addAll: (self createSlotNodes: (obj allSlots)).
-
-	coll := self sortMethodNodes: (self createMethodNodes: methods).
-	
-	coll add: attribute.
-	
-	shape := CRClassBlueprintCanvas new.
-	shape model: obj.
-	
-	
-	"create the mondrian for each category"
-	coll do: [:c | | m canv normH |
-		m := CRMondrian new.
-		m nodes preBuiltNode 
-			addNodeCollection: c.
-		
-		canv := m createCanvas canvasAsNode addToolTip: c name; background: Color transparent.
-			
-		shape addContainer: (canv).
-	].
-	
-	^shape
 	
 
-]
 
-{ #category : #accessing }
-CRClassBlueprintBuilder >> createSlotNodes: slots [
-	| shapeBuilder |
+	cp := CRMondrian new.
+	cp nodes 
+		label 
+			constraintsBlock: ([:constraint | 
+				constraint grid horizontal span: 5.
+				constraint grid horizontal alignCenter.]); 
+			with: {obj}.
+	cp nodes
+		mondrianNodes
+			noHighlights;
+			toolTip: #name;
+			stencil: [ :con | | mon |
+				mon := CRMondrian new.
+				mon nodes 
+				box 
+				background: [:m | self methodColor: m container: con];
+				toolTip: #name; 
+				normalizeHeight: #linesOfCode;
+				"normalizeWidth: [:m | ( m senders ) size];"
+				with: con.
+				mon
+			]; with: sortedMethods.
+	cp nodes
+		mondrianNodes
+			noHighlights;
+			toolTip: #name;
+			stencil: [:con | | mon |
+				mon := CRMondrian new.
+				mon nodes 
+					box 
+					background: attributeColor;
+					toolTip: #name; 
+					normalizeSize: [:x | (x usingMethods) size];
+					with: con.
+				mon
+			]; with: {slots}.
+	cp layout custom: (BlGridLayout new columnCount: 5; cellSpacing: 20).
+
+
+	^cp createCanvas canvasAsNode
 	
-	shapeBuilder := CRBoxBuilder new.
-	shapeBuilder with: slots.
-	"shapeBuilder addNormalizer: self slotHeightNormalizer."
-	shapeBuilder addNormalizer: self slotWidthNormalizer.
-	shapeBuilder toolTip: #name.
-	^shapeBuilder createNodes
-	
+
 ]
 
 { #category : #accessing }
@@ -156,37 +131,18 @@ CRClassBlueprintBuilder >> initialize [
 ]
 
 { #category : #accessing }
-CRClassBlueprintBuilder >> methodHeightNormalizer [
-	^CRNormalizer new
-		key: #linesOfCode;
-		attribute: [:node :value | node height: value];
-		from: 10;
-		to: 75.
-]
-
-{ #category : #accessing }
-CRClassBlueprintBuilder >> methodWidthNormalizer [
-	^CRNormalizer new
-		key: [:m | (m callingMethodsIn: modelCollection) size];
-		attribute: [:node :value | node width: value];
-		from: 10;
-		to: 75.
-]
-
-{ #category : #accessing }
-CRClassBlueprintBuilder >> slotHeightNormalizer [
-	^CRNormalizer new
-		key: #size;
-		attribute: [:node :value | node height: value];
-		from: 10; to: 75.
-]
-
-{ #category : #accessing }
-CRClassBlueprintBuilder >> slotWidthNormalizer [
-	^CRNormalizer new
-		key: [:slot | slot numberOfAccessesWithin: (slot owningClass allMethods)];
-		attribute: [:node :value | node width: value];
-		from: 10; to: 75.
+CRClassBlueprintBuilder >> methodColor: method container: con [ 
+	| cat |
+	cat := method classBlueprintColorCategory.
+	cat = #abstract ifTrue: [^abstractColor].
+	cat = #extending ifTrue: [^extendingColor].
+	cat = #overriding ifTrue: [^overridingColor].
+	
+	con name = 'implementation' ifTrue: [^interfaceLayerColor].
+	con name = 'interface' ifTrue: [^interfaceLayerColor].
+	con name = 'accessor' ifTrue: [(method isSetter) ifTrue: [^setterColor] ifFalse: [^getterColor]].
+	
+	^Color pink
 ]
 
 { #category : #accessing }
@@ -231,110 +187,34 @@ CRClassBlueprintBuilder >> sortAndColorMethodNodes: methodNodes [
 ]
 
 { #category : #accessing }
-CRClassBlueprintBuilder >> sortMethodNodes: methodNodes [
-"I sort the provided nodes in groups and return the groups as collection"
-
-	| collection initialization interface implementor accessor attribute |
-	collection := OrderedCollection new.
+CRClassBlueprintBuilder >> sortMethods: someMethods [
+	| methodContainer initialization interface implementor accessor attribute |
 	
 	"create the Groups for the categorization"
 	initialization := CRGroup new name: 'initialization'.
 	interface := CRGroup new name: 'interface'.
 	implementor := CRGroup new name: 'implementor'.
 	accessor := CRGroup new name: 'accessor'.
-	attribute := CRGroup new name: 'attribute'.
 	
 
-	collection := OrderedCollection new.
-	collection add: initialization.
-	collection add: interface.
-	collection add: implementor.
-	collection add: accessor.
+	methodContainer := {initialization. interface. implementor. accessor.}.
 	
 	"sort the mthods"
-	methodNodes do: [ :node | | method |
-		method := node model.
-		
+	someMethods do: [ :method | 	
 		(method isInitialization) ifTrue: [
-			initialization add: node.
-			
+			initialization add: method.		
 		] ifFalse: [
-			(method isAccessor) ifTrue: [
-				accessor add: node.
-				node centerElement background: getterColor.
+			(method isAccessor or: method isSetter) ifTrue: [
+				accessor add: method.
 			] ifFalse: [
-				(method isSetter) ifTrue: [
-					accessor add: node.
-					node centerElement background: setterColor.
+				(method isImplementationLayerMethod) ifTrue: [
+					implementor add: method.
 				] ifFalse: [
-					(method isImplementationLayerMethod) ifTrue: [
-						implementor add: node.
-						node centerElement background: interfaceLayerColor.
-					] ifFalse: [
-						interface add: node.
-						node centerElement background: interfaceLayerColor.
-					].
+						interface add: method.
 				].
 			].
 		].
-		
-		self colorMethod: node.
-		
 	].
 	
-	^collection
-	
-]
-
-{ #category : #accessing }
-CRClassBlueprintBuilder >> test [
-"I hold an example of the layout with a label and 5 conatainers. I should be moved or removed later on"
-<gtExample>
-| c init instance implementor accessor attribute label |
-
-c := BlElement new
-	border: (BlBorder paint: Color red width: 1);
-	size: (140@240);
-	
-	clipChildren: false.
-c properties 
-			addProperty: (BlElementLayoutHorizontalResizerProperty new fitContent);
-			addProperty: (BlElementLayoutVerticalResizerProperty new fitContent).
-			
-			
-			
-label := CRLabel new
-	text: 'Class Name' asRopedText.
-label constraintsDo: [ :con |
-		con grid horizontal span: 5.
-		con grid horizontal alignCenter  ].
-
-init := BlElement new
-	size: 100@200;
-	border: (BlBorder paint: Color black width: 0.5).			
-			
-instance := BlElement new
-	size: 100@200;
-	border: (BlBorder paint: Color black width: 0.5).
-	
-implementor := BlElement new
-	size: 100@200;
-	border: (BlBorder paint: Color black width: 0.5).
-
-accessor := BlElement new
-	size: 100@200;
-	border: (BlBorder paint: Color black width: 0.5).
-	
-attribute := BlElement new
-	size: 100@200;
-	border: (BlBorder paint: Color black width: 0.5).
-
-c addChild: label.
-c addChild: init.
-c addChild: instance.
-c addChild: implementor.
-c addChild: accessor.
-c addChild: attribute.
-c layout: (BlGridLayout new columnCount: 5; cellSpacing: 20).
-^c
+	^methodContainer
 ]

@@ -11,7 +11,10 @@ Class {
 		'width',
 		'edgeShape',
 		'connectionBlock',
-		'condition'
+		'condition',
+		'noHighlights',
+		'highlightColor',
+		'highlightWidth'
 	],
 	#category : #'CR-Graph-CR-Graph'
 }
@@ -95,6 +98,9 @@ CREdge >> createVisibleEdgeFrom: fromNode to: toNode [
 	
 	width ifNotNil: [line width: (width)].
 	color ifNotNil: [line color: (color)].
+	highlightColor ifNotNil: [line highlightColor: highlightColor].
+	highlightWidth ifNotNil: [line highlightWidth: highlightWidth].
+	noHighlights ifTrue: [line noHighlights].
 	
 	line fromAnchor: (self createAnchorFor: fromNode to: toNode).
 	line toAnchor: (self createAnchorFor: toNode to: fromNode).
@@ -128,13 +134,32 @@ CREdge >> fromAnchorPosition: aAnchor [
 	fromAnchorPosition := aAnchor
 ]
 
+{ #category : #accessing }
+CREdge >> highlightColor: aColor [
+"set the color used to highlight edges when hovered over fromNode"
+	highlightColor := aColor
+]
+
+{ #category : #accessing }
+CREdge >> highlightWidth: aNumber [
+"set the color used to highlight edges when hovered over fromNode"
+	highlightWidth := aNumber
+]
+
 { #category : #initialization }
 CREdge >> initialize [
 	super initialize.
 	toAnchorPosition :=  BlNearestPositionBoundsAnchor.
 	fromAnchorPosition := BlElementCenterAnchor.
 	condition := [true].
+	noHighlights := false.
 	^self
+]
+
+{ #category : #accessing }
+CREdge >> noHighlights [
+"remove all highlights when hovering over connected nodes"
+	noHighlights := true.
 ]
 
 { #category : #accessing }

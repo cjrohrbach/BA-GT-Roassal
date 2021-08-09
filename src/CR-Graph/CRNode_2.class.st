@@ -19,7 +19,11 @@ Class {
 		'outGoingEdges',
 		'group',
 		'centerElement',
-		'anchorPosition'
+		'anchorPosition',
+		'markColor',
+		'hoverColor',
+		'connectColor',
+		'clickColor'
 	],
 	#category : #'CR-Graph-CR-Graph'
 }
@@ -70,6 +74,18 @@ CRNode_2 >> centerElement: aElement [
 ]
 
 { #category : #accessing }
+CRNode_2 >> clickColor: aColor [
+"I change the color the node is highlighted with when clicked"
+	clickColor := aColor
+]
+
+{ #category : #accessing }
+CRNode_2 >> connectedColor: aColor [
+"I change the color the node is highlighted with when a connecting node is hovered over"
+	connectColor := aColor
+]
+
+{ #category : #accessing }
 CRNode_2 >> example [
 	<gtExample>
 	| node shape | 
@@ -109,13 +125,13 @@ CRNode_2 >> group: aCRBindingGroup [
 
 { #category : #highlighting }
 CRNode_2 >> highlight [
-	self background: (Color green alpha: 0.5).
+	self background: hoverColor.
 ]
 
 { #category : #highlighting }
 CRNode_2 >> highlightAsConnected [
 	"I am used to mark the object as connected with an edge"
-	self background: (Color blue alpha: 0.5)
+	self background: connectColor
 ]
 
 { #category : #highlighting }
@@ -144,6 +160,12 @@ CRNode_2 >> highlightOutGoingEdges [
 ]
 
 { #category : #accessing }
+CRNode_2 >> hoverColor: aColor [
+"I change the color the node is highlighted with when hovered over"
+	hoverColor := aColor
+]
+
+{ #category : #accessing }
 CRNode_2 >> initialize [
 	super initialize.
 	
@@ -168,6 +190,10 @@ CRNode_2 >> initialize [
 	isMarked := false.
 	anchorPosition := BlNearestPositionEllipseAnchor.
 	
+	hoverColor := Color green alpha: 0.5.
+	clickColor := Color red alpha: 0.5.
+	connectColor := Color blue alpha: 0.5.
+	
 	^self
 ]
 
@@ -179,7 +205,7 @@ CRNode_2 >> makeDraggable [
 
 { #category : #highlighting }
 CRNode_2 >> markAsClicked [
-	self background: (Color red alpha: 0.5).
+	self background: clickColor.
 	isMarked := true.
 ]
 
@@ -206,6 +232,14 @@ CRNode_2 >> model: anObject [
 	centerElement ifNotNil: [
 		(centerElement requiersModel) ifTrue: [centerElement model: model] 
 	].
+]
+
+{ #category : #accessing }
+CRNode_2 >> noHighlights [
+"I make all highlights invisible."
+	hoverColor := Color transparent.
+	clickColor := Color transparent.
+	connectColor := Color transparent.
 ]
 
 { #category : #accessing }

@@ -16,6 +16,15 @@ CompiledMethod >> callingMethodsIn: someClasses [
 ]
 
 { #category : #'*CR-Graph' }
+CompiledMethod >> classBlueprintColorCategory [
+	(self isSubclassResponsibility) ifTrue: [^#abstract].
+	(self variableNodes contains: [:x | x class = RBSuperNode]) 
+		ifTrue: [^#extending] 
+		ifFalse: [(self overriddenMethods size > 0) ifTrue: [^#overriding]].
+	^#false
+]
+
+{ #category : #'*CR-Graph' }
 CompiledMethod >> isAccessor [
 	| ast seq ret var |
 	ast := self ast.
