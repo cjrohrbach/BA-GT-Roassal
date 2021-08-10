@@ -22,21 +22,37 @@ Class {
 
 { #category : #accessing }
 CRClassBlueprintBuilder >> colorMethod: aNode [
-	| method |
-	method := aNode model.
-	(method isSubclassResponsibility) ifTrue: [
-		aNode centerElement background: abstractColor.
-	] ifFalse: [
-		(method isExtendingMethod) ifTrue: [
-			aNode centerElement background: extendingColor.
-		] ifFalse: [
-			(method isPureOverridingMethod) ifTrue: [
-				aNode centerElement background: overridingColor.
-			] ifFalse: [
-				(method )
-			]
-		]
-	]
+	| centerElement colorCat |
+	centerElement := aNode centerElement.
+	colorCat := aNode model classBlueprintColorCategory.
+	
+	(colorCat = #abstract) ifTrue: [centerElement background: abstractColor].
+	(colorCat = #extending) ifTrue: [centerElement background: extendingColor].
+	(colorCat = #overriding) ifTrue: [centerElement background: overridingColor].
+	(colorCat = #delegating) ifTrue: [centerElement background: delegationColor].
+	(colorCat = #constant) ifTrue: [centerElement background: constantColor].
+	
+
+	
+]
+
+{ #category : #accessing }
+CRClassBlueprintBuilder >> colorMethod: method container: con [
+	| colorCat |
+	colorCat := method classBlueprintColorCategory.
+	
+	(colorCat = #abstract) ifTrue: [^abstractColor].
+	(colorCat = #extending) ifTrue: [^extendingColor].
+	(colorCat = #overriding) ifTrue: [^overridingColor].
+	(colorCat = #delegating) ifTrue: [^delegationColor].
+	(colorCat = #constant) ifTrue: [^constantColor].
+	
+	con name = 'implementor' ifTrue: [^interfaceLayerColor].
+	con name = 'interface' ifTrue: [^interfaceLayerColor].
+	con name = 'accessor' ifTrue: [(method isSetter) ifTrue: [^setterColor] ifFalse: [^getterColor]].
+	
+	^Color black
+	
 ]
 
 { #category : #normalizer }
@@ -53,7 +69,7 @@ CRClassBlueprintBuilder >> createShapeFor: obj [
 	for each categories. These mondrians are then added to the ClassBlueprintCanvas
 	as Nodes.
 "
-	|  sortedMethods methods slots cp |
+	|  sortedMethods methods slots cp scope |
 	methods := OrderedCollection new.
 	methods addAll: obj methods.
 	
@@ -62,7 +78,7 @@ CRClassBlueprintBuilder >> createShapeFor: obj [
 	slots addAll: (obj slots).
 	
 	
-
+	scope := (modelCollection collect: [:class | class package]) copyWithoutDuplicates.
 
 	cp := CRMondrian new.
 	cp nodes 
@@ -79,10 +95,10 @@ CRClassBlueprintBuilder >> createShapeFor: obj [
 				mon := CRMondrian new.
 				mon nodes 
 				box 
-				background: [:m | self methodColor: m container: con];
+				background: [:m | self colorMethod: m container: con];
 				toolTip: #name; 
 				normalizeHeight: #linesOfCode;
-				"normalizeWidth: [:m | ( m senders ) size];"
+				normalizeWidth: [:m | ( m sendersInPackageCollection: scope ) size];
 				with: con.
 				mon
 			]; with: sortedMethods.

@@ -21,6 +21,8 @@ CompiledMethod >> classBlueprintColorCategory [
 	(self variableNodes contains: [:x | x class = RBSuperNode]) 
 		ifTrue: [^#extending] 
 		ifFalse: [(self overriddenMethods size > 0) ifTrue: [^#overriding]].
+	(self isDelegation) ifTrue: [^#delegating].
+	(self returnsConstant) ifTrue: [^#constant].
 	^#false
 ]
 
@@ -42,6 +44,18 @@ CompiledMethod >> isAccessor [
 	var class == RBInstanceVariableNode ifFalse: [ ^ false ].
 	
 	^ self selector = var name
+]
+
+{ #category : #'*CR-Graph' }
+CompiledMethod >> isDelegation [
+	(self ast body children size = 1) ifTrue:[
+		(self variableNodes contains: [:x | x class = RBInstanceVariableNode or: x class = RBSelfNode]) ifTrue: [
+			(self messages size > 0) ifTrue: [
+				^true.
+			].
+		].
+	].
+	^false
 ]
 
 { #category : #'*CR-Graph' }
@@ -134,5 +148,22 @@ CompiledMethod >> returnsConstant [
 	"
 		Return true If I return a constant value
 	"
+	((self ast ir numArgs) = 0 ) ifTrue: [
 	
+		(self ast addReturn value class = RBLiteralValueNode) ifTrue: [^true]
+	].
+	^false
+]
+
+{ #category : #'*CR-Graph' }
+CompiledMethod >> sendersInPackage: aPackage [
+	^aPackage classes flatCollect: [ :class | 
+			(class thoroughWhichMethodsReferTo: (self selector)) collect: [ :method | method methodReference ] ]
+]
+
+{ #category : #'*CR-Graph' }
+CompiledMethod >> sendersInPackageCollection: aPackageCollection [
+	^aPackageCollection flatCollect: [ :package | 
+			self sendersInPackage: package
+			]
 ]
