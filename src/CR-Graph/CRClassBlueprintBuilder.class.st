@@ -116,10 +116,14 @@ CRClassBlueprintBuilder >> createShapeFor: obj [
 					with: con.
 				mon
 			]; with: {slots}.
+	cp edges 
+		arrow;
+		color: Color blue;
+		forAll: [:x | x class = CompiledMethod]; 
+		connectFromAll: [:m | (m sendersInPackageCollection: scope) collect: [:s | s method]].
 	cp layout custom: (BlGridLayout new columnCount: 5; cellSpacing: 20).
 
-
-	^cp createCanvas canvasAsNode
+	^cp createCanvas canvasAsNode 
 	
 
 ]

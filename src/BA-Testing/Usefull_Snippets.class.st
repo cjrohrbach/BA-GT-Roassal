@@ -162,6 +162,55 @@ z contentElement: (p).
 ]
 
 { #category : #accessing }
+Usefull_Snippets >> classBlueprintLayout [
+<gtExample>
+| con1 con2 con3 con4 con5 methods class slots cp |
+	con1 := CRGroup new name: 'con1'.
+con1 addAll: (CRMondrian methods).
+con2 := CRGroup new name: 'con2'.
+con2 addAll: (CRMondrian methods).
+con3 := CRGroup new name: 'con3'.
+con3 addAll: (CRMondrian methods).
+con4 := CRGroup new name: 'con4'.
+con4 addAll: (CRMondrian methods).
+
+class := {CRShapeBuilder}.
+
+con5 := CRShapeBuilder slots.
+
+methods := (CRClassBlueprintBuilder new sortMethods: CRShapeBuilder methods).
+slots := {con5}.
+
+cp := CRMondrian new.
+cp nodes 
+	label 
+		constraintsBlock: ([:constraint | 
+			constraint grid horizontal span: 5.
+			constraint grid horizontal alignCenter.]); 
+		with: class.
+cp nodes
+	mondrianNodes
+		toolTip: #name;
+		stencil: [ :con | | mon |
+			mon := CRMondrian new.
+			mon nodes box toolTip: #name; with: con.
+			mon
+		]; with: methods.
+cp nodes
+	mondrianNodes
+		stencil: [:con | | mon |
+			mon := CRMondrian new.
+			mon nodes box toolTip: #name; with: con.
+			mon
+		
+		]; with: slots.
+		
+
+cp layout custom: (BlGridLayout new columnCount: 5; cellSpacing: 20).		
+^cp 
+]
+
+{ #category : #accessing }
 Usefull_Snippets >> getAllPackages [
 	<gtExample>
 	^ RPackageOrganizer default

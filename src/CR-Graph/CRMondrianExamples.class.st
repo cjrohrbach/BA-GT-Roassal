@@ -10,30 +10,31 @@ Class {
 { #category : #accessing }
 CRMondrianExamples >> classBlueprint [
 	<gtExample>
-	| coll view methodHNorm |
+	| classes scope view methodHNorm |
 	
-	"coll := (RPackageOrganizer default packageNamed: 'CR-Graph') classes."
+	"classes := (RPackageOrganizer default packageNamed: 'CR-Graph') classes."
 	
-	coll := OrderedCollection new.
-	coll addAll: CRShapeBuilder subclasses.
-	coll add: CRShapeBuilder. 
+	classes := OrderedCollection new.
+	classes addAll: CRShapeBuilder subclasses.
+	classes add: CRShapeBuilder. 
 	
-	
+	scope := (classes collect: [:class | class package]) copyWithoutDuplicates.
 
 	view := CRMondrian new.
-	view nodes classBlueprint 
+	view nodes 
+		classBlueprint 
 		anchorPosition: (BlNearestPositionBoundsAnchor);
-		with: (coll).
-	view edges 
-		width: 5; 
-		forAll: [:x | x isClass]; 
-		connectFrom: [:x | x superclass].
+		noHighlights; 
+		with: (classes).
+	view edges forAll: [:x | x isClass]; connectFrom: #superclass.
 	view edges 
 		arrow;
 		color: Color blue;
 		forAll: [:x | x class = CompiledMethod]; 
-		connectFromAll: [:x | x senders collect: [:s | s method]].
+		connectFromAll: [:m | (m sendersInPackageCollection: scope) collect: [:s | s method]].
+
 	view layout tree.
+
 	^view
 ]
 
