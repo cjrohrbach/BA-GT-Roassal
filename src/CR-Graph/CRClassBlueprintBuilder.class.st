@@ -15,7 +15,8 @@ Class {
 		'extendingColor',
 		'abstractColor',
 		'attributeColor',
-		'overridingColor'
+		'overridingColor',
+		'scope'
 	],
 	#category : #'CR-Graph-ShapeBuilder'
 }
@@ -69,7 +70,7 @@ CRClassBlueprintBuilder >> createShapeFor: obj [
 	for each categories. These mondrians are then added to the ClassBlueprintCanvas
 	as Nodes.
 "
-	|  sortedMethods methods slots cp scope |
+	|  sortedMethods methods slots cp |
 	methods := OrderedCollection new.
 	methods addAll: obj methods.
 	
@@ -77,8 +78,7 @@ CRClassBlueprintBuilder >> createShapeFor: obj [
 	slots := CRGroup new name: 'slots'.
 	slots addAll: (obj slots).
 	
-	
-	scope := (modelCollection collect: [:class | class package]) copyWithoutDuplicates.
+	scope ifNil: [scope := (modelCollection collect: [:class | class package]) copyWithoutDuplicates.].
 
 	cp := CRMondrian new.
 	cp nodes 
@@ -163,6 +163,12 @@ CRClassBlueprintBuilder >> methodColor: method container: con [
 	con name = 'accessor' ifTrue: [(method isSetter) ifTrue: [^setterColor] ifFalse: [^getterColor]].
 	
 	^Color pink
+]
+
+{ #category : #accessing }
+CRClassBlueprintBuilder >> scope: aCollectionOfPackages [ 
+	"Set the scope for the normalizer"
+	scope := aCollectionOfPackages
 ]
 
 { #category : #accessing }

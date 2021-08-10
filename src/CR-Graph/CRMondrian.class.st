@@ -106,6 +106,31 @@ CRMondrian >> buildNodes [
 ]
 
 { #category : #accessing }
+CRMondrian >> classBlueprintFor: aCollectionOfClasses [
+	| scope cbp |
+	
+	scope := (aCollectionOfClasses collect: [:class | class package]) copyWithoutDuplicates.
+	
+	cbp := CRMondrian new.
+	cbp nodes 
+		classBlueprint
+		anchorPosition: (BlNearestPositionBoundsAnchor);
+		noHighlights;
+		scope: scope;
+		with: (aCollectionOfClasses).
+	cbp edges forAll: [:x | x isClass]; connectFrom: #superclass.
+	cbp edges
+		arrow;
+		color: Color blue;
+		forAll: [:x | x class = CompiledMethod];
+		connectFromAll: [:m | (m sendersInPackageCollection: scope) collect: [:s | s method]].
+	
+	cbp layout tree.
+	
+	^cbp
+]
+
+{ #category : #accessing }
 CRMondrian >> classicCanvas [
 "I set the Canvas type to the normal CRCanvas"
 	canvasType := CRCanvas

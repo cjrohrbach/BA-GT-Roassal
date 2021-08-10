@@ -281,6 +281,16 @@ CRMondrianExamples >> normalizerAndForceLayout [
 ]
 
 { #category : #accessing }
+CRMondrianExamples >> oneLineClassBlueprint [
+	<gtExample>
+	| classes |
+	classes := OrderedCollection new.
+	classes addAll: (CRShapeBuilder subclasses).
+	classes add: CRShapeBuilder. 
+	^CRMondrian new classBlueprintFor: classes
+]
+
+{ #category : #accessing }
 CRMondrianExamples >> preBuiltNode [
 	<gtExample>
 	| node mondrian |
