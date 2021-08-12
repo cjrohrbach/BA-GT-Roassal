@@ -108,7 +108,7 @@ Therefore I have to be implemented in the subclass that holds further informatio
 { #category : #'node-creation' }
 CRShapeBuilder >> evaluate: aBlockClosure on: aObject [
 " checks wheter the given Block is a Block or if it's just a value "
-	(aBlockClosure class = BlockClosure or: aBlockClosure class = ByteSymbol) 
+	(aBlockClosure class = FullBlockClosure or: aBlockClosure class = ByteSymbol) 
 		ifTrue: [^ (aBlockClosure cull: aObject)]
 		ifFalse: [^aBlockClosure]
 ]

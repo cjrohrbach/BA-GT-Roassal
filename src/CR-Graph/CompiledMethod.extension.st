@@ -41,21 +41,22 @@ CompiledMethod >> isAccessor [
 	
 	
 	var := ret children first.
-	var class == RBInstanceVariableNode ifFalse: [ ^ false ].
+	var class = RBVariableNode ifFalse: [ ^ false ].
+	var isInstanceVariable ifFalse: [ ^ false ].
+	
 	
 	^ self selector = var name
 ]
 
 { #category : #'*CR-Graph' }
 CompiledMethod >> isDelegation [
-	(self ast body children size = 1) ifTrue:[
-		(self variableNodes contains: [:x | x class = RBInstanceVariableNode or: x class = RBSelfNode]) ifTrue: [
-			(self messages size > 0) ifTrue: [
-				^true.
-			].
-		].
-	].
-	^false
+
+	self ast body children size = 1 ifTrue: [ 
+		(self variableNodes contains: [ :x | 
+			 x class = RBVariableNode and:
+				 (x isInstanceVariable or: x isSelfVariable) ]) ifTrue: [ 
+			self messages size > 0 ifTrue: [ ^ true ] ] ].
+	^ false
 ]
 
 { #category : #'*CR-Graph' }
@@ -65,7 +66,7 @@ CompiledMethod >> isExtendingMethod [
 	This is determined by searching for a super call.
 	"
 	
-	^self variableNodes contains: [:x | x class = RBSuperNode]
+	^self variableNodes contains: [:x | (x class = RBVariableNode) and: (x isSuper)]
 	
 ]
 
@@ -139,7 +140,8 @@ CompiledMethod >> isSetter [
 	
 	ass := seq children first.
 	ass children size = 2 ifFalse: [ ^ false ].
-	ass children second class == RBInstanceVariableNode ifFalse: [ ^ false ].
+	ass children second class = RBVariableNode ifFalse: [ ^ false ].
+	ass children second isInstanceVariable ifFalse: [ ^ false ].
 	^ self methodClass instVarNames includes: ass children second name
 ]
 
