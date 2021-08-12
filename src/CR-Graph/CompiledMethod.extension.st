@@ -18,7 +18,7 @@ CompiledMethod >> callingMethodsIn: someClasses [
 { #category : #'*CR-Graph' }
 CompiledMethod >> classBlueprintColorCategory [
 	(self isSubclassResponsibility) ifTrue: [^#abstract].
-	(self variableNodes contains: [:x | x class = RBSuperNode]) 
+	(self variableNodes contains: [:x | (x class = RBVariableNode) and: (x isSuper)]) 
 		ifTrue: [^#extending] 
 		ifFalse: [(self overriddenMethods size > 0) ifTrue: [^#overriding]].
 	(self isDelegation) ifTrue: [^#delegating].
