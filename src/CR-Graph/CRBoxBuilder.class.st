@@ -9,7 +9,8 @@ Class {
 		'height',
 		'borderWidth',
 		'borderColor',
-		'background'
+		'background',
+		'size'
 	],
 	#category : #'CR-Graph-ShapeBuilder'
 }
@@ -48,7 +49,8 @@ CRBoxBuilder >> createShapeFor: obj [
 "
 	| shape |
 	shape := CRBox new.
-		
+	
+	size ifNotNil: [shape size: (self evaluate: size on: obj)].	
 	width ifNotNil: [shape width: (self evaluate: width on: obj)].
 	height ifNotNil: [shape height: (self evaluate: height on: obj)].
 	background ifNotNil: [shape background: (self evaluate: background on: obj)].
@@ -87,8 +89,8 @@ CRBoxBuilder >> size: aValueOrAOneArgBlock [
 	I am a setter method for the size.
 	I can receive either a symbol, a block or a value.
 "
-	width := aValueOrAOneArgBlock x.
-	height := aValueOrAOneArgBlock y.
+	size := aValueOrAOneArgBlock 
+	
 ]
 
 { #category : #accessing }
