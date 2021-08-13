@@ -10,7 +10,7 @@ It is important to change the center element if you want to change my shape or c
 
 "
 Class {
-	#name : #'CRNode_2',
+	#name : #CRNode,
 	#superclass : #BlElement,
 	#instVars : [
 		'isMarked',
@@ -29,12 +29,12 @@ Class {
 }
 
 { #category : #accessing }
-CRNode_2 >> addOutGoingEdge: anEdge [
+CRNode >> addOutGoingEdge: anEdge [
 	outGoingEdges add: anEdge.
 ]
 
 { #category : #createProperties }
-CRNode_2 >> addToolTip [
+CRNode >> addToolTip [
 	"I add a tooltip to the node. 
 	The tooltip label text is the toolTipContent that can be defined. 
 	The ToolTip gets shown when the mouse hovers over the node.
@@ -53,43 +53,43 @@ CRNode_2 >> addToolTip [
 ]
 
 { #category : #accessing }
-CRNode_2 >> anchorPosition [
+CRNode >> anchorPosition [
 	^anchorPosition
 ]
 
 { #category : #accessing }
-CRNode_2 >> anchorPosition: aBlAnchor [
+CRNode >> anchorPosition: aBlAnchor [
 	anchorPosition := aBlAnchor
 ]
 
 { #category : #accessing }
-CRNode_2 >> centerElement [
+CRNode >> centerElement [
 	^centerElement
 ]
 
 { #category : #accessing }
-CRNode_2 >> centerElement: aElement [
+CRNode >> centerElement: aElement [
 	centerElement := aElement.
 	self addChild: aElement.
 ]
 
 { #category : #accessing }
-CRNode_2 >> clickColor: aColor [
+CRNode >> clickColor: aColor [
 "I change the color the node is highlighted with when clicked"
 	clickColor := aColor
 ]
 
 { #category : #accessing }
-CRNode_2 >> connectedColor: aColor [
+CRNode >> connectedColor: aColor [
 "I change the color the node is highlighted with when a connecting node is hovered over"
 	connectColor := aColor
 ]
 
 { #category : #accessing }
-CRNode_2 >> example [
+CRNode >> example [
 	<gtExample>
 	| node shape | 
-	node := CRNode_2 new
+	node := CRNode new
 		model: 'some Model';
 		group: CRBindingGroup new.
 	shape := BlElement new
@@ -101,7 +101,7 @@ CRNode_2 >> example [
 ]
 
 { #category : #accessing }
-CRNode_2 >> getNodes [
+CRNode >> getNodes [
 	"
 	I return myself in a collection.
 	This method is overritten when the node contains other nodes, in this case it has to return all subnodes as a collection.
@@ -112,30 +112,30 @@ CRNode_2 >> getNodes [
 ]
 
 { #category : #accessing }
-CRNode_2 >> group [
+CRNode >> group [
 "Return the CRBindingGroup I was last added to"
 	^group
 ]
 
 { #category : #accessing }
-CRNode_2 >> group: aCRBindingGroup [
+CRNode >> group: aCRBindingGroup [
 "Setter for the group. group is used to keep track of the CRBindingGroup I belong to."
 	group := aCRBindingGroup
 ]
 
 { #category : #highlighting }
-CRNode_2 >> highlight [
+CRNode >> highlight [
 	self background: hoverColor.
 ]
 
 { #category : #highlighting }
-CRNode_2 >> highlightAsConnected [
+CRNode >> highlightAsConnected [
 	"I am used to mark the object as connected with an edge"
 	self background: connectColor
 ]
 
 { #category : #highlighting }
-CRNode_2 >> highlightOnClick [
+CRNode >> highlightOnClick [
 	"Add eventHandler to highlight myself when clicked on. 
 	This is done trough the group because other highlighted nodes first have to have their highlight removed.
 	"
@@ -143,7 +143,7 @@ CRNode_2 >> highlightOnClick [
 ]
 
 { #category : #highlighting }
-CRNode_2 >> highlightOnHover [
+CRNode >> highlightOnHover [
 	self addEventHandlerOn: BlMouseEnterEvent do: [
 		isMarked ifFalse: [self highlight].
 		self highlightOutGoingEdges.
@@ -155,18 +155,18 @@ CRNode_2 >> highlightOnHover [
 ]
 
 { #category : #highlighting }
-CRNode_2 >> highlightOutGoingEdges [
+CRNode >> highlightOutGoingEdges [
 	outGoingEdges do: [:e | e highlight]
 ]
 
 { #category : #accessing }
-CRNode_2 >> hoverColor: aColor [
+CRNode >> hoverColor: aColor [
 "I change the color the node is highlighted with when hovered over"
 	hoverColor := aColor
 ]
 
 { #category : #accessing }
-CRNode_2 >> initialize [
+CRNode >> initialize [
 	super initialize.
 	
 	self geometry: (BlRoundedRectangleGeometry cornerRadius: 5).
@@ -198,19 +198,19 @@ CRNode_2 >> initialize [
 ]
 
 { #category : #createProperties }
-CRNode_2 >> makeDraggable [
+CRNode >> makeDraggable [
 	"Add a eventHandler that makes me draggable"
 	self addEventHandler: BlPullHandler new allowOutOfBounds.
 ]
 
 { #category : #highlighting }
-CRNode_2 >> markAsClicked [
+CRNode >> markAsClicked [
 	self background: clickColor.
 	isMarked := true.
 ]
 
 { #category : #highlighting }
-CRNode_2 >> markOnClick [
+CRNode >> markOnClick [
 	"Add eventHandler to highlight myself when clicked on. 
 	This is done trough the group because other highlighted nodes first have to have their highlight removed.
 	"
@@ -218,13 +218,13 @@ CRNode_2 >> markOnClick [
 ]
 
 { #category : #accessing }
-CRNode_2 >> model [
+CRNode >> model [
 "I am getter method for the model"
 	^model
 ]
 
 { #category : #accessing }
-CRNode_2 >> model: anObject [
+CRNode >> model: anObject [
 "I am a setter method for the model. I add the model as toolTipContent"
 	model := anObject.
 	toolTipContent := model.
@@ -235,7 +235,7 @@ CRNode_2 >> model: anObject [
 ]
 
 { #category : #accessing }
-CRNode_2 >> noHighlights [
+CRNode >> noHighlights [
 "I make all highlights invisible."
 	hoverColor := Color transparent.
 	clickColor := Color transparent.
@@ -243,12 +243,12 @@ CRNode_2 >> noHighlights [
 ]
 
 { #category : #accessing }
-CRNode_2 >> noToolTip [
+CRNode >> noToolTip [
 	
 ]
 
 { #category : #createProperties }
-CRNode_2 >> openNodeOnShiftClick [
+CRNode >> openNodeOnShiftClick [
 	"Add a EventHandler that opens my model when I am clicked on. 
 	If the shift key is pressed during the click open myself in a inspector instead of the model.
 	"
@@ -260,25 +260,25 @@ CRNode_2 >> openNodeOnShiftClick [
 ]
 
 { #category : #highlighting }
-CRNode_2 >> removeHighlight [
+CRNode >> removeHighlight [
 	self background: (Color transparent).
 	(centerElement holdsNodes) ifTrue: [centerElement removeHighlight].
 	isMarked := false.
 ]
 
 { #category : #highlighting }
-CRNode_2 >> removeHighlightOutGoingEdges [
+CRNode >> removeHighlightOutGoingEdges [
 	outGoingEdges do: [:e | e removeHighlight]
 ]
 
 { #category : #accessing }
-CRNode_2 >> shape: aElement [
+CRNode >> shape: aElement [
 	self centerElement: aElement.
 	self addToolTip.
 ]
 
 { #category : #accessing }
-CRNode_2 >> toolTipContent: someText [
+CRNode >> toolTipContent: someText [
 	"Add the content for the toolTip. This can be a attribute, or just text "
 	toolTipContent := someText.
 ]

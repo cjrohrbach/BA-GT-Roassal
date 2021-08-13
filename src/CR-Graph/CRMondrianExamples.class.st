@@ -295,7 +295,7 @@ CRMondrianExamples >> preBuiltNode [
 	<gtExample>
 	| node mondrian |
 	
-	node := CRNode_2 new
+	node := CRNode new
 		shape: (CRBox new
 			size: 50@100;
 			background: Color blue;

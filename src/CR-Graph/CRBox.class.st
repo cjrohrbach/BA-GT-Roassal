@@ -29,6 +29,13 @@ CRBox >> addToolTip: content [
 ]
 
 { #category : #accessing }
+CRBox >> example [
+"I create a CRBox to show in the class comment"
+	<gtExample>
+	^CRBox new
+]
+
+{ #category : #accessing }
 CRBox >> gtMondrianShape [
 "I make the box look like the default element in GtMondrian. I'm mainly used for testing"
 	self background: Color transparent;

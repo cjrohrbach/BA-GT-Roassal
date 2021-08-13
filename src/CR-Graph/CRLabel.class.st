@@ -28,6 +28,13 @@ CRLabel >> content: something [
 	self text: something asRopedText glamorousRegularFont.
 ]
 
+{ #category : #accessing }
+CRLabel >> example [
+"I am an example for my class comment"
+	<gtExample>
+	^CRLabel new
+]
+
 { #category : #initialization }
 CRLabel >> initialize [
 	super initialize.

@@ -17,9 +17,9 @@ CRPrimeSieveAction >> blo [
 | b |
 b := [:e | | node multiples sorted |
 
-	(e target class = CRNode_2) ifTrue: [node := e target]
+	(e target class = CRNode) ifTrue: [node := e target]
 		ifFalse: [
-			(e target parent class = CRNode_2) ifTrue: [node := e target parent]
+			(e target parent class = CRNode) ifTrue: [node := e target parent]
 		].
 	
 	

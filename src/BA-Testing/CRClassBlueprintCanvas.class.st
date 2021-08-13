@@ -11,7 +11,7 @@ Class {
 		'label',
 		'isDebugViewActive'
 	],
-	#category : #'CR-Graph-NodeShape'
+	#category : #'BA-Testing-NodeShape'
 }
 
 { #category : #accessing }

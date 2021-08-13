@@ -92,7 +92,7 @@ CRMondrian >> buildNodes [
 	
 		shapeNodes do: [:n |
 			allNodes add: n.		
-			n allChildrenDepthFirstDo: [:x | (x class = CRNode_2) ifTrue: [allNodes add: x]].
+			n allChildrenDepthFirstDo: [:x | (x class = CRNode) ifTrue: [allNodes add: x]].
 		].
 	].
 	
