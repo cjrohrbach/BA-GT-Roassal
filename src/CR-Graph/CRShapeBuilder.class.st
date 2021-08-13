@@ -19,17 +19,15 @@ Class {
 }
 
 { #category : #accessing }
-CRShapeBuilder >> addLayoutConstraint: aLayoutConstaint [
-]
-
-{ #category : #accessing }
 CRShapeBuilder >> addNormalizer: aCRNormalier [
+	"add a prebuilt normlaizer to the normalizerCollection"
 	self assert: [aCRNormalier class = CRNormalizer or: aCRNormalier class = CRColorNormalizer] description: 'You need to provide a CRNormalizer'.
 	normalizerCollection add: aCRNormalier.
 ]
 
 { #category : #accessing }
 CRShapeBuilder >> anchorPosition: aBlAnchor [
+"Define the anchor position for edges"
 	anchorPosition := aBlAnchor
 ]
 
@@ -56,12 +54,8 @@ CRShapeBuilder >> connectedColor: aColor [
 ]
 
 { #category : #accessing }
-CRShapeBuilder >> constraintBlock: aConstraintBlock [
-	
-]
-
-{ #category : #accessing }
 CRShapeBuilder >> constraintsBlock: aConstraintBlock [
+"Add a constraint that will be added to all nodes"
 	constraintsBlock := aConstraintBlock
 ]
 

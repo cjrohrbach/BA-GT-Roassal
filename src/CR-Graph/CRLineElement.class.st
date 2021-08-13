@@ -18,6 +18,7 @@ Class {
 
 { #category : #accessing }
 CRLineElement >> highlight [
+"I highlight myself and the toNode. Therfore I change my border according to the highlight color and with"
 	originalBorder := self border.
 	self border: (BlBorder paint: (highlightColor) width: highlightWidth).
 	self toAnchor referenceElement parent highlightAsConnected
@@ -49,6 +50,10 @@ CRLineElement >> initialize [
 
 { #category : #accessing }
 CRLineElement >> noHighlights [
+"
+	Set the highlight color and width to the same as the standard border.
+	This way I don't have an highlight.
+"
 	highlightColor := (self border paint).
 	highlightWidth := (self border width).
 ]

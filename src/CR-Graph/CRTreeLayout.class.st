@@ -1,5 +1,5 @@
 "
-I extent the ${class:GtGraphTreeLayout}$ and I am used to apply an force layout to a CRMondrian
+I extent the {{gtClass:GtGraphTreeLayout}} and I am used to apply an force layout to a {{gtClass:CRMondrian}}
 "
 Class {
 	#name : #CRTreeLayout,

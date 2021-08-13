@@ -22,23 +22,8 @@ Class {
 }
 
 { #category : #accessing }
-CRClassBlueprintBuilder >> colorMethod: aNode [
-	| centerElement colorCat |
-	centerElement := aNode centerElement.
-	colorCat := aNode model classBlueprintColorCategory.
-	
-	(colorCat = #abstract) ifTrue: [centerElement background: abstractColor].
-	(colorCat = #extending) ifTrue: [centerElement background: extendingColor].
-	(colorCat = #overriding) ifTrue: [centerElement background: overridingColor].
-	(colorCat = #delegating) ifTrue: [centerElement background: delegationColor].
-	(colorCat = #constant) ifTrue: [centerElement background: constantColor].
-	
-
-	
-]
-
-{ #category : #accessing }
 CRClassBlueprintBuilder >> colorMethod: method container: con [
+"I return the color this method should have"
 	| colorCat |
 	colorCat := method classBlueprintColorCategory.
 	
@@ -151,69 +136,14 @@ CRClassBlueprintBuilder >> initialize [
 ]
 
 { #category : #accessing }
-CRClassBlueprintBuilder >> methodColor: method container: con [ 
-	| cat |
-	cat := method classBlueprintColorCategory.
-	cat = #abstract ifTrue: [^abstractColor].
-	cat = #extending ifTrue: [^extendingColor].
-	cat = #overriding ifTrue: [^overridingColor].
-	
-	con name = 'implementation' ifTrue: [^interfaceLayerColor].
-	con name = 'interface' ifTrue: [^interfaceLayerColor].
-	con name = 'accessor' ifTrue: [(method isSetter) ifTrue: [^setterColor] ifFalse: [^getterColor]].
-	
-	^Color pink
-]
-
-{ #category : #accessing }
 CRClassBlueprintBuilder >> scope: aCollectionOfPackages [ 
 	"Set the scope for the normalizer"
 	scope := aCollectionOfPackages
 ]
 
 { #category : #accessing }
-CRClassBlueprintBuilder >> sortAndColorMethodNodes: methodNodes [
-"I sort the provided nodes in groups and return the groups as collection"
-
-	| collection initialization interface implementor accessor attribute |
-	collection := OrderedCollection new.
-	
-	"create the Groups for the categorization"
-	initialization := CRGroup new name: 'initialization'.
-	interface := CRGroup new name: 'interface'.
-	implementor := CRGroup new name: 'implementor'.
-	accessor := CRGroup new name: 'accessor'.
-	attribute := CRGroup new name: 'attribute'.
-	
-
-	collection := OrderedCollection new.
-	collection add: initialization.
-	collection add: interface.
-	collection add: implementor.
-	collection add: accessor.
-	
-	"sort the mthods"
-	methodNodes do: [ :node | | method |
-		method := node model.
-		
-		(method isAccessor or: method isSetter) ifTrue: [accessor add: node]
-		ifFalse: [
-			(method isInitialization) ifTrue: [initialization add: node]
-				ifFalse: [
-					(method isPrivateIn: modelCollection) ifTrue: [implementor add: node]
-						ifFalse: [
-							interface add: node.
-						].
-				].
-		].
-	].
-	
-	^collection
-	
-]
-
-{ #category : #accessing }
 CRClassBlueprintBuilder >> sortMethods: someMethods [
+"I sort the method into the four groups"
 	| methodContainer initialization interface implementor accessor attribute |
 	
 	"create the Groups for the categorization"

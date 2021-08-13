@@ -19,6 +19,7 @@ CRArrowElement >> color: aColor [
 
 { #category : #accessing }
 CRArrowElement >> highlight [
+"I highlight myself"
 	super highlight.
 	originalArrow := self toHead.
 	self toHead: (BlArrowheadTriangle new
@@ -50,6 +51,7 @@ CRArrowElement >> matchArrowToBorder [
 
 { #category : #accessing }
 CRArrowElement >> removeHighlight [
+"I reset my self to the original look"
 	super removeHighlight.
 	
 	self toHead: originalArrow.

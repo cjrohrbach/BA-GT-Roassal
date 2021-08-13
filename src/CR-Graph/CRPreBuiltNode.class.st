@@ -20,6 +20,7 @@ CRPreBuiltNode >> addNode: aNode [
 
 { #category : #accessing }
 CRPreBuiltNode >> addNodeCollection: nodeCollection [
+"Add a collection of prebuilt nodes"
 	nodes addAll: nodeCollection.
 ]
 

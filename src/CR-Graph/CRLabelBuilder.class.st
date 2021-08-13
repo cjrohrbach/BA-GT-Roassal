@@ -35,6 +35,7 @@ CRLabelBuilder >> initialize [
 
 { #category : #accessing }
 CRLabelBuilder >> text: someTextOrBlock [
+"Define the text the labels should show"
 	text := someTextOrBlock
 ]
 

@@ -97,32 +97,6 @@ CRCanvas >> canvasForView [
 ]
 
 { #category : #accessing }
-CRCanvas >> canvasForView2 [
-	| p z |
-	p := BlPannableElement new
-		border: (BlBorder paint: (Color gray) width:4);
-		constraintsDo: [:con |
-			con horizontal matchParent.
-			con vertical matchParent.
-		].
-	z := BlZoomableElement new
-		border: (BlBorder paint: (Color red) width:4);
-		constraintsDo: [:con |
-			con horizontal matchParent.
-			con vertical matchParent.
-		].
-	
-	p addChild: self.
-	
-	z contentElement: p.
-	self requestFocusOnClick: z.
-	self addScrollToZoom: z.
-	self jumpToInitialZoomOnSpace: z.
-	^z zoomToFit
-	
-]
-
-{ #category : #accessing }
 CRCanvas >> getNodes [
 "I return all the nodes I contain and their subnodes"
 	^nodes collectAll: [:n | n getNodes]

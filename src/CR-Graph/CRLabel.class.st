@@ -24,6 +24,7 @@ CRLabel >> aptitude: aLook [
 
 { #category : #accessing }
 CRLabel >> content: something [
+"define the text I should show"
 	modelAsText := false.
 	self text: something asRopedText glamorousRegularFont.
 ]

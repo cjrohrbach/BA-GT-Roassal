@@ -27,6 +27,7 @@ TCREdge >> group: aCRGroup [
 
 { #category : #accessing }
 TCREdge >> highlight [
+"I highlight myself and the toNode"
 	originalBorder := self border.
 	self border: (BlBorder paint: (Color black) width: 1).
 	self toAnchor referenceElement parent highlightAsConnected
@@ -43,6 +44,7 @@ TCREdge >> initialize [
 
 { #category : #accessing }
 TCREdge >> removeHighlight [
+"I remove the reset myself and the toNode to the original look"
 	self border: originalBorder.
 	self toAnchor referenceElement parent removeHighlight
 ]

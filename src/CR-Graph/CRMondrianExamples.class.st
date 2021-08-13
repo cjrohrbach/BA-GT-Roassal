@@ -151,6 +151,8 @@ CRMondrianExamples >> methodsWithoutCommentHighlighted [
 	| q package |
 	package := (RPackageOrganizer default packageNamed: 'CR-Graph') classes.
 	package remove: CompiledMethod.
+	package remove: BlElement.
+	package remove: InstanceVariableSlot.
 	package remove: CRMondrianExamples.
 	
 	q := CRMondrian new.

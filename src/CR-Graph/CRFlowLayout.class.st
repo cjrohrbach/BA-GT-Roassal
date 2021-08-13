@@ -7,6 +7,17 @@ Class {
 }
 
 { #category : #accessing }
+CRFlowLayout >> example [
+"I am an example used for my class comment"
+	<gtExample>
+	| m |
+	m := CRMondrian new.
+	m nodes with: (1 to: 10).
+	m layout flow. 
+	^m
+]
+
+{ #category : #accessing }
 CRFlowLayout >> initialize [
 	super initialize.
 	^self

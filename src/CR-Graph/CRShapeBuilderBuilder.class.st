@@ -48,6 +48,7 @@ CRShapeBuilderBuilder >> classBlueprint [
 
 { #category : #accessing }
 CRShapeBuilderBuilder >> custom [
+"I return a CRCustomShapeBuilder to create mondrians with custom node shape. I also add this builder to the mondrian instance."
 	| builder |
 	builder := CRCustomShapeBuilder new.
 	mondrian addShapeBuilder: builder.
@@ -56,6 +57,7 @@ CRShapeBuilderBuilder >> custom [
 
 { #category : #accessing }
 CRShapeBuilderBuilder >> custom: aStencilBlock [
+"I create a CRCustomShapeBuilder with the stencilBlock as stencil"
 	| builder |
 	builder := CRCustomShapeBuilder new.
 	builder stencil: aStencilBlock.
@@ -104,6 +106,7 @@ CRShapeBuilderBuilder >> point [
 
 { #category : #accessing }
 CRShapeBuilderBuilder >> preBuiltNode [
+"I create a CRPreBuiltNode shape builder."
 	| builder |
 	builder := CRPreBuiltNode new.
 	mondrian addShapeBuilder: builder.

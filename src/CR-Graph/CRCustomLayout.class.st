@@ -10,6 +10,17 @@ Class {
 }
 
 { #category : #accessing }
+CRCustomLayout >> example [
+"I am an example used in my class comment"
+	<gtExample>
+	| m |
+	m := CRMondrian new.
+	m nodes with: (1 to: 10).
+	m layout custom: (BlGridLayout new columnCount: 2).
+	^m 
+]
+
+{ #category : #accessing }
 CRCustomLayout >> layout: aLayout [
 "set the layout"
 	layout := aLayout

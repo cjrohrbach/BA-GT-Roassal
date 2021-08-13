@@ -30,6 +30,7 @@ Class {
 
 { #category : #accessing }
 CRNode >> addOutGoingEdge: anEdge [
+"I add the edge to the outGoingEdges collection"
 	outGoingEdges add: anEdge.
 ]
 
@@ -54,21 +55,25 @@ CRNode >> addToolTip [
 
 { #category : #accessing }
 CRNode >> anchorPosition [
+"Getter method for the anchorPosition"
 	^anchorPosition
 ]
 
 { #category : #accessing }
 CRNode >> anchorPosition: aBlAnchor [
+"Setter method for the anchorPosition"
 	anchorPosition := aBlAnchor
 ]
 
 { #category : #accessing }
 CRNode >> centerElement [
+"Getter method for the centerElement"
 	^centerElement
 ]
 
 { #category : #accessing }
 CRNode >> centerElement: aElement [
+"Setter method for the centerElement"
 	centerElement := aElement.
 	self addChild: aElement.
 ]
@@ -87,6 +92,7 @@ CRNode >> connectedColor: aColor [
 
 { #category : #accessing }
 CRNode >> example [
+"I am an example used for my class comment"
 	<gtExample>
 	| node shape | 
 	node := CRNode new
@@ -125,6 +131,7 @@ CRNode >> group: aCRBindingGroup [
 
 { #category : #highlighting }
 CRNode >> highlight [
+"I change my background to the color predefined for highlights "
 	self background: hoverColor.
 ]
 
@@ -144,6 +151,7 @@ CRNode >> highlightOnClick [
 
 { #category : #highlighting }
 CRNode >> highlightOnHover [
+"Add a EventHandler that highlights the node and all outgoing edges when hovered over the node"
 	self addEventHandlerOn: BlMouseEnterEvent do: [
 		isMarked ifFalse: [self highlight].
 		self highlightOutGoingEdges.
@@ -156,6 +164,7 @@ CRNode >> highlightOnHover [
 
 { #category : #highlighting }
 CRNode >> highlightOutGoingEdges [
+"highlight all outgoing edges"
 	outGoingEdges do: [:e | e highlight]
 ]
 
@@ -205,6 +214,10 @@ CRNode >> makeDraggable [
 
 { #category : #highlighting }
 CRNode >> markAsClicked [
+"
+	I mark myself as clicked. 
+	Therefore I change the color of my background to the predefined clickColor
+"
 	self background: clickColor.
 	isMarked := true.
 ]
@@ -242,11 +255,6 @@ CRNode >> noHighlights [
 	connectColor := Color transparent.
 ]
 
-{ #category : #accessing }
-CRNode >> noToolTip [
-	
-]
-
 { #category : #createProperties }
 CRNode >> openNodeOnShiftClick [
 	"Add a EventHandler that opens my model when I am clicked on. 
@@ -261,6 +269,7 @@ CRNode >> openNodeOnShiftClick [
 
 { #category : #highlighting }
 CRNode >> removeHighlight [
+"Remove my highlight"
 	self background: (Color transparent).
 	(centerElement holdsNodes) ifTrue: [centerElement removeHighlight].
 	isMarked := false.
@@ -268,11 +277,13 @@ CRNode >> removeHighlight [
 
 { #category : #highlighting }
 CRNode >> removeHighlightOutGoingEdges [
+"I remove all highlights from the outgoing edges"
 	outGoingEdges do: [:e | e removeHighlight]
 ]
 
 { #category : #accessing }
 CRNode >> shape: aElement [
+"setter method for the centerElement"
 	self centerElement: aElement.
 	self addToolTip.
 ]

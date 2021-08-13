@@ -107,6 +107,7 @@ CRMondrian >> buildNodes [
 
 { #category : #accessing }
 CRMondrian >> classBlueprintFor: aCollectionOfClasses [
+"I create a classBlueprint for all classes in the given collection"
 	| scope cbp |
 	
 	scope := (aCollectionOfClasses collect: [:class | class package]) copyWithoutDuplicates.
@@ -164,6 +165,7 @@ CRMondrian >> createCanvas [
 
 { #category : #accessing }
 CRMondrian >> createMindMap: mindMapStructure [
+	"I create a mindmap graph for the given mindmap structure"
 
 	self nodes label text: #model; with: (mindMapStructure allNodesAsCollection).
 	self edges sigmoid; connectFrom: #parent.
@@ -174,6 +176,7 @@ CRMondrian >> createMindMap: mindMapStructure [
 
 { #category : #accessing }
 CRMondrian >> edge [
+"use edges instead"
 	self deprecated: 'This method is deprecated. Use edges instead'
 ]
 

@@ -13,8 +13,9 @@ Class {
 	#category : #'CR-Graph-NodeShape'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 CRBox >> addToolTip: content [
+"Setter method for the tooltip content"
 	| label labelText |
 	label := [BrLabel new aptitude: 
 		BrGlamorousLabelAptitude new  
