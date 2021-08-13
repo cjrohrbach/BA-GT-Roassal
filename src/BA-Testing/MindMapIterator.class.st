@@ -6,7 +6,7 @@ Class {
 		'level',
 		'orderedChildren'
 	],
-	#category : #'CR-Graph-MindMap'
+	#category : #'BA-Testing-MindMap'
 }
 
 { #category : #accessing }
