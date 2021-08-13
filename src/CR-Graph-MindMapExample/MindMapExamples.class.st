@@ -59,7 +59,7 @@ MindMapExamples >> mondrianAsMindmap [
 			model: CRAction;
 			addChildrenFromModels: {CRPrimeSieveAction. CRRandomBackgroundAction.}.
 		MindMapNode new
-			model: CRNode_2;
+			model: CRNode;
 			addChildren: {
 				MindMapNode new
 					model: 'Node-Shape';
