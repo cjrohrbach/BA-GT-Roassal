@@ -436,7 +436,7 @@ CRMondrianExamples >> someConnectedPointsTree [
 	m := CRMondrian new.
 	m nodes 
 		point
-		with: (1 to: 100).
+		with: (1 to: 15).
 	m edges
 		width: 1; 
 		color: Color gray;

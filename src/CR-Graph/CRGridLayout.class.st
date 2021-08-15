@@ -1,5 +1,9 @@
 "
-I extent the ${class:BlGridLayout}$ and I am used to apply an force layout to a CRMondrian.
+I am a grid layout. 
+
+Before applying myself on a canvas I calculate the columns necessary to be as square as possible.
+
+{{gtExample:CRGridLayout>>example|codeExpanded=false|previewExpanded=true}}
 "
 Class {
 	#name : 'CRGridLayout',
@@ -8,6 +12,17 @@ Class {
 	#classTraits : 'TCRLayout classTrait',
 	#category : 'CR-Graph-Layout'
 }
+
+{ #category : 'accessing' }
+CRGridLayout >> example [
+"I am an example used in my class comments"
+	<gtExample>
+	| m |
+	m := CRMondrian new.
+	m nodes with: (1 to: 9).
+	m layout grid.
+	^m
+]
 
 { #category : 'initialization' }
 CRGridLayout >> initialize [

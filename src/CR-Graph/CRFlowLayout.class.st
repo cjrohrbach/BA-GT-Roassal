@@ -1,3 +1,8 @@
+"
+I am a circle layout 
+
+{{gtExample:CRFlowLayout>>#example|codeExpanded=false|previewExpanded=true}}
+"
 Class {
 	#name : 'CRFlowLayout',
 	#superclass : 'BlFlowLayout',

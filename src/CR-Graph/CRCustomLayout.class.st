@@ -1,3 +1,8 @@
+"
+I can be used to apply any layout to a {{gtClass:CRMondrian}} instance.
+
+{{gtExample:CRCustomLayout>>#example|codeExpanded=true|previewExpanded=true}}
+"
 Class {
 	#name : 'CRCustomLayout',
 	#superclass : 'Object',

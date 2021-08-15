@@ -1,3 +1,8 @@
+"
+I am a circle layout 
+
+{{gtExample:CRCircleLayout>>#example|codeExpanded=false|previewExpanded=true}}
+"
 Class {
 	#name : 'CRCircleLayout',
 	#superclass : 'GtGraphCircleLayout',
