@@ -75,12 +75,15 @@ CRMondrianExamples >> customShape [
 <gtExample>
 | q |
 	q := CRMondrian new.
-q nodes custom stencil:  [ :x |
-	BlElement new
-		size: 20@50;
-		background: Color gray.
-]; with: (1 to: 10).
-^q 
+	q nodes 
+		custom 
+			stencil:  [ :x |
+				BlElement new
+				size: 20@50;
+				background: Color gray.
+			]; 
+			with: (1 to: 9).
+	^q 
 ]
 
 { #category : #accessing }
@@ -254,6 +257,7 @@ CRMondrianExamples >> nodesWithDifferentScopes [
 
 { #category : #accessing }
 CRMondrianExamples >> normalizeColor [
+"Normalize the background. The darker the node, the more lines of code it has"
 	<gtExample>
 	| m |
 	m := CRMondrian new.
@@ -385,7 +389,7 @@ CRMondrianExamples >> someNumbers [
 	<gtExample>
 	| c |
 	c := CRMondrian new.
-	c nodes box with: (1 to: 9).
+	c nodes with: (1 to: 9).
 	^c
 ]
 

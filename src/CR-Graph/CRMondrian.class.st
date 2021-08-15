@@ -1,5 +1,48 @@
 "
-I am a Mondrian instance. I can be used to create different visualisations of data sets.
+# CRMondrian
+CRMondrian is a simle API to build polymetric views.
+
+It is simmilar to  {{gtClass:GtMondrian}} but with some key differences: 
+- Easier to choose the shape of the nodes
+- Support for normalized nodes
+- Offers methods for easily creating a ClassBlueprint and MindMap
+- Add actions
+and many more
+
+## How do I use it?
+
+### Create Nodes:
+
+Create simple collection of nodes like this:
+{{gtExample:CRMondrianExamples>>#someNumbers|codeExpanded=true|previewExpanded=true}}
+
+Change the shape to the following predefined shapes: 
+- Circle 
+- Box
+- Point
+- Label
+
+{{gtExample:CRMondrianExamples>>#someCircles|codeExpanded=true|previewExpanded=false}}
+
+Or define your own shape like this: 
+{{gtExample:CRMondrianExamples>>#customShape|codeExpanded=true|previewExpanded=false}}
+
+### Edges and Layout
+
+Add edges and a layout like this: 
+{{gtExample:CRMondrianExamples>>#someConnectedPointsTree|codeExpanded=true|previewExpanded=false}}
+
+
+### Normalizer
+Add a normalizer like this: 
+{{gtExample:CRMondrianExamples>>#normalizeColor|codeExpanded=true|previewExpanded=false}}
+
+### Actions
+Add a action (Eventhandler) to each node like this: 
+{{gtExample:CRMondrianExamples>>#customAction|codeExpanded=true|previewExpanded=false}}
+
+
+You can finde a lot more examples in {{gtClass:CRMondrianExamples}}
 "
 Class {
 	#name : #CRMondrian,
