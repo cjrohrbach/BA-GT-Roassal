@@ -1,5 +1,5 @@
 "
-I am a ShapeBuilder thats used to create mondrians as node
+I am a ShapeBuilder thats used to create nested mondrians
 "
 Class {
 	#name : 'CRMondrianAsNode',

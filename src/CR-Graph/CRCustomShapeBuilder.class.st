@@ -1,3 +1,6 @@
+"
+I am the shapeBuilder used for shapes with a predefined stencil
+"
 Class {
 	#name : 'CRCustomShapeBuilder',
 	#superclass : 'CRShapeBuilder',
