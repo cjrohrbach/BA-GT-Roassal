@@ -1,5 +1,7 @@
 "
-I am used to choose and create the ShapeBuilder
+I am used to choose and create the ShapeBuilder.
+
+If you create any new shapeBuilders make sure to create a method here to make the shapeBuilder accessible.
 "
 Class {
 	#name : 'CRShapeBuilderBuilder',

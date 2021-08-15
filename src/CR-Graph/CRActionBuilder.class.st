@@ -1,5 +1,7 @@
 "
-I am used to create Actions
+I am used to create Actions.
+
+If you create any new actions predefined action classes. You should add a method like: {{gtMethod:CRActionBuilder>>primeSieve}} to make it easy to add this action to a mondrian instance
 "
 Class {
 	#name : 'CRActionBuilder',

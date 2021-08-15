@@ -1,5 +1,7 @@
 "
-I am used to choose the layout that should be used for the canvas
+I am used to choose the layout that should be used for the canvas.
+
+If you create a new layout, make sure to add a method here to make it accessible
 "
 Class {
 	#name : 'CRLayoutBuilder',

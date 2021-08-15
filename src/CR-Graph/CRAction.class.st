@@ -1,5 +1,7 @@
 "
 I am a action. I can be used to apply the same EventHandler to all the nodes of a CRMondrian.
+
+{{gtExample:CRMondrianExamples>>customAction|codeExpanded=true|previewExpanded=false}}
 "
 Class {
 	#name : 'CRAction',
