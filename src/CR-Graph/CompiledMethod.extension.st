@@ -1,6 +1,6 @@
-Extension { #name : #CompiledMethod }
+Extension { #name : 'CompiledMethod' }
 
-{ #category : #'*CR-Graph' }
+{ #category : '*CR-Graph' }
 CompiledMethod >> callingMethodsIn: someClasses [
 " I collect and return all methods in the provided classes that call this method "
 
@@ -15,7 +15,7 @@ CompiledMethod >> callingMethodsIn: someClasses [
 	
 ]
 
-{ #category : #'*CR-Graph' }
+{ #category : '*CR-Graph' }
 CompiledMethod >> classBlueprintColorCategory [
 	(self isSubclassResponsibility) ifTrue: [^#abstract].
 	(self variableNodes contains: [:x | (x class = RBVariableNode) and: (x isSuper)]) 
@@ -26,7 +26,7 @@ CompiledMethod >> classBlueprintColorCategory [
 	^#false
 ]
 
-{ #category : #'*CR-Graph' }
+{ #category : '*CR-Graph' }
 CompiledMethod >> isAccessor [
 	| ast seq ret var |
 	ast := self ast.
@@ -48,7 +48,7 @@ CompiledMethod >> isAccessor [
 	^ self selector = var name
 ]
 
-{ #category : #'*CR-Graph' }
+{ #category : '*CR-Graph' }
 CompiledMethod >> isDelegation [
 
 	self ast body children size = 1 ifTrue: [ 
@@ -59,7 +59,7 @@ CompiledMethod >> isDelegation [
 	^ false
 ]
 
-{ #category : #'*CR-Graph' }
+{ #category : '*CR-Graph' }
 CompiledMethod >> isExtendingMethod [
 	"
 	Returns true if this method extends another method.
@@ -70,12 +70,12 @@ CompiledMethod >> isExtendingMethod [
 	
 ]
 
-{ #category : #'*CR-Graph' }
+{ #category : '*CR-Graph' }
 CompiledMethod >> isExternalInterfaceMethod [
 	^(self isInitialization not) and: ((self isAccessor or: self isSetter) not) and: (self isImplementationLayerMethod not)
 ]
 
-{ #category : #'*CR-Graph' }
+{ #category : '*CR-Graph' }
 CompiledMethod >> isImplementationLayerMethod [
 	
 	self methodClass methods do: [:m |
@@ -86,7 +86,7 @@ CompiledMethod >> isImplementationLayerMethod [
 	^false
 ]
 
-{ #category : #'*CR-Graph' }
+{ #category : '*CR-Graph' }
 CompiledMethod >> isInitialization [
 	"Return ture if I am a method used for initialization, meaning my protocol or name includes the substring init.
 	"
@@ -95,7 +95,7 @@ CompiledMethod >> isInitialization [
 	^false
 ]
 
-{ #category : #'*CR-Graph' }
+{ #category : '*CR-Graph' }
 CompiledMethod >> isPrivateIn: someClasses [
 	"Return true if I am public, i.e., at least one method that is not in my class may call me
 	
@@ -104,7 +104,7 @@ CompiledMethod >> isPrivateIn: someClasses [
 	^ (self isPublicIn: someClasses) not
 ]
 
-{ #category : #'*CR-Graph' }
+{ #category : '*CR-Graph' }
 CompiledMethod >> isPublicIn: someClasses [
 	"Return true if I am public, i.e., at least one method that is not in my class may call me
 	
@@ -118,7 +118,7 @@ CompiledMethod >> isPublicIn: someClasses [
 	^ false
 ]
 
-{ #category : #'*CR-Graph' }
+{ #category : '*CR-Graph' }
 CompiledMethod >> isPureOverridingMethod [
 	"
 		Return true if this method overrides a method without calling its super method.
@@ -128,7 +128,7 @@ CompiledMethod >> isPureOverridingMethod [
 	
 ]
 
-{ #category : #'*CR-Graph' }
+{ #category : '*CR-Graph' }
 CompiledMethod >> isSetter [
 	| ast seq ass |
 	ast := self ast.
@@ -145,7 +145,7 @@ CompiledMethod >> isSetter [
 	^ self methodClass instVarNames includes: ass children second name
 ]
 
-{ #category : #'*CR-Graph' }
+{ #category : '*CR-Graph' }
 CompiledMethod >> returnsConstant [
 	"
 		Return true If I return a constant value
@@ -157,13 +157,13 @@ CompiledMethod >> returnsConstant [
 	^false
 ]
 
-{ #category : #'*CR-Graph' }
+{ #category : '*CR-Graph' }
 CompiledMethod >> sendersInPackage: aPackage [
 	^aPackage classes flatCollect: [ :class | 
 			(class thoroughWhichMethodsReferTo: (self selector)) collect: [ :method | method methodReference ] ]
 ]
 
-{ #category : #'*CR-Graph' }
+{ #category : '*CR-Graph' }
 CompiledMethod >> sendersInPackageCollection: aPackageCollection [
 	^aPackageCollection flatCollect: [ :package | 
 			self sendersInPackage: package

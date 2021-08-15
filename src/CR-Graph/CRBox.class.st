@@ -3,17 +3,17 @@ I represent a box.
 I'm just a BlElement with BlRectangleGeometry.
 "
 Class {
-	#name : #CRBox,
-	#superclass : #BlElement,
+	#name : 'CRBox',
+	#superclass : 'BlElement',
 	#instVars : [
 		'height',
 		'width',
 		'color'
 	],
-	#category : #'CR-Graph-NodeShape'
+	#category : 'CR-Graph-NodeShape'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRBox >> addToolTip: content [
 "Setter method for the tooltip content"
 	| label labelText |
@@ -29,14 +29,14 @@ CRBox >> addToolTip: content [
 		contentStencil: label)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRBox >> example [
 "I create a CRBox to show in the class comment"
 	<gtExample>
 	^CRBox new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRBox >> gtMondrianShape [
 "I make the box look like the default element in GtMondrian. I'm mainly used for testing"
 	self background: Color transparent;
@@ -46,7 +46,7 @@ CRBox >> gtMondrianShape [
 		zIndex: 10.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRBox >> initialize [
 	super initialize.
 	self geometry: BlRectangleGeometry new.

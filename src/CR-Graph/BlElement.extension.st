@@ -1,12 +1,12 @@
-Extension { #name : #BlElement }
+Extension { #name : 'BlElement' }
 
-{ #category : #'*CR-Graph' }
+{ #category : '*CR-Graph' }
 BlElement >> borderColor: aColor [
 "I change the color of the border"
 	self border: (BlBorder paint: (aColor) width: (self border width))
 ]
 
-{ #category : #'*CR-Graph' }
+{ #category : '*CR-Graph' }
 BlElement >> el_ToggleDebugView [
 	
 	(self userData at: #isDebugViewActive ifAbsentPut: false) ifTrue: [
@@ -21,7 +21,7 @@ BlElement >> el_ToggleDebugView [
 	]
 ]
 
-{ #category : #'*CR-Graph' }
+{ #category : '*CR-Graph' }
 BlElement >> holdsNodes [
 	"I return true if I have nodes as children.
 	If this is the case I have to implement a removeHighlight method that removes all highlights from my nodes.
@@ -31,7 +31,7 @@ BlElement >> holdsNodes [
 	
 ]
 
-{ #category : #'*CR-Graph' }
+{ #category : '*CR-Graph' }
 BlElement >> requiersModel [
 "
 	Default is false.

@@ -2,12 +2,12 @@
 Some examples with CRMondrian
 "
 Class {
-	#name : #CRMondrianExamples,
-	#superclass : #Object,
-	#category : #'CR-Graph-Examples'
+	#name : 'CRMondrianExamples',
+	#superclass : 'Object',
+	#category : 'CR-Graph-Examples'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrianExamples >> classBlueprint [
 	<gtExample>
 	| classes scope view methodHNorm |
@@ -38,7 +38,7 @@ CRMondrianExamples >> classBlueprint [
 	^view
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrianExamples >> customAction [
 	<gtExample>
 	| m |
@@ -50,7 +50,7 @@ CRMondrianExamples >> customAction [
 	^m
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrianExamples >> customHighlights [
 	<gtExample>
 	| m |
@@ -70,7 +70,7 @@ CRMondrianExamples >> customHighlights [
 	^m
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrianExamples >> customShape [
 <gtExample>
 | q |
@@ -86,7 +86,7 @@ CRMondrianExamples >> customShape [
 	^q 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrianExamples >> edgesToHalf [
 	<gtExample>
 	| m |
@@ -99,7 +99,7 @@ CRMondrianExamples >> edgesToHalf [
 	^m
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrianExamples >> edgesToHalfWithArrow [
 	<gtExample>
 	| m |
@@ -114,7 +114,7 @@ CRMondrianExamples >> edgesToHalfWithArrow [
 	^m
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrianExamples >> evenAndUnevenNumbersSeparatedByColor [
 	<gtExample>
 	| m |
@@ -126,7 +126,7 @@ CRMondrianExamples >> evenAndUnevenNumbersSeparatedByColor [
 	^m
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrianExamples >> methodsAndClassesWithoutCommentHighlighted [
 	<gtExample>
 	| q |
@@ -148,7 +148,7 @@ CRMondrianExamples >> methodsAndClassesWithoutCommentHighlighted [
 	^q
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrianExamples >> methodsWithoutCommentHighlighted [
 	<gtExample>
 	| q package |
@@ -177,7 +177,7 @@ CRMondrianExamples >> methodsWithoutCommentHighlighted [
 	^q
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrianExamples >> mondrianAsNode [
 	<gtExample>
 	| q |
@@ -199,7 +199,7 @@ CRMondrianExamples >> mondrianAsNode [
 	^q
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrianExamples >> mondrianAsNodeWithEdges [
 	<gtExample>
 	| m |
@@ -224,7 +224,7 @@ CRMondrianExamples >> mondrianAsNodeWithEdges [
 	^m
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrianExamples >> mondrianWithoutHighlights [
 "an example with no highlights for the nodes when clicking, hovering, etc"
 	<gtExample>
@@ -237,7 +237,7 @@ CRMondrianExamples >> mondrianWithoutHighlights [
 	^m
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrianExamples >> nodesWithDifferentScopes [
 	<gtExample>
 	| c |
@@ -255,7 +255,7 @@ CRMondrianExamples >> nodesWithDifferentScopes [
 	^c
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrianExamples >> normalizeColor [
 "Normalize the background. The darker the node, the more lines of code it has"
 	<gtExample>
@@ -268,7 +268,7 @@ CRMondrianExamples >> normalizeColor [
 	^ m 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrianExamples >> normalizerAndForceLayout [
 	<gtExample>
 	| m |
@@ -286,7 +286,7 @@ CRMondrianExamples >> normalizerAndForceLayout [
 	^m
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrianExamples >> oneLineClassBlueprint [
 	<gtExample>
 	| classes |
@@ -296,7 +296,7 @@ CRMondrianExamples >> oneLineClassBlueprint [
 	^CRMondrian new classBlueprintFor: classes
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrianExamples >> preBuiltNode [
 	<gtExample>
 	| node mondrian |
@@ -313,7 +313,7 @@ CRMondrianExamples >> preBuiltNode [
 	^mondrian
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrianExamples >> primeSieveAction [
 	<gtExample>
 	| m |
@@ -324,7 +324,7 @@ CRMondrianExamples >> primeSieveAction [
 	^m
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrianExamples >> randomBackgroundAction [
 	<gtExample>
 	| m |
@@ -335,7 +335,7 @@ CRMondrianExamples >> randomBackgroundAction [
 	^m
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrianExamples >> sigmoidEdges [
 	<gtExample>
 	| m |
@@ -346,7 +346,7 @@ CRMondrianExamples >> sigmoidEdges [
 	^m
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrianExamples >> smallAndBigCircles [
 	<gtExample>
 	| c |
@@ -357,7 +357,7 @@ CRMondrianExamples >> smallAndBigCircles [
 	^c
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrianExamples >> someCircles [
 	<gtExample>
 	| c |
@@ -368,7 +368,7 @@ CRMondrianExamples >> someCircles [
 	^c
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrianExamples >> someConnectedPointsTree [
 	<gtExample>
 	| m |
@@ -384,7 +384,7 @@ CRMondrianExamples >> someConnectedPointsTree [
 	^m
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrianExamples >> someNumbers [
 	<gtExample>
 	| c |
@@ -393,7 +393,7 @@ CRMondrianExamples >> someNumbers [
 	^c
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrianExamples >> systemComplexity [
 	<gtExample>
 	| m |

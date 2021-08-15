@@ -2,16 +2,16 @@
 I am a ShapeBuilder thats used to create mondrians as node
 "
 Class {
-	#name : #CRMondrianAsNode,
-	#superclass : #CRShapeBuilder,
+	#name : 'CRMondrianAsNode',
+	#superclass : 'CRShapeBuilder',
 	#instVars : [
 		'mondrianStencil',
 		'background'
 	],
-	#category : #'CR-Graph-ShapeBuilder'
+	#category : 'CR-Graph-ShapeBuilder'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrianAsNode >> background: aValueOrAOneArgBlock [
 "
 	I am a setter method for the background.
@@ -20,7 +20,7 @@ CRMondrianAsNode >> background: aValueOrAOneArgBlock [
 	background := aValueOrAOneArgBlock.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrianAsNode >> createShapeFor: obj [
 "
 	I create the node for the given object.
@@ -36,13 +36,13 @@ CRMondrianAsNode >> createShapeFor: obj [
 	^ result
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 CRMondrianAsNode >> initialize [
 	super initialize.
 	^self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrianAsNode >> stencil: aBlockWithAMondrianStencil [
 "I am a setter method for the Stencil that should be used to create the mondrians"
 	mondrianStencil := aBlockWithAMondrianStencil.

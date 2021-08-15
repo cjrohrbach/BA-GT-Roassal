@@ -2,15 +2,15 @@
 I am used to create Actions
 "
 Class {
-	#name : #CRActionBuilder,
-	#superclass : #Object,
+	#name : 'CRActionBuilder',
+	#superclass : 'Object',
 	#instVars : [
 		'mondrian'
 	],
-	#category : #'CR-Graph-Action'
+	#category : 'CR-Graph-Action'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRActionBuilder >> custom [
 "if you want to create your own custom action, call me"
 	| action |
@@ -19,19 +19,19 @@ CRActionBuilder >> custom [
 	^action
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 CRActionBuilder >> initialize [
 	super initialize.
 	^self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRActionBuilder >> mondrian: aMondrian [
 "I am a setter method for the mondrian"
 	mondrian := aMondrian
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 CRActionBuilder >> newWithMondrian: aMondrian [
 " initialize myself with the provided mondrian "
 	| instance | 
@@ -40,7 +40,7 @@ CRActionBuilder >> newWithMondrian: aMondrian [
 	^instance
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRActionBuilder >> primeSieve [
 "to create a primeSieve action call me"
 	| action |
@@ -50,7 +50,7 @@ CRActionBuilder >> primeSieve [
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRActionBuilder >> randomBackground [
 "to create a randomBackground action call me"
 	| action |

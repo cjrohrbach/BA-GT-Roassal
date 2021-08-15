@@ -2,8 +2,8 @@
 I represent a ShapeBuilder specific for building CRBox nodes
 "
 Class {
-	#name : #CRBoxBuilder,
-	#superclass : #CRShapeBuilder,
+	#name : 'CRBoxBuilder',
+	#superclass : 'CRShapeBuilder',
 	#instVars : [
 		'width',
 		'height',
@@ -12,10 +12,10 @@ Class {
 		'background',
 		'size'
 	],
-	#category : #'CR-Graph-ShapeBuilder'
+	#category : 'CR-Graph-ShapeBuilder'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRBoxBuilder >> background: aValueOrAOneArgBlock [
 "
 	I am a setter method for the background.
@@ -24,7 +24,7 @@ CRBoxBuilder >> background: aValueOrAOneArgBlock [
 	background := aValueOrAOneArgBlock.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRBoxBuilder >> borderColor: aColorOrAOneArgBlock [
 "
 	I am a setter method for the borderColor.
@@ -33,7 +33,7 @@ CRBoxBuilder >> borderColor: aColorOrAOneArgBlock [
 	borderColor := aColorOrAOneArgBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRBoxBuilder >> borderWidth: aValueOrAOneArgBlock [
 "
 	I am a setter method for the borderWidth.
@@ -42,7 +42,7 @@ CRBoxBuilder >> borderWidth: aValueOrAOneArgBlock [
 	borderWidth := aValueOrAOneArgBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRBoxBuilder >> createShapeFor: obj [
 "
 	I create a CRCicle with the given object as model according to the stored specification.
@@ -68,7 +68,7 @@ CRBoxBuilder >> createShapeFor: obj [
 	^ shape
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRBoxBuilder >> height: aValueOrAOneArgBlock [
 "
 	I am a setter method for the height.
@@ -77,13 +77,13 @@ CRBoxBuilder >> height: aValueOrAOneArgBlock [
 	height := aValueOrAOneArgBlock.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 CRBoxBuilder >> initialize [
 	super initialize.
 	^self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRBoxBuilder >> size: aValueOrAOneArgBlock [
 "
 	I am a setter method for the size.
@@ -93,7 +93,7 @@ CRBoxBuilder >> size: aValueOrAOneArgBlock [
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRBoxBuilder >> width: aValueOrAOneArgBlock [
 "
 	I am a setter method for the width.

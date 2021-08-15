@@ -2,8 +2,8 @@
 I am the superclass of all edge types and I'm used to share methods between them
 "
 Class {
-	#name : #CREdge,
-	#superclass : #Object,
+	#name : 'CREdge',
+	#superclass : 'Object',
 	#instVars : [
 		'toAnchorPosition',
 		'fromAnchorPosition',
@@ -16,28 +16,28 @@ Class {
 		'highlightColor',
 		'highlightWidth'
 	],
-	#category : #'CR-Graph-CR-Graph'
+	#category : 'CR-Graph-CR-Graph'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CREdge >> color: aColor [
 "Setter method for the color the edge should have"
 	color := aColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CREdge >> condition [
 "I am a getter for the condition block that has to be true on all nodes that are used for the edges"
 	^condition
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CREdge >> condition: aTrueFalseBlock [		
 "I am a setter for the condition block that has to be true on all nodes that are used for the edges"
 	condition := aTrueFalseBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CREdge >> connect: someNodes [
 	"
 	I have to be implemented in the subclass according to the kind of
@@ -47,13 +47,13 @@ CREdge >> connect: someNodes [
 	^self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CREdge >> connectionBlock: aBlockOrASymbol [
 "Setter method for the connectionBlock"
 	connectionBlock := aBlockOrASymbol
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CREdge >> createAnchorFor: fromNode to: toNode [
 "I create the anchor for the fromNode according to the position stored in the fromNode"
 	(fromNode anchorPosition superclass = BlNearestPositionAnchor) ifTrue: [
@@ -63,7 +63,7 @@ CREdge >> createAnchorFor: fromNode to: toNode [
 	]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CREdge >> createEdgeFrom: fromNode to: toNode [
 "I delegate the creation of the edge. Therefore I use methods creating the graph constraints as well as the visible edge"
 
@@ -74,13 +74,13 @@ CREdge >> createEdgeFrom: fromNode to: toNode [
 	^(self createVisibleEdgeFrom: fromNode to: toNode)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CREdge >> createEdges: someNodes [
 "I delegate the creation of the edges between the given set of nodes."
 	^self connect: someNodes.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CREdge >> createGraphEdgeAndAddConstraintsFrom: fromNode to: toNode [
 "I create the graph constraints between the two nodes. This is necessary for the layouts to work."
 	| edge |
@@ -89,7 +89,7 @@ CREdge >> createGraphEdgeAndAddConstraintsFrom: fromNode to: toNode [
 	toNode constraints graph addConnectedEdge: edge.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CREdge >> createVisibleEdgeFrom: fromNode to: toNode [
 "I create the actual line between the two nodes. Therefore I use the edge shape and the provided specifications."
 
@@ -110,13 +110,13 @@ CREdge >> createVisibleEdgeFrom: fromNode to: toNode [
 	^ line
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CREdge >> edgeShape: aEdgeShape [
 "Setter method for the shape of the edge."
 	edgeShape := aEdgeShape
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CREdge >> evaluate: aBlock on: aCRNode nodes: nodes [
 	" evaluates the given block on the object and then returns a CRGroup with all shapes that match the result "
 	| result |
@@ -128,25 +128,25 @@ CREdge >> evaluate: aBlock on: aCRNode nodes: nodes [
 		ifFalse: [^ nodes nodesFromModel: result].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CREdge >> fromAnchorPosition: aAnchor [
 "Setter method for the fromAnchorPosition"
 	fromAnchorPosition := aAnchor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CREdge >> highlightColor: aColor [
 "set the color used to highlight edges when hovered over fromNode"
 	highlightColor := aColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CREdge >> highlightWidth: aNumber [
 "set the color used to highlight edges when hovered over fromNode"
 	highlightWidth := aNumber
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 CREdge >> initialize [
 	super initialize.
 	toAnchorPosition :=  BlNearestPositionBoundsAnchor.
@@ -156,19 +156,19 @@ CREdge >> initialize [
 	^self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CREdge >> noHighlights [
 "remove all highlights when hovering over connected nodes"
 	noHighlights := true.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CREdge >> toAnchorPosition: aAnchor [
 "Setter method for the toAnchorPosition"
 	toAnchorPosition := aAnchor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CREdge >> width: aValue [
 "Setter method for the width of the edges"
 	width := aValue.

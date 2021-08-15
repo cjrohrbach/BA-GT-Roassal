@@ -2,18 +2,18 @@
 I represent a ShapeBuilder specific for building CRCircle nodes
 "
 Class {
-	#name : #CRCircleBuilder,
-	#superclass : #CRShapeBuilder,
+	#name : 'CRCircleBuilder',
+	#superclass : 'CRShapeBuilder',
 	#instVars : [
 		'size',
 		'borderWidth',
 		'borderColor',
 		'background'
 	],
-	#category : #'CR-Graph-ShapeBuilder'
+	#category : 'CR-Graph-ShapeBuilder'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRCircleBuilder >> background: aValueOrArgBlock [
 "
 	I am a setter method for the background.
@@ -22,7 +22,7 @@ CRCircleBuilder >> background: aValueOrArgBlock [
 	background := aValueOrArgBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRCircleBuilder >> borderColor: aValueOrArgBlock [
 "
 	I am a setter method for the borderColor.
@@ -31,7 +31,7 @@ CRCircleBuilder >> borderColor: aValueOrArgBlock [
 	borderColor := aValueOrArgBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRCircleBuilder >> borderWidth: aValueOrArgBlock [
 "
 	I am a setter method for the borderWidth.
@@ -40,7 +40,7 @@ CRCircleBuilder >> borderWidth: aValueOrArgBlock [
 	borderWidth := aValueOrArgBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRCircleBuilder >> createShapeFor: obj [
 "
 	I create a CRCicle with the given object as model according to the stored specification.
@@ -65,13 +65,13 @@ CRCircleBuilder >> createShapeFor: obj [
 		^ shape
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 CRCircleBuilder >> initialize [
 	super initialize.
 	^self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRCircleBuilder >> size: aValueOrArgBlock [
 "
 	I am a setter method for the size.

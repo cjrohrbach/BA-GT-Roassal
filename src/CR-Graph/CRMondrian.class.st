@@ -45,8 +45,8 @@ Add a action (Eventhandler) to each node like this:
 You can finde a lot more examples in {{gtClass:CRMondrianExamples}}
 "
 Class {
-	#name : #CRMondrian,
-	#superclass : #Object,
+	#name : 'CRMondrian',
+	#superclass : 'Object',
 	#instVars : [
 		'edgeBuilderCollection',
 		'shapeBuilderCollection',
@@ -58,10 +58,10 @@ Class {
 		'modelForCanvas',
 		'nodeCache'
 	],
-	#category : #'CR-Graph-CR-Graph'
+	#category : 'CR-Graph-CR-Graph'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrian >> action [
 "
 	I return a new Action builder. 
@@ -75,13 +75,13 @@ CRMondrian >> action [
 	^actionBuilder
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrian >> addActionBuilder: aCRActionBuilder [
 "I add the given CRActionBuilder to the actionBuilderCollection"
 	actionBuilderCollection add: aCRActionBuilder
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrian >> addActions: someNodes [
 "Add all the actions to all nodes"
 	actionBuilderCollection do: [:ab |
@@ -89,19 +89,19 @@ CRMondrian >> addActions: someNodes [
 	]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrian >> addEdgeBuilder: edgeBuilder [
 "I add the given CREdgeBuilder to the edgeBuilderCollection"
 	edgeBuilderCollection add: edgeBuilder.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrian >> addShapeBuilder: aShapeBuilder [
 "I add the given CRShapeBuilder to the shapeBuilderCollection"
 	shapeBuilderCollection add: aShapeBuilder
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrian >> buildEdges: nodes [
 "I delegate the creation of all edges for all edgeBuilders"
 	| edges allNodes |
@@ -115,7 +115,7 @@ CRMondrian >> buildEdges: nodes [
 	^edges.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrian >> buildNodes [
 "
 	I delegate the creation of all nodes for all shapeBuilders.
@@ -148,7 +148,7 @@ CRMondrian >> buildNodes [
 	^result
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrian >> classBlueprintFor: aCollectionOfClasses [
 "I create a classBlueprint for all classes in the given collection"
 	| scope cbp |
@@ -174,13 +174,13 @@ CRMondrian >> classBlueprintFor: aCollectionOfClasses [
 	^cbp
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrian >> classicCanvas [
 "I set the Canvas type to the normal CRCanvas"
 	canvasType := CRCanvas
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrian >> createCanvas [
 "
 	I am responsible for creating the canvas.
@@ -206,7 +206,7 @@ CRMondrian >> createCanvas [
 	^ canvas
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrian >> createMindMap: mindMapStructure [
 	"I create a mindmap graph for the given mindmap structure"
 
@@ -217,13 +217,13 @@ CRMondrian >> createMindMap: mindMapStructure [
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrian >> edge [
 "use edges instead"
 	self deprecated: 'This method is deprecated. Use edges instead'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrian >> edges [
 "
 	I return a new CREdgeBuilder.
@@ -234,7 +234,7 @@ CRMondrian >> edges [
 	^ CREdgeBuilder newWithMondrian: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrian >> getNodes [
 "
 	I return the nodes contained in this mondrian.
@@ -247,7 +247,7 @@ CRMondrian >> getNodes [
 	^canvasCache nodes 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrian >> gtCanvasViewOn: aView [
 "
 	I am responsible for the presentation of the canvas.
@@ -279,7 +279,7 @@ CRMondrian >> gtCanvasViewOn: aView [
 				action: [ canvasForView zoomOut ] ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 CRMondrian >> initialize [
 	super initialize.
 	shapeBuilderCollection := OrderedCollection new.
@@ -292,7 +292,7 @@ CRMondrian >> initialize [
 	^self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrian >> layout [
 "
 	I return a new CRLayoutBuilder.
@@ -303,14 +303,14 @@ CRMondrian >> layout [
 	^layoutBuilder
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrian >> model: aObject [
 "I am a setter method for the model that should be passed on to the canvas"
 	modelForCanvas := aObject.
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrian >> noHighlights [
 "I remove all interaction highlights from nodes and edges"
 	edgeBuilderCollection do: [:eb | eb noHighlights].
@@ -318,12 +318,12 @@ CRMondrian >> noHighlights [
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrian >> noHighlightsOnInteraction [
 "I remove all interaction highlights from nodes and edges"
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRMondrian >> nodes [
 "
 	I return a new CRShapeBuilderBuilder.

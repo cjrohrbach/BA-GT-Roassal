@@ -2,8 +2,8 @@
 I can be used to normalize some values over a specific scope.
 "
 Class {
-	#name : #CRNormalizer,
-	#superclass : #Object,
+	#name : 'CRNormalizer',
+	#superclass : 'Object',
 	#instVars : [
 		'minValue',
 		'maxValue',
@@ -14,22 +14,22 @@ Class {
 		'attributeBlock',
 		'condition'
 	],
-	#category : #'CR-Graph-Normalizer'
+	#category : 'CR-Graph-Normalizer'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRNormalizer >> attribute: aNodeAttributeAsBlock [
 	" the block must be given like this: [ :node :value | node height: value ] "
 	attributeBlock := aNodeAttributeAsBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRNormalizer >> condition: aTrueFalseBlock [		
 "I am a setter for the condition block that has to be true on all nodes that should be normalized"
 	condition := aTrueFalseBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRNormalizer >> evaluateScope [
 " I should only be called once key and nodes have been set. I evaluate the max and min value of the nodes with the given key"
 	| min max |
@@ -48,7 +48,7 @@ CRNormalizer >> evaluateScope [
 	maxValue := max.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRNormalizer >> from: aValue [
 "
 	I am a setter method for the from value.
@@ -57,7 +57,7 @@ CRNormalizer >> from: aValue [
 	from := aValue
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRNormalizer >> from: fromValue to: toValue [
 "
 	I am a setter method for the from and the to value.
@@ -66,7 +66,7 @@ CRNormalizer >> from: fromValue to: toValue [
 	to := toValue.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 CRNormalizer >> initialize [
 	super initialize.
 	
@@ -75,7 +75,7 @@ CRNormalizer >> initialize [
 	^self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRNormalizer >> key: anArgBlockOrSymbol [
 "
 	I am a setter method for the key. 
@@ -84,7 +84,7 @@ CRNormalizer >> key: anArgBlockOrSymbol [
 	key := anArgBlockOrSymbol.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRNormalizer >> maximumValue: aValue [
 "
 	I am a setter method for the maximum value.
@@ -93,7 +93,7 @@ CRNormalizer >> maximumValue: aValue [
 	maxValue := aValue
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRNormalizer >> minimumValue: aValue [
 "
 	I am a setter method for the maximum value.
@@ -102,21 +102,21 @@ CRNormalizer >> minimumValue: aValue [
 	minValue := aValue
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRNormalizer >> nodes: someCRNodes [
 	"Set the elements that should be normalized"
 	someCRNodes ifNil: [ self error: 'Should not provide nil' ].
 	nodes := someCRNodes flatCollect: [:x | (condition cull: x model) ifTrue: [{x}] ifFalse: [{}]]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRNormalizer >> normalize [
 "Apply the normlaizer to the whole nodes provided"
 	nodes do: [:node | attributeBlock cull: (node centerElement) cull: (self valueFor: node)]
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRNormalizer >> normalize: aBlock [
 " the block must be given like this: [ :node :value | node height: value ] "
 
@@ -124,7 +124,7 @@ CRNormalizer >> normalize: aBlock [
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRNormalizer >> to: aValue [
 "
 	I am a setter method for the to value.
@@ -133,7 +133,7 @@ CRNormalizer >> to: aValue [
 	to := aValue
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRNormalizer >> valueFor: aNode [
 "
 	I return the value for the given node.

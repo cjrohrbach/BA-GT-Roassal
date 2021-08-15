@@ -2,12 +2,12 @@
 I can be used to normalize colors over a scope
 "
 Class {
-	#name : #CRColorNormalizer,
-	#superclass : #CRNormalizer,
-	#category : #'CR-Graph-Normalizer'
+	#name : 'CRColorNormalizer',
+	#superclass : 'CRNormalizer',
+	#category : 'CR-Graph-Normalizer'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRColorNormalizer >> blend: aColor with: aColorValue weight: wt [
 	"Answer a new ColorValue which is a weighted blend of the receiver and the
 	supplied ColorValue."
@@ -23,7 +23,7 @@ CRColorNormalizer >> blend: aColor with: aColorValue weight: wt [
 	^Color r: rv g: gv b: bv alpha: av
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRColorNormalizer >> initialize [
 	super initialize.
 	
@@ -33,7 +33,7 @@ CRColorNormalizer >> initialize [
 	^self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRColorNormalizer >> valueFor: aNode [
 "
 	I return the color for the given node.

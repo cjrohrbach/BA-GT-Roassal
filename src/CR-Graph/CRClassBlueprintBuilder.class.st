@@ -2,8 +2,8 @@
 I am a ClassBlueprint builder and I'm used to build class blueprints for the given collection
 "
 Class {
-	#name : #CRClassBlueprintBuilder,
-	#superclass : #CRShapeBuilder,
+	#name : 'CRClassBlueprintBuilder',
+	#superclass : 'CRShapeBuilder',
 	#instVars : [
 		'accessEdgeColor',
 		'invocationEdgeColor',
@@ -18,10 +18,10 @@ Class {
 		'overridingColor',
 		'scope'
 	],
-	#category : #'CR-Graph-ShapeBuilder'
+	#category : 'CR-Graph-ShapeBuilder'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRClassBlueprintBuilder >> colorMethod: method container: con [
 "I return the color this method should have"
 	| colorCat |
@@ -41,13 +41,13 @@ CRClassBlueprintBuilder >> colorMethod: method container: con [
 	
 ]
 
-{ #category : #normalizer }
+{ #category : 'normalizer' }
 CRClassBlueprintBuilder >> createNormalizer: anArgBlockOrSymbol from: fromValue to: toValue forAll: aTrueFalseBlock attribute: aBlockSpecifingTheAttribute [
 	"A classblueprint shouldn't be normalized"
 	self shouldNotImplement 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRClassBlueprintBuilder >> createShapeFor: obj [
 "
 	I create a classBluePrint shape for the given objec, which should be a class.
@@ -113,7 +113,7 @@ CRClassBlueprintBuilder >> createShapeFor: obj [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRClassBlueprintBuilder >> initialize [
 	super initialize.
 	
@@ -135,13 +135,13 @@ CRClassBlueprintBuilder >> initialize [
 	^self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRClassBlueprintBuilder >> scope: aCollectionOfPackages [ 
 	"Set the scope for the normalizer"
 	scope := aCollectionOfPackages
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRClassBlueprintBuilder >> sortMethods: someMethods [
 "I sort the method into the four groups"
 	| methodContainer initialization interface implementor accessor attribute |

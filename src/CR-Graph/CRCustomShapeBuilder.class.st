@@ -1,13 +1,13 @@
 Class {
-	#name : #CRCustomShapeBuilder,
-	#superclass : #CRShapeBuilder,
+	#name : 'CRCustomShapeBuilder',
+	#superclass : 'CRShapeBuilder',
 	#instVars : [
 		'stencil'
 	],
-	#category : #'CR-Graph-ShapeBuilder'
+	#category : 'CR-Graph-ShapeBuilder'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRCustomShapeBuilder >> createShapeFor: obj [
 "
 	I create a node accodring to the stencil
@@ -17,7 +17,7 @@ CRCustomShapeBuilder >> createShapeFor: obj [
 	^shape
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRCustomShapeBuilder >> stencil: aBlock [
 	"The stencil used to build all Nodes"
 	stencil := aBlock.

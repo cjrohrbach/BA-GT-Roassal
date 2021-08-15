@@ -1,6 +1,6 @@
-Extension { #name : #InstanceVariableSlot }
+Extension { #name : 'InstanceVariableSlot' }
 
-{ #category : #'*CR-Graph' }
+{ #category : '*CR-Graph' }
 InstanceVariableSlot >> numberOfAccessesWithin: aMethodCollection [
 	| counter |
 	counter := 0.

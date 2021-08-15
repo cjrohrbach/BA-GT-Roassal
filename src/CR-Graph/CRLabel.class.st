@@ -6,37 +6,37 @@ I extend ${class:BlTextElement}$ and implement ${class:TCRNode}$.
 
 "
 Class {
-	#name : #CRLabel,
-	#superclass : #BlTextElement,
+	#name : 'CRLabel',
+	#superclass : 'BlTextElement',
 	#instVars : [
 		'model',
 		'modelAsText'
 	],
-	#category : #'CR-Graph-NodeShape'
+	#category : 'CR-Graph-NodeShape'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRLabel >> aptitude: aLook [
 "Tooltips on labels don't make sense"
 	(aLook class = BrGlamorousWithTooltipAptitude) ifFalse:
 		[super aptitude: aLook]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRLabel >> content: something [
 "define the text I should show"
 	modelAsText := false.
 	self text: something asRopedText glamorousRegularFont.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRLabel >> example [
 "I am an example for my class comment"
 	<gtExample>
 	^CRLabel new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 CRLabel >> initialize [
 	super initialize.
 	
@@ -50,20 +50,20 @@ CRLabel >> initialize [
 	^self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRLabel >> model [
 "I am a getter method for the model"
 	^model
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRLabel >> model: anObject [
 "I am a setter method for the model. I add the model as toolTipContent and as text that I display"
 	model := anObject.
 	modelAsText ifTrue: [self text: model asRopedText glamorousRegularFont].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRLabel >> requiersModel [
 "
 	Since my text should correspond with the model I represent, I require the model

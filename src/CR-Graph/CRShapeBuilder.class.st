@@ -2,8 +2,8 @@
 I represent a ShapeBuilder, and I am used to create nodes for models.
 "
 Class {
-	#name : #CRShapeBuilder,
-	#superclass : #Object,
+	#name : 'CRShapeBuilder',
+	#superclass : 'Object',
 	#instVars : [
 		'normalizerCollection',
 		'modelCollection',
@@ -15,23 +15,23 @@ Class {
 		'connectedColor',
 		'clickColor'
 	],
-	#category : #'CR-Graph-ShapeBuilder'
+	#category : 'CR-Graph-ShapeBuilder'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRShapeBuilder >> addNormalizer: aCRNormalier [
 	"add a prebuilt normlaizer to the normalizerCollection"
 	self assert: [aCRNormalier class = CRNormalizer or: aCRNormalier class = CRColorNormalizer] description: 'You need to provide a CRNormalizer'.
 	normalizerCollection add: aCRNormalier.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRShapeBuilder >> anchorPosition: aBlAnchor [
 "Define the anchor position for edges"
 	anchorPosition := aBlAnchor
 ]
 
-{ #category : #'node-creation' }
+{ #category : 'node-creation' }
 CRShapeBuilder >> applyNormalizer: someNodes [
 "I normalize all provided nodes with the normalizers that were added druing creation."
 	normalizerCollection do: [:normalizer |
@@ -41,25 +41,25 @@ CRShapeBuilder >> applyNormalizer: someNodes [
 	].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRShapeBuilder >> clickColor: aColor [
 "I change the color the node is highlighted with when clicked"
 	clickColor := aColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRShapeBuilder >> connectedColor: aColor [
 "I change the color the node is highlighted with when a connecting node is hovered over"
 	connectedColor := aColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRShapeBuilder >> constraintsBlock: aConstraintBlock [
 "Add a constraint that will be added to all nodes"
 	constraintsBlock := aConstraintBlock
 ]
 
-{ #category : #'node-creation' }
+{ #category : 'node-creation' }
 CRShapeBuilder >> createNodes [
 "
 	I initiate the creation of the nodes with the provided collection and specifications.
@@ -75,7 +75,7 @@ CRShapeBuilder >> createNodes [
 	^nodes
 ]
 
-{ #category : #normalizer }
+{ #category : 'normalizer' }
 CRShapeBuilder >> createNormalizer: anArgBlockOrSymbol from: fromValue to: toValue forAll: aTrueFalseBlock attribute: aBlockSpecifingTheAttribute [
 	"I create a normlaizer using the given specification"	
 			
@@ -91,7 +91,7 @@ CRShapeBuilder >> createNormalizer: anArgBlockOrSymbol from: fromValue to: toVal
 	^norm
 ]
 
-{ #category : #'node-creation' }
+{ #category : 'node-creation' }
 CRShapeBuilder >> createShapeFor: obj [
 "I take an model and create and return a node matching the provided specifications. 
 Therefore I have to be implemented in the subclass that holds further information about the shape.
@@ -99,7 +99,7 @@ Therefore I have to be implemented in the subclass that holds further informatio
 	^self subclassResponsibility
 ]
 
-{ #category : #'node-creation' }
+{ #category : 'node-creation' }
 CRShapeBuilder >> evaluate: aBlockClosure on: aObject [
 " checks wheter the given Block is a Block or if it's just a value "
 	(aBlockClosure class = FullBlockClosure or: aBlockClosure class = ByteSymbol) 
@@ -107,13 +107,13 @@ CRShapeBuilder >> evaluate: aBlockClosure on: aObject [
 		ifFalse: [^aBlockClosure]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRShapeBuilder >> hoverColor: aColor [
 "I change the color the node is highlighted with when hovered over"
 	hoverColor := aColor
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 CRShapeBuilder >> initialize [
 	super initialize.
 	normalizerCollection := OrderedCollection new.
@@ -121,19 +121,19 @@ CRShapeBuilder >> initialize [
 	^self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRShapeBuilder >> markedColor: aColor [
 "I change the color the node is highlighted with when clicked"
 	markedColor := aColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRShapeBuilder >> noHighlights [
 "I remove all interaction highlights"
 	noHighlights := true.
 ]
 
-{ #category : #normalizer }
+{ #category : 'normalizer' }
 CRShapeBuilder >> normalizeBackground: anArgBlockOrSymbol [
 "
 	I create a color normalizer using the given 
@@ -147,7 +147,7 @@ CRShapeBuilder >> normalizeBackground: anArgBlockOrSymbol [
 		
 ]
 
-{ #category : #normalizer }
+{ #category : 'normalizer' }
 CRShapeBuilder >> normalizeBackground: anArgBlockOrSymbol forAll: aTrueFalseBlock [
 "
 	I create a background normalizer using the given 
@@ -162,7 +162,7 @@ CRShapeBuilder >> normalizeBackground: anArgBlockOrSymbol forAll: aTrueFalseBloc
 				forAll: aTrueFalseBlock
 ]
 
-{ #category : #normalizer }
+{ #category : 'normalizer' }
 CRShapeBuilder >> normalizeBackground: anArgBlockOrSymbol from: fromValue to: toValue [
 "
 	I create a color normalizer using the given block or symbol as key
@@ -174,7 +174,7 @@ CRShapeBuilder >> normalizeBackground: anArgBlockOrSymbol from: fromValue to: to
 				forAll: [ true ]
 ]
 
-{ #category : #normalizer }
+{ #category : 'normalizer' }
 CRShapeBuilder >> normalizeBackground: anArgBlockOrSymbol from: fromValue to: toValue forAll: aTrueFalseBlock [
 "
 	I create a normalizer for the backgroundcolor, according to the specification I'm given
@@ -190,7 +190,7 @@ CRShapeBuilder >> normalizeBackground: anArgBlockOrSymbol from: fromValue to: to
 	^norm
 ]
 
-{ #category : #normalizer }
+{ #category : 'normalizer' }
 CRShapeBuilder >> normalizeBorderColor: anArgBlockOrSymbol [
 "
 	I create a color normalizer using the given 
@@ -203,7 +203,7 @@ CRShapeBuilder >> normalizeBorderColor: anArgBlockOrSymbol [
 				forAll: [ true ]
 ]
 
-{ #category : #normalizer }
+{ #category : 'normalizer' }
 CRShapeBuilder >> normalizeBorderColor: anArgBlockOrSymbol forAll: aTrueFalseBlock [
 "
 	I create a borderColor normalizer using the given 
@@ -218,7 +218,7 @@ CRShapeBuilder >> normalizeBorderColor: anArgBlockOrSymbol forAll: aTrueFalseBlo
 				forAll: aTrueFalseBlock
 ]
 
-{ #category : #normalizer }
+{ #category : 'normalizer' }
 CRShapeBuilder >> normalizeBorderColor: anArgBlockOrSymbol from: fromValue to: toValue [
 "
 	I create a bordercolor normalizer using the given block or symbol as key
@@ -230,7 +230,7 @@ CRShapeBuilder >> normalizeBorderColor: anArgBlockOrSymbol from: fromValue to: t
 				forAll: [ true ]
 ]
 
-{ #category : #normalizer }
+{ #category : 'normalizer' }
 CRShapeBuilder >> normalizeBorderColor: anArgBlockOrSymbol from: fromValue to: toValue forAll: aTrueFalseBlock [
 "
 	I create a normalizer for the bordercolor, according to the specification I'm given
@@ -247,7 +247,7 @@ CRShapeBuilder >> normalizeBorderColor: anArgBlockOrSymbol from: fromValue to: t
 	^norm
 ]
 
-{ #category : #normalizer }
+{ #category : 'normalizer' }
 CRShapeBuilder >> normalizeHeight: anArgBlockOrSymbol [
 "
 	I create a height normalizer using the given 
@@ -258,7 +258,7 @@ CRShapeBuilder >> normalizeHeight: anArgBlockOrSymbol [
 	^ self normalizeHeight: anArgBlockOrSymbol from: 10 to: 50 forAll: [ true ]
 ]
 
-{ #category : #normalizer }
+{ #category : 'normalizer' }
 CRShapeBuilder >> normalizeHeight: anArgBlockOrSymbol forAll: aTrueFalseBlock [
 "
 	I create a height normalizer using the given 
@@ -270,7 +270,7 @@ CRShapeBuilder >> normalizeHeight: anArgBlockOrSymbol forAll: aTrueFalseBlock [
 	 ^ self normalizeHeight: anArgBlockOrSymbol from: 10 to: 50 forAll: aTrueFalseBlock
 ]
 
-{ #category : #normalizer }
+{ #category : 'normalizer' }
 CRShapeBuilder >> normalizeHeight: anArgBlockOrSymbol from: fromValue to: toValue [
 "
 	I create a height normalizer using the given block or symbol as key
@@ -279,7 +279,7 @@ CRShapeBuilder >> normalizeHeight: anArgBlockOrSymbol from: fromValue to: toValu
 	^self normalizeHeight: anArgBlockOrSymbol from: fromValue to: toValue forAll: [ true ]
 ]
 
-{ #category : #normalizer }
+{ #category : 'normalizer' }
 CRShapeBuilder >> normalizeHeight: anArgBlockOrSymbol from: fromValue to: toValue forAll: aTrueFalseBlock [
 "
 	I create a normalizer for the height, according to the specification I'm given
@@ -292,7 +292,7 @@ CRShapeBuilder >> normalizeHeight: anArgBlockOrSymbol from: fromValue to: toValu
 				attribute: [ :node : value | node height: value ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRShapeBuilder >> normalizeSize: anArgBlockOrSymbol [
 "
 	I create a normalizer that for the size. (size meaning that width and height are normalized using the same specification and values)
@@ -300,7 +300,7 @@ CRShapeBuilder >> normalizeSize: anArgBlockOrSymbol [
 	^self createNormalizer: anArgBlockOrSymbol from: 10 to: 50 forAll: [true] attribute: [ :node : value | node size: value@value ]
 ]
 
-{ #category : #normalizer }
+{ #category : 'normalizer' }
 CRShapeBuilder >> normalizeWdith: anArgBlockOrSymbol forAll: aTrueFalseBlock [
 "
 	I create a width normalizer using the given 
@@ -312,7 +312,7 @@ CRShapeBuilder >> normalizeWdith: anArgBlockOrSymbol forAll: aTrueFalseBlock [
 	 ^ self normalizeWidth: anArgBlockOrSymbol from: 10 to: 50 forAll: aTrueFalseBlock
 ]
 
-{ #category : #normalizer }
+{ #category : 'normalizer' }
 CRShapeBuilder >> normalizeWidth: anArgBlockOrSymbol [
 "
 	I create a width normalizer using the given 
@@ -323,7 +323,7 @@ CRShapeBuilder >> normalizeWidth: anArgBlockOrSymbol [
 	^ self normalizeWidth: anArgBlockOrSymbol from: 10 to: 50 forAll: [ true ]
 ]
 
-{ #category : #normalizer }
+{ #category : 'normalizer' }
 CRShapeBuilder >> normalizeWidth: anArgBlockOrSymbol from: fromValue to: toValue [
 "
 	I create a width normalizer using the given block or symbol as key
@@ -332,7 +332,7 @@ CRShapeBuilder >> normalizeWidth: anArgBlockOrSymbol from: fromValue to: toValue
 	^self normalizeWidth: anArgBlockOrSymbol from: fromValue to: toValue forAll: [ true ]
 ]
 
-{ #category : #normalizer }
+{ #category : 'normalizer' }
 CRShapeBuilder >> normalizeWidth: anArgBlockOrSymbol from: fromValue to: toValue forAll: aTrueFalseBlock [
 "
 	I create a normalizer for the width, according to the specification I'm given
@@ -346,7 +346,7 @@ CRShapeBuilder >> normalizeWidth: anArgBlockOrSymbol from: fromValue to: toValue
 
 ]
 
-{ #category : #'node-creation' }
+{ #category : 'node-creation' }
 CRShapeBuilder >> shapesOn: someObjects [
 "I create the nodes for the provided collection, using the createShapeFor method, and collect them as a CRGroup."
 
@@ -374,13 +374,13 @@ CRShapeBuilder >> shapesOn: someObjects [
 	^ group
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRShapeBuilder >> toolTip: someValueOrBlock [
 "I'm used to set the toolTipContent variable"
 	toolTipContent := someValueOrBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRShapeBuilder >> with: aCollection [
 "I am a setter method for the modelCollection variable which holds the models that later are used to create the nodes"
 	self assert: [aCollection isCollection] description: 'You need to provide a collection'.

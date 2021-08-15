@@ -3,17 +3,17 @@ I represent an OrderedCollection, with some specific methods to help build graph
 I usually hold nodes and edges.
 "
 Class {
-	#name : #CRGroup,
-	#superclass : #OrderedCollection,
+	#name : 'CRGroup',
+	#superclass : 'OrderedCollection',
 	#instVars : [
 		'highlightedNode',
 		'identifier',
 		'name'
 	],
-	#category : #'CR-Graph-CR-Graph'
+	#category : 'CR-Graph-CR-Graph'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRGroup >> gtTreeWithModelFor: aView [
 "I create a view that adds a model column"
 	<gtView>
@@ -55,7 +55,7 @@ CRGroup >> gtTreeWithModelFor: aView [
 			weight: 3.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRGroup >> highlightElement: aNode [ 
 "
 	Highlight a specific element of mine. 
@@ -67,32 +67,32 @@ CRGroup >> highlightElement: aNode [
 	aNode markAsClicked.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 CRGroup >> initialize [
 	super initialize.
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRGroup >> name [
 "returns my name"
 	^name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRGroup >> name: aName [
 "Give me a name"
 	name := aName.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRGroup >> nodeFromModel: aObject [
 	"returns a single node matching the ojbect. Returns nil if no matching node is found"
 	self do: [:node | (node model = aObject) ifTrue: [^node]].
 	^nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRGroup >> nodesFromModel: aObject [
 " returns all nodes matching the objects as new CRGroup "
 	| group |
@@ -105,7 +105,7 @@ CRGroup >> nodesFromModel: aObject [
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRGroup >> nodesFromModelArray: aArray [
 "I return all nodes with a model that matches the a model in the given array"
 	| group |
@@ -118,14 +118,14 @@ CRGroup >> nodesFromModelArray: aArray [
 	^ group
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRGroup >> removeAllHighlights [
 "I remove all highlights from all my nodes."
 	highlightedNode := nil.
 	self do: [:n | n removeHighlight]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRGroup >> removeHighlights [
 "I remove the highlight from the node that was last highlighted"
 	highlightedNode ifNotNil: [ highlightedNode removeHighlight].

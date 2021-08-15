@@ -1,19 +1,27 @@
 "
-I am the canvas. i hold all elements and I'm the element that is displayed.
+I am the canvas, every {{gtClass:CRMondrian}} has one. I hold all elements (nodes and edges) and I'm the element that is displayed.
+I extend {{gtClass:BlElement}}
+
+Before I can be used you need to call {{gtMethod:CRCanvas>>#paint}} to add all elements.
+
+If the mondrian is displayed by itself use the {{gtMethod:CRCanvas>>canvasForView}} method to get the canvas as zoomable and pannable element with scroll to zoom and all the other properties needed to work and look good.
+
+If the mondrian should be used within another visualization then use {{gtMethod:CRCanvas>>canvasAsNode}}. This will return the canvas with a border and the ability to click on it to open the mondrian instance it belongs to in a inspector.
+
 "
 Class {
-	#name : #CRCanvas,
-	#superclass : #BlElement,
+	#name : 'CRCanvas',
+	#superclass : 'BlElement',
 	#instVars : [
 		'nodes',
 		'edges',
 		'mondrian',
 		'isDebugViewActive'
 	],
-	#category : #'CR-Graph-CR-Graph'
+	#category : 'CR-Graph-CR-Graph'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRCanvas class >> newFrom: someNodes edges: someEdges mondrian: aMondrian [
 "I create a new canvas from the given nodes, edges and the mondrian instance"
 	| c |
@@ -24,19 +32,19 @@ CRCanvas class >> newFrom: someNodes edges: someEdges mondrian: aMondrian [
 	^c
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRCanvas >> addAllEdges: shapeCollection [
 "I add the content of the provided collection to the collection conatining the edges"
 	edges addAll: shapeCollection.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRCanvas >> addEdge: aShape [
 "I add the provided shape as edge"
 	edges add: aShape.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRCanvas >> addScrollToZoom: aElement [
 "I add a Eventhandler to the provided elements that eables scroll to zoom on this zoomable element"
 	| eh |
@@ -50,7 +58,7 @@ CRCanvas >> addScrollToZoom: aElement [
 	aElement addEventHandler: eh.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRCanvas >> addToolTip: content [
 	"I add a tooltip to the node. 
 	The tooltip label text is the content given. 
@@ -69,7 +77,7 @@ CRCanvas >> addToolTip: content [
 		contentStencil: label)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRCanvas >> canvasAsNode [
 "I return the canvas with all the properties of a normal node"
 	| c |
@@ -78,7 +86,7 @@ CRCanvas >> canvasAsNode [
 	^self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRCanvas >> canvasForView [
 "I return the canvas with the properties needed to display it nicely. (i.e. scroll to zoom etc)"
 	| c |
@@ -95,13 +103,13 @@ CRCanvas >> canvasForView [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRCanvas >> getNodes [
 "I return all the nodes I contain and their subnodes"
 	^nodes collectAll: [:n | n getNodes]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRCanvas >> holdsNodes [
 	"
 	I return true if I have nodes as children.
@@ -110,7 +118,7 @@ CRCanvas >> holdsNodes [
 	^true
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 CRCanvas >> initialize [
 	super initialize.
 	"super initializeForCanvas."
@@ -138,7 +146,7 @@ CRCanvas >> initialize [
 	^self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRCanvas >> jumpToInitialZoomOnSpace: aElement [
 "I add an Shortcut to the element that resets the zoomlevel when the space bar is pressed"
 	aElement addShortcut: ( 
@@ -148,25 +156,25 @@ CRCanvas >> jumpToInitialZoomOnSpace: aElement [
 			aElement zoomToFit.]).
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRCanvas >> mondrian: aMondrian [
 "I am a setter method for the mondrian Instance this canvas belongs to"
 	mondrian := aMondrian.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRCanvas >> nodeCount [
 "I return the number of nodes the canvas contains"
 	^nodes size
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRCanvas >> nodes [
 "I am a getter method for the nodes"
 	^nodes
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRCanvas >> openMondrianOnClick [
 "
 	I add an Eventhandler that opens the mondrian instance in a inspectore when the canvas is clicked on.
@@ -180,7 +188,7 @@ CRCanvas >> openMondrianOnClick [
 	]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRCanvas >> paint [
 "I add all Nodes and edges as children to the canvas"
 	self assert: [nodes notNil] description: 'You need to set the nodeGroup first'.
@@ -188,13 +196,13 @@ CRCanvas >> paint [
 	self addChildren: edges.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRCanvas >> removeHighlight [
 "I remove the highlights of all nodes that I contain."
 	nodes removeAllHighlights
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRCanvas >> removeHighlightOnClick [
 "I add an Eventhandler that removes hilights from the nodes when the canvas is clicked on."
 	self addEventHandlerOn: BlClickEvent do: [:e |
@@ -202,7 +210,7 @@ CRCanvas >> removeHighlightOnClick [
 	]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRCanvas >> requestFocusOnClick: aElement [
 "I add an eventhandler that requests the focus when the canvas is clicked on. This is uesd for the Shortcuts"
 	aElement addEventHandlerOn: BlClickEvent do: [:e | 
@@ -210,13 +218,13 @@ CRCanvas >> requestFocusOnClick: aElement [
 		e currentTarget requestFocus].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRCanvas >> setEdgeGroup: aCRGroup [
 "I am a setter method for the edges"
 	edges := aCRGroup
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRCanvas >> setNodeGroup: aCRGroup [
 "I am a setter method for the nodes The nodes should be provided as CRBindingGroup"
 	self assert: [aCRGroup class = CRBindingGroup] description: 'You need to provide the nodes as CRBindingGroup'.

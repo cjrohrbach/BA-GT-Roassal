@@ -2,19 +2,19 @@
 I am a CRNode with BlCircle geometry
 "
 Class {
-	#name : #CRCircle,
-	#superclass : #BlElement,
-	#category : #'CR-Graph-NodeShape'
+	#name : 'CRCircle',
+	#superclass : 'BlElement',
+	#category : 'CR-Graph-NodeShape'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRCircle >> example [
 "I am an example for my class comment"
 	<gtExample>
 	^CRCircle new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRCircle >> initialize [
 	super initialize.
 	self geometry: BlCircle new.

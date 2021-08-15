@@ -1,12 +1,12 @@
 Class {
-	#name : #CRCircleLayout,
-	#superclass : #GtGraphCircleLayout,
+	#name : 'CRCircleLayout',
+	#superclass : 'GtGraphCircleLayout',
 	#traits : 'TCRLayout',
 	#classTraits : 'TCRLayout classTrait',
-	#category : #'CR-Graph-Layout'
+	#category : 'CR-Graph-Layout'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRCircleLayout >> example [
 "I am an example used in my class comment"
 	<gtExample>
@@ -17,7 +17,7 @@ CRCircleLayout >> example [
 	^m 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRCircleLayout >> initialize [
 	super initialize.
 	^self

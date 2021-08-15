@@ -5,19 +5,19 @@ I extend {{gtClass:BlElement}} and apply a {{gtClass:BlCircle}} geometry as defa
 {{gtExample:CRPoint>>#example|noCode=true}}
 "
 Class {
-	#name : #CRPoint,
-	#superclass : #BlElement,
-	#category : #'CR-Graph-NodeShape'
+	#name : 'CRPoint',
+	#superclass : 'BlElement',
+	#category : 'CR-Graph-NodeShape'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRPoint >> example [
 "I am an example for my class comment"
 	<gtExample>
 	^CRPoint new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRPoint >> initialize [.
 	super initialize.
 	self geometry: BlCircle new.

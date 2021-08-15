@@ -2,16 +2,16 @@
 I implement a prime sieve. When I'm added to a mondrian all nodes will receive a Eventhandler that works as a prime sive.
 "
 Class {
-	#name : #CRPrimeSieveAction,
-	#superclass : #CRAction,
+	#name : 'CRPrimeSieveAction',
+	#superclass : 'CRAction',
 	#instVars : [
 		'nonPrimeColor',
 		'primeColor'
 	],
-	#category : #'CR-Graph-Action'
+	#category : 'CR-Graph-Action'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRPrimeSieveAction >> blo [
 "I create the block used for a prime sieve action"
 | b |
@@ -48,7 +48,7 @@ b := [:e | | node multiples sorted |
 ^b
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 CRPrimeSieveAction >> initialize [
 	super initialize.
 	

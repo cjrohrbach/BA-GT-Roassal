@@ -1,15 +1,15 @@
 Class {
-	#name : #CRCustomLayout,
-	#superclass : #Object,
+	#name : 'CRCustomLayout',
+	#superclass : 'Object',
 	#traits : 'TCRLayout',
 	#classTraits : 'TCRLayout classTrait',
 	#instVars : [
 		'layout'
 	],
-	#category : #'CR-Graph-Layout'
+	#category : 'CR-Graph-Layout'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRCustomLayout >> example [
 "I am an example used in my class comment"
 	<gtExample>
@@ -20,13 +20,13 @@ CRCustomLayout >> example [
 	^m 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRCustomLayout >> layout: aLayout [
 "set the layout"
 	layout := aLayout
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRCustomLayout >> on: aCanvas [
 "I apply the layout to the given Canvas. But first I create a BlOnceLayout from myself to allow draggable nodes"
 	aCanvas layout: (BlOnceLayout new layout: layout)

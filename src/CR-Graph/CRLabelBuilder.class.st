@@ -2,22 +2,22 @@
 I represent a ShapeBuilder specific for building CRLabel nodes
 "
 Class {
-	#name : #CRLabelBuilder,
-	#superclass : #CRShapeBuilder,
+	#name : 'CRLabelBuilder',
+	#superclass : 'CRShapeBuilder',
 	#instVars : [
 		'background',
 		'text'
 	],
-	#category : #'CR-Graph-ShapeBuilder'
+	#category : 'CR-Graph-ShapeBuilder'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRLabelBuilder >> background: aColorOrArgBlock [
 "I am a setter method for the background."
 	background := aColorOrArgBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRLabelBuilder >> createShapeFor: obj [
 "I create a new label for the given object with the given color"
 	| result |
@@ -27,19 +27,19 @@ CRLabelBuilder >> createShapeFor: obj [
 		^ result
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 CRLabelBuilder >> initialize [
 	super initialize.
 	^self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRLabelBuilder >> text: someTextOrBlock [
 "Define the text the labels should show"
 	text := someTextOrBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRLabelBuilder >> toolTip: someValue [
 "A label shouldn't have a toolTip"
 	^self shouldNotImplement

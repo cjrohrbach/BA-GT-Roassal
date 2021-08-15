@@ -2,36 +2,36 @@
 I represent a ShapeBuilder specific for building CRPoint nodes
 "
 Class {
-	#name : #CRPointBuilder,
-	#superclass : #CRShapeBuilder,
+	#name : 'CRPointBuilder',
+	#superclass : 'CRShapeBuilder',
 	#instVars : [
 		'background',
 		'borderColor',
 		'borderWidth',
 		'size'
 	],
-	#category : #'CR-Graph-ShapeBuilder'
+	#category : 'CR-Graph-ShapeBuilder'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRPointBuilder >> background: aValueOrArgBlock [
 "I am a setter method for the background"
 	background := aValueOrArgBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRPointBuilder >> borderColor: aValueOrArgBlock [
 "I am a setter method for the borderColor"
 	borderColor := aValueOrArgBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRPointBuilder >> borderWidth: aValueOrArgBlock [
 "I am a setter method for the borderWidth"
 	borderWidth := aValueOrArgBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRPointBuilder >> createShapeFor: obj [
 "
 	I create the node for the given object.
@@ -52,13 +52,13 @@ CRPointBuilder >> createShapeFor: obj [
 		^ shape
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 CRPointBuilder >> initialize [
 	super initialize.
 	^self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRPointBuilder >> size: aValueOrArgBlock [
 "I am a setter method for the size of the point. This can be a value, a symobl or a block"
 	size := aValueOrArgBlock

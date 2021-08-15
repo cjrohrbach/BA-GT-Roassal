@@ -3,8 +3,8 @@ I extend BlLineElement  and am used for edges.
 I extend BlLineElement to predefine the behaviour and look.
 "
 Class {
-	#name : #CRLineElement,
-	#superclass : #BlLineElement,
+	#name : 'CRLineElement',
+	#superclass : 'BlLineElement',
 	#traits : 'TCREdge',
 	#classTraits : 'TCREdge classTrait',
 	#instVars : [
@@ -13,10 +13,10 @@ Class {
 		'highlightColor',
 		'highlightWidth'
 	],
-	#category : #'CR-Graph-EdgeShape'
+	#category : 'CR-Graph-EdgeShape'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRLineElement >> highlight [
 "I highlight myself and the toNode. Therfore I change my border according to the highlight color and with"
 	originalBorder := self border.
@@ -24,19 +24,19 @@ CRLineElement >> highlight [
 	self toAnchor referenceElement parent highlightAsConnected
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRLineElement >> highlightColor: aColor [
 "set the color used to highlight edges when hovered over fromNode"
 	highlightColor := aColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRLineElement >> highlightWidth: aNumber [
 "set the width used to highlight edges when hovered over fromNode"
 	highlightWidth := aNumber
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRLineElement >> initialize [
 	super initialize.
 	self border: (BlBorder paint: (Color gray alpha: 0.5) width: 0.5).
@@ -48,7 +48,7 @@ CRLineElement >> initialize [
 	^self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRLineElement >> noHighlights [
 "
 	Set the highlight color and width to the same as the standard border.

@@ -2,12 +2,12 @@
 I create edges to all block results from the node
 "
 Class {
-	#name : #CREdgeToAll,
-	#superclass : #CREdge,
-	#category : #'CR-Graph-CR-Graph'
+	#name : 'CREdgeToAll',
+	#superclass : 'CREdge',
+	#category : 'CR-Graph-CR-Graph'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CREdgeToAll >> connect: nodes [
 "
 	I create the edges according to the given block and specification.

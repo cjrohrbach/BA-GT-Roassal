@@ -1,12 +1,12 @@
 Class {
-	#name : #CRFlowLayout,
-	#superclass : #BlFlowLayout,
+	#name : 'CRFlowLayout',
+	#superclass : 'BlFlowLayout',
 	#traits : 'TCRLayout',
 	#classTraits : 'TCRLayout classTrait',
-	#category : #'CR-Graph-Layout'
+	#category : 'CR-Graph-Layout'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRFlowLayout >> example [
 "I am an example used for my class comment"
 	<gtExample>
@@ -17,7 +17,7 @@ CRFlowLayout >> example [
 	^m
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRFlowLayout >> initialize [
 	super initialize.
 	^self
