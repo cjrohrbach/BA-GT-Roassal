@@ -9,7 +9,19 @@ It is simmilar to  {{gtClass:GtMondrian}} but with some key differences:
 - Add actions
 and many more
 
+## How does it work?
+A CRMondrian consists of theses main parts:
+- {{gtClass:CRCanvas}}: The canvas is parent to all elements contained in the visualization. 
+- {{gtClass:CRShapeBuilder}} : There are different shapeBuilders for different node shapes. Their job is to collect the shape specification and when required build the nodes.  (a mondrian instance can have multiple shapeBuilders)
+- {{gtClass:CRNode}}: CRNode wraps the node shape in a element that changes the color to add highlights to the node when needed. Furthermore is it the element that addes drag functionallity and tooltips to the node.
+- {{gtClass:CREdgeBuilder}}  together with {{gtClass:CREdge}} and its subclasses: Provides the ability to add edges to the visualization. (a mondrian instance can have mulitple edgeBuilders)
+- CRLayout: The diffent layouts are used to layout the nodes. They are applied on the canvas.
+
+
 ## How do I use it?
+
+Following some basic examples on how to use CRMondrian. 
+You can find many more examples in {{gtClass:CRMondrianExamples}}
 
 ### Create Nodes:
 
@@ -42,7 +54,11 @@ Add a action (Eventhandler) to each node like this:
 {{gtExample:CRMondrianExamples>>#customAction|codeExpanded=true|previewExpanded=false}}
 
 
-You can finde a lot more examples in {{gtClass:CRMondrianExamples}}
+
+### Nested nodes
+
+{{gtExample:CRMondrianExamples>>#mondrianAsNode|codeExpanded=true|previewExpanded=false}}
+
 "
 Class {
 	#name : 'CRMondrian',
