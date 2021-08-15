@@ -1,5 +1,6 @@
 "
-I am just a simple box element.
+I am just a simple point element.
+
 I extend {{gtClass:BlElement}} and apply a {{gtClass:BlCircle}} geometry as default.
 
 {{gtExample:CRPoint>>#example|noCode=true}}

@@ -1,1 +1,1 @@
-Package { #name : #'CR-Graph-MindMapExample' }
+Package { #name : 'CR-Graph-MindMapExample' }

@@ -1,5 +1,7 @@
 "
-I am a CRNode with BlCircle geometry
+I am the default shape for {{gtClass:CRMondrian}} nodes with circle shape
+
+{{gtExample:CRCircle>>#example|codeExpanded=false|previewExpanded=true}}
 "
 Class {
 	#name : 'CRCircle',

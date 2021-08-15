@@ -1,8 +1,8 @@
 "
-I represent a Node with Label Shape used in ${class:CRMondrian}$.
+CRLabel is the element used for {{gtClass:CRMondrian}} label nodes.
 
-I extend ${class:BlTextElement}$ and implement ${class:TCRNode}$.
 
+{{gtExample:CRLabel>>#example|codeExpanded=false|previewExpanded=true}}
 
 "
 Class {

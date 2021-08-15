@@ -178,6 +178,67 @@ CRMondrianExamples >> methodsWithoutCommentHighlighted [
 ]
 
 { #category : 'accessing' }
+CRMondrianExamples >> mondrianAsMindmap [
+"CRMondrian as Mindmap"
+	<gtExample>
+	| root s |
+	root := MindMapNode new
+	model: CRMondrian;
+	addChildren: {
+		MindMapNode new
+			model: CRCanvas;
+			addChildren: {}.
+		MindMapNode new
+			model: CRAction;
+			addChildrenFromModels: {CRPrimeSieveAction. CRRandomBackgroundAction.}.
+		MindMapNode new
+			model: CRNode;
+			addChildren: {
+				MindMapNode new
+					model: 'Node-Shape';
+					addChildrenFromModels: {CRBox. CRCircle. CRClassBlueprintCanvas. CRBox. 
+						CRCircle. CRPoint.}.
+				MindMapNode new
+					model: CRShapeBuilderBuilder;
+					addChildren: {
+						MindMapNode new
+							model: CRShapeBuilder;
+							addChildrenFromModels: {
+								CRBoxBuilder. 
+								CRCircleBuilder. 
+								CRClassBlueprintBuilder. 
+								CRCustomShapeBuilder.
+								CRLabelBuilder.
+								CRMondrianAsNode.
+								CRPointBuilder.
+								CRPreBuiltNode.}
+					}
+			}.
+		MindMapNode new
+			model: CREdgeBuilder;
+			addChildren: {
+				MindMapNode new
+					model: CREdge;
+					addChildrenFromModels: {CREdgeFrom. CREdgeTo. CREdgeFromAll. CREdgeToAll.}.
+				MindMapNode new
+					model: TCREdge;
+					addChildrenFromModels: {CRLineElement. CRArrowElement. CRSigmoidElement.}.
+			}.
+		MindMapNode new
+			model: CRLayoutBuilder;
+			addChildren: {
+				MindMapNode new
+					model: TCRLayout;
+					addChildrenFromModels: {CRGridLayout. CRCircleLayout. CRClusterLayout. CRCustomLayout. CRFlowLayout. CRForceLayout. CRGridLayout. CRTreeLayout.}}
+	}; isRoot.
+	
+	s := MindMapStructure new
+	setRootNode: root.
+	
+	^CRMondrian new createMindMap: s
+]
+
+{ #category : 'accessing' }
 CRMondrianExamples >> mondrianAsNode [
 	<gtExample>
 	| q |

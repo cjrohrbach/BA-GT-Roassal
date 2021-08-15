@@ -1,6 +1,6 @@
 "
-I represent a box. 
-I'm just a BlElement with BlRectangleGeometry.
+I am the default shape for {{gtClass:CRMondrian}} nodes. 
+{{gtExample:CRBox>>#example|codeExpanded=false|previewExpanded=true}}
 "
 Class {
 	#name : 'CRBox',
