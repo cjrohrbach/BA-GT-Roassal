@@ -75,7 +75,6 @@ CRCanvas >> canvasAsNode [
 	| c |
 	self openMondrianOnClick.
 	self border: (BlBorder paint: Color black width: 2).
-	"self background: (Color white)."
 	^self
 ]
 
