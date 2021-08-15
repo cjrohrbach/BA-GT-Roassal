@@ -1,5 +1,7 @@
 "
-I can be used to normalize colors over a scope
+I can be used to normalize colors over a scope.
+
+Have a look at the {{gtClass:CRNormalizer}} class comment to get an idea how it works 
 "
 Class {
 	#name : 'CRColorNormalizer',

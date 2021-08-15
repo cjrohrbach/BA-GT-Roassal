@@ -1,5 +1,13 @@
 "
 I can be used to normalize some values over a specific scope.
+
+Create a Normalizer like this: 
+
+{{gtExample:CRNormalizer>>#example}}
+
+- Key is the property that should be used to calculate the value (i.e. linesOfCode, size, value, number of methods, etc.) 
+- attribute is a block that thakes a node and the value. It is used to set the attribute that should be normalized 
+- condition: is a block that returns true or false. The normalizer will only be applied nodes that return true for this block
 "
 Class {
 	#name : 'CRNormalizer',
@@ -46,6 +54,18 @@ CRNormalizer >> evaluateScope [
 	
 	minValue := min.
 	maxValue := max.
+]
+
+{ #category : 'accessing' }
+CRNormalizer >> example [
+"Example to use in my class comment"
+	<gtExample>
+	^CRNormalizer new
+		key: #linesOfCode;
+		attribute: [:node :value | node size: value];
+		from: 10;
+		to: 50;
+		condition: [:node | node class = CompiledMethod]
 ]
 
 { #category : 'accessing' }
