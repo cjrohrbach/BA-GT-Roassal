@@ -3,18 +3,18 @@ I am a template to display classes with methods in categories.
 My main purpose is to be used in class blueprints.
 "
 Class {
-	#name : #CRClassBlueprintCanvas,
-	#superclass : #BlElement,
+	#name : 'CRClassBlueprintCanvas',
+	#superclass : 'BlElement',
 	#instVars : [
 		'nodes',
 		'model',
 		'label',
 		'isDebugViewActive'
 	],
-	#category : #'BA-Testing-NodeShape'
+	#category : 'BA-Testing-NodeShape'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRClassBlueprintCanvas >> addContainer: aCRCanvas [
 "I add the CRCanvas (containing the methods in its category) to the canvas and its nodes to my nodes "
 	aCRCanvas border: (BlBorder paint: Color black width: 0.5).
@@ -22,13 +22,13 @@ CRClassBlueprintCanvas >> addContainer: aCRCanvas [
 	self addChild: aCRCanvas.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRClassBlueprintCanvas >> createAndAddLabel [
 	self createLabel.
 	self addChild: label.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRClassBlueprintCanvas >> createLabel [
 "I create the label on top. The label contains the class name"
 	label := CRLabel new.
@@ -38,13 +38,13 @@ CRClassBlueprintCanvas >> createLabel [
 	label text: 'model' asRopedText glamorousRegularFont.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRClassBlueprintCanvas >> getNodes [
 "I am a getter Method for the nodes"
 	^nodes collectAll: [:n | n getNodes]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRClassBlueprintCanvas >> holdsNodes [
 	"
 	I return true if I have nodes as children.
@@ -53,7 +53,7 @@ CRClassBlueprintCanvas >> holdsNodes [
 	^true
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 CRClassBlueprintCanvas >> initialize [
 	super initialize.
 	
@@ -77,7 +77,7 @@ CRClassBlueprintCanvas >> initialize [
 	^self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRClassBlueprintCanvas >> model: anObject [
 "
 	I am a setter method for the model.
@@ -87,18 +87,18 @@ CRClassBlueprintCanvas >> model: anObject [
 	self updateLabelText.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRClassBlueprintCanvas >> removeHighlight [
 "I remove all highlights from my nodes and mine"
 	nodes removeAllHighlights
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRClassBlueprintCanvas >> requiersModel [
 	^true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRClassBlueprintCanvas >> toggleDebugView [
 "I enable or disable the debug view for myself and all my nodes"
 	isDebugViewActive
@@ -116,7 +116,7 @@ CRClassBlueprintCanvas >> toggleDebugView [
 	].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRClassBlueprintCanvas >> updateLabelText [
 	label text: model asRopedText
 ]

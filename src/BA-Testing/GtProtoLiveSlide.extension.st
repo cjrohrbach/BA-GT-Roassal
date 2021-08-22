@@ -1,6 +1,6 @@
-Extension { #name : #GtProtoLiveSlide }
+Extension { #name : 'GtProtoLiveSlide' }
 
-{ #category : #'*BA-Testing' }
+{ #category : '*BA-Testing' }
 GtProtoLiveSlide >> bulletPoint [
 	^ GtBulletpointSlide new
 		definingMethod: (GtPhlowDefiningMethodsCollector new 

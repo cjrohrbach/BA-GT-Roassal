@@ -1,22 +1,22 @@
 Trait {
-	#name : #TTraitTest,
+	#name : 'TTraitTest',
 	#instVars : [
 		'abc'
 	],
-	#category : #'BA-Testing-TraitTesting'
+	#category : 'BA-Testing-TraitTesting'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TTraitTest >> abc [
 	^abc
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TTraitTest >> abc: something [
 	abc := something
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TTraitTest >> changeColor [
 	self background: Color random.
 ]

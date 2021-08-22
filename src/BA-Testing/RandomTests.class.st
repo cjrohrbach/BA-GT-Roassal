@@ -1,10 +1,10 @@
 Class {
-	#name : #RandomTests,
-	#superclass : #Object,
-	#category : #'BA-Testing-BA-Testing'
+	#name : 'RandomTests',
+	#superclass : 'Object',
+	#category : 'BA-Testing-BA-Testing'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 RandomTests >> a [
 	<gtExample>
 	| element el2 |
@@ -28,7 +28,7 @@ RandomTests >> a [
 	^ el2
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 RandomTests >> b: aNumber [
  ^GtPageElement new
 ]

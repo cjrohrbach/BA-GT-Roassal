@@ -1,14 +1,14 @@
 Class {
-	#name : #GtBulletpointSlide,
-	#superclass : #GtLiveSlide,
+	#name : 'GtBulletpointSlide',
+	#superclass : 'GtLiveSlide',
 	#instVars : [
 		'title',
 		'points'
 	],
-	#category : #'BA-Testing-Presentation'
+	#category : 'BA-Testing-Presentation'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtBulletpointSlide >> bulletPoint: aText [
 	| b |
 	"b := BlElement new
@@ -30,7 +30,7 @@ GtBulletpointSlide >> bulletPoint: aText [
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtBulletpointSlide >> create [
 	| container textContainer texts pointsContainer |
 	container := BlElement new
@@ -85,13 +85,13 @@ GtBulletpointSlide >> create [
 	^container
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtBulletpointSlide >> initialize [
 	super initialize.
 	points := OrderedCollection new.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtBulletpointSlide >> title: aTitle [
 	title := aTitle asRopedText fontSize: 40; glamorousRegularFont; bold
 ]

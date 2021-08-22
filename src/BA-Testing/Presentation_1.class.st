@@ -1,10 +1,10 @@
 Class {
-	#name : #'Presentation_1',
-	#superclass : #GtSlideShow,
-	#category : #'BA-Testing-Presentation'
+	#name : 'Presentation_1',
+	#superclass : 'GtSlideShow',
+	#category : 'BA-Testing-Presentation'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Presentation_1 >> classesAsCollection [
 	| col |
 	col := OrderedCollection new.
@@ -13,7 +13,7 @@ Presentation_1 >> classesAsCollection [
 	^col
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Presentation_1 >> crMondrianPointLabelColor [
 <gtExample>
 	| m |
@@ -26,7 +26,7 @@ Presentation_1 >> crMondrianPointLabelColor [
 	^m 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Presentation_1 >> crMondrianWithMethods [
 <gtExample>
 	| m |
@@ -47,7 +47,7 @@ Presentation_1 >> crMondrianWithMethods [
 	^m 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Presentation_1 >> createMondrianExplainView [
 <gtExample>
 	| x m e1 e2 container line e3 |
@@ -99,7 +99,7 @@ container addChildren: {e1. e2. e3. line.}.
 ^container
 ]
 
-{ #category : #slides }
+{ #category : 'slides' }
 Presentation_1 >> demoSlide2: aSlide [
 	<gtSlide>
 	^ aSlide element
@@ -125,7 +125,7 @@ m'
 		}) create ]
 ]
 
-{ #category : #slides }
+{ #category : 'slides' }
 Presentation_1 >> demoSlide: aSlide [
 	<gtSlide>
 	^ aSlide element
@@ -138,7 +138,7 @@ classes add: CRNode.'.
 		}) create ]
 ]
 
-{ #category : #slides }
+{ #category : 'slides' }
 Presentation_1 >> explainSlide: aSlide [
 	<gtSlide>
 	"Rename this method to be more representative for your slide"
@@ -152,7 +152,7 @@ Presentation_1 >> explainSlide: aSlide [
 The elements (nodes, edges and canvas) are instances of BlElement and created just before beeing displayed' asRopedText glamorousRegularFont; fontSize: 27)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Presentation_1 >> gtMondrianPoint [
 <gtExample>
 	| m |
@@ -164,7 +164,7 @@ Presentation_1 >> gtMondrianPoint [
 	^m
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Presentation_1 >> gtMondrianPointLabel [
 <gtExample>
 	| m |
@@ -187,7 +187,7 @@ Presentation_1 >> gtMondrianPointLabel [
 	^m
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Presentation_1 >> gtMondrianPointLabelColor [
 <gtExample>
 	| m |
@@ -210,7 +210,7 @@ Presentation_1 >> gtMondrianPointLabelColor [
 	^m
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Presentation_1 >> methodForMondrianExplain [
 <gtExample>
 	| view coll |
@@ -222,7 +222,7 @@ Presentation_1 >> methodForMondrianExplain [
 	^ view
 ]
 
-{ #category : #slides }
+{ #category : 'slides' }
 Presentation_1 >> mondrianSlideFor: aSlide [
 	<gtSlide>
 	^ aSlide textAndElement
@@ -243,11 +243,11 @@ Presentation_1 >> mondrianSlideFor: aSlide [
 		element: [BlElement new addChild: (self createMondrianExplainView asScalableElement fitAll) ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Presentation_1 >> nil [
 ]
 
-{ #category : #slides }
+{ #category : 'slides' }
 Presentation_1 >> questionsSlideFor: aSlide [
 	<gtSlide>
 	^ aSlide title
@@ -255,7 +255,7 @@ Presentation_1 >> questionsSlideFor: aSlide [
 		titleWithFormat: ('Questions?' asRopedText fontSize: 70; glamorousRegularFont; bold)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Presentation_1 >> simplegtMondrian [
 <gtExample>
 	| m |
@@ -264,13 +264,13 @@ Presentation_1 >> simplegtMondrian [
 	^m
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Presentation_1 >> startPresentation [
 	<gtExample>
 	^GtLiveShow createWithArrowsVisible: Presentation_1 new.
 ]
 
-{ #category : #slides }
+{ #category : 'slides' }
 Presentation_1 >> titleSlide: aSlide [
 	<gtSlide>
 	^ aSlide title
@@ -281,7 +281,7 @@ Presentation_1 >> titleSlide: aSlide [
 			bold)
 ]
 
-{ #category : #slides }
+{ #category : 'slides' }
 Presentation_1 >> whatsLeftSlide: aSlide [
 	<gtSlide>
 	"Rename this method to be more representative for your slide"
@@ -295,7 +295,7 @@ Presentation_1 >> whatsLeftSlide: aSlide [
 - Write the thesis and documentation' asRopedText glamorousRegularFont; fontSize: 27)
 ]
 
-{ #category : #slides }
+{ #category : 'slides' }
 Presentation_1 >> whyGtSlide: aSlide [
 	<gtSlide>
 	^ aSlide textAndElement

@@ -1,15 +1,15 @@
 Class {
-	#name : #MindMapIterator,
-	#superclass : #Object,
+	#name : 'MindMapIterator',
+	#superclass : 'Object',
 	#instVars : [
 		'mindMapStructure',
 		'level',
 		'orderedChildren'
 	],
-	#category : #'BA-Testing-MindMap'
+	#category : 'BA-Testing-MindMap'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MindMapIterator >> createOrder [
 	| order children |
 	orderedChildren := OrderedCollection new.
@@ -18,24 +18,24 @@ MindMapIterator >> createOrder [
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MindMapIterator >> hasStepLeft [
 	^(orderedChildren size > 0)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MindMapIterator >> initialize [
 	super initialize.
 	^self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MindMapIterator >> mindMapStructure: ms [
 	mindMapStructure := ms.
 	level := mindMapStructure deepestChild parent depth.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MindMapIterator >> popLastChildren [
 	(orderedChildren size > 0) ifTrue: [ | c step |
 		"((orderedChildren size = 1) and: ((orderedChildren at: 1 ) isRoot)) ifTrue: 
@@ -65,7 +65,7 @@ MindMapIterator >> popLastChildren [
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MindMapIterator >> popLastWithChildren [
 	(orderedChildren size > 0) ifTrue: [ | c step |
 		step := OrderedCollection new.
@@ -80,7 +80,7 @@ MindMapIterator >> popLastWithChildren [
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MindMapIterator >> popStep [
 	| step |
 	(orderedChildren size > 0) ifTrue: [

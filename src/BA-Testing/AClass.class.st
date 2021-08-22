@@ -1,21 +1,21 @@
 Class {
-	#name : #AClass,
-	#superclass : #BlElement,
+	#name : 'AClass',
+	#superclass : 'BlElement',
 	#traits : 'TTraitTest',
 	#classTraits : 'TTraitTest classTrait',
 	#instVars : [
 		'b',
 		'a'
 	],
-	#category : #'BA-Testing-TraitTesting'
+	#category : 'BA-Testing-TraitTesting'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AClass >> abc [
 	self abc: 'ab'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AClass >> initialize [
 	super initialize.
 	self background: Color blue.
@@ -24,17 +24,17 @@ AClass >> initialize [
 	^self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AClass >> test [
 	 ^Color green
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AClass >> test2 [ 
 	^CRNormalizer new from: a; to: b .
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AClass >> test3 [ 
 	a asComment
 ]

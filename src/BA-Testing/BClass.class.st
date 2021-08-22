@@ -1,12 +1,12 @@
 Class {
-	#name : #BClass,
-	#superclass : #BlTextElement,
+	#name : 'BClass',
+	#superclass : 'BlTextElement',
 	#traits : 'TTraitTest',
 	#classTraits : 'TTraitTest classTrait',
-	#category : #'BA-Testing-TraitTesting'
+	#category : 'BA-Testing-TraitTesting'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BClass >> initialize [
 	super initialize.
 	self background: Color blue.

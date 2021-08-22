@@ -2,12 +2,12 @@
 I am a collection of usefull examples.
 "
 Class {
-	#name : #'GT_BA_Examples',
-	#superclass : #Object,
-	#category : #'BA-Testing'
+	#name : 'GT_BA_Examples',
+	#superclass : 'Object',
+	#category : 'BA-Testing'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GT_BA_Examples >> Testing [ 
 	<gtExample>
 	| view c p |
@@ -25,7 +25,7 @@ GT_BA_Examples >> Testing [
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GT_BA_Examples >> boxWithColorChangeOnHover [
 	| box |
 	box := BlElement new
@@ -41,7 +41,7 @@ GT_BA_Examples >> boxWithColorChangeOnHover [
 	^ box
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GT_BA_Examples >> boxWithLabelOnHover: labelContent [
 	"create a BlElement with a label poping up when the mouse is over it"
 
@@ -71,7 +71,7 @@ GT_BA_Examples >> boxWithLabelOnHover: labelContent [
 	^ box
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GT_BA_Examples >> colorChangeOnHover [
 	<gtExample>
 		| box |
@@ -87,7 +87,7 @@ GT_BA_Examples >> colorChangeOnHover [
 	^ box
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GT_BA_Examples >> edgesToHalf [
 	<gtExample>
 	| view |
@@ -98,7 +98,7 @@ GT_BA_Examples >> edgesToHalf [
 	^ view
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GT_BA_Examples >> graphWithGtMondrianMethods [
 	<gtExample>
 	| view c package |
@@ -126,7 +126,7 @@ GT_BA_Examples >> graphWithGtMondrianMethods [
 	^ view
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GT_BA_Examples >> graphWithPackages [
 	<gtExample>
 	| view packages |
@@ -145,7 +145,7 @@ GT_BA_Examples >> graphWithPackages [
 	^ view
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GT_BA_Examples >> hospitalSystemMindmap [
 <gtExample>
 | dict m |
@@ -173,7 +173,7 @@ m layout.
 ^m
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GT_BA_Examples >> labelOnHover [
 	<gtExample>
 |	 box box2 |
@@ -199,7 +199,7 @@ GT_BA_Examples >> labelOnHover [
 	^box
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GT_BA_Examples >> mondrianWithColorChangeOnHover [
 	| box |
 	box := BlElement new
@@ -215,7 +215,7 @@ GT_BA_Examples >> mondrianWithColorChangeOnHover [
 	^ box
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GT_BA_Examples >> mondrianWithTextOnHover [
 	<gtExample>
 	|view |
@@ -233,7 +233,7 @@ GT_BA_Examples >> mondrianWithTextOnHover [
 	^view
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GT_BA_Examples >> multipleNodes [
 	<gtExample>
 	| m |
@@ -243,7 +243,7 @@ GT_BA_Examples >> multipleNodes [
 	^ m
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GT_BA_Examples >> nodesWithEllipses [
 	<gtExample>
 	| view |
@@ -259,7 +259,7 @@ GT_BA_Examples >> nodesWithEllipses [
 	^ view
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GT_BA_Examples >> nodesWithGtClasses [
 	<gtExample>
 	| view |
@@ -269,7 +269,7 @@ GT_BA_Examples >> nodesWithGtClasses [
 	^ view
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GT_BA_Examples >> nodesWithGtMethods [
 	<gtExample>
 	| view c |
@@ -281,7 +281,7 @@ GT_BA_Examples >> nodesWithGtMethods [
 	^ view
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GT_BA_Examples >> nodesWithGtMondrianClasses [
 	<gtExample>
 	| view |
@@ -291,7 +291,7 @@ GT_BA_Examples >> nodesWithGtMondrianClasses [
 	^ view
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GT_BA_Examples >> nodesWithGtMondrianClassesAndMethods [
 	<gtExample>
 	| view c |
@@ -314,7 +314,7 @@ GT_BA_Examples >> nodesWithGtMondrianClassesAndMethods [
 	^ view
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GT_BA_Examples >> nodesWithGtMondrianMethods [
 	<gtExample>
 	| view c |
@@ -337,7 +337,7 @@ GT_BA_Examples >> nodesWithGtMondrianMethods [
 	^ view
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GT_BA_Examples >> nodesWithTooltip [
 	<gtExample>
 	| m |
@@ -359,7 +359,7 @@ GT_BA_Examples >> nodesWithTooltip [
 	^ m
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GT_BA_Examples >> nodesWithTooltipWithoutDelay [
 	<gtExample>
 	| view |
@@ -382,7 +382,7 @@ GT_BA_Examples >> nodesWithTooltipWithoutDelay [
 	^view
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GT_BA_Examples >> packageTreeView [
 	<gtExample>
 	| packagesToDisplay view s packages |
@@ -418,7 +418,7 @@ GT_BA_Examples >> packageTreeView [
 	^ view
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GT_BA_Examples >> systemComplexityWithPackages [
 	<gtExample>
 	| view packages |
@@ -437,7 +437,7 @@ GT_BA_Examples >> systemComplexityWithPackages [
 	^ view
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GT_BA_Examples >> test [
 	| box |
 	box := BlElement new
@@ -453,12 +453,12 @@ GT_BA_Examples >> test [
 	^ box
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GT_BA_Examples >> testGit [
 	^ 'abc'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GT_BA_Examples >> treeWithEvenNumbersHighlighted [
 	<gtExample>
 	| view |

@@ -1,10 +1,10 @@
 Class {
-	#name : #'Usefull_Snippets',
-	#superclass : #Object,
-	#category : #'BA-Testing-BA-Testing'
+	#name : 'Usefull_Snippets',
+	#superclass : 'Object',
+	#category : 'BA-Testing-BA-Testing'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Usefull_Snippets >> blElementDraggableWithModelOnClick [
 	<gtExample>
 	|element|
@@ -17,7 +17,7 @@ Usefull_Snippets >> blElementDraggableWithModelOnClick [
 	^element
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Usefull_Snippets >> blElementNodesWithEdgesInTree [
 	<gtExample>
 	| canvas p c1 c2 edge1 edge2 |
@@ -76,7 +76,7 @@ Usefull_Snippets >> blElementNodesWithEdgesInTree [
 	^canvas
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Usefull_Snippets >> blElementsWithEdge [
 	<gtExample>
 	| canvas l e z |
@@ -112,7 +112,7 @@ Usefull_Snippets >> blElementsWithEdge [
 	^canvas
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Usefull_Snippets >> canvasPrototype [
 	<gtExample>
 	| z p canv a b c |
@@ -161,7 +161,7 @@ z contentElement: (p).
 ^z zoomToFit
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Usefull_Snippets >> classBlueprintLayout [
 <gtExample>
 | con1 con2 con3 con4 con5 methods class slots cp |
@@ -210,13 +210,13 @@ cp layout custom: (BlGridLayout new columnCount: 5; cellSpacing: 20).
 ^cp 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Usefull_Snippets >> getAllPackages [
 	<gtExample>
 	^ RPackageOrganizer default
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Usefull_Snippets >> mindMapCircleLayout [
 <gtExample>
 | c a m b |
