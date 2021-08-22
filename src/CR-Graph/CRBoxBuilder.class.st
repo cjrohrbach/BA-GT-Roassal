@@ -50,7 +50,8 @@ CRBoxBuilder >> createShapeFor: obj [
 	| shape |
 	shape := CRBox new.
 	
-	size ifNotNil: [shape size: (self evaluate: size on: obj)].	
+	
+	size ifNotNil: [shape size: ((self evaluate: size on: obj) asPoint)].	
 	width ifNotNil: [shape width: (self evaluate: width on: obj)].
 	height ifNotNil: [shape height: (self evaluate: height on: obj)].
 	background ifNotNil: [shape background: (self evaluate: background on: obj)].
