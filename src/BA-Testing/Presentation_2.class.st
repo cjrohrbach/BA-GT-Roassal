@@ -31,7 +31,7 @@ Presentation_2 >> c_action [
 	| m |
 	m := CRMondrian new.
 	m nodes circle borderWidth: 0.4; with: (1 to: 100).
-	m action primeSieve.
+	m action randomBackground.
 	^m
 ]
 
@@ -63,6 +63,7 @@ Presentation_2 >> e_classBlueprint [
 	classes := OrderedCollection new.
 	classes addAll: (CRShapeBuilder subclasses).
 	classes add: CRShapeBuilder. 
+	
 	^CRMondrian new classBlueprintFor: classes
 ]
 
@@ -70,7 +71,7 @@ Presentation_2 >> e_classBlueprint [
 Presentation_2 >> f_mondrianAsMindmap [
 "CRMondrian as Mindmap"
 	<gtExample>
-	^CRMondrian new createMindMap: self createMindMapStructure
+	^CRMondrian new createMindMap: self zz_createMindMapStructure
 ]
 
 { #category : 'accessing' }

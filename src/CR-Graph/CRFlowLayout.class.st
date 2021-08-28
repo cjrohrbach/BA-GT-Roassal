@@ -1,5 +1,5 @@
 "
-I am a circle layout 
+I am a flow layout 
 
 {{gtExample:CRFlowLayout>>#example|codeExpanded=false|previewExpanded=true}}
 "
