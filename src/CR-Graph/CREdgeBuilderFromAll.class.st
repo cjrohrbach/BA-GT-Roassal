@@ -2,13 +2,13 @@
 I create edges from all block results to the node
 "
 Class {
-	#name : 'CREdgeFromAll',
-	#superclass : 'CREdge',
+	#name : 'CREdgeBuilderFromAll',
+	#superclass : 'CREdgeBuilder',
 	#category : 'CR-Graph-CR-Graph'
 }
 
 { #category : 'accessing' }
-CREdgeFromAll >> connect: nodes [
+CREdgeBuilderFromAll >> connect: nodes [
 "
 	I create the edges according to the given block and specification.
 	Therefore I'll, for each node, evaluate the connectionBlock with its

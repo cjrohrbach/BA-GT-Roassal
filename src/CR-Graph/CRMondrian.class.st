@@ -247,7 +247,7 @@ CRMondrian >> edges [
 "
 	canvasForView := nil.
 	canvasCache := nil.
-	^ CREdgeBuilder newWithMondrian: self
+	^ CREdgeBuilderBuilder newWithMondrian: self
 ]
 
 { #category : 'accessing' }

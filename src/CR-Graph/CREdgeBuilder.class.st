@@ -1,16 +1,16 @@
 "
-I am used to create the edge Builders Edges
+I am the superclass of all edge types and I'm used to share methods between them
 "
 Class {
 	#name : 'CREdgeBuilder',
 	#superclass : 'Object',
 	#instVars : [
-		'mondrian',
+		'toAnchorPosition',
+		'fromAnchorPosition',
 		'color',
 		'width',
 		'edgeShape',
-		'toAnchorPosition',
-		'fromAnchorPosition',
+		'connectionBlock',
 		'condition',
 		'noHighlights',
 		'highlightColor',
@@ -19,98 +19,119 @@ Class {
 	#category : 'CR-Graph-CR-Graph'
 }
 
-{ #category : 'initialization' }
-CREdgeBuilder class >> newWithMondrian: aMondrian [
-"I create a new instance and set the given mondrian as mondrian "
-	| instance | 
-	instance := CREdgeBuilder new .
-	instance mondrian: aMondrian.
-	instance line.
-	^instance
-]
-
-{ #category : 'accessing' }
-CREdgeBuilder >> arrow [
-"I change the shape of the edges to arrows"
-	edgeShape := CRArrowElement.
-	"toAnchorPosition := BlElementTopCenterAnchor."
-	toAnchorPosition := BlNearestPositionBoundsAnchor.
-]
-
 { #category : 'accessing' }
 CREdgeBuilder >> color: aColor [
-"I am a setter method for the color"
+"Setter method for the color the edge should have"
 	color := aColor
 ]
 
 { #category : 'accessing' }
-CREdgeBuilder >> connectFrom: aBlockOrASymbol [
-"	
-	I create a new CREdgeFrom wich will create an edge from the block result to the given node. 
-	This CREdgeFrom I'll add to the mondrian instance
-"
-	| edge |
-	edge := CREdgeFrom new.
-	edge connectionBlock: aBlockOrASymbol.
-	
-	self passAttributesToEdge: edge.
-	
-	mondrian addEdgeBuilder: edge.
-	^edge
+CREdgeBuilder >> condition [
+"I am a getter for the condition block that has to be true on all nodes that are used for the edges"
+	^condition
 ]
 
 { #category : 'accessing' }
-CREdgeBuilder >> connectFromAll: aBlockOrASymbol [
-"	
-	I create a new CREdgeFromAll wich will create edges to the node from all nodes that match the block results. 
-	This CREdgeFromAll I'll add to the mondrian instance
-"
-	| edge |
-	edge := CREdgeFromAll new.
-	edge connectionBlock: aBlockOrASymbol.
-	
-	self passAttributesToEdge: edge.
-	
-	mondrian addEdgeBuilder: edge.
-	^edge
-]
-
-{ #category : 'accessing' }
-CREdgeBuilder >> connectTo: aBlockOrASymbol [
-"	
-	I create a new CREdgeTo wich will create an edge to the block result from the given node. 
-	This CREdgeTo I'll add to the mondrian instance
-"
-	| edge |
-	edge := CREdgeTo new.
-	edge connectionBlock: aBlockOrASymbol.
-	
-	self passAttributesToEdge: edge.
-	
-	mondrian addEdgeBuilder: edge.
-	^edge
-]
-
-{ #category : 'accessing' }
-CREdgeBuilder >> connectToAll: aBlockOrASymbol [
-"	
-	I create a new CREdgeToAll wich will create edges from the node to all nodes that match the block results. 
-	This CREdgeToAll I'll add to the mondrian instance
-"
-	| edge |
-	edge := CREdgeToAll new.
-	edge connectionBlock: aBlockOrASymbol.
-	
-	self passAttributesToEdge: edge.
-	
-	mondrian addEdgeBuilder: edge.
-	^edge
-]
-
-{ #category : 'accessing' }
-CREdgeBuilder >> forAll: aTrueFalseBlock [
-"I am a setter for the condition. The edges are only created for nodes that return true with the block"
+CREdgeBuilder >> condition: aTrueFalseBlock [		
+"I am a setter for the condition block that has to be true on all nodes that are used for the edges"
 	condition := aTrueFalseBlock
+]
+
+{ #category : 'accessing' }
+CREdgeBuilder >> connect: someNodes [
+	"
+	I have to be implemented in the subclass according to the kind of
+	connection it should be (1:n; 1:1; n:1).
+	I create the edges between the nodes according to the specifications.
+	"
+	^self subclassResponsibility
+]
+
+{ #category : 'accessing' }
+CREdgeBuilder >> connectionBlock: aBlockOrASymbol [
+"Setter method for the connectionBlock"
+	connectionBlock := aBlockOrASymbol
+]
+
+{ #category : 'accessing' }
+CREdgeBuilder >> createAnchorFor: fromNode to: toNode [
+"I create the anchor for the fromNode according to the position stored in the fromNode"
+	(fromNode anchorPosition superclass = BlNearestPositionAnchor) ifTrue: [
+		^fromNode anchorPosition nearestTo: toNode centerElement from: fromNode centerElement
+	] ifFalse: [
+		^fromNode anchorPosition element: fromNode centerElement
+	]
+]
+
+{ #category : 'accessing' }
+CREdgeBuilder >> createEdgeFrom: fromNode to: toNode [
+"I delegate the creation of the edge. Therefore I use methods creating the graph constraints as well as the visible edge"
+
+	"check if from and to node are the same"
+	(fromNode = toNode) ifTrue: [^nil].
+	
+	self createGraphEdgeAndAddConstraintsFrom: fromNode to: toNode.
+	^(self createVisibleEdgeFrom: fromNode to: toNode)
+]
+
+{ #category : 'accessing' }
+CREdgeBuilder >> createEdges: someNodes [
+"I delegate the creation of the edges between the given set of nodes."
+	^self connect: someNodes.
+]
+
+{ #category : 'accessing' }
+CREdgeBuilder >> createGraphEdgeAndAddConstraintsFrom: fromNode to: toNode [
+"I create the graph constraints between the two nodes. This is necessary for the layouts to work."
+	| edge |
+	edge := GtGraphEdge new from: fromNode to: toNode.
+	fromNode constraints graph addConnectedEdge: edge.
+	toNode constraints graph addConnectedEdge: edge.
+]
+
+{ #category : 'accessing' }
+CREdgeBuilder >> createVisibleEdgeFrom: fromNode to: toNode [
+"I create the actual line between the two nodes. Therefore I use the edge shape and the provided specifications."
+
+	| line l |
+	line := edgeShape new.
+	
+	width ifNotNil: [line width: (width)].
+	color ifNotNil: [line color: (color)].
+	highlightColor ifNotNil: [line highlightColor: highlightColor].
+	highlightWidth ifNotNil: [line highlightWidth: highlightWidth].
+	noHighlights ifTrue: [line noHighlights].
+	
+	line fromAnchor: (self createAnchorFor: fromNode to: toNode).
+	line toAnchor: (self createAnchorFor: toNode to: fromNode).
+	
+	fromNode addOutGoingEdge: line.
+	
+	^ line
+]
+
+{ #category : 'accessing' }
+CREdgeBuilder >> edgeShape: aEdgeShape [
+"Setter method for the shape of the edge."
+	edgeShape := aEdgeShape
+]
+
+{ #category : 'accessing' }
+CREdgeBuilder >> evaluate: aBlock on: aCRNode nodes: nodes [
+	" evaluates the given block on the object and then returns a CRGroup with all shapes that match the result "
+	| result |
+	result := aBlock cull: (aCRNode model).
+	
+	
+	(result isCollection) 
+		ifTrue: [^ nodes nodesFromModelArray: result.]
+		ifFalse: [^ nodes nodesFromModel: result].
+]
+
+{ #category : 'accessing' }
+CREdgeBuilder >> fromAnchorPosition: aAnchor [
+"Setter method for the fromAnchorPosition"
+	fromAnchorPosition := aAnchor
 ]
 
 { #category : 'accessing' }
@@ -128,21 +149,11 @@ CREdgeBuilder >> highlightWidth: aNumber [
 { #category : 'initialization' }
 CREdgeBuilder >> initialize [
 	super initialize.
-	self line.
+	toAnchorPosition :=  BlNearestPositionBoundsAnchor.
+	fromAnchorPosition := BlElementCenterAnchor.
+	condition := [true].
 	noHighlights := false.
 	^self
-]
-
-{ #category : 'accessing' }
-CREdgeBuilder >> line [
-"I change the shape of the edges to lines"
-	edgeShape := CRLineElement
-]
-
-{ #category : 'accessing' }
-CREdgeBuilder >> mondrian: aMondrian [
-"I am a setter method for the mondrian instance"
-	mondrian := aMondrian
 ]
 
 { #category : 'accessing' }
@@ -152,28 +163,13 @@ CREdgeBuilder >> noHighlights [
 ]
 
 { #category : 'accessing' }
-CREdgeBuilder >> passAttributesToEdge: aEdge [
-"I pass all the provided and stored specifications to the edge"
-	width ifNotNil: [aEdge width: width].
-	color ifNotNil: [aEdge color: color].
-	aEdge edgeShape: edgeShape.
-	toAnchorPosition ifNotNil: [aEdge toAnchorPosition: toAnchorPosition].
-	fromAnchorPosition ifNotNil: [aEdge fromAnchorPosition: fromAnchorPosition].
-	condition ifNotNil: [aEdge condition: condition].
-	noHighlights ifTrue: [aEdge noHighlights].
-	highlightColor ifNotNil: [aEdge highlightColor: highlightColor].
-	highlightWidth ifNotNil: [aEdge highlightWidth: highlightWidth].
-	
-]
-
-{ #category : 'accessing' }
-CREdgeBuilder >> sigmoid [
-"I change the shape of the edges to sigmoid"
-	edgeShape := CRSigmoidElement.
+CREdgeBuilder >> toAnchorPosition: aAnchor [
+"Setter method for the toAnchorPosition"
+	toAnchorPosition := aAnchor
 ]
 
 { #category : 'accessing' }
 CREdgeBuilder >> width: aValue [
-"I am a setter method for the width "
-	width := aValue
+"Setter method for the width of the edges"
+	width := aValue.
 ]

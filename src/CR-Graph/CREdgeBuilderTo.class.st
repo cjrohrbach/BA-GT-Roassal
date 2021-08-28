@@ -2,13 +2,13 @@
 I create an edge from the node to the block result
 "
 Class {
-	#name : 'CREdgeTo',
-	#superclass : 'CREdge',
+	#name : 'CREdgeBuilderTo',
+	#superclass : 'CREdgeBuilder',
 	#category : 'CR-Graph-CR-Graph'
 }
 
 { #category : 'accessing' }
-CREdgeTo >> connect: nodes [
+CREdgeBuilderTo >> connect: nodes [
 "
 	I create the edges according to the given block and specification.
 	Therefore I'll, for each node, evaluate the connectionBlock with its

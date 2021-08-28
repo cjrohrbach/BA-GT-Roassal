@@ -215,11 +215,11 @@ CRMondrianExamples >> mondrianAsMindmap [
 					}
 			}.
 		MindMapNode new
-			model: CREdgeBuilder;
+			model: CREdgeBuilderBuilder;
 			addChildren: {
 				MindMapNode new
-					model: CREdge;
-					addChildrenFromModels: {CREdgeFrom. CREdgeTo. CREdgeFromAll. CREdgeToAll.}.
+					model: CREdgeBuilder;
+					addChildrenFromModels: {CREdgeBuilderFrom. CREdgeBuilderTo. CREdgeBuilderFromAll. CREdgeBuilderToAll.}.
 				MindMapNode new
 					model: TCREdge;
 					addChildrenFromModels: {CRLineElement. CRArrowElement. CRSigmoidElement.}.
