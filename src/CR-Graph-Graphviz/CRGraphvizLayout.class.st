@@ -1,18 +1,23 @@
+"
+I am used to apply graphviz layouts to CRMondrian graphs. 
+
+Not working yet.
+"
 Class {
-	#name : #CRGraphvizLayout,
-	#superclass : #GraphvizLayout,
+	#name : 'CRGraphvizLayout',
+	#superclass : 'GraphvizLayout',
 	#traits : 'TCRLayout',
 	#classTraits : 'TCRLayout classTrait',
-	#category : #'CR-Graph-Graphviz-Layout'
+	#category : 'CR-Graph-Graphviz-Layout'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRGraphvizLayout >> initialize [
 	super initialize.
 	^self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CRGraphvizLayout >> on: aCanvas [
 "I apply the layout to the given Canvas. But first I create a BlOnceLayout from myself to allow draggable nodes"
 	aCanvas layout: (BlOnceLayout new layout: (BlFitChildrenLayout new addLayout: self)).

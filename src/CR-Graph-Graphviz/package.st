@@ -1,1 +1,1 @@
-Package { #name : #'CR-Graph-Graphviz' }
+Package { #name : 'CR-Graph-Graphviz' }

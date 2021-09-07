@@ -1,6 +1,6 @@
-Extension { #name : #CRLayoutBuilder }
+Extension { #name : 'CRLayoutBuilder' }
 
-{ #category : #'*CR-Graph-Graphviz' }
+{ #category : '*CR-Graph-Graphviz' }
 CRLayoutBuilder >> graphviz [
 "I return a new CRGraphvizLayout."
 	layout := CRGraphvizLayout new.
