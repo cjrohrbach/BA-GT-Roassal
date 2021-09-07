@@ -45,8 +45,10 @@ TCREdge >> initialize [
 { #category : 'accessing' }
 TCREdge >> removeHighlight [
 "I remove the reset myself and the toNode to the original look"
+	| toElement |
 	self border: originalBorder.
-	self toAnchor referenceElement parent removeHighlight
+	toElement := (self toAnchor referenceElement parent).  
+	(toElement isMarked) ifTrue: [toElement markAsClicked]ifFalse: [toElement removeHighlight]
 ]
 
 { #category : 'accessing' }
