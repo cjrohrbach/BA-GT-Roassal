@@ -79,8 +79,9 @@ CRMondrianExamples >> customShape [
 		custom 
 			stencil:  [ :x |
 				BlElement new
-				size: 20@50;
-				background: Color gray.
+					size: 70@50;
+					geometry: BlTriangleGeometry new beTop;
+					background: Color orange
 			]; 
 			with: (1 to: 9).
 	^q 

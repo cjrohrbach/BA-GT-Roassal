@@ -1,5 +1,8 @@
 "
-I am the shapeBuilder used for shapes with a predefined stencil
+I am the shapeBuilder used for shapes according to a provided stencil
+
+
+{{gtExample:CRMondrianExamples>>#customShape|previewExpanded=true|codeExpanded=true}}
 "
 Class {
 	#name : 'CRCustomShapeBuilder',
