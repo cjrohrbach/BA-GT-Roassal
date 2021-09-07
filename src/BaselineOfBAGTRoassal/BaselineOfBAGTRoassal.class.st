@@ -1,10 +1,10 @@
 Class {
-	#name : #BaselineOfBAGTRoassal,
-	#superclass : #BaselineOf,
-	#category : #BaselineOfBAGTRoassal
+	#name : 'BaselineOfBAGTRoassal',
+	#superclass : 'BaselineOf',
+	#category : 'BaselineOfBAGTRoassal'
 }
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BaselineOfBAGTRoassal >> baseline: spec [
 	<baseline>
 	spec
@@ -21,7 +21,6 @@ BaselineOfBAGTRoassal >> baseline: spec [
 			
 			spec
 				package: #'BA-Testing';
-				package: #'GT-Roassal';
 				package: #'CR-Graph';
 				package: #'CR-Graph-Graphviz';
 				package: #'CR-Graph-MindMapExample'.
