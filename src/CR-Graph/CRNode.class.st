@@ -206,6 +206,12 @@ CRNode >> initialize [
 	^self
 ]
 
+{ #category : 'accessing' }
+CRNode >> isMarked [
+"return true if I'm marked as clicked"
+	^isMarked
+]
+
 { #category : 'createProperties' }
 CRNode >> makeDraggable [
 	"Add a eventHandler that makes me draggable"

@@ -57,3 +57,12 @@ CRLineElement >> noHighlights [
 	highlightColor := (self border paint).
 	highlightWidth := (self border width).
 ]
+
+{ #category : 'accessing' }
+CRLineElement >> removeHighlight [
+"I remove the reset myself and the toNode to the original look"
+	| toElement |
+	self border: originalBorder.
+	toElement := (self toAnchor referenceElement parent).  
+	(toElement isMarked) ifTrue: [toElement markAsClicked]ifFalse: [toElement removeHighlight]
+]
