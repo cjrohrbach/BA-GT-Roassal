@@ -1,3 +1,7 @@
+"
+I am a node within a mindmap strucutre.
+I have a parent node as well as children nodes.
+"
 Class {
 	#name : 'MindMapNode',
 	#superclass : 'Object',

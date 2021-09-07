@@ -5,7 +5,7 @@ My size is changed according to the centerElement (also called shape) thats adde
 The centerElement can be any BlElement, when its added to me it becomes a node.
 It is important to change the center element if you want to change my shape or color, since I myself am actually only used to have a nice background that to use as highlight when the node is clicked on or hovered over.
 
-{{gtExample:CRNode_2>>#example}}
+{{gtExample:CRNode>>#example}}
 
 
 "

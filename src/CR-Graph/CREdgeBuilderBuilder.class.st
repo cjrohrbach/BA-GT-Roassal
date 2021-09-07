@@ -1,5 +1,5 @@
 "
-I am used to create the edge Builders Edges
+I am used to create the edge Builders
 "
 Class {
 	#name : 'CREdgeBuilderBuilder',
