@@ -20,16 +20,14 @@ BaselineOfBAGTRoassal >> baseline: spec [
 				with: [ spec repository: 'github://nitishspatkar/moldable-requirements:scheduling' ].
 			
 			spec
-				package: #'BA-Testing';
 				package: #'CR-Graph';
 				package: #'CR-Graph-Graphviz';
 				package: #'CR-Graph-MindMapExample'.
 			spec 
 				group: 'default' with: #('core');
 				group: 'core' with: #(#'CR-Graph');
-				group: 'dev' with: #('default' 'BA-Testing');
 				group: 'withGraphviz' with: #(#'default' 'Graphviz4GT' #'CR-Graph-Graphviz');
 				group: 'withHospitalExample' with: #('default' 'MyMoldableRequirements' #'CR-Graph-MindMapExample');
-				group: 'complete' with: #('BA-Testing' 'withGraphviz' 'withHospitalExample')
+				group: 'complete' with: #('withGraphviz' 'withHospitalExample')
 				 ]
 ]
