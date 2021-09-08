@@ -197,7 +197,7 @@ CRMondrianExamples >> mondrianAsMindmap [
 			addChildren: {
 				MindMapNode new
 					model: 'Node-Shape';
-					addChildrenFromModels: {CRBox. CRCircle. CRClassBlueprintCanvas. CRBox. 
+					addChildrenFromModels: {CRBox. CRCircle. CRBox. 
 						CRCircle. CRPoint.}.
 				MindMapNode new
 					model: CRShapeBuilderBuilder;
@@ -230,7 +230,7 @@ CRMondrianExamples >> mondrianAsMindmap [
 			addChildren: {
 				MindMapNode new
 					model: TCRLayout;
-					addChildrenFromModels: {CRGridLayout. CRCircleLayout. CRClusterLayout. CRCustomLayout. CRFlowLayout. CRForceLayout. CRGridLayout. CRTreeLayout.}}
+					addChildrenFromModels: {CRGridLayout. CRCircleLayout. CRCustomLayout. CRFlowLayout. CRForceLayout. CRGridLayout. CRTreeLayout.}}
 	}; isRoot.
 	
 	s := MindMapStructure new
